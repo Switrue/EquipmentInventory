@@ -1,0 +1,215 @@
+﻿<Window x:Class="EquipmentInventory.Forms.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EquipmentInventory"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:windowChrome="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Style="{StaticResource MaterialDesignWindow}"
+        Background="{StaticResource GradientBackgroundBrush}"
+        mc:Ignorable="d"
+        Height="600" Width="1000"
+        MinHeight="500" MinWidth="800"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        SizeChanged="Window_SizeChanged"
+        MouseDown="Window_MouseDown">
+    
+    <windowChrome:WindowChrome.WindowChrome>
+        <windowChrome:WindowChrome 
+            CaptionHeight="0" 
+            CornerRadius="20" 
+            GlassFrameThickness="0" 
+            ResizeBorderThickness="0" />
+    </windowChrome:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/MainWindowStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!-- Внешний Border для границы -->
+    <Border x:Name="windowEdging" BorderBrush="{StaticResource Circuit}" BorderThickness="1.5" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+            <!-- #region Header -->
+
+            <Border x:Name="windowBorder" Grid.Row="0" CornerRadius="10 10 0 0"
+                    Background="{StaticResource Foreground}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <WrapPanel HorizontalAlignment="Left">
+                            <!-- #region Menu -->
+
+                            <StackPanel VerticalAlignment="Center">
+                                <Menu IsMainMenu="True" FontSize="12" Background="{StaticResource Foreground}"
+                                      materialDesign:MenuAssist.TopLevelMenuItemHeight="-1">
+                                    <MenuItem x:Name="fileMnIt" Padding="10"
+                                              Foreground="{StaticResource HintColor}"
+                                              Background="{StaticResource Foreground}">
+                                        <MenuItem x:Name="settingsMnIt"
+                                                  Icon="{materialDesign:PackIcon Kind=Settings}"
+                                                  Click="Settings_Click" />
+                                    </MenuItem>
+
+                                    <MenuItem x:Name="helpMnIt" Padding="10"
+                                              Foreground="{StaticResource HintColor}"
+                                              Background="{StaticResource Foreground}">
+                                        <MenuItem x:Name="aboutTheProgrammMnIt" InputGestureText="Ctrl+F1"
+                                                  Icon="{materialDesign:PackIcon Kind=Information}"
+                                                  Click="AboutTheProgramm_Click" />
+                                    </MenuItem>
+                                </Menu>
+                            </StackPanel>
+
+                            <!-- #endregion -->
+                        </WrapPanel>
+
+                        <WrapPanel HorizontalAlignment="Right">
+                            <!-- #region Manager Account -->
+
+                            <StackPanel VerticalAlignment="Center">
+                                <Button x:Name="manageAccountBtn" Cursor="Hand" Padding="10 4 10 4" IsTabStop="False"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                        Style="{StaticResource MaterialDesignFlatSecondaryButton}"
+                                        Background="Transparent" Click="ShowProfileOptions_Click">
+                                    <WrapPanel>
+                                        <Border Background="Black">
+                                            <Image Source="/Resources/Pictures/SmallUserIcon.png" />
+                                        </Border>
+                                        <Border Width="2" Background="{StaticResource SecondaryColor}" Margin="0 0 4 0"/>
+                                        <TextBlock x:Name="userNameTexB" VerticalAlignment="Center" MaxWidth="120" FontSize="12"
+                                                   TextTrimming="CharacterEllipsis" Foreground="{StaticResource SecondaryColor}" />
+                                    </WrapPanel>
+                                </Button>
+
+                                <Popup x:Name="actionsPopup" PlacementTarget="{Binding ElementName=manageAccountBtn}" 
+                                       Placement="Bottom" StaysOpen="False" AllowsTransparency="True">
+                                    <StackPanel Background="{StaticResource Foreground}">
+                                        <Button x:Name="profileBtn" HorizontalContentAlignment="Left"
+                                                Foreground="{StaticResource HintColor}"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                                Style="{StaticResource MaterialDesignFlatSecondaryDarkButton}"
+                                                Click="Profile_Click" />
+                                        <Border Height="1" Background="{StaticResource HintColor}" />
+                                        <Button x:Name="logOutBtn" HorizontalContentAlignment="Left"
+                                                Foreground="{StaticResource HintColor}" Click="Logout_Click"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                                Style="{StaticResource MaterialDesignFlatSecondaryDarkButton}" />
+                                    </StackPanel>
+                                </Popup>
+                            </StackPanel>
+
+                            <!-- #endregion -->
+
+                            <!-- #region Window options -->
+
+                            <Button x:Name="collapseBtn" Cursor="Hand" IsTabStop="False"
+                                    Content="{materialDesign:PackIcon Kind=Minimize}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
+                                    Padding="10 0 10 0" Click="CollapseWindow_Click" 
+                                    Foreground="{StaticResource HintColor}" />
+                            <Button x:Name="maximizeBtn" Cursor="Hand" IsTabStop="False"
+                                    Content="{materialDesign:PackIcon Kind=WindowMaximize}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
+                                    Padding="10 0 10 0" Click="MaximizeWindow_Click" 
+                                    Foreground="{StaticResource HintColor}" />
+                            <Button x:Name="closeBtn" Cursor="Hand" IsTabStop="False"
+                                    Content="{materialDesign:PackIcon Kind=Close}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
+                                    Padding="10 0 10 0" Click="CloseWindow_Click" 
+                                    Foreground="{StaticResource HintColor}" />
+
+                            <!-- #endregion -->
+                        </WrapPanel>
+                    </Grid>
+
+                    <Grid>
+                        <WrapPanel>
+                            <!-- #region Control panel -->
+
+                            <Button VerticalAlignment="Center" Margin="8 0 8 0" materialDesign:RippleAssist.IsDisabled="True"
+                                    Click="UserRegistration_Click">
+                                <TextBlock x:Name="userRegistrationTxtB" FontSize="18" Foreground="{StaticResource TextColor}" />
+                            </Button>
+
+                            <Button VerticalAlignment="Center" Margin="8 0 8 0" materialDesign:RippleAssist.IsDisabled="True"
+                                    Padding="0" Background="Transparent" BorderBrush="Transparent" IsTabStop="False">
+                                <TextBox x:Name="tablesTxtB" Text="TAB" FontSize="18"
+                                         Foreground="{StaticResource TextColor}"
+                                         Cursor="Hand" IsReadOnly="True" IsTabStop="False"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryColor}"
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
+                                         materialDesign:TextFieldAssist.NewSpecHighlightingEnabled="True" />
+                            </Button>
+
+                            <Button VerticalAlignment="Center" Margin="8 0 8 0" materialDesign:RippleAssist.IsDisabled="True"
+                                    Padding="0" Background="Transparent" BorderBrush="Transparent" IsTabStop="False">
+                                <TextBox x:Name="dictionariesTxtB" Text="DIC" FontSize="18"
+                                         Foreground="{StaticResource TextColor}"
+                                         Cursor="Hand" IsReadOnly="True" IsTabStop="False"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryColor}"
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
+                                         materialDesign:TextFieldAssist.NewSpecHighlightingEnabled="True" />
+                            </Button>
+
+                            <!-- #endregion -->
+                        </WrapPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- #endregion -->
+
+            <!--#region Body-->
+
+            <Grid Grid.Row="1">
+                <Frame x:Name="mainFrame" IsTabStop="False" />
+            </Grid>
+
+            <!-- #endregion -->
+
+            <!-- #region Footer -->
+
+            <Border Grid.Row="2" CornerRadius="0 0 10 10" 
+                    Background="{StaticResource Foreground}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Background="Transparent"
+                                MouseLeftButtonDown="DragWindow_MouseLeftButtonDown" />
+
+                    <Rectangle x:Name="resizeMarker" Cursor="SizeNWSE"
+                               MouseMove="ResizeHandle_MouseMove" Grid.Column="1"
+                               MouseLeftButtonDown="ResizeHandle_MouseLeftButtonDown" 
+                               MouseLeftButtonUp="ResizeHandle_MouseLeftButtonUp"
+                               HorizontalAlignment="Right" Margin="4" Width="20" 
+                               Height="20" Fill="{StaticResource HintColor}">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/Pictures/Expand.png" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Grid>
+            </Border>
+
+            <!-- #endregion -->
+        </Grid>
+    </Border> 
+</Window>
