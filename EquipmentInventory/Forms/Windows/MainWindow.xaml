@@ -24,7 +24,7 @@
     </windowChrome:WindowChrome.WindowChrome>
 
     <!-- Внешний Border для границы -->
-    <Border x:Name="windowEdging" BorderBrush="{StaticResource Circuit}" BorderThickness="1.5" CornerRadius="10">
+    <Border x:Name="windowEdging" BorderBrush="{StaticResource Circuit}" BorderThickness="1.5" CornerRadius="10" Padding="2">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
@@ -66,6 +66,7 @@
                         </WrapPanel>
 
                         <WrapPanel HorizontalAlignment="Right">
+
                             <!-- #region Manager Account -->
 
                             <StackPanel VerticalAlignment="Center">
@@ -136,18 +137,18 @@
                                 <RadioButton x:Name="userRegistrationRb" Padding="5" IsTabStop="False" FontSize="18"
                                              Foreground="{StaticResource TextColor}"
                                              Style="{StaticResource MaterialDesignTabRadioButton}"
-                                             Checked="ColorChange_Checked"
+                                             Checked="ColorChange_Checked" Click="UpdatePage_Click"
                                              materialDesign:RippleAssist.IsDisabled="True" />
                                 <RadioButton x:Name="tablesRb" Padding="5" IsTabStop="False" FontSize="18"
                                              Foreground="{StaticResource TextColor}" IsChecked="True"
                                              Style="{StaticResource MaterialDesignTabRadioButton}"
                                              materialDesign:RippleAssist.IsDisabled="True"
-                                             Checked="ColorChange_Checked" />
+                                             Checked="ColorChange_Checked" Click="UpdatePage_Click" />
                                 <RadioButton x:Name="dictionariesRb" Padding="5" IsTabStop="False" FontSize="18"
                                              Foreground="{StaticResource TextColor}"
                                              Style="{StaticResource MaterialDesignTabRadioButton}"
                                              materialDesign:RippleAssist.IsDisabled="True"
-                                             Checked="ColorChange_Checked" />
+                                             Checked="ColorChange_Checked" Click="UpdatePage_Click" />
                             </StackPanel>
 
                             <!-- #endregion -->
@@ -161,7 +162,7 @@
             <!--#region Body-->
 
             <Grid Grid.Row="1">
-                <Frame x:Name="mainFrame" IsTabStop="False" />
+                <Frame x:Name="mainFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
             </Grid>
 
             <!-- #endregion -->

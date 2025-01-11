@@ -1,5 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
+using EquipmentInventory.Forms.Pages;
+using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -11,6 +13,13 @@ using System.Windows.Media;
 
 namespace EquipmentInventory.Forms.Windows
 {
+    public enum PageType
+    {
+        UserRegistration,
+        Tables,
+        Dictionaries
+    }
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -253,6 +262,39 @@ namespace EquipmentInventory.Forms.Windows
                     element.Foreground = textColor;
                 }
             }
+        }
+
+        private void UpdatePage_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is RadioButton radioButton)
+            {
+                var selectedPage = GetSelectedPageType(radioButton);
+
+                switch (selectedPage)
+                {
+                    case PageType.UserRegistration:
+                        mainFrame.Navigate(new UserRegistration());
+                        break;
+                    case PageType.Tables:
+                        // Логика для обновления страницы таблиц
+                        break;
+                    case PageType.Dictionaries:
+                        mainFrame.Navigate(new Dictionaries());
+                        break;
+                }
+            }
+        }
+
+        private PageType? GetSelectedPageType(RadioButton radioButton)
+        {
+            if (radioButton == userRegistrationRb)
+                return PageType.UserRegistration;
+            else if (radioButton == tablesRb)
+                return PageType.Tables;
+            else if (radioButton == dictionariesRb)
+                return PageType.Dictionaries;
+
+            return null;
         }
     }
 }
