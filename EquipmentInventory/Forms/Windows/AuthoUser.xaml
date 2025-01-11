@@ -49,6 +49,7 @@
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
                                 Padding="10 0 10 0" Click="CloseWindow_Click" 
+                                materialDesign:RippleAssist.Feedback="{StaticResource AccentColor}"
                                 Foreground="{StaticResource HintColor}" />
                     </WrapPanel>
                 </Grid>

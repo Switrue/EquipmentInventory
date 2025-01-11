@@ -8,14 +8,13 @@
         xmlns:windowChrome="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         Style="{StaticResource MaterialDesignWindow}"
         Background="{StaticResource GradientBackgroundBrush}"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStyle="None"
         Height="600" Width="1000"
         MinHeight="500" MinWidth="800"
-        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         SizeChanged="Window_SizeChanged"
         MouseDown="Window_MouseDown">
-    
+
     <windowChrome:WindowChrome.WindowChrome>
         <windowChrome:WindowChrome 
             CaptionHeight="0" 
@@ -23,14 +22,6 @@
             GlassFrameThickness="0" 
             ResizeBorderThickness="0" />
     </windowChrome:WindowChrome.WindowChrome>
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Styles/MainWindowStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
 
     <!-- Внешний Border для границы -->
     <Border x:Name="windowEdging" BorderBrush="{StaticResource Circuit}" BorderThickness="1.5" CornerRadius="10">
@@ -94,7 +85,7 @@
 
                                 <Popup x:Name="actionsPopup" PlacementTarget="{Binding ElementName=manageAccountBtn}" 
                                        Placement="Bottom" StaysOpen="False" AllowsTransparency="True">
-                                    <StackPanel Background="{StaticResource Foreground}">
+                                    <StackPanel Background="{StaticResource Background}">
                                         <Button x:Name="profileBtn" HorizontalContentAlignment="Left"
                                                 Foreground="{StaticResource HintColor}"
                                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
@@ -130,6 +121,7 @@
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                     Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
                                     Padding="10 0 10 0" Click="CloseWindow_Click" 
+                                    materialDesign:RippleAssist.Feedback="{StaticResource AccentColor}"
                                     Foreground="{StaticResource HintColor}" />
 
                             <!-- #endregion -->
@@ -140,32 +132,23 @@
                         <WrapPanel>
                             <!-- #region Control panel -->
 
-                            <Button VerticalAlignment="Center" Margin="8 0 8 0" materialDesign:RippleAssist.IsDisabled="True"
-                                    Click="UserRegistration_Click">
-                                <TextBlock x:Name="userRegistrationTxtB" FontSize="18" Foreground="{StaticResource TextColor}" />
-                            </Button>
-
-                            <Button VerticalAlignment="Center" Margin="8 0 8 0" materialDesign:RippleAssist.IsDisabled="True"
-                                    Padding="0" Background="Transparent" BorderBrush="Transparent" IsTabStop="False">
-                                <TextBox x:Name="tablesTxtB" Text="TAB" FontSize="18"
-                                         Foreground="{StaticResource TextColor}"
-                                         Cursor="Hand" IsReadOnly="True" IsTabStop="False"
-                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryColor}"
-                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
-                                         materialDesign:TextFieldAssist.NewSpecHighlightingEnabled="True" />
-                            </Button>
-
-                            <Button VerticalAlignment="Center" Margin="8 0 8 0" materialDesign:RippleAssist.IsDisabled="True"
-                                    Padding="0" Background="Transparent" BorderBrush="Transparent" IsTabStop="False">
-                                <TextBox x:Name="dictionariesTxtB" Text="DIC" FontSize="18"
-                                         Foreground="{StaticResource TextColor}"
-                                         Cursor="Hand" IsReadOnly="True" IsTabStop="False"
-                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryColor}"
-                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
-                                         materialDesign:TextFieldAssist.NewSpecHighlightingEnabled="True" />
-                            </Button>
+                            <StackPanel Margin="4" Orientation="Horizontal">
+                                <RadioButton x:Name="userRegistrationRb" Padding="5" IsTabStop="False" FontSize="18"
+                                             Foreground="{StaticResource TextColor}"
+                                             Style="{StaticResource MaterialDesignTabRadioButton}"
+                                             Checked="ColorChange_Checked"
+                                             materialDesign:RippleAssist.IsDisabled="True" />
+                                <RadioButton x:Name="tablesRb" Padding="5" IsTabStop="False" FontSize="18"
+                                             Foreground="{StaticResource TextColor}" IsChecked="True"
+                                             Style="{StaticResource MaterialDesignTabRadioButton}"
+                                             materialDesign:RippleAssist.IsDisabled="True"
+                                             Checked="ColorChange_Checked" />
+                                <RadioButton x:Name="dictionariesRb" Padding="5" IsTabStop="False" FontSize="18"
+                                             Foreground="{StaticResource TextColor}"
+                                             Style="{StaticResource MaterialDesignTabRadioButton}"
+                                             materialDesign:RippleAssist.IsDisabled="True"
+                                             Checked="ColorChange_Checked" />
+                            </StackPanel>
 
                             <!-- #endregion -->
                         </WrapPanel>

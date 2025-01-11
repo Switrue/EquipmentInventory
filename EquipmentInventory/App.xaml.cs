@@ -13,7 +13,7 @@ namespace EquipmentInventory
         {
             base.OnStartup(e);
 
-            var cultureInfo = new CultureInfo("en_US");
+            var cultureInfo = new CultureInfo("ru_RU");
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }

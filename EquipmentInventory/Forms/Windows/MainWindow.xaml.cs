@@ -5,6 +5,7 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -67,9 +68,9 @@ namespace EquipmentInventory.Forms.Windows
             settingsMnIt.Header = $"_{Strings.Settings}";
             helpMnIt.Header = $"_{Strings.Help}";
             aboutTheProgrammMnIt.Header = $"_{Strings.AboutTheProgramm}";
-            userRegistrationTxtB.Text = Strings.UserRegistration;
-            //tablesTxtB.Text = Strings.Tables;
-            //dictionariesTxtB.Text = Strings.Dictionaries;
+            userRegistrationRb.Content = Strings.UserRegistration;
+            tablesRb.Content = Strings.Tables;
+            dictionariesRb.Content = Strings.Dictionaries;
 
             Width = Settings.Default.WindowWidth;
             Height = Settings.Default.WindowHeight;
@@ -191,6 +192,8 @@ namespace EquipmentInventory.Forms.Windows
 
         #endregion
 
+        #region Click
+
         private void Logout_Click(object sender, EventArgs e)
         {
             bool result = CustomMessageBoxHelper.Show(Strings.SignOut, Strings.SignOutDescription, true);
@@ -202,17 +205,6 @@ namespace EquipmentInventory.Forms.Windows
                 new AuthoUser().Show();
                 Close();
             }
-        }
-
-        private void UserRegistration_Click(object sender, RoutedEventArgs e)
-        {
-            SolidColorBrush textColor = (SolidColorBrush)Application.Current.Resources["TextColor"];
-            SolidColorBrush secondaryColor = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
-
-            userRegistrationTxtB.Foreground =
-                userRegistrationTxtB.Foreground == textColor ?
-                secondaryColor :
-                textColor;
         }
 
         private void ShowProfileOptions_Click(object sender, RoutedEventArgs e)
@@ -233,6 +225,34 @@ namespace EquipmentInventory.Forms.Windows
         private void Profile_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Pressed Profile");
+        }
+
+        #endregion
+
+        private void ColorChange_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is RadioButton radioButton)
+            {
+                SolidColorBrush textColor = (SolidColorBrush)Application.Current.Resources["TextColor"];
+                SolidColorBrush secondaryColor = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
+
+                UpdateRadioButtonColors(textColor);
+
+                radioButton.Foreground = secondaryColor;
+            }
+        }
+
+        private void UpdateRadioButtonColors(SolidColorBrush textColor)
+        {
+            RadioButton[] elements = { userRegistrationRb, tablesRb, dictionariesRb };
+
+            foreach (var element in elements)
+            {
+                if (element != null)
+                {
+                    element.Foreground = textColor;
+                }
+            }
         }
     }
 }

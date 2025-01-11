@@ -32,19 +32,19 @@
 
             <!-- #region Header -->
 
-            <Border Background="{StaticResource Foreground}" Height="30" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown" Grid.Row="0" CornerRadius="10 10 0 0">
+            <Border Background="{StaticResource Foreground}" Height="30" CornerRadius="10 10 0 0"
+                    MouseLeftButtonDown="DragWindow_MouseLeftButtonDown" Grid.Row="0">
                 <Grid>
-                    <TextBlock x:Name="customMessageBoxTitle" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource HintColor}" />
+                    <TextBlock x:Name="customMessageBoxTitle" TextWrapping="Wrap" TextAlignment="Center" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource HintColor}" />
                     <Button x:Name="closeBtn" 
                             Content="{materialDesign:PackIcon Kind=Close}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
-                            HorizontalAlignment="Right"
-                            Foreground="{StaticResource HintColor}" 
-                            Click="CloseWindow_Click" 
-                            Padding="10 0 10 0" 
-                            Cursor="Hand"
-                            IsTabStop="False" />
+                            Padding="10 0 10 0" HorizontalAlignment="Right"
+                            Foreground="{StaticResource HintColor}"
+                            materialDesign:RippleAssist.Feedback="{StaticResource AccentColor}"
+                            Click="CloseWindow_Click" Cursor="Hand" IsTabStop="False" />
                 </Grid>
             </Border>
 
@@ -58,31 +58,20 @@
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="messageTxtB"
-                           TextWrapping="Wrap" 
-                           Grid.Row="0" 
-                           TextAlignment="Justify"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center" 
-                           Foreground="White"
-                           Margin="10" />
+                <TextBlock x:Name="messageTxtB" TextWrapping="Wrap" Grid.Row="0" TextAlignment="Justify"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="10" />
 
                 <WrapPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
-                    <Button x:Name="trueBtn"
+                    <Button x:Name="trueBtn" Width="60" Margin="5 0 5 0"
                             materialDesign:RippleAssist.Feedback="#DD000000"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            Click="ReturnTrue_Click" 
-                            Margin="5 0 5 0"
-                            Width="60" />
-                    <Button x:Name="falseBtn"
+                            Click="ReturnTrue_Click" />
+                    <Button x:Name="falseBtn" Width="60" Margin="5 0 5 0" 
                             materialDesign:RippleAssist.Feedback="#DD000000"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            Click="ReturnFalse_Click" 
-                            Margin="5 0 5 0" 
-                            Visibility="Collapsed" 
-                            Width="60" />
+                            Click="ReturnFalse_Click" Visibility="Collapsed" />
                 </WrapPanel>
             </Grid>
 
