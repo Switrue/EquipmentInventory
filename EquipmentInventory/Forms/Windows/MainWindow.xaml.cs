@@ -25,6 +25,10 @@ namespace EquipmentInventory.Forms.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserRegistration userRegistration = new UserRegistration();
+
+        private Dictionaries dictionaries = new Dictionaries();
+
         private bool isResizing;
 
         private double previousWidth;
@@ -36,6 +40,8 @@ namespace EquipmentInventory.Forms.Windows
             InitializeComponent();
             InitializeUI();
         }
+
+        #region Virtual methods
 
         protected override void OnClosed(EventArgs e)
         {
@@ -59,6 +65,22 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (e.ChangedButton == MouseButton.XButton1) 
+            {
+                BackPage_Click(this, null);
+            }
+            else if (e.ChangedButton == MouseButton.XButton2)
+            {
+                ForwardPage_Click(this, null);
+            }
+        }
+
+        #endregion
+
         #region Load
 
         private void InitializeUI()
@@ -80,6 +102,8 @@ namespace EquipmentInventory.Forms.Windows
             userRegistrationRb.Content = Strings.UserRegistration;
             tablesRb.Content = Strings.Tables;
             dictionariesRb.Content = Strings.Dictionaries;
+            backPageBtn.ToolTip = Strings.Back;
+            forwardPagebtn.ToolTip = Strings.Forward;
 
             Width = Settings.Default.WindowWidth;
             Height = Settings.Default.WindowHeight;
@@ -236,7 +260,25 @@ namespace EquipmentInventory.Forms.Windows
             MessageBox.Show("Pressed Profile");
         }
 
+        private void BackPage_Click(object sender, EventArgs e)
+        {
+            if (mainFrame.CanGoBack)
+            {
+                mainFrame.GoBack();
+            }
+        }
+
+        private void ForwardPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (mainFrame.CanGoForward)
+            {
+                mainFrame.GoForward();
+            }
+        }
+
         #endregion
+
+        #region Control panel
 
         private void ColorChange_Checked(object sender, RoutedEventArgs e)
         {
@@ -273,13 +315,13 @@ namespace EquipmentInventory.Forms.Windows
                 switch (selectedPage)
                 {
                     case PageType.UserRegistration:
-                        mainFrame.Navigate(new UserRegistration());
+                        mainFrame.Navigate(userRegistration);
                         break;
                     case PageType.Tables:
                         // Логика для обновления страницы таблиц
                         break;
                     case PageType.Dictionaries:
-                        mainFrame.Navigate(new Dictionaries());
+                        mainFrame.Navigate(dictionaries);
                         break;
                 }
             }
@@ -296,5 +338,7 @@ namespace EquipmentInventory.Forms.Windows
 
             return null;
         }
+
+        #endregion
     }
 }
