@@ -70,6 +70,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Archive.
+        /// </summary>
+        internal static string Archive {
+            get {
+                return ResourceManager.GetString("Archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Invalid login or password..
         /// </summary>
         internal static string AuthenticationError {
@@ -174,6 +183,15 @@ namespace EquipmentInventory.Properties {
         internal static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Inventory.
+        /// </summary>
+        internal static string Inventory {
+            get {
+                return ResourceManager.GetString("Inventory", resourceCulture);
             }
         }
         

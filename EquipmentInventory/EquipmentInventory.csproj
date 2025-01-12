@@ -123,12 +123,23 @@
     <Compile Include="Classes\Data\Database\ConnectionDatabase.cs" />
     <Compile Include="Classes\Data\Database\TokenValidation.cs" />
     <Compile Include="Classes\Data\UserData.cs" />
+    <Compile Include="Classes\Enums\PageTypes.cs" />
     <Compile Include="Classes\Helper\CustomMessageBoxHelper.cs" />
+    <Compile Include="Classes\Interfaces\IMainWindow.cs" />
+    <Compile Include="Forms\Pages\Accountant\AccountantPanel.xaml.cs">
+      <DependentUpon>AccountantPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Admin\AdminPanel.xaml.cs">
+      <DependentUpon>AdminPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\Admin\Dictionaries.xaml.cs">
       <DependentUpon>Dictionaries.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\Admin\UserRegistration.xaml.cs">
       <DependentUpon>UserRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Tables.xaml.cs">
+      <DependentUpon>Tables.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -179,11 +190,23 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Forms\Pages\Accountant\AccountantPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Admin\AdminPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Pages\Admin\Dictionaries.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Pages\Admin\UserRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Tables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

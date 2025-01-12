@@ -216,4 +216,10 @@
   <data name="Forward" xml:space="preserve">
     <value>Вперед</value>
   </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Архив</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Инвентаризация</value>
+  </data>
 </root>

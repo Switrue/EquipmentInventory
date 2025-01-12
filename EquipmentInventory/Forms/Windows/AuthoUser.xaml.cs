@@ -3,7 +3,6 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
-using EquipmentInventory.Classes;
 using Npgsql;
 using EquipmentInventory.Classes.Cryptography;
 using EquipmentInventory.Classes.Helper;
@@ -11,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Data.Database;
+using EquipmentInventory.Forms.Pages.Admin;
+using EquipmentInventory.Forms.Pages.Accountant;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -163,19 +164,23 @@ namespace EquipmentInventory.Forms.Windows
             UserData.Username = authResult[2].ToString();
             UserData.Surname = authResult[3].ToString();
 
+            MainWindow mainWindow = new MainWindow();
+
             switch (UserData.UserRoleId)
             {
                 case 1:
-                    new MainWindow().Show();
-                    Close();
+                    mainWindow.ChangeControlPanelFrameContent(new AdminPanel(mainWindow));
                     break;
                 case 2:
-                    MessageBox.Show("2");
+                    mainWindow.ChangeControlPanelFrameContent(new AccountantPanel(mainWindow));
                     break;
                 default:
                     CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);
                     break;
             }
+
+            mainWindow.Show();
+            Close();
         }
 
         #endregion

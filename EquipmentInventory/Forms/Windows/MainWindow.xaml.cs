@@ -1,5 +1,6 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
+using EquipmentInventory.Classes.Interfaces;
 using EquipmentInventory.Forms.Pages;
 using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Properties;
@@ -9,21 +10,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace EquipmentInventory.Forms.Windows
 {
-    public enum PageType
-    {
-        UserRegistration,
-        Tables,
-        Dictionaries
-    }
-
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMainWindow
     {
         private UserRegistration userRegistration = new UserRegistration();
 
@@ -99,9 +92,6 @@ namespace EquipmentInventory.Forms.Windows
             settingsMnIt.Header = $"_{Strings.Settings}";
             helpMnIt.Header = $"_{Strings.Help}";
             aboutTheProgrammMnIt.Header = $"_{Strings.AboutTheProgramm}";
-            userRegistrationRb.Content = Strings.UserRegistration;
-            tablesRb.Content = Strings.Tables;
-            dictionariesRb.Content = Strings.Dictionaries;
             backPageBtn.ToolTip = Strings.Back;
             forwardPagebtn.ToolTip = Strings.Forward;
 
@@ -278,65 +268,16 @@ namespace EquipmentInventory.Forms.Windows
 
         #endregion
 
-        #region Control panel
+        #region Change frame
 
-        private void ColorChange_Checked(object sender, RoutedEventArgs e)
+        public void ChangeMainFrameContent(Page newContent)
         {
-            if (sender is RadioButton radioButton)
-            {
-                SolidColorBrush textColor = (SolidColorBrush)Application.Current.Resources["TextColor"];
-                SolidColorBrush secondaryColor = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
-
-                UpdateRadioButtonColors(textColor);
-
-                radioButton.Foreground = secondaryColor;
-            }
+            mainFrame.Navigate(newContent);
         }
 
-        private void UpdateRadioButtonColors(SolidColorBrush textColor)
+        public void ChangeControlPanelFrameContent(Page newContent)
         {
-            RadioButton[] elements = { userRegistrationRb, tablesRb, dictionariesRb };
-
-            foreach (var element in elements)
-            {
-                if (element != null)
-                {
-                    element.Foreground = textColor;
-                }
-            }
-        }
-
-        private void UpdatePage_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is RadioButton radioButton)
-            {
-                var selectedPage = GetSelectedPageType(radioButton);
-
-                switch (selectedPage)
-                {
-                    case PageType.UserRegistration:
-                        mainFrame.Navigate(userRegistration);
-                        break;
-                    case PageType.Tables:
-                        // Логика для обновления страницы таблиц
-                        break;
-                    case PageType.Dictionaries:
-                        mainFrame.Navigate(dictionaries);
-                        break;
-                }
-            }
-        }
-
-        private PageType? GetSelectedPageType(RadioButton radioButton)
-        {
-            if (radioButton == userRegistrationRb)
-                return PageType.UserRegistration;
-            else if (radioButton == tablesRb)
-                return PageType.Tables;
-            else if (radioButton == dictionariesRb)
-                return PageType.Dictionaries;
-
-            return null;
+            controlPanelFrame.Navigate(newContent);
         }
 
         #endregion

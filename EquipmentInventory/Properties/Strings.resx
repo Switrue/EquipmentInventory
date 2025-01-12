@@ -249,4 +249,12 @@
     <value>Forward</value>
     <comment>MainWindow</comment>
   </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Archive</value>
+    <comment>UserPanel</comment>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+    <comment>UserPanel</comment>
+  </data>
 </root>

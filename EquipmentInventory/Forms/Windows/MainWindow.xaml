@@ -139,37 +139,19 @@
                                         IsTabStop="False" Foreground="{StaticResource HintColor}" Click="BackPage_Click">
                                     <materialDesign:PackIcon Kind="ArrowLeftThick" Width="20" Height="20" />
                                 </Button>
-
                                 <Button x:Name="forwardPagebtn"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                         Style="{StaticResource MaterialDesignIconButton}" Width="30" Height="30" materialDesign:RippleAssist.IsDisabled="True"
                                         IsTabStop="False" Foreground="{StaticResource HintColor}" Click="ForwardPage_Click">
                                     <materialDesign:PackIcon Kind="ArrowRightThick" Width="20" Height="20" />
                                 </Button>
-                                
                             </StackPanel>
 
                             <!-- #endregion -->
 
                             <!-- #region Control panel -->
 
-                            <StackPanel Orientation="Horizontal">
-                                <RadioButton x:Name="userRegistrationRb" Padding="5" IsTabStop="False" FontSize="18"
-                                             Foreground="{StaticResource TextColor}"
-                                             Style="{StaticResource MaterialDesignTabRadioButton}"
-                                             Checked="ColorChange_Checked" Click="UpdatePage_Click"
-                                             materialDesign:RippleAssist.IsDisabled="True" />
-                                <RadioButton x:Name="tablesRb" Padding="5" IsTabStop="False" FontSize="18"
-                                             Foreground="{StaticResource TextColor}" IsChecked="True"
-                                             Style="{StaticResource MaterialDesignTabRadioButton}"
-                                             materialDesign:RippleAssist.IsDisabled="True"
-                                             Checked="ColorChange_Checked" Click="UpdatePage_Click" />
-                                <RadioButton x:Name="dictionariesRb" Padding="5" IsTabStop="False" FontSize="18"
-                                             Foreground="{StaticResource TextColor}"
-                                             Style="{StaticResource MaterialDesignTabRadioButton}"
-                                             materialDesign:RippleAssist.IsDisabled="True"
-                                             Checked="ColorChange_Checked" Click="UpdatePage_Click" />
-                            </StackPanel>
+                            <Frame x:Name="controlPanelFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
 
                             <!-- #endregion -->
                         </WrapPanel>
