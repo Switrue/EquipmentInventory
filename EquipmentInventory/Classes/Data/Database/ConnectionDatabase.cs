@@ -41,10 +41,7 @@ namespace EquipmentInventory.Classes.Data.Database
 
         public static DataTable ExecuteQuery(string query)
         {
-            DataTable dt = new DataTable();
-            NpgsqlDataAdapter adp = new NpgsqlDataAdapter(query, GetConnection());
-            adp.Fill(dt);
-            return dt;
+            return ExecuteQuery(query, new NpgsqlParameter[0]);
         }
     }
 }

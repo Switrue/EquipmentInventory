@@ -22,15 +22,18 @@ namespace EquipmentInventory.Forms.Windows
 
         private Dictionaries dictionaries = new Dictionaries();
 
+        private UserData _user;
+
         private bool isResizing;
 
         private double previousWidth;
 
         private double previousHeight;
 
-        public MainWindow()
+        public MainWindow(UserData user)
         {
             InitializeComponent();
+            _user = user;
             InitializeUI();
         }
 
@@ -78,7 +81,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private void InitializeUI()
         {
-            string username = UserData.Surname + " " + UserData.Username;
+            string username =  _user.Surname + " " + _user.Username;
 
             Title = Strings.MainWindowTitle;
             collapseBtn.ToolTip = Strings.Collapse;

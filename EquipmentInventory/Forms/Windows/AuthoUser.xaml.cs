@@ -34,14 +34,10 @@ namespace EquipmentInventory.Forms.Windows
 
             try
             {
-                var tokenSql = "select refresh_access_token(@token)";
-
-                var tokenParams = new[]
-                {
+                var tokenResult = ConnectionDatabase.ExecuteQuery(
+                    "select refresh_access_token(@token)", 
                     new NpgsqlParameter("@token", Settings.Default.UserToken)
-                };
-
-                var tokenResult = ConnectionDatabase.ExecuteQuery(tokenSql, tokenParams);
+                );
                 var token = tokenResult.Rows[0][0].ToString();
 
                 Settings.Default.UserToken = token;
@@ -54,10 +50,7 @@ namespace EquipmentInventory.Forms.Windows
 
                 Authorization(token);
             }
-            catch
-            {
-                CustomMessageBoxHelper.Show(Strings.Error, Strings.DatabaseError, false);
-            }
+            catch { }
         }
 
         private void InitializeUI()
@@ -149,38 +142,39 @@ namespace EquipmentInventory.Forms.Windows
 
         private void Authorization(string token)
         {
-            var authSql = "select id_role, id, username, surname from users where id = (select user_id from tokens where access_token = @token)";
-
-            var authParam = new[]
-            {
+            var authResult = ConnectionDatabase.ExecuteQuery(
+                "select id from users where id = (select user_id from tokens where access_token = @token)", 
                 new NpgsqlParameter("@token", token)
-            };
-
-            var authResult = ConnectionDatabase.ExecuteQuery(authSql, authParam).Rows[0];
+            ).Rows[0];
 
             // Данные пользователя
-            UserData.UserRoleId = Convert.ToInt32(authResult[0]);
-            UserData.UserId = Convert.ToInt32(authResult[1]);
-            UserData.Username = authResult[2].ToString();
-            UserData.Surname = authResult[3].ToString();
+            UserData user = new UserData(Convert.ToInt64(authResult[0]));
 
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(user);
+            var roleId = user.UserRoleId;
 
-            switch (UserData.UserRoleId)
+            if (roleId != 0)
             {
-                case 1:
-                    mainWindow.ChangeControlPanelFrameContent(new AdminPanel(mainWindow));
-                    break;
-                case 2:
-                    mainWindow.ChangeControlPanelFrameContent(new AccountantPanel(mainWindow));
-                    break;
-                default:
-                    CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);
-                    break;
-            }
+                switch (roleId)
+                {
+                    case 1:
+                        mainWindow.ChangeControlPanelFrameContent(new AdminPanel(mainWindow));
+                        break;
+                    case 2:
+                        mainWindow.ChangeControlPanelFrameContent(new AccountantPanel(mainWindow));
+                        break;
+                    default:
+                        CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);
+                        break;
+                }
 
-            mainWindow.Show();
-            Close();
+                mainWindow.Show();
+                Close();
+            }
+            else
+            {
+                // Данные пользователя не были получены 
+            }
         }
 
         #endregion
