@@ -11,24 +11,24 @@ namespace EquipmentInventory.Forms.Pages.Accountant
     /// <summary>
     /// Логика взаимодействия для AccountantPanel.xaml
     /// </summary>
-    public partial class AccountantPanel : Page
+    public partial class AccountantPanel : Page, IMainPanel
     {
         private IMainWindow _parentWindow;
 
-        private Tables tables = new Tables();
+        private Tables tables;
 
         public AccountantPanel(IMainWindow parentWindow)
         {
             InitializeComponent();
             InitializeUI();
             _parentWindow = parentWindow;
-
+            tables = new Tables(this);
             UpdatePage_Click(tablesRb, null);
         }
 
         private void InitializeUI()
         {
-            tablesRb.Content = Strings.Tables;
+            tablesRb.Content = Strings.Tables.ToUpper();
             inventoryBtn.Content = Strings.Inventory;
             archiveBtn.Content = Strings.Archive;
         }
@@ -89,14 +89,14 @@ namespace EquipmentInventory.Forms.Pages.Accountant
             actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
         }
 
-        private void Archive_Click(object sender, RoutedEventArgs e)
+        public void Archive_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Pressed Archive");
+            MessageBox.Show("Pressed Archive from User");
         }
 
-        private void Inventory_Click(object sender, RoutedEventArgs e)
+        public void Inventory_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Pressed Inventory");
+            MessageBox.Show("Pressed Inventory from User");
         }
 
         #endregion

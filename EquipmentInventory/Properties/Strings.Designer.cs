@@ -79,6 +79,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Contains the history of changes from the main table..
+        /// </summary>
+        internal static string ArchiveDescripton {
+            get {
+                return ResourceManager.GetString("ArchiveDescripton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Invalid login or password..
         /// </summary>
         internal static string AuthenticationError {
@@ -93,15 +102,6 @@ namespace EquipmentInventory.Properties {
         internal static string AuthoTitle {
             get {
                 return ResourceManager.GetString("AuthoTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Back.
-        /// </summary>
-        internal static string Back {
-            get {
-                return ResourceManager.GetString("Back", resourceCulture);
             }
         }
         
@@ -142,7 +142,7 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на DICTIONARIES.
+        ///   Ищет локализованную строку, похожую на Dictionaries.
         /// </summary>
         internal static string Dictionaries {
             get {
@@ -169,15 +169,6 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Forward.
-        /// </summary>
-        internal static string Forward {
-            get {
-                return ResourceManager.GetString("Forward", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Help.
         /// </summary>
         internal static string Help {
@@ -192,6 +183,15 @@ namespace EquipmentInventory.Properties {
         internal static string Inventory {
             get {
                 return ResourceManager.GetString("Inventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Contains basic information..
+        /// </summary>
+        internal static string InventoryDescription {
+            get {
+                return ResourceManager.GetString("InventoryDescription", resourceCulture);
             }
         }
         
@@ -331,7 +331,7 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на TABLES.
+        ///   Ищет локализованную строку, похожую на Tables.
         /// </summary>
         internal static string Tables {
             get {
@@ -349,7 +349,7 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на USER REGISTRATION.
+        ///   Ищет локализованную строку, похожую на User registration.
         /// </summary>
         internal static string UserRegistration {
             get {

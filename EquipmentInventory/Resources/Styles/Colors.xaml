@@ -14,4 +14,12 @@
         <GradientStop Color="#313947" Offset="0.5" />
         <GradientStop Color="#3a4456" Offset="1.0" />
     </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GradientTransparent" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#B0D0D0D0" Offset="0.0" />
+        <GradientStop Color="#A0B0B0B0" Offset="0.25" />
+        <GradientStop Color="#B0D0D0D0" Offset="0.5" />
+        <GradientStop Color="#A0B0B0B0" Offset="0.75" />
+        <GradientStop Color="#B0D0D0D0" Offset="1.0" />
+    </LinearGradientBrush>
 </ResourceDictionary>

@@ -130,28 +130,9 @@
 
                     <Grid>
                         <WrapPanel>
-                            <!-- #region Navigation bar -->
-
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4 0 0 0">
-                                <Button x:Name="backPageBtn"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                        Style="{StaticResource MaterialDesignIconButton}" Width="30" Height="30" materialDesign:RippleAssist.IsDisabled="True"
-                                        IsTabStop="False" Foreground="{StaticResource HintColor}" Click="BackPage_Click">
-                                    <materialDesign:PackIcon Kind="ArrowLeftThick" Width="20" Height="20" />
-                                </Button>
-                                <Button x:Name="forwardPagebtn"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                        Style="{StaticResource MaterialDesignIconButton}" Width="30" Height="30" materialDesign:RippleAssist.IsDisabled="True"
-                                        IsTabStop="False" Foreground="{StaticResource HintColor}" Click="ForwardPage_Click">
-                                    <materialDesign:PackIcon Kind="ArrowRightThick" Width="20" Height="20" />
-                                </Button>
-                            </StackPanel>
-
-                            <!-- #endregion -->
-
                             <!-- #region Control panel -->
 
-                            <Frame x:Name="controlPanelFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
+                            <Frame x:Name="controlPanelFrame" IsTabStop="False" NavigationUIVisibility="Hidden" Margin="4 0 0 0" />
 
                             <!-- #endregion -->
                         </WrapPanel>

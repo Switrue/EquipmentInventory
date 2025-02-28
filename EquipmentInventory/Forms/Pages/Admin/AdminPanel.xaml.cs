@@ -11,7 +11,7 @@ namespace EquipmentInventory.Forms.Pages.Admin
     /// <summary>
     /// Логика взаимодействия для AdminPanel.xaml
     /// </summary>
-    public partial class AdminPanel : Page
+    public partial class AdminPanel : Page, IMainPanel
     {
         private IMainWindow _parentWindow;
 
@@ -19,22 +19,22 @@ namespace EquipmentInventory.Forms.Pages.Admin
 
         private Dictionaries dictionaries = new Dictionaries();
 
-        private Tables tables = new Tables();
+        private Tables tables;
 
         public AdminPanel(IMainWindow parentWindow)
         {
             InitializeComponent();
             InitializeUI();
             _parentWindow = parentWindow;
-
+            tables = new Tables(this);
             UpdatePage_Click(tablesRb, null);
         }
 
         private void InitializeUI()
         {
-            userRegistrationRb.Content = Strings.UserRegistration;
-            tablesRb.Content = Strings.Tables;
-            dictionariesRb.Content = Strings.Dictionaries;
+            userRegistrationRb.Content = Strings.UserRegistration.ToUpper();
+            tablesRb.Content = Strings.Tables.ToUpper();
+            dictionariesRb.Content = Strings.Dictionaries.ToUpper();
             inventoryBtn.Content = Strings.Inventory;
             archiveBtn.Content = Strings.Archive;
         }
@@ -106,14 +106,14 @@ namespace EquipmentInventory.Forms.Pages.Admin
             actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
         }
 
-        private void Archive_Click(object sender, RoutedEventArgs e)
+        public void Archive_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Pressed Archive");
+            MessageBox.Show("Pressed Archive from Adm");
         }
 
-        private void Inventory_Click(object sender, RoutedEventArgs e)
+        public void Inventory_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Pressed Inventory");
+            _parentWindow.ChangeMainFrameContent(new Inventory());
         }
 
         #endregion

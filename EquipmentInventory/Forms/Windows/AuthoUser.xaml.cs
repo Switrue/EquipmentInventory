@@ -87,7 +87,7 @@ namespace EquipmentInventory.Forms.Windows
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Убрать фокус с элементов
-            loginBtn.Focus();
+            Keyboard.ClearFocus();
             ClearTheFields();
         }
 

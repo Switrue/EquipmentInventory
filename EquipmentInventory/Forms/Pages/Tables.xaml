@@ -5,11 +5,99 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <TextBlock Text="Таблицы" Foreground="{StaticResource TextColor}"
-                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <StackPanel Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="titleBlockTxtBl" Grid.Column="0" Foreground="{StaticResource TextColor}"/>
+                <Border BorderBrush="{StaticResource HintColor}" Grid.Column="2" BorderThickness="1.5" Height="1" />
+            </Grid>
+
+            <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
+                <!-- #region Сard archive -->
+
+                <materialDesign:Card Width="260" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0">
+                            <Image Source="/Resources/Pictures/ArchivePreview.jpg" Stretch="Uniform" Style="{StaticResource ImageHoverStyle}" />
+                        </StackPanel>
+
+                        <Grid Grid.Row="0" Background="{StaticResource GradientTransparent}" Height="80" VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
+                                    Grid.Column="0" Margin="5" IsTabStop="False"
+                                    Click="GoToArchive_Click">
+                                <materialDesign:PackIcon Kind="NavigateNext" Width="25" Height="25" />
+                            </Button>
+
+                            <StackPanel Grid.Column="1" Margin="5" VerticalAlignment="Center">
+                                <TextBlock x:Name="titleArchiveCardTxtBl" FontWeight="Bold" />
+                                <TextBlock x:Name="descriptionArchiveCardTxtBl"
+                                           VerticalAlignment="Center"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+
+                <!-- #endregion -->
+
+                <!-- #region Card inventory -->
+
+                <materialDesign:Card Width="260" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0">
+                            <Image Source="/Resources/Pictures/InvenotryPreview.jpg" Stretch="Uniform" Style="{StaticResource ImageHoverStyle}" />
+                        </StackPanel>
+
+                        <Grid Grid.Row="0" Background="{StaticResource GradientTransparent}" Height="80" VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
+                                    Grid.Column="0" Margin="5" IsTabStop="False"
+                                    Click="GoToInventory_Click">
+                                <materialDesign:PackIcon Kind="NavigateNext" Width="25" Height="25" />
+                            </Button>
+
+                            <StackPanel Grid.Column="1" Margin="5" VerticalAlignment="Center">
+                                <TextBlock x:Name="titleInventoryCardTxtBl" FontWeight="Bold" />
+                                <TextBlock x:Name="descriptionInventoryCardTxtBl"
+                                           VerticalAlignment="Center"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+
+                <!-- #endregion -->
+            </WrapPanel>
+        </StackPanel>
     </Grid>
 </Page>

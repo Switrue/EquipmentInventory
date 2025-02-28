@@ -202,24 +202,24 @@
     <value>Помощь</value>
   </data>
   <data name="Tables" xml:space="preserve">
-    <value>ТАБЛИЦЫ</value>
+    <value>Таблицы</value>
   </data>
   <data name="Dictionaries" xml:space="preserve">
-    <value>СЛОВАРИ</value>
+    <value>Словари</value>
   </data>
   <data name="UserRegistration" xml:space="preserve">
-    <value>РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЕЙ</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Назад</value>
-  </data>
-  <data name="Forward" xml:space="preserve">
-    <value>Вперед</value>
+    <value>Регистрация пользователей</value>
   </data>
   <data name="Archive" xml:space="preserve">
     <value>Архив</value>
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Инвентаризация</value>
+  </data>
+  <data name="ArchiveDescripton" xml:space="preserve">
+    <value>Содержит историю изменений основной таблицы.</value>
+  </data>
+  <data name="InventoryDescription" xml:space="preserve">
+    <value>Содержит основную информацию.</value>
   </data>
 </root>

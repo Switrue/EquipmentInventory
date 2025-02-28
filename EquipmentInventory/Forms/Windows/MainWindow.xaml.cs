@@ -61,20 +61,6 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseDown(e);
-
-            if (e.ChangedButton == MouseButton.XButton1) 
-            {
-                BackPage_Click(this, null);
-            }
-            else if (e.ChangedButton == MouseButton.XButton2)
-            {
-                ForwardPage_Click(this, null);
-            }
-        }
-
         #endregion
 
         #region Load
@@ -95,8 +81,6 @@ namespace EquipmentInventory.Forms.Windows
             settingsMnIt.Header = $"_{Strings.Settings}";
             helpMnIt.Header = $"_{Strings.Help}";
             aboutTheProgrammMnIt.Header = $"_{Strings.AboutTheProgramm}";
-            backPageBtn.ToolTip = Strings.Back;
-            forwardPagebtn.ToolTip = Strings.Forward;
 
             Width = Settings.Default.WindowWidth;
             Height = Settings.Default.WindowHeight;
@@ -253,34 +237,18 @@ namespace EquipmentInventory.Forms.Windows
             MessageBox.Show("Pressed Profile");
         }
 
-        private void BackPage_Click(object sender, EventArgs e)
-        {
-            if (mainFrame.CanGoBack)
-            {
-                mainFrame.GoBack();
-            }
-        }
-
-        private void ForwardPage_Click(object sender, RoutedEventArgs e)
-        {
-            if (mainFrame.CanGoForward)
-            {
-                mainFrame.GoForward();
-            }
-        }
-
         #endregion
 
         #region Change frame
 
         public void ChangeMainFrameContent(Page newContent)
         {
-            mainFrame.Navigate(newContent);
+            mainFrame.Content = newContent;
         }
 
         public void ChangeControlPanelFrameContent(Page newContent)
         {
-            controlPanelFrame.Navigate(newContent);
+            controlPanelFrame.Content = newContent;
         }
 
         #endregion

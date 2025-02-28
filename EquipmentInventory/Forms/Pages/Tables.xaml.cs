@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EquipmentInventory.Classes.Interfaces;
+using EquipmentInventory.Properties;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -20,9 +10,32 @@ namespace EquipmentInventory.Forms.Pages
     /// </summary>
     public partial class Tables : Page
     {
-        public Tables()
+        private IMainPanel _parent;
+
+        public Tables(IMainPanel parent)
         {
             InitializeComponent();
+            InitializeUI();
+            _parent = parent;
+        }
+
+        private void InitializeUI()
+        {
+            titleArchiveCardTxtBl.Text = Strings.Archive;
+            descriptionArchiveCardTxtBl.Text = Strings.ArchiveDescripton;
+            titleInventoryCardTxtBl.Text = Strings.Inventory;
+            descriptionInventoryCardTxtBl.Text = Strings.InventoryDescription;
+            titleBlockTxtBl.Text = Strings.Tables;
+        }
+
+        private void GoToArchive_Click(object sender, RoutedEventArgs e)
+        {
+            _parent.Archive_Click(sender, e);
+        }
+
+        private void GoToInventory_Click(object sender, RoutedEventArgs e)
+        {
+            _parent.Inventory_Click(sender, e);
         }
     }
 }
