@@ -12,11 +12,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="filterAreaGrid" Grid.Column="0" Width="250" Background="{StaticResource Background}">
+        <Grid x:Name="filterAreaGrid" Grid.Column="0" Style="{StaticResource AnimatedGridStyle}" Visibility="Collapsed" Width="250" Background="{StaticResource Background}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -39,16 +39,22 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1">
-                
+
             </StackPanel>
 
             <Border Background="{StaticResource SecondaryColor}" Grid.RowSpan="2" HorizontalAlignment="Right" Width="2" />
         </Grid>
 
-        <Button x:Name="toggleGridBtn" Grid.Column="1" Padding="0" IsTabStop="False"
-                VerticalAlignment="Bottom" Margin="10" Background="{StaticResource SecondaryColor}"
-                Content="{materialDesign:PackIcon ArrowExpandLeft}"
-                Click="toggleGridBtn_Click"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+        <Grid x:Name="contentGrid" Background="Gray" Grid.Column="1">
+            <TextBlock Text="Test" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+
+        <ToggleButton x:Name="toggleGridBtn" VerticalAlignment="Top" Margin="5"
+                      materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowExpandLeft}"
+                      Background="{StaticResource SecondaryColor}"
+                      materialDesign:ElevationAssist.Elevation="Dp6"
+                      Content="{materialDesign:PackIcon ArrowExpandRight}" IsTabStop="False"
+                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                      Click="toggleGridBtn_Click" Grid.Column="2" />
     </Grid>
 </Page>

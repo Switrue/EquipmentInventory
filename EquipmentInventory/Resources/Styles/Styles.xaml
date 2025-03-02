@@ -30,4 +30,37 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+
+    <Storyboard x:Key="SlideInStoryboard" x:Shared="False">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" 
+                         From="-350" To="0" Duration="0:0:0.5" />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                         From="0" To="1" Duration="0:0:0.5" />
+    </Storyboard>
+    <Storyboard x:Key="SlideOutStoryboard" x:Shared="False">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" 
+                         From="0" To="-350" Duration="0:0:0.5" />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                         From="1" To="0" Duration="0:0:0.5" />
+    </Storyboard>
+
+    <Style x:Key="AnimatedGridStyle" TargetType="Grid">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="-350" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Visibility}" Value="Visible">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource SlideInStoryboard}" />
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Visibility}" Value="Collapsed">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource SlideOutStoryboard}" />
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

@@ -1,6 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using EquipmentInventory.Classes.Helper;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace EquipmentInventory.Forms.Pages
@@ -16,18 +17,10 @@ namespace EquipmentInventory.Forms.Pages
             InitializeComponent();
         }
 
-        private void toggleGridBtn_Click(object sender, RoutedEventArgs e)
+        private async void toggleGridBtn_Click(object sender, RoutedEventArgs e)
         {
-            bool isCollapsed = filterAreaGrid.Visibility == Visibility.Collapsed;
-
-            filterAreaGrid.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
-
-            var icon = new PackIcon
-            {
-                Kind = isCollapsed ? PackIconKind.ArrowExpandLeft : PackIconKind.ArrowExpandRight
-            };
-
-            toggleGridBtn.Content = icon;
+            AnimationHelper.ToggleSlideAnimation(filterAreaGrid);
+            await AnimationHelper.AnimatedBlock((ToggleButton)sender);
         }
 
         private void Page_MouseDown(object sender, MouseButtonEventArgs e)
