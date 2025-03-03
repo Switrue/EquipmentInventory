@@ -38,13 +38,13 @@
                     <TextBlock x:Name="authoTitle" TextWrapping="Wrap" TextAlignment="Center" 
                                VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource HintColor}" />
                     <WrapPanel HorizontalAlignment="Right">
-                        <Button x:Name="collapseBtn" Cursor="Hand" IsTabStop="False"
+                        <Button x:Name="collapseBtn" Cursor="Hand" IsTabStop="False" Focusable="False"
                                 Content="{materialDesign:PackIcon Kind=Minus}"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
                                 Padding="10 0 10 0" Click="CollapseWindow_Click" 
                                 Foreground="{StaticResource HintColor}" />
-                        <Button x:Name="closeBtn" Cursor="Hand" IsTabStop="False" 
+                        <Button x:Name="closeBtn" Cursor="Hand" IsTabStop="False" Focusable="False"
                                 Content="{materialDesign:PackIcon Kind=Close}"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
