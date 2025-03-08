@@ -7,20 +7,34 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       MouseDown="Page_MouseDown"
+      Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800">
 
+    <Page.Resources>
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="errorTxtBl"
+                Storyboard.TargetProperty="Opacity"
+                From="0" To="1" Duration="0:0:0.5" />
+        </Storyboard>
+
+        <Storyboard x:Key="FadeOutStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="errorTxtBl"
+                Storyboard.TargetProperty="Opacity"
+                From="1" To="0" Duration="0:0:0.5" />
+        </Storyboard>
+    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <materialDesign:DrawerHost Grid.Column="1"
-                                   x:Name="DrawerHost"
-                                   OpenMode="Standard"
-                                   IsLeftDrawerOpen="True"
-                                   BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
-                                   BottomDrawerCornerRadius="20 20 0 0">
+        <!--#region Search panel-->
+        
+        <materialDesign:DrawerHost Grid.Column="0" OpenMode="Standard" IsLeftDrawerOpen="True">
             <materialDesign:DrawerHost.Style>
                 <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
                     <Style.Triggers>
@@ -31,194 +45,216 @@
                 </Style>
             </materialDesign:DrawerHost.Style>
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <Grid Grid.Column="0" Background="{StaticResource Background}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-
-                    <!-- #region Search -->
-                    
-                    <StackPanel Grid.Row="0">
-                        <TextBox x:Name="searchTxtB"
-                                 materialDesign:HintAssist.Hint="Поиск"
-                                 materialDesign:HintAssist.HintPaddingBrush="{StaticResource Background}"
-                                 AcceptsReturn="True"
-                                 FontSize="14"
-                                 Margin="15 15 15 0"
-                                 BorderBrush="{StaticResource TextColor}"
-                                 Foreground="{StaticResource TextColor}"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 VerticalScrollBarVisibility="Auto" />
-                        <TextBlock x:Name="errorTxtBl" 
-                                   Text="Ошибка..."
-                                   VerticalAlignment="Center"
-                                   MaxHeight="50"
-                                   Margin="15 10 15 0"
-                                   Foreground="{StaticResource AccentColor}"
-                                   TextWrapping="Wrap"
-                                   TextTrimming="CharacterEllipsis" />
-                    </StackPanel>
-                    
-                    <!-- #endregion -->
-
-                    <!-- #region Filters -->
-
-                    <Grid Grid.Row="1" Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button x:Name="viewFiltersBtn" Content="Показать" Margin="5" Grid.Column="0"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
-                        <Button x:Name="hidenFiltersBtn" Content="Скрыть" Margin="5" Grid.Column="1"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
-                    </Grid>
-
-                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False">
-                        <materialDesign:Card Background="{StaticResource Background}" 
-                                             materialDesign:ElevationAssist.Elevation="Dp0" 
-                                             IsTabStop="False">
-                            <StackPanel>
-                                <Expander HorizontalAlignment="Stretch" x:Name="techniqueExpander" Header="Техника"
-                                          Background="{StaticResource Background}"
-                                          Foreground="{StaticResource TextColor}">
-                                    <StackPanel Margin="24 8 24 16"
-                                                Orientation="Vertical"
-                                                TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                        <RadioButton x:Name="techNameRBtn" Content="Наименование" Style="{StaticResource RadioButtonFilter}" />
-                                        <RadioButton x:Name="techTypeRBtn" Content="Тип" Style="{StaticResource RadioButtonFilter}" />
-                                        <RadioButton x:Name="techNumberRBtn" Content="Инвентарный номер" Style="{StaticResource RadioButtonFilter}" />
-                                        <RadioButton x:Name="techCostRBtn" Content="Стоимость" Style="{StaticResource RadioButtonFilter}" />
-                                    </StackPanel>
-                                </Expander>
-                                <Border Background="{StaticResource HintColor}" Height="2" />
-                                <Expander HorizontalAlignment="Stretch" x:Name="responsibleExpander" Header="Ответственный"
-                                          Background="{StaticResource Background}"
-                                          Foreground="{StaticResource TextColor}">
-                                    <StackPanel Margin="24 8 24 16"
-                                                Orientation="Vertical"
-                                                TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                        <RadioButton x:Name="respEmployeeRBtn" Content="Сотрудник" Style="{StaticResource RadioButtonFilter}" />
-                                        <RadioButton x:Name="respNumberRBtn" Content="Номер кабинета" Style="{StaticResource RadioButtonFilter}" />
-                                    </StackPanel>
-                                </Expander>
-                                <Border Background="{StaticResource HintColor}" Height="2" />
-                                <Expander HorizontalAlignment="Stretch" x:Name="computerExpander" Header="Компьютер"
-                                          Background="{StaticResource Background}"
-                                          Foreground="{StaticResource TextColor}">
-                                    <StackPanel Margin="24 8 24 16"
-                                                Orientation="Vertical"
-                                                TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                        <RadioButton x:Name="compNumberRBtn" Content="Номер" Style="{StaticResource RadioButtonFilter}" />
-                                    </StackPanel>
-                                </Expander>
-                                <Border Background="{StaticResource HintColor}" Height="2" />
-                                <Expander HorizontalAlignment="Stretch" x:Name="dateExpander" Header="Дата"
-                                          Background="{StaticResource Background}"
-                                          Foreground="{StaticResource TextColor}">
-                                    <StackPanel Margin="24 8 24 16"
-                                                Orientation="Vertical"
-                                                TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                        <RadioButton x:Name="dateAcquisitionRBtn" Content="Приобретения" Style="{StaticResource RadioButtonFilter}" />
-                                        <RadioButton x:Name="dateProductionsRBtn" Content="Производства" Style="{StaticResource RadioButtonFilter}" />
-                                    </StackPanel>
-                                </Expander>
-                                <Border Background="{StaticResource HintColor}" Height="2" />
-                                <Expander HorizontalAlignment="Stretch" x:Name="suppliersExpander" Header="Поставщики"
-                                          Background="{StaticResource Background}"
-                                          Foreground="{StaticResource TextColor}">
-                                    <StackPanel Margin="24 8 24 16"
-                                                Orientation="Vertical"
-                                                TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                        <RadioButton x:Name="supNameRBtn" Content="Наименование" Style="{StaticResource RadioButtonFilter}" />
-                                    </StackPanel>
-                                </Expander>
-                                <Border Background="{StaticResource HintColor}" Height="2" />
-                            </StackPanel>
-                        </materialDesign:Card>
-                    </ScrollViewer>
-                    
-                    <!-- #endregion -->
-                    
-                    <!-- #region Control panel -->
-
-                    <Grid Grid.Row="3">
+                <Grid Background="{StaticResource Background}">
+                    <Grid Grid.Column="0" Width="260" Margin="15">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" Margin="15 15 15 0">
-                            <ComboBox x:Name="OutlinedComboBox"
-                                      Foreground="{StaticResource TextColor}"
-                                      FontSize="14"
-                                      materialDesign:ThemeAssist.Theme="Dark"
-                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}"
-                                      materialDesign:HintAssist.Hint="Выбор запроса"
-                                      ItemsSource="{Binding ShortStringList}">
-                                <ComboBoxItem Content="Пример 1" />
-                                <ComboBoxItem Content="Пример 2" />
-                            </ComboBox>
+                        <!--#region Search-->
 
-                            <Grid Margin="0 10 0 0">
+                        <StackPanel Grid.Row="0">
+                            <TextBox x:Name="searchTxtB"
+                                     materialDesign:HintAssist.Hint="Поиск"
+                                     Margin="0 0 0 15"
+                                     materialDesign:HintAssist.HintPaddingBrush="{StaticResource Background}"
+                                     AcceptsReturn="True"
+                                     FontSize="14"
+                                     BorderBrush="{StaticResource TextColor}"
+                                     Foreground="{StaticResource TextColor}"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            <TextBlock x:Name="errorTxtBl" 
+                                       Text="Ошибка..."
+                                       VerticalAlignment="Center"
+                                       MaxHeight="50"
+                                       Foreground="{StaticResource AccentColor}"
+                                       TextWrapping="Wrap"
+                                       TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+
+                        <!-- #endregion -->
+
+                        <!--#region Filters-->
+
+                        <Grid Grid.Row="1" Margin="0 15 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="viewFiltersBtn" Content="Показать" Grid.Column="0"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                            <Button x:Name="hidenFiltersBtn" Content="Скрыть" Grid.Column="2"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                        </Grid>
+
+                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False" Margin="-15 5 -15 0">
+                            <materialDesign:Card Background="{StaticResource Background}" 
+                                                 materialDesign:ElevationAssist.Elevation="Dp0"
+                                                 IsTabStop="False">
+                                <StackPanel>
+                                    <Expander HorizontalAlignment="Stretch" x:Name="techniqueExpander" Header="Техника"
+                                              Background="{StaticResource Background}"
+                                              Foreground="{StaticResource TextColor}">
+                                        <StackPanel Margin="24 8 24 16">
+                                            <RadioButton x:Name="techNameRBtn" Content="Наименование" Style="{StaticResource RadioButtonFilter}" />
+                                            <RadioButton x:Name="techTypeRBtn" Content="Тип" Style="{StaticResource RadioButtonFilter}" />
+                                            <RadioButton x:Name="techNumberRBtn" Content="Инвентарный номер" Style="{StaticResource RadioButtonFilter}" />
+                                            <RadioButton x:Name="techCostRBtn" Content="Стоимость" Style="{StaticResource RadioButtonFilter}" />
+                                        </StackPanel>
+                                    </Expander>
+                                    <Border Background="{StaticResource HintColor}" Height="2" />
+                                    <Expander HorizontalAlignment="Stretch" x:Name="responsibleExpander" Header="Ответственный"
+                                              Background="{StaticResource Background}"
+                                              Foreground="{StaticResource TextColor}">
+                                        <StackPanel Margin="24 8 24 16">
+                                            <RadioButton x:Name="respEmployeeRBtn" Content="Сотрудник" Style="{StaticResource RadioButtonFilter}" />
+                                            <RadioButton x:Name="respNumberRBtn" Content="Номер кабинета" Style="{StaticResource RadioButtonFilter}" />
+                                        </StackPanel>
+                                    </Expander>
+                                    <Border Background="{StaticResource HintColor}" Height="2" />
+                                    <Expander HorizontalAlignment="Stretch" x:Name="computerExpander" Header="Компьютер"
+                                              Background="{StaticResource Background}"
+                                              Foreground="{StaticResource TextColor}">
+                                        <StackPanel Margin="24 8 24 16">
+                                            <RadioButton x:Name="compNumberRBtn" Content="Номер" Style="{StaticResource RadioButtonFilter}" />
+                                        </StackPanel>
+                                    </Expander>
+                                    <Border Background="{StaticResource HintColor}" Height="2" />
+                                    <Expander HorizontalAlignment="Stretch" x:Name="dateExpander" Header="Дата"
+                                              Background="{StaticResource Background}"
+                                              Foreground="{StaticResource TextColor}">
+                                        <StackPanel Margin="24 8 24 16">
+                                            <RadioButton x:Name="dateAcquisitionRBtn" Content="Приобретения" Style="{StaticResource RadioButtonFilter}" />
+                                            <RadioButton x:Name="dateProductionsRBtn" Content="Производства" Style="{StaticResource RadioButtonFilter}" />
+                                        </StackPanel>
+                                    </Expander>
+                                    <Border Background="{StaticResource HintColor}" Height="2" />
+                                    <Expander HorizontalAlignment="Stretch" x:Name="suppliersExpander" Header="Поставщики"
+                                              Background="{StaticResource Background}"
+                                              Foreground="{StaticResource TextColor}">
+                                        <StackPanel Margin="24 8 24 16">
+                                            <RadioButton x:Name="supNameRBtn" Content="Наименование" Style="{StaticResource RadioButtonFilter}" />
+                                        </StackPanel>
+                                    </Expander>
+                                    <Border Background="{StaticResource HintColor}" Height="2" />
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </ScrollViewer>
+
+                        <!-- #endregion -->
+
+                        <!--#region Control panel-->
+
+                        <StackPanel Grid.Row="3">
+                            <materialDesign:DrawerHost Margin="0 0 0 10" OpenMode="Standard" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
+                                <materialDesign:DrawerHost.Style>
+                                    <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}" Value="True">
+                                                <Setter Property="OverlayBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </materialDesign:DrawerHost.Style>
+                                <materialDesign:DrawerHost.BottomDrawerContent>
+                                    <StackPanel Background="Transparent">
+                                        <ComboBox x:Name="OutlinedComboBox"
+                                                  Foreground="{StaticResource TextColor}"
+                                                  FontSize="14"
+                                                  materialDesign:ThemeAssist.Theme="Dark"
+                                                  materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}"
+                                                  materialDesign:HintAssist.Hint="Выбор запроса"
+                                                  ItemsSource="{Binding ShortStringList}">
+                                            <ComboBoxItem Content="Пример 1" />
+                                            <ComboBoxItem Content="Пример 2" />
+                                        </ComboBox>
+
+                                        <Grid Margin="0 15 0 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Text="Отсутствует:" Grid.Column="0" Grid.Row="0" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" />
+                                            <ListBox Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="0">
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
+                                            </ListBox>
+
+                                            <TextBlock Text="В ремонте:" Grid.Column="0" Grid.Row="1" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" />
+                                            <ListBox Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="1">
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
+                                            </ListBox>
+                                        </Grid>
+                                    </StackPanel>
+                                </materialDesign:DrawerHost.BottomDrawerContent>
+                                <StackPanel Margin="0 0 9 0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <ToggleButton Background="{DynamicResource SecondaryColor}"
+                                                  materialDesign:ElevationAssist.Elevation="Dp3"
+                                                  materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseDown}"
+                                                  Content="{materialDesign:PackIcon Kind=ArrowExpandUp}"
+                                                  Style="{StaticResource MaterialDesignActionToggleButton}"
+                                                  CommandParameter="{x:Static Dock.Bottom}" Cursor="Hand"
+                                                  Click="toggleGridBtn_Click" IsChecked="False" />
+                                </StackPanel>
+                            </materialDesign:DrawerHost>
+
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Text="Отсутствует:" Grid.Column="0" Grid.Row="0" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" />
-                                <ListBox Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="1" Grid.Row="0">
-                                    <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
-                                    <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
-                                    <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
-                                </ListBox>
-
-                                <TextBlock Text="В ремонте:" Grid.Column="0" Grid.Row="1" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" />
-                                <ListBox Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="1" Grid.Row="1">
-                                    <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
-                                    <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
-                                    <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
-                                </ListBox>
+                                <Button Content="Найти"
+                                        Grid.Column="0"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                                <Button Content="{materialDesign:PackIcon Kind=CloseBoxOutline, Size=20}" 
+                                        Grid.Column="2"
+                                        ToolTip="Очистить"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
                             </Grid>
                         </StackPanel>
 
-                        <Button Content="Найти" Margin="15" Grid.Column="0" Grid.Row="1"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                        <!-- #endregion -->
                     </Grid>
-                    
-                    <!-- #endregion -->
-
-                    <Border Background="{StaticResource SecondaryColor}" Grid.RowSpan="4" HorizontalAlignment="Right" Width="2" />
+                    <Border Background="{StaticResource SecondaryColor}" HorizontalAlignment="Right" Width="2" />
                 </Grid>
             </materialDesign:DrawerHost.LeftDrawerContent>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <ToggleButton x:Name="toggleGridBtn" Margin="5" Grid.Column="0"
-                              HorizontalAlignment="Left" VerticalAlignment="Top"
-                              materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowExpandLeft}"
+            <StackPanel Margin="6" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <ToggleButton x:Name="toggleGridBtn"
                               Background="{StaticResource SecondaryColor}"
-                              materialDesign:ElevationAssist.Elevation="Dp6"
+                              materialDesign:ElevationAssist.Elevation="Dp3"
+                              materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseLeft}"
                               Content="{materialDesign:PackIcon ArrowExpandRight}" 
                               Style="{StaticResource MaterialDesignActionToggleButton}"
                               CommandParameter="{x:Static Dock.Left}" Cursor="Hand"
-                              Click="toggleGridBtn_Click" IsChecked="True" IsTabStop="False" />
-            </Grid>
+                              Click="toggleGridBtn_Click" IsChecked="True" />
+            </StackPanel>
         </materialDesign:DrawerHost>
+
+        <!--#endregion-->
+        
+        <Grid Grid.Column="1">
+            <Button Content="Жми" Click="Button_Click" HorizontalAlignment="Center" />
+        </Grid>
     </Grid>
 </Page>

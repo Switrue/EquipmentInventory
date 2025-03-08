@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
+using System.Windows.Media.Animation;
+using System;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -37,7 +39,23 @@ namespace EquipmentInventory.Forms.Pages
                 {
                     DrawerHost.CloseDrawerCommand.Execute(null, null);
                 }
+            }
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (errorTxtBl.Visibility == Visibility.Collapsed)
+            {
+                errorTxtBl.Visibility = Visibility.Visible;
+                errorTxtBl.BeginAnimation(UIElement.OpacityProperty, null);
+                Storyboard fadeIn = (Storyboard)FindResource("FadeInStoryboard");
+                fadeIn.Begin();
+            }
+            else
+            {
+                Storyboard fadeOut = (Storyboard)FindResource("FadeOutStoryboard");
+                fadeOut.Completed += (s, args) => errorTxtBl.Visibility = Visibility.Collapsed;
+                fadeOut.Begin();
             }
         }
     }
