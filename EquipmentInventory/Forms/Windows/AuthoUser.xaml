@@ -5,25 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentInventory.Forms.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:windowChrome="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         Style="{StaticResource MaterialDesignWindow}"
-        Background="{StaticResource GradientBackgroundBrush}"
+        Background="Transparent"
+        AllowsTransparency="True"
         mc:Ignorable="d"
         Height="450" Width="350"
         ResizeMode="NoResize" WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
 
-    <windowChrome:WindowChrome.WindowChrome>
-        <windowChrome:WindowChrome 
-            CaptionHeight="0" 
-            CornerRadius="20" 
-            GlassFrameThickness="0" 
-            ResizeBorderThickness="0"/>
-    </windowChrome:WindowChrome.WindowChrome>
-
     <!-- Внешний Border для границы -->
-    <Border BorderBrush="{StaticResource Circuit}" BorderThickness="1.5" CornerRadius="10">
+    <Border BorderBrush="{StaticResource Circuit}" Background="{StaticResource GradientBackgroundBrush}" BorderThickness="2" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -32,9 +24,9 @@
 
             <!-- #region Header -->
 
-            <Border Height="30" Grid.Row="0" CornerRadius="10 10 0 0"
+            <Border Grid.Row="0" CornerRadius="10 10 0 0"
                     Background="{StaticResource Foreground}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
-                <Grid>
+                <Grid Margin="2.5">
                     <TextBlock x:Name="authoTitle" TextWrapping="Wrap" TextAlignment="Center" 
                                VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource HintColor}" />
                     <WrapPanel HorizontalAlignment="Right">
