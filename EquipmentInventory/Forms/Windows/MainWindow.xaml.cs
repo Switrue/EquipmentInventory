@@ -1,8 +1,6 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Interfaces;
-using EquipmentInventory.Forms.Pages;
-using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -18,10 +16,6 @@ namespace EquipmentInventory.Forms.Windows
     /// </summary>
     public partial class MainWindow : Window, IMainWindow
     {
-        private UserRegistration userRegistration = new UserRegistration();
-
-        private Dictionaries dictionaries = new Dictionaries();
-
         private UserData _user;
 
         private bool isResizing;
@@ -29,6 +23,8 @@ namespace EquipmentInventory.Forms.Windows
         private double previousWidth;
 
         private double previousHeight;
+
+        private bool _maximazedWindow;
 
         public MainWindow(UserData user)
         {
@@ -95,7 +91,7 @@ namespace EquipmentInventory.Forms.Windows
             if (e.ClickCount == 2)
             {
                 await Task.Delay(200);
-                ToggleWindowState(WindowState == WindowState.Normal);
+                ToggleWindowState();
             }
             else
             {
@@ -107,7 +103,8 @@ namespace EquipmentInventory.Forms.Windows
         {
             if (WindowState == WindowState.Maximized)
             {
-                ToggleWindowState(true);
+                ToggleWindowState();
+                WindowState = WindowState.Normal;
             }
         }
 
@@ -118,7 +115,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private void MaximizeWindow_Click(object sender, EventArgs e)
         {
-            ToggleWindowState(WindowState == WindowState.Normal);
+            ToggleWindowState();
         }
 
         private void CloseWindow_Click(object sender, EventArgs e)
@@ -131,16 +128,26 @@ namespace EquipmentInventory.Forms.Windows
             Focus();
         }
 
-        private void ToggleWindowState(bool isMaximized)
+        private void ToggleWindowState()
         {
-            if (isMaximized)
+            if (!_maximazedWindow)
             {
                 // Сохраняем текущие размеры перед развертыванием
                 previousWidth = Width;
                 previousHeight = Height;
 
-                // Устанавливаем состояние окна в развернутое
-                WindowState = WindowState.Maximized;
+                // Получаем размеры рабочего стола с учетом панели задач
+                var workingArea = SystemParameters.WorkArea;
+
+                // Устанавливаем размеры окна в соответствии с размерами рабочего стола
+                Width = workingArea.Width;
+                Height = workingArea.Height;
+
+                // Устанавливаем положение окна в верхний левый угол
+                Left = workingArea.Left;
+                Top = workingArea.Top;
+
+                _maximazedWindow = true;
             }
             else
             {
@@ -148,17 +155,20 @@ namespace EquipmentInventory.Forms.Windows
                 Width = previousWidth;
                 Height = previousHeight;
 
-                // Устанавливаем состояние окна в нормальное
-                WindowState = WindowState.Normal;
+                // Устанавливаем положение окна
+                Left = (SystemParameters.PrimaryScreenWidth - previousWidth) / 2;
+                Top = (SystemParameters.PrimaryScreenHeight - previousHeight) / 2;
+
+                _maximazedWindow = false;
             }
 
             // Обновляем иконку
             maximizeBtn.Content = new PackIcon
             {
-                Kind = isMaximized ? PackIconKind.WindowRestore : PackIconKind.WindowMaximize
+                Kind = _maximazedWindow ? PackIconKind.WindowRestore : PackIconKind.WindowMaximize
             };
 
-            resizeMarker.Visibility = isMaximized ? Visibility.Collapsed : Visibility.Visible;
+            resizeMarker.Visibility = _maximazedWindow ? Visibility.Collapsed : Visibility.Visible;
         }
 
         #endregion
