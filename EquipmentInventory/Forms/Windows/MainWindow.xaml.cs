@@ -7,7 +7,10 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
+
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -24,7 +27,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private double previousHeight;
 
-        private bool _maximazedWindow;
+        private bool _maximizedWindow;
 
         public MainWindow(UserData user)
         {
@@ -39,7 +42,7 @@ namespace EquipmentInventory.Forms.Windows
         {
             base.OnClosed(e);
 
-            if (WindowState != WindowState.Maximized)
+            if (!_maximizedWindow)
             {
                 Settings.Default.WindowWidth = Width;
                 Settings.Default.WindowHeight = Height;
@@ -47,7 +50,7 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
+        protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
             base.OnKeyDown(e);
 
@@ -93,7 +96,7 @@ namespace EquipmentInventory.Forms.Windows
                 await Task.Delay(200);
                 ToggleWindowState();
             }
-            else
+            else if (!_maximizedWindow)
             {
                 DragMove();
             }
@@ -123,52 +126,55 @@ namespace EquipmentInventory.Forms.Windows
             Close();
         }
 
-        private void Window_MouseDown(object sender, MouseEventArgs e)
-        {
-            Focus();
-        }
-
         private void ToggleWindowState()
         {
-            if (!_maximazedWindow)
-            {
-                // Сохраняем текущие размеры перед развертыванием
-                previousWidth = Width;
-                previousHeight = Height;
+            var currentScreen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
 
-                // Получаем размеры рабочего стола с учетом панели задач
-                var workingArea = SystemParameters.WorkArea;
+            Action<Screen> toggleAction = _maximizedWindow ? (Action<Screen>)RestoreWindow : MaximizedWindow;
 
-                // Устанавливаем размеры окна в соответствии с размерами рабочего стола
-                Width = workingArea.Width;
-                Height = workingArea.Height;
+            toggleAction(currentScreen);
 
-                // Устанавливаем положение окна в верхний левый угол
-                Left = workingArea.Left;
-                Top = workingArea.Top;
+            UpdateUI();
+        }
 
-                _maximazedWindow = true;
-            }
-            else
-            {
-                // Восстанавливаем размеры окна
-                Width = previousWidth;
-                Height = previousHeight;
+        private void MaximizedWindow(Screen currentScreen)
+        {
+            previousWidth = Width;
+            previousHeight = Height;
 
-                // Устанавливаем положение окна
-                Left = (SystemParameters.PrimaryScreenWidth - previousWidth) / 2;
-                Top = (SystemParameters.PrimaryScreenHeight - previousHeight) / 2;
+            var workingArea = currentScreen.WorkingArea;
 
-                _maximazedWindow = false;
-            }
+            Width = workingArea.Width;
+            Height = workingArea.Height;
 
-            // Обновляем иконку
+            Left = workingArea.Left;
+            Top = workingArea.Top;
+
+            _maximizedWindow = true;
+        }
+
+        private void RestoreWindow(Screen currentScreen)
+        {
+            Width = previousWidth;
+            Height = previousHeight;
+
+            Left = currentScreen.WorkingArea.Left + (currentScreen.WorkingArea.Width - previousWidth) / 2;
+            Top = currentScreen.WorkingArea.Top + (currentScreen.WorkingArea.Height - previousHeight) / 2;
+
+            _maximizedWindow = false;
+        }
+
+        private void UpdateUI()
+        {
             maximizeBtn.Content = new PackIcon
             {
-                Kind = _maximazedWindow ? PackIconKind.WindowRestore : PackIconKind.WindowMaximize
+                Kind = _maximizedWindow ? PackIconKind.WindowRestore : PackIconKind.WindowMaximize
             };
 
-            resizeMarker.Visibility = _maximazedWindow ? Visibility.Collapsed : Visibility.Visible;
+            resizeMarker.Visibility = _maximizedWindow ? Visibility.Collapsed : Visibility.Visible;
+
+            windowEdging.CornerRadius = _maximizedWindow ? new CornerRadius(0) : new CornerRadius(10);
+            footerBorder.CornerRadius = _maximizedWindow ? new CornerRadius(0) : new CornerRadius(0, 0, 10, 10);
         }
 
         #endregion
@@ -187,7 +193,7 @@ namespace EquipmentInventory.Forms.Windows
             Mouse.Capture(null);
         }
 
-        private void ResizeHandle_MouseMove(object sender, MouseEventArgs e)
+        private void ResizeHandle_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (isResizing)
             {
@@ -234,17 +240,17 @@ namespace EquipmentInventory.Forms.Windows
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Pressed Settings");
+            System.Windows.MessageBox.Show("Pressed Settings");
         }
 
         private void AboutTheProgramm_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Pressed About the program");
+            System.Windows.MessageBox.Show("Pressed About the program");
         }
 
         private void Profile_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Pressed Profile");
+            System.Windows.MessageBox.Show("Pressed Profile");
         }
 
         #endregion
