@@ -11,9 +11,7 @@ namespace EquipmentInventory.Forms.Windows
     public partial class CustomMessageBox : Window
     {
         private string _title;
-
         private string _message;
-
         private bool _visibility;
 
         public CustomMessageBox(string title, string message, bool visibility)
@@ -62,14 +60,8 @@ namespace EquipmentInventory.Forms.Windows
 
         #endregion
 
-        private void ReturnTrue_Click(object sender, EventArgs e)
-        {
-            DialogResult = true;
-        }
+        private void ReturnTrue_Click(object sender, EventArgs e) => DialogResult = true;
 
-        private void ReturnFalse_Click(object sender, EventArgs e)
-        {
-            DialogResult = false;
-        }
+        private void ReturnFalse_Click(object sender, EventArgs e) => DialogResult = false;
     }
 }

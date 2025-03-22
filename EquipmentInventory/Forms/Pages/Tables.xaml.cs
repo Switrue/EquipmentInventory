@@ -28,14 +28,8 @@ namespace EquipmentInventory.Forms.Pages
             titleBlockTxtBl.Text = Strings.Tables;
         }
 
-        private void GoToArchive_Click(object sender, RoutedEventArgs e)
-        {
-            _parent.Archive_Click(sender, e);
-        }
+        private void GoToArchive_Click(object sender, RoutedEventArgs e) => _parent.Archive_Click(sender, e);
 
-        private void GoToInventory_Click(object sender, RoutedEventArgs e)
-        {
-            _parent.Inventory_Click(sender, e);
-        }
+        private void GoToInventory_Click(object sender, RoutedEventArgs e) => _parent.Inventory_Click(sender, e);
     }
 }

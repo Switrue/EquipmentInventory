@@ -222,4 +222,76 @@
   <data name="InventoryDescription" xml:space="preserve">
     <value>Содержит основную информацию.</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Показать</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Скрыть</value>
+  </data>
+  <data name="Technique" xml:space="preserve">
+    <value>Техника</value>
+  </data>
+  <data name="Responsible" xml:space="preserve">
+    <value>Ответственный</value>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value>Компьютер</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Поставщик</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="InventoryNumber" xml:space="preserve">
+    <value>Инвентарный номер</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Сотрудник</value>
+  </data>
+  <data name="OfficeNumber" xml:space="preserve">
+    <value>Номер кабинета</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Acquisition" xml:space="preserve">
+    <value>Приобретения</value>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>Производства</value>
+  </data>
+  <data name="CostFrom" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="CostUpTo" xml:space="preserve">
+    <value>До</value>
+  </data>
+  <data name="SelectRequest" xml:space="preserve">
+    <value>Выбор запроса</value>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Отсутствует</value>
+  </data>
+  <data name="InRepair" xml:space="preserve">
+    <value>В ремонте</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="Clean" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
 </root>

@@ -257,4 +257,100 @@
     <value>Contains basic information.</value>
     <comment>Tables</comment>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Hide</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Technique" xml:space="preserve">
+    <value>Technique</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Responsible" xml:space="preserve">
+    <value>Responsible</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value>Computer</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Supplier</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="InventoryNumber" xml:space="preserve">
+    <value>Inventory number</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="OfficeNumber" xml:space="preserve">
+    <value>Office number</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Acquisition" xml:space="preserve">
+    <value>Acquisition</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>Production</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="CostFrom" xml:space="preserve">
+    <value>From</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="CostUpTo" xml:space="preserve">
+    <value>Up to</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="SelectRequest" xml:space="preserve">
+    <value>Selecting a request</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Absent</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="InRepair" xml:space="preserve">
+    <value>In repair</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Find</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Clean" xml:space="preserve">
+    <value>Clean</value>
+    <comment>Tables</comment>
+  </data>
 </root>

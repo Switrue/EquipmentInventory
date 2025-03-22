@@ -84,20 +84,11 @@ namespace EquipmentInventory.Forms.Pages.Accountant
             return null;
         }
 
-        private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e)
-        {
-            actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
-        }
+        private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e) => actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
 
-        public void Archive_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Pressed Archive from User");
-        }
+        public void Archive_Click(object sender, RoutedEventArgs e) => MessageBox.Show("Pressed Archive from User");
 
-        public void Inventory_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Pressed Inventory from User");
-        }
+        public void Inventory_Click(object sender, RoutedEventArgs e) => MessageBox.Show("Pressed Inventory from User");
 
         #endregion
     }

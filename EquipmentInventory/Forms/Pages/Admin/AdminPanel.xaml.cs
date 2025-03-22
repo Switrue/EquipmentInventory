@@ -101,20 +101,11 @@ namespace EquipmentInventory.Forms.Pages.Admin
             return null;
         }
 
-        private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e)
-        {
-            actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
-        }
+        private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e) => actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
 
-        public void Archive_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Pressed Archive from Adm");
-        }
+        public void Archive_Click(object sender, RoutedEventArgs e) => MessageBox.Show("Pressed Archive from Adm");
 
-        public void Inventory_Click(object sender, RoutedEventArgs e)
-        {
-            _parentWindow.ChangeMainFrameContent(new Inventory());
-        }
+        public void Inventory_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new Inventory());
 
         #endregion
     }
