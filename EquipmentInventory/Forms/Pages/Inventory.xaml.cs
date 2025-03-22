@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Text.RegularExpressions;
 using EquipmentInventory.Properties;
+using System.Windows.Media;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -27,6 +28,8 @@ namespace EquipmentInventory.Forms.Pages
 
         private void InitializeUI()
         {
+            bool isCurrencyUsd = Settings.Default.CultureInfo == "en_US";
+
             HintAssist.SetHint(searchTxtB, Strings.Search);
             viewFiltersBtn.Content = Strings.View;
             hidenFiltersBtn.Content = Strings.Hide;
@@ -46,12 +49,15 @@ namespace EquipmentInventory.Forms.Pages
             dateAcquisitionRBtn.Content = Strings.Acquisition;
             dateProductionRBtn.Content = Strings.Production;
             suppliersExpander.Header = Strings.Supplier;
-            supNameRBtn.Content = Strings.Supplier;
+            supNameRBtn.Content = Strings.Name;
             HintAssist.SetHint(templateQueriesCB, Strings.SelectRequest);
             absentTxtB.Text = Strings.Absent + ":";
             repairTxtB.Text = Strings.InRepair + ":";
             findBtn.Content = Strings.Find;
             cleanBtn.ToolTip = Strings.Clean;
+
+            TextFieldAssist.SetLeadingIcon(costFromTxtB, isCurrencyUsd ? PackIconKind.CurrencyUsd : PackIconKind.CurrencyRub);
+            TextFieldAssist.SetLeadingIcon(costToTxtB, isCurrencyUsd ? PackIconKind.CurrencyUsd : PackIconKind.CurrencyRub);
         }
 
         #endregion
@@ -60,18 +66,10 @@ namespace EquipmentInventory.Forms.Pages
 
         private void toggleGridBtn_Click(object sender, RoutedEventArgs e)
         {
-            var toggle = sender as ToggleButton;
-
-            if (toggle != null)
+            if (sender is ToggleButton toggle)
             {
-                if (toggle.IsChecked == true)
-                {
-                    DrawerHost.OpenDrawerCommand.Execute(null, null);
-                }
-                else
-                {
-                    DrawerHost.CloseDrawerCommand.Execute(null, null);
-                }
+                var command = toggle.IsChecked == true ? DrawerHost.OpenDrawerCommand : DrawerHost.CloseDrawerCommand;
+                command.Execute(null, null);
             }
         }
 
@@ -91,7 +89,59 @@ namespace EquipmentInventory.Forms.Pages
             e.Handled = !regex.IsMatch(newText);
         }
 
-        private void CleanTheForm_Click(object sender, RoutedEventArgs e) { } // Очистить форму
+        private void CleanTheForm_Click(object sender, RoutedEventArgs e)
+        {
+            ResetExpanders();
+            ClearSearchTextBox();
+            ResetTemplateQueriesComboBox();
+            SetDefaultListBoxSelections();
+        }
+
+        private void ClearSearchTextBox()
+        {
+            searchTxtB.Text = string.Empty;
+        }
+
+        private void ResetTemplateQueriesComboBox()
+        {
+            templateQueriesCB.SelectedItem = null;
+        }
+
+        private void SetDefaultListBoxSelections()
+        {
+            absentListB.SelectedIndex = 1;
+            repairListB.SelectedIndex = 1;
+        }
+
+        private void ResetExpanders()
+        {
+            foreach (Expander expander in filterContainer.Children.OfType<Expander>())
+            {
+                ClearRadioButtons(expander);
+            }
+
+            // Очистить текстовые поля со стоимостью
+            CheckPriceContainer();
+        }
+
+        private void ClearRadioButtons(DependencyObject parent)
+        {
+            if (parent == null) return;
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is RadioButton radioButton)
+                {
+                    radioButton.IsChecked = false;
+                }
+                else
+                {
+                    ClearRadioButtons(child);
+                }
+            }
+        }
 
         private void TriggerANotification(string message)
         {

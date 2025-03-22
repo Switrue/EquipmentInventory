@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using EquipmentInventory.Properties;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 
@@ -13,7 +14,17 @@ namespace EquipmentInventory
         {
             base.OnStartup(e);
 
-            var cultureInfo = new CultureInfo("en_US"); // en_US или ru_RU
+            CultureInfo cultureInfo;
+
+            try
+            {
+                cultureInfo = new CultureInfo(Settings.Default.CultureInfo);
+            }
+            catch 
+            {
+                cultureInfo = new CultureInfo("ru_RU");
+            }
+            
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }

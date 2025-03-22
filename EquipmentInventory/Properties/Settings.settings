@@ -11,5 +11,8 @@
     <Setting Name="WindowHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>
+    <Setting Name="CultureInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ru_RU</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

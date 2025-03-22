@@ -58,5 +58,17 @@ namespace EquipmentInventory.Properties {
                 this["WindowHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ru_RU")]
+        public string CultureInfo {
+            get {
+                return ((string)(this["CultureInfo"]));
+            }
+            set {
+                this["CultureInfo"] = value;
+            }
+        }
     }
 }

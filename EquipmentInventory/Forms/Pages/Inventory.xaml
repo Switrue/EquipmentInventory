@@ -79,7 +79,7 @@
                             <materialDesign:Card Background="{StaticResource Background}" materialDesign:ElevationAssist.Elevation="Dp0" IsTabStop="False">
                                 <StackPanel x:Name="filterContainer">
                                     <Expander x:Name="techniqueExpander" Background="{StaticResource Background}" Foreground="{StaticResource TextColor}">
-                                        <StackPanel Margin="24 8 24 16">
+                                        <StackPanel x:Name="techniqueContainer" Margin="24 8 24 16">
                                             <RadioButton x:Name="techNameRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <RadioButton x:Name="techTypeRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <RadioButton x:Name="techNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
@@ -88,11 +88,15 @@
                                                 <TextBox x:Name="costFromTxtB" 
                                                          Margin="0 0 5 0" 
                                                          IsReadOnly="True"
+                                                         materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                                         materialDesign:TextFieldAssist.LeadingIconSize="15"
                                                          BorderBrush="{StaticResource HintColor}"
                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}"
                                                          PreviewTextInput="ValidationPrice_PreviewTextInput" />
                                                 <TextBox x:Name="costToTxtB" 
                                                          Margin="5 0 0 0" 
+                                                         materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                                         materialDesign:TextFieldAssist.LeadingIconSize="15"
                                                          IsReadOnly="True"
                                                          BorderBrush="{StaticResource HintColor}"
                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}"
@@ -102,27 +106,27 @@
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
                                     <Expander x:Name="responsibleExpander" Background="{StaticResource Background}" Foreground="{StaticResource TextColor}">
-                                        <StackPanel Margin="24 8 24 16">
+                                        <StackPanel x:Name="responsibleContainer" Margin="24 8 24 16">
                                             <RadioButton x:Name="respEmployeeRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <RadioButton x:Name="respNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
                                     <Expander x:Name="computerExpander" Background="{StaticResource Background}" Foreground="{StaticResource TextColor}">
-                                        <StackPanel Margin="24 8 24 16">
+                                        <StackPanel x:Name="computerContainer" Margin="24 8 24 16">
                                             <RadioButton x:Name="compNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
                                     <Expander x:Name="dateExpander" Background="{StaticResource Background}" Foreground="{StaticResource TextColor}">
-                                        <StackPanel Margin="24 8 24 16">
+                                        <StackPanel x:Name="dateContainer" Margin="24 8 24 16">
                                             <RadioButton x:Name="dateAcquisitionRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <RadioButton x:Name="dateProductionRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
                                     <Expander x:Name="suppliersExpander"  Background="{StaticResource Background}" Foreground="{StaticResource TextColor}">
-                                        <StackPanel Margin="24 8 24 16">
+                                        <StackPanel x:Name="suppliersContainer" Margin="24 8 24 16">
                                             <RadioButton x:Name="supNameRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                         </StackPanel>
                                     </Expander>
@@ -170,13 +174,13 @@
                                             </Grid.RowDefinitions>
 
                                             <TextBlock x:Name="absentTxtB" Grid.Column="0" Grid.Row="0" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" />
-                                            <ListBox Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="0">
+                                            <ListBox x:Name="absentListB" Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="0">
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
                                             </ListBox>
                                             <TextBlock x:Name="repairTxtB" Grid.Column="0" Grid.Row="1" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" />
-                                            <ListBox Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="1">
+                                            <ListBox x:Name="repairListB" Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="1">
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
