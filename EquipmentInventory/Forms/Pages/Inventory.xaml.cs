@@ -1,11 +1,10 @@
-﻿using EquipmentInventory.Classes.Helper;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
-using System.Windows.Media.Animation;
 using System;
+using System.Threading.Tasks;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -20,10 +19,7 @@ namespace EquipmentInventory.Forms.Pages
             InitializeComponent();
         }
 
-        private void Page_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            toggleGridBtn.Focus();
-        }
+        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => toggleGridBtn.Focus();
 
         private void toggleGridBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -42,20 +38,27 @@ namespace EquipmentInventory.Forms.Pages
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e) => TriggerANotification("Ошибка...");
+
+        private void ExpendFilters_Click(Object sender, RoutedEventArgs e) => ExpendFilters(bool.TryParse(((Button)sender).Tag as string, out bool isExpended));
+
+        private void ExpendFilters(bool isExpended)
         {
-            if (errorTxtBl.Visibility == Visibility.Collapsed)
+            foreach(var child in filterContainer.Children)
             {
-                errorTxtBl.Visibility = Visibility.Visible;
-                errorTxtBl.BeginAnimation(UIElement.OpacityProperty, null);
-                Storyboard fadeIn = (Storyboard)FindResource("FadeInStoryboard");
-                fadeIn.Begin();
+                if (child != null && child is Expander)
+                {
+                    var expender = child as Expander;
+                    expender.IsExpanded = isExpended;
+                }
             }
-            else
+        }
+
+        private void TriggerANotification(string message)
+        {
+            if (NotificationSnackbar.MessageQueue is { } messageQueue && NotificationSnackbar.Message == null)
             {
-                Storyboard fadeOut = (Storyboard)FindResource("FadeOutStoryboard");
-                fadeOut.Completed += (s, args) => errorTxtBl.Visibility = Visibility.Collapsed;
-                fadeOut.Begin();
+                Task task = Task.Factory.StartNew(() => messageQueue.Enqueue(message));
             }
         }
     }

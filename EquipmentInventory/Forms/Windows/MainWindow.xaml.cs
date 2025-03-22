@@ -20,13 +20,9 @@ namespace EquipmentInventory.Forms.Windows
     public partial class MainWindow : Window, IMainWindow
     {
         private UserData _user;
-
         private bool isResizing;
-
         private double previousWidth;
-
         private double previousHeight;
-
         private bool _maximizedWindow;
 
         public MainWindow(UserData user)
@@ -111,20 +107,11 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        private void CollapseWindow_Click(object sender, EventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+        private void CollapseWindow_Click(object sender, EventArgs e) => WindowState = WindowState.Minimized;
 
-        private void MaximizeWindow_Click(object sender, EventArgs e)
-        {
-            ToggleWindowState();
-        }
+        private void MaximizeWindow_Click(object sender, EventArgs e) => ToggleWindowState();
 
-        private void CloseWindow_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void CloseWindow_Click(object sender, EventArgs e) => Close();
 
         private void ToggleWindowState()
         {
@@ -133,7 +120,6 @@ namespace EquipmentInventory.Forms.Windows
             Action<Screen> toggleAction = _maximizedWindow ? (Action<Screen>)RestoreWindow : MaximizedWindow;
 
             toggleAction(currentScreen);
-
             UpdateUI();
         }
 
@@ -233,39 +219,21 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        private void ShowProfileOptions_Click(object sender, RoutedEventArgs e)
-        {
-            actionsPopup.IsOpen = !actionsPopup.IsOpen;
-        }
+        private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) => actionsPopup.IsOpen = !actionsPopup.IsOpen;
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.MessageBox.Show("Pressed Settings");
-        }
+        private void Settings_Click(object sender, RoutedEventArgs e) => System.Windows.MessageBox.Show("Pressed Settings");
 
-        private void AboutTheProgramm_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.MessageBox.Show("Pressed About the program");
-        }
+        private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) => System.Windows.MessageBox.Show("Pressed About the program");
 
-        private void Profile_Click(object sender, EventArgs e)
-        {
-            System.Windows.MessageBox.Show("Pressed Profile");
-        }
+        private void Profile_Click(object sender, EventArgs e) => System.Windows.MessageBox.Show("Pressed Profile");
 
         #endregion
 
         #region Change frame
 
-        public void ChangeMainFrameContent(Page newContent)
-        {
-            mainFrame.Content = newContent;
-        }
+        public void ChangeMainFrameContent(Page newContent) => mainFrame.Content = newContent;
 
-        public void ChangeControlPanelFrameContent(Page newContent)
-        {
-            controlPanelFrame.Content = newContent;
-        }
+        public void ChangeControlPanelFrameContent(Page newContent) => controlPanelFrame.Content = newContent;
 
         #endregion
     }

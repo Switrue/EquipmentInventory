@@ -10,22 +10,6 @@
       Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800">
 
-    <Page.Resources>
-        <Storyboard x:Key="FadeInStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="errorTxtBl"
-                Storyboard.TargetProperty="Opacity"
-                From="0" To="1" Duration="0:0:0.5" />
-        </Storyboard>
-
-        <Storyboard x:Key="FadeOutStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="errorTxtBl"
-                Storyboard.TargetProperty="Opacity"
-                From="1" To="0" Duration="0:0:0.5" />
-        </Storyboard>
-    </Page.Resources>
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -66,13 +50,6 @@
                                      BorderBrush="{StaticResource TextColor}"
                                      Foreground="{StaticResource TextColor}"
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-                            <TextBlock x:Name="errorTxtBl" 
-                                       Text="Ошибка..."
-                                       VerticalAlignment="Center"
-                                       MaxHeight="50"
-                                       Foreground="{StaticResource AccentColor}"
-                                       TextWrapping="Wrap"
-                                       TextTrimming="CharacterEllipsis" />
                         </StackPanel>
 
                         <!-- #endregion -->
@@ -88,18 +65,21 @@
 
                             <Button x:Name="viewFiltersBtn" Content="Показать" Grid.Column="0"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                                    Tag="true"
+                                    Click="ExpendFilters_Click" />
                             <Button x:Name="hidenFiltersBtn" Content="Скрыть" Grid.Column="2"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}" 
+                                    Click="ExpendFilters_Click" />
                         </Grid>
 
                         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False" Margin="-15 5 -15 0">
                             <materialDesign:Card Background="{StaticResource Background}" 
                                                  materialDesign:ElevationAssist.Elevation="Dp0"
                                                  IsTabStop="False">
-                                <StackPanel>
-                                    <Expander HorizontalAlignment="Stretch" x:Name="techniqueExpander" Header="Техника"
+                                <StackPanel x:Name="filterContainer">
+                                    <Expander x:Name="techniqueExpander" HorizontalAlignment="Stretch" Header="Техника"
                                               Background="{StaticResource Background}"
                                               Foreground="{StaticResource TextColor}">
                                         <StackPanel Margin="24 8 24 16">
@@ -110,7 +90,7 @@
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
-                                    <Expander HorizontalAlignment="Stretch" x:Name="responsibleExpander" Header="Ответственный"
+                                    <Expander x:Name="responsibleExpander" HorizontalAlignment="Stretch" Header="Ответственный"
                                               Background="{StaticResource Background}"
                                               Foreground="{StaticResource TextColor}">
                                         <StackPanel Margin="24 8 24 16">
@@ -119,7 +99,7 @@
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
-                                    <Expander HorizontalAlignment="Stretch" x:Name="computerExpander" Header="Компьютер"
+                                    <Expander x:Name="computerExpander" HorizontalAlignment="Stretch" Header="Компьютер"
                                               Background="{StaticResource Background}"
                                               Foreground="{StaticResource TextColor}">
                                         <StackPanel Margin="24 8 24 16">
@@ -127,7 +107,7 @@
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
-                                    <Expander HorizontalAlignment="Stretch" x:Name="dateExpander" Header="Дата"
+                                    <Expander x:Name="dateExpander" HorizontalAlignment="Stretch" Header="Дата"
                                               Background="{StaticResource Background}"
                                               Foreground="{StaticResource TextColor}">
                                         <StackPanel Margin="24 8 24 16">
@@ -136,7 +116,7 @@
                                         </StackPanel>
                                     </Expander>
                                     <Border Background="{StaticResource HintColor}" Height="2" />
-                                    <Expander HorizontalAlignment="Stretch" x:Name="suppliersExpander" Header="Поставщики"
+                                    <Expander x:Name="suppliersExpander" HorizontalAlignment="Stretch" Header="Поставщики"
                                               Background="{StaticResource Background}"
                                               Foreground="{StaticResource TextColor}">
                                         <StackPanel Margin="24 8 24 16">
@@ -252,9 +232,19 @@
         </materialDesign:DrawerHost>
 
         <!--#endregion-->
-        
-        <Grid Grid.Column="1">
+
+        <!--#region Table-->
+
+        <Grid Grid.Column="1" Cursor="">
             <Button Content="Жми" Click="Button_Click" HorizontalAlignment="Center" />
         </Grid>
+
+        <materialDesign:Snackbar x:Name="NotificationSnackbar" Grid.Column="1"
+                                 Margin="-44 0 0 0"
+                                 HorizontalAlignment="Stretch"
+                                 MessageQueue="{materialDesign:MessageQueue}"
+                                 Background="{StaticResource Background}" />
+
+        <!--#endregion-->
     </Grid>
 </Page>

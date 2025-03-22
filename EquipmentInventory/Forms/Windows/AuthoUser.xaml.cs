@@ -69,24 +69,14 @@ namespace EquipmentInventory.Forms.Windows
 
         #region Window management
 
-        private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
 
-        private void CollapseWindow_Click(object sender, EventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+        private void CollapseWindow_Click(object sender, EventArgs e) => WindowState = WindowState.Minimized;
 
-        private void CloseWindow_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void CloseWindow_Click(object sender, EventArgs e) => Close();
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Убрать фокус с элементов
             Keyboard.ClearFocus();
             ClearTheFields();
         }
