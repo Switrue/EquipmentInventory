@@ -13,17 +13,19 @@ namespace EquipmentInventory.Forms.Pages.Admin
     /// <summary>
     /// Логика взаимодействия для AdminPanel.xaml
     /// </summary>
-    public partial class AdminPanel : Page, IMainPanel
+    public partial class UserPanel : Page, IMainPanel
     {
         private IMainWindow _parentWindow;
+        private bool _isAdmin;
         private UserRegistration userRegistration = new UserRegistration();
         private Dictionaries dictionaries = new Dictionaries();
         private Tables tables;
 
-        public AdminPanel(IMainWindow parentWindow)
+        public UserPanel(IMainWindow parentWindow, bool isAdmin)
         {
             InitializeComponent();
             _parentWindow = parentWindow;
+            _isAdmin = isAdmin;
             InitializeData();
             InitializeUI();
         }
@@ -43,6 +45,12 @@ namespace EquipmentInventory.Forms.Pages.Admin
             dictionariesRb.Content = Strings.Dictionaries.ToUpper();
             inventoryBtn.Content = Strings.Inventory;
             archiveBtn.Content = Strings.Archive;
+
+            if (!_isAdmin)
+            {
+                userRegistrationRb.Visibility = Visibility.Collapsed;
+                dictionariesRb.Visibility = Visibility.Collapsed;
+            }
         }
 
         #endregion

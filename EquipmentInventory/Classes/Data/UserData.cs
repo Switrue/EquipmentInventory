@@ -9,11 +9,8 @@ namespace EquipmentInventory.Classes.Data
     public class UserData
     {
         public long UserId { get; private set; }
-
         public long UserRoleId { get; private set; }
-
         public string Username { get; private set; }
-
         public string Surname { get; private set; }
 
         public UserData(long userId)

@@ -15,9 +15,11 @@ namespace EquipmentInventory.Forms.Pages
         public Tables(IMainPanel parent)
         {
             InitializeComponent();
-            InitializeUI();
             _parent = parent;
+            InitializeUI();
         }
+
+        #region Load
 
         private void InitializeUI()
         {
@@ -28,8 +30,14 @@ namespace EquipmentInventory.Forms.Pages
             titleBlockTxtBl.Text = Strings.Tables;
         }
 
+        #endregion
+
+        #region Click
+
         private void GoToArchive_Click(object sender, RoutedEventArgs e) => _parent.Archive_Click(sender, e);
 
         private void GoToInventory_Click(object sender, RoutedEventArgs e) => _parent.Inventory_Click(sender, e);
+
+        #endregion
     }
 }

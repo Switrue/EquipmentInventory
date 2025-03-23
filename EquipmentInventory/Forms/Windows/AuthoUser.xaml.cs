@@ -11,7 +11,6 @@ using System.Windows.Controls;
 using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Data.Database;
 using EquipmentInventory.Forms.Pages.Admin;
-using EquipmentInventory.Forms.Pages.Accountant;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -148,10 +147,10 @@ namespace EquipmentInventory.Forms.Windows
                 switch (roleId)
                 {
                     case 1:
-                        mainWindow.ChangeControlPanelFrameContent(new AdminPanel(mainWindow));
+                        mainWindow.ChangeControlPanelFrameContent(new UserPanel(mainWindow, true));
                         break;
                     case 2:
-                        mainWindow.ChangeControlPanelFrameContent(new AccountantPanel(mainWindow));
+                        mainWindow.ChangeControlPanelFrameContent(new UserPanel(mainWindow, false));
                         break;
                     default:
                         CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);

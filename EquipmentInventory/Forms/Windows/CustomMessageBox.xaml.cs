@@ -17,12 +17,9 @@ namespace EquipmentInventory.Forms.Windows
         public CustomMessageBox(string title, string message, bool visibility)
         {
             InitializeComponent();
-
-            // Получение параметров
             _title = title;
             _message = message;
             _visibility = visibility;
-
             InitializeUI();
             DefaultParams();
         }
@@ -48,20 +45,18 @@ namespace EquipmentInventory.Forms.Windows
 
         #region Window management
 
-        private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
 
-        private void CloseWindow_Click(Object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void CloseWindow_Click(Object sender, EventArgs e) => Close();
 
         #endregion
+
+        #region Return
 
         private void ReturnTrue_Click(object sender, EventArgs e) => DialogResult = true;
 
         private void ReturnFalse_Click(object sender, EventArgs e) => DialogResult = false;
+
+        #endregion
     }
 }

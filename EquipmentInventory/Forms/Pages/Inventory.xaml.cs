@@ -62,6 +62,8 @@ namespace EquipmentInventory.Forms.Pages
 
         #endregion
 
+        #region Search panel
+
         private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void toggleGridBtn_Click(object sender, RoutedEventArgs e)
@@ -169,5 +171,7 @@ namespace EquipmentInventory.Forms.Pages
                 textBox.Text = isChecked ? textBox.Text : string.Empty;
             }
         }
+
+        #endregion
     }
 }
