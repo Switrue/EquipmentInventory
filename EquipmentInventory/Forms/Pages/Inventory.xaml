@@ -232,7 +232,7 @@
                               Content="{materialDesign:PackIcon ArrowExpandRight}" 
                               Style="{StaticResource MaterialDesignActionToggleButton}"
                               CommandParameter="{x:Static Dock.Left}" Cursor="Hand"
-                              Click="toggleGridBtn_Click" IsChecked="True" />
+                              Click="ToggleGridBtn_Click" IsChecked="True" />
             </StackPanel>
         </materialDesign:DrawerHost>
 

@@ -17,7 +17,6 @@ namespace EquipmentInventory.Forms.Pages
     /// </summary>
     public partial class Inventory : Page
     {
-
         public Inventory()
         {
             InitializeComponent();
@@ -66,7 +65,7 @@ namespace EquipmentInventory.Forms.Pages
 
         private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
-        private void toggleGridBtn_Click(object sender, RoutedEventArgs e)
+        private void ToggleGridBtn_Click(object sender, RoutedEventArgs e)
         {
             if (sender is ToggleButton toggle)
             {
@@ -75,7 +74,7 @@ namespace EquipmentInventory.Forms.Pages
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => TriggerANotification("Ошибка...");
+        private void Button_Click(object sender, RoutedEventArgs e) => TriggerANotification("Ошибка..."); // Тест
 
         private void ExpendFilters_Click(Object sender, RoutedEventArgs e) => ExpendFilters(bool.TryParse(((Button)sender).Tag as string, out bool isExpended));
 
