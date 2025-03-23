@@ -11,23 +11,23 @@
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <!-- #region Control panel -->
         
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="radioButtonContainer" Orientation="Horizontal">
             <RadioButton x:Name="userRegistrationRb" Padding="5" IsTabStop="False" FontSize="18"
                          Foreground="{StaticResource TextColor}"
                          Style="{StaticResource MaterialDesignTabRadioButton}"
-                         Checked="ColorChange_Checked" Click="UpdatePage_Click"
+                         Click="RadioButton_Click"
                          materialDesign:RippleAssist.IsDisabled="True" />
             <RadioButton x:Name="tablesRb" Padding="5" IsTabStop="False" FontSize="18"
                          Foreground="{StaticResource TextColor}" IsChecked="True"
                          Style="{StaticResource MaterialDesignTabRadioButton}"
                          materialDesign:RippleAssist.IsDisabled="True"
-                         Checked="ColorChange_Checked" Click="UpdatePage_Click" 
+                         Click="RadioButton_Click"
                          MouseEnter="DisplayTableOptions_Mouse" />
             <RadioButton x:Name="dictionariesRb" Padding="5" IsTabStop="False" FontSize="18"
                          Foreground="{StaticResource TextColor}"
                          Style="{StaticResource MaterialDesignTabRadioButton}"
                          materialDesign:RippleAssist.IsDisabled="True"
-                         Checked="ColorChange_Checked" Click="UpdatePage_Click" />
+                         Click="RadioButton_Click" />
 
             <Popup x:Name="actionsPopupRb" PlacementTarget="{Binding ElementName=tablesRb}" 
                    Placement="Bottom" StaysOpen="False" AllowsTransparency="True">

@@ -14,14 +14,20 @@ namespace EquipmentInventory.Forms.Pages.Accountant
     public partial class AccountantPanel : Page, IMainPanel
     {
         private IMainWindow _parentWindow;
-
         private Tables tables;
 
         public AccountantPanel(IMainWindow parentWindow)
         {
             InitializeComponent();
-            InitializeUI();
             _parentWindow = parentWindow;
+            InitializeData();
+            InitializeUI();
+        }
+
+        #region Load
+
+        private void InitializeData()
+        {
             tables = new Tables(this);
             UpdatePage_Click(tablesRb, null);
         }
@@ -32,6 +38,8 @@ namespace EquipmentInventory.Forms.Pages.Accountant
             inventoryBtn.Content = Strings.Inventory;
             archiveBtn.Content = Strings.Archive;
         }
+
+        #endregion
 
         #region Control panel
 
@@ -49,13 +57,11 @@ namespace EquipmentInventory.Forms.Pages.Accountant
 
         private void UpdateRadioButtonColors(SolidColorBrush textColor)
         {
-            RadioButton[] elements = { tablesRb };
-
-            foreach (var element in elements)
+            foreach (var child in radioButtonContainer.Children)
             {
-                if (element != null)
+                if (child != null && child is RadioButton radioButton)
                 {
-                    element.Foreground = textColor;
+                    radioButton.Foreground = textColor;
                 }
             }
         }

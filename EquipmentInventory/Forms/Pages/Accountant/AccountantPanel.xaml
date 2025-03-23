@@ -11,7 +11,7 @@
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <!-- #region Control panel -->
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="radioButtonContainer" Orientation="Horizontal">
             <RadioButton x:Name="tablesRb" Padding="5" IsTabStop="False" FontSize="18"
                          Foreground="{StaticResource TextColor}" IsChecked="True"
                          Style="{StaticResource MaterialDesignTabRadioButton}"
