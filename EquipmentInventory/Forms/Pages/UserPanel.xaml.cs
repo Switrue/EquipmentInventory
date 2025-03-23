@@ -1,4 +1,5 @@
-﻿using EquipmentInventory.Classes.Interfaces;
+﻿using EquipmentInventory.Classes.Enums;
+using EquipmentInventory.Classes.Interfaces;
 using EquipmentInventory.Properties;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,7 @@ namespace EquipmentInventory.Forms.Pages.Admin
 
         public void Archive_Click(object sender, RoutedEventArgs e) => MessageBox.Show("Pressed Archive from Adm");
 
-        public void Inventory_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new Inventory());
+        public void Inventory_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Inventory));
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {

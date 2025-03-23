@@ -1,4 +1,4 @@
-﻿<Page x:Class="EquipmentInventory.Forms.Pages.Inventory"
+﻿<Page x:Class="EquipmentInventory.Forms.Pages.TableSwitcher"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -240,15 +240,15 @@
 
         <!--#region Table-->
 
-        <Grid Grid.Column="1" Cursor="">
-            <Button Content="Жми" Click="Button_Click" HorizontalAlignment="Center" />
+        <Grid Grid.Column="1">
+            <Frame x:Name="tableFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
+            
+            <materialDesign:Snackbar x:Name="NotificationSnackbar" Grid.Column="1"
+                                     Margin="-44 0 0 0"
+                                     HorizontalAlignment="Stretch"
+                                     MessageQueue="{materialDesign:MessageQueue}"
+                                     Background="{StaticResource Background}" />
         </Grid>
-
-        <materialDesign:Snackbar x:Name="NotificationSnackbar" Grid.Column="1"
-                                 Margin="-44 0 0 0"
-                                 HorizontalAlignment="Stretch"
-                                 MessageQueue="{materialDesign:MessageQueue}"
-                                 Background="{StaticResource Background}" />
 
         <!--#endregion-->
     </Grid>

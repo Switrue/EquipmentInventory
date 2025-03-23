@@ -9,18 +9,25 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using EquipmentInventory.Properties;
 using System.Windows.Media;
+using EquipmentInventory.Classes.Interfaces;
+using EquipmentInventory.Classes.Enums;
+using EquipmentInventory.Forms.Pages.GridTables;
 
 namespace EquipmentInventory.Forms.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Inventory.xaml
     /// </summary>
-    public partial class Inventory : Page
+    public partial class TableSwitcher : Page, IMainTableSwitcher
     {
-        public Inventory()
+        private TableType _tableType;
+
+        public TableSwitcher(TableType tableType)
         {
             InitializeComponent();
+            _tableType = tableType;
             InitializeUI();
+            InitializeTable();
         }
 
         #region Load
@@ -59,6 +66,18 @@ namespace EquipmentInventory.Forms.Pages
             TextFieldAssist.SetLeadingIcon(costToTxtB, isCurrencyUsd ? PackIconKind.CurrencyUsd : PackIconKind.CurrencyRub);
         }
 
+        private void InitializeTable()
+        {
+            switch (_tableType)
+            {
+                case TableType.Inventory:
+                    tableFrame.Content = new Inventory(this);
+                    break;
+                case TableType.Archive:
+                    break;
+            }
+        }
+
         #endregion
 
         #region Search panel
@@ -73,8 +92,6 @@ namespace EquipmentInventory.Forms.Pages
                 command.Execute(null, null);
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) => TriggerANotification("Ошибка..."); // Тест
 
         private void ExpendFilters_Click(Object sender, RoutedEventArgs e) => ExpendFilters(bool.TryParse(((Button)sender).Tag as string, out bool isExpended));
 
@@ -144,14 +161,6 @@ namespace EquipmentInventory.Forms.Pages
             }
         }
 
-        private void TriggerANotification(string message)
-        {
-            if (NotificationSnackbar.MessageQueue is { } messageQueue && NotificationSnackbar.Message == null)
-            {
-                Task task = Task.Factory.StartNew(() => messageQueue.Enqueue(message));
-            }
-        }
-
         private void ExpendFilters(bool isExpended)
         {
             foreach(Expander expander in filterContainer.Children.OfType<Expander>())
@@ -168,6 +177,18 @@ namespace EquipmentInventory.Forms.Pages
             {
                 textBox.IsReadOnly = !isChecked;
                 textBox.Text = isChecked ? textBox.Text : string.Empty;
+            }
+        }
+
+        #endregion
+
+        #region Interface methods
+
+        public void TriggerANotification(string message)
+        {
+            if (NotificationSnackbar.MessageQueue is { } messageQueue && NotificationSnackbar.Message == null)
+            {
+                Task task = Task.Factory.StartNew(() => messageQueue.Enqueue(message));
             }
         }
 
