@@ -56,6 +56,15 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
+        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Отключение обработки боковых нажатий мыши
+            if (e.ChangedButton == MouseButton.XButton1 || e.ChangedButton == MouseButton.XButton2)
+            {
+                e.Handled = true; 
+            }
+        }
+
         #endregion
 
         #region Load

@@ -74,8 +74,17 @@ namespace EquipmentInventory.Forms.Pages
                     tableFrame.Content = new Inventory(this);
                     break;
                 case TableType.Archive:
+                    tableFrame.Content = new Archive(this);
+                    CollapseFilters();
                     break;
             }
+        }
+
+        private void CollapseFilters()
+        {
+            filterButtonUnit.Visibility = Visibility.Collapsed;
+            filterUnit.Visibility = Visibility.Collapsed;
+            templateQueriesCB.Visibility = Visibility.Collapsed;
         }
 
         #endregion

@@ -18,7 +18,7 @@
 
         <!--#region Search panel-->
         
-        <materialDesign:DrawerHost Grid.Column="0" OpenMode="Standard" IsLeftDrawerOpen="True">
+        <materialDesign:DrawerHost x:Name="searchPanelDrawerHost" Grid.Column="0" OpenMode="Standard" IsLeftDrawerOpen="True">
             <materialDesign:DrawerHost.Style>
                 <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
                     <Style.Triggers>
@@ -57,7 +57,7 @@
 
                         <!--#region Filters-->
 
-                        <Grid Grid.Row="1" Margin="0 15 0 0">
+                        <Grid x:Name="filterButtonUnit" Grid.Row="1" Margin="0 15 0 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="10" />
@@ -75,7 +75,7 @@
                                     Click="ExpendFilters_Click" />
                         </Grid>
 
-                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False" Margin="-15 5 -15 0">
+                        <ScrollViewer x:Name="filterUnit" Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False" Margin="-15 5 -15 0">
                             <materialDesign:Card Background="{StaticResource Background}" materialDesign:ElevationAssist.Elevation="Dp0" IsTabStop="False">
                                 <StackPanel x:Name="filterContainer">
                                     <Expander x:Name="techniqueExpander" Background="{StaticResource Background}" Foreground="{StaticResource TextColor}">

@@ -60,7 +60,7 @@ namespace EquipmentInventory.Forms.Pages.Admin
 
         private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e) => actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
 
-        public void Archive_Click(object sender, RoutedEventArgs e) => MessageBox.Show("Pressed Archive from Adm");
+        public void Archive_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Archive));
 
         public void Inventory_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Inventory));
 

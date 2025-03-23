@@ -172,6 +172,9 @@
     <Compile Include="Classes\Interfaces\IMainTableSwitcher.cs" />
     <Compile Include="Classes\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Interfaces\IMainPanel.cs" />
+    <Compile Include="Forms\Pages\GridTables\Archive.xaml.cs">
+      <DependentUpon>Archive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\GridTables\Inventory.xaml.cs">
       <DependentUpon>Inventory.xaml</DependentUpon>
     </Compile>
@@ -238,6 +241,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Forms\Pages\GridTables\Archive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Pages\GridTables\Inventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

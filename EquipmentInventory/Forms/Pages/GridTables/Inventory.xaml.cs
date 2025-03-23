@@ -17,6 +17,6 @@ namespace EquipmentInventory.Forms.Pages.GridTables
             _mainTableSwitcher = mainTableSwitcher;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => _mainTableSwitcher.TriggerANotification("Привет!");
+        private void Button_Click(object sender, RoutedEventArgs e) => _mainTableSwitcher.TriggerANotification("Inv");
     }
 }
