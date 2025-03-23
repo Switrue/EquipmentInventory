@@ -195,7 +195,7 @@
                                                   Content="{materialDesign:PackIcon Kind=ArrowExpandUp}"
                                                   Style="{StaticResource MaterialDesignActionToggleButton}"
                                                   CommandParameter="{x:Static Dock.Bottom}" Cursor="Hand"
-                                                  Click="toggleGridBtn_Click" IsChecked="False" />
+                                                  Click="ToggleGridBtn_Click" IsChecked="False" />
                                 </StackPanel>
                             </materialDesign:DrawerHost>
 
