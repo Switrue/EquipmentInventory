@@ -168,7 +168,7 @@
     <Compile Include="Classes\Data\Database\TokenValidation.cs" />
     <Compile Include="Classes\Data\UserData.cs" />
     <Compile Include="Classes\Enums\TableType.cs" />
-    <Compile Include="Classes\Helper\CustomMessageBoxHelper.cs" />
+    <Compile Include="Classes\Helpers\CustomMessageBoxHelper.cs" />
     <Compile Include="Classes\Interfaces\IMainTableSwitcher.cs" />
     <Compile Include="Classes\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Interfaces\IMainPanel.cs" />

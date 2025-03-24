@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -11,5 +12,7 @@ namespace EquipmentInventory.Forms.Pages
         {
             InitializeComponent();
         }
+
+        private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => Keyboard.ClearFocus(); 
     }
 }
