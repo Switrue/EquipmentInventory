@@ -5,17 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentInventory.Forms.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
         Style="{StaticResource MaterialDesignWindow}"
-        ResizeMode="NoResize" SizeToContent="Height" 
+        mc:Ignorable="d"
         Background="Transparent"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen"
+        MinHeight="200" 
+        Width="400"
+        SizeToContent="Height" 
+        ResizeMode="NoResize" 
         WindowStyle="None"
-        MinHeight="200" Width="400">
+        WindowStartupLocation="CenterScreen">
 
-    <!-- Внешний Border для границы -->
-    <Border BorderBrush="{StaticResource Circuit}" Background="{StaticResource GradientBackgroundBrush}" BorderThickness="2" CornerRadius="10">
+    <!--#region Styles-->
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedSecondaryButton}">
+                <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                <Setter Property="Width" Value="60" />
+                <Setter Property="Margin" Value="5 0 5 0" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <!--#endregion-->
+    
+    <Border Style="{StaticResource WindowBorder}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -24,19 +39,12 @@
 
             <!-- #region Header -->
 
-            <Border Background="{StaticResource Foreground}" CornerRadius="10 10 0 0"
-                    MouseLeftButtonDown="DragWindow_MouseLeftButtonDown" Grid.Row="0">
+            <Border Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
                 <Grid Margin="2.5">
-                    <TextBlock x:Name="customMessageBoxTitle" TextWrapping="Wrap" TextAlignment="Center" 
-                               VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource HintColor}" />
-                    <Button x:Name="closeBtn" 
-                            Content="{materialDesign:PackIcon Kind=Close}"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Style="{StaticResource MaterialDesignFlatSecondaryLightButton}"
-                            Padding="10 0 10 0" HorizontalAlignment="Right"
-                            Foreground="{StaticResource HintColor}"
-                            materialDesign:RippleAssist.Feedback="{StaticResource AccentColor}"
-                            Click="CloseWindow_Click" Cursor="Hand" IsTabStop="False" Focusable="False" />
+                    <TextBlock x:Name="customMessageBoxTitle" Style="{StaticResource WindowTitleTextBlock}" />
+                    <WrapPanel HorizontalAlignment="Right">
+                        <Button x:Name="closeMessageBoxBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />
+                    </WrapPanel>
                 </Grid>
             </Border>
 
@@ -50,20 +58,18 @@
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="messageTxtB" TextWrapping="Wrap" Grid.Row="0" TextAlignment="Justify"
-                           VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="10" />
+                <TextBlock x:Name="messageTxtB" 
+                           Grid.Row="0" 
+                           Margin="10"
+                           TextWrapping="Wrap" 
+                           TextAlignment="Justify"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center" 
+                           Foreground="White" />
 
                 <WrapPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
-                    <Button x:Name="trueBtn" Width="60" Margin="5 0 5 0"
-                            materialDesign:RippleAssist.Feedback="#DD000000"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            Click="ReturnTrue_Click" />
-                    <Button x:Name="falseBtn" Width="60" Margin="5 0 5 0" 
-                            materialDesign:RippleAssist.Feedback="#DD000000"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            Click="ReturnFalse_Click" Visibility="Collapsed" />
+                    <Button x:Name="trueBtn" Click="ReturnTrue_Click" />
+                    <Button x:Name="falseBtn" Click="ReturnFalse_Click" Visibility="Collapsed" />
                 </WrapPanel>
             </Grid>
 

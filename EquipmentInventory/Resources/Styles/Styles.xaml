@@ -110,6 +110,18 @@
         </Setter>
     </Style>
 
+    <!--#region DataTemplate-->
+    
+    <DataTemplate x:Key="IconTemplateSize">
+        <materialDesign:PackIcon Kind="{Binding Kind}" Width="{Binding Size}" Height="{Binding Size}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="IconTemplate">
+        <materialDesign:PackIcon Kind="{Binding}" />
+    </DataTemplate>
+    
+    <!--#endregion-->
+
     <!--#region Window-->
 
     <Style x:Key="WindowBorder" TargetType="Border">
@@ -144,16 +156,28 @@
     </Style>
 
     <Style x:Key="CollapseButton" TargetType="Button" BasedOn="{StaticResource WindowControlButtons}">
-        <Setter Property="Content" Value="{materialDesign:PackIcon Kind=Minus}" />
+        <Setter Property="ContentTemplate" Value="{StaticResource IconTemplate}" />
+        <Setter Property="Content" Value="Minus" />
     </Style>
 
     <Style x:Key="MaximizeButton" TargetType="Button" BasedOn="{StaticResource WindowControlButtons}">
-        <Setter Property="Content" Value="{materialDesign:PackIcon Kind=WindowMaximize}" />
+        <Setter Property="ContentTemplate" Value="{StaticResource IconTemplate}" />
+        <Setter Property="Content" Value="WindowMaximize" />
     </Style>
 
     <Style x:Key="CloseButton" TargetType="Button" BasedOn="{StaticResource WindowControlButtons}">
-        <Setter Property="Content" Value="{materialDesign:PackIcon Kind=Close}" />
+        <Setter Property="ContentTemplate" Value="{StaticResource IconTemplate}" />
+        <Setter Property="Content" Value="Close" />
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="{StaticResource AccentColor}" />
+    </Style>
+    
+    <!--#endregion-->
+    
+    <!--#region Footer-->
+
+    <Style x:Key="FooterBorder" TargetType="Border">
+        <Setter Property="CornerRadius" Value="0 0 10 10" />
+        <Setter Property="Background" Value="{StaticResource Foreground}" />
     </Style>
     
     <!--#endregion-->

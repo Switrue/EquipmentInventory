@@ -21,7 +21,7 @@ namespace EquipmentInventory.Forms.Windows
             _message = message;
             _visibility = visibility;
             InitializeUI();
-            DefaultParams();
+            InitializeParams();
         }
 
         #region Load
@@ -29,12 +29,12 @@ namespace EquipmentInventory.Forms.Windows
         private void InitializeUI()
         {
             Title = _title;
-            closeBtn.ToolTip = Strings.Close;
+            closeMessageBoxBtn.ToolTip = Strings.Close;
             trueBtn.Content = _visibility ? Strings.Ok : Strings.Yes;
             falseBtn.Content = Strings.No;
         }
 
-        private void DefaultParams()
+        private void InitializeParams()
         {
             customMessageBoxTitle.Text = _title;
             messageTxtB.Text = _message;

@@ -8,7 +8,24 @@
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800">
 
+    <!--#region Styles-->
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                <Setter Property="ContentTemplate" Value="{StaticResource IconTemplateSize}" />
+                <Setter Property="Content" Value="{Binding}" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <!--#endregion-->
+    
     <Grid>
+        <!--#region Table section-->
         <StackPanel Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
@@ -21,38 +38,27 @@
                 <Border BorderBrush="{StaticResource HintColor}" Grid.Column="2" BorderThickness="1.5" Height="1" />
             </Grid>
 
+            <!--#region Cards-->
+            
             <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
                 <!-- #region Сard archive -->
 
                 <materialDesign:Card Width="260" Margin="5">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0">
+                        <StackPanel>
                             <Image Source="/Resources/Pictures/ArchivePreview.jpg" Stretch="Uniform" Style="{StaticResource ImageHoverStyle}" />
                         </StackPanel>
 
-                        <Grid Grid.Row="0" Background="{StaticResource GradientTransparent}" Height="80" VerticalAlignment="Bottom">
+                        <Grid Background="{StaticResource GradientTransparent}" Height="80" VerticalAlignment="Bottom">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
-                                    Grid.Column="0" Margin="5" IsTabStop="False"
-                                    Click="GoToArchive_Click">
-                                <materialDesign:PackIcon Kind="NavigateNext" Width="25" Height="25" />
-                            </Button>
-
+                            <Button Grid.Column="0" Click="GoToArchive_Click" />
                             <StackPanel Grid.Column="1" Margin="5" VerticalAlignment="Center">
                                 <TextBlock x:Name="titleArchiveCardTxtBl" FontWeight="Bold" />
-                                <TextBlock x:Name="descriptionArchiveCardTxtBl"
-                                           VerticalAlignment="Center"
-                                           TextWrapping="Wrap" />
+                                <TextBlock x:Name="descriptionArchiveCardTxtBl" VerticalAlignment="Center" TextWrapping="Wrap" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -79,18 +85,10 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
-                                    Grid.Column="0" Margin="5" IsTabStop="False"
-                                    Click="GoToInventory_Click">
-                                <materialDesign:PackIcon Kind="NavigateNext" Width="25" Height="25" />
-                            </Button>
-
+                            <Button Grid.Column="0" Click="GoToInventory_Click" />
                             <StackPanel Grid.Column="1" Margin="5" VerticalAlignment="Center">
                                 <TextBlock x:Name="titleInventoryCardTxtBl" FontWeight="Bold" />
-                                <TextBlock x:Name="descriptionInventoryCardTxtBl"
-                                           VerticalAlignment="Center"
-                                           TextWrapping="Wrap" />
+                                <TextBlock x:Name="descriptionInventoryCardTxtBl" VerticalAlignment="Center" TextWrapping="Wrap" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -98,6 +96,10 @@
 
                 <!-- #endregion -->
             </WrapPanel>
+            
+            <!--#endregion-->
         </StackPanel>
+        
+        <!--#endregion-->
     </Grid>
 </Page>

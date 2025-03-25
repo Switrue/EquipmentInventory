@@ -147,19 +147,14 @@
 
             <!-- #region Footer -->
 
-            <Border x:Name="footerBorder" 
-                    Grid.Row="2" 
-                    CornerRadius="0 0 10 10" 
-                    Background="{StaticResource Foreground}">
+            <Border x:Name="footerBorder" Grid.Row="2" Style="{StaticResource FooterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" 
-                                Background="Transparent"
-                                MouseLeftButtonDown="DragWindow_MouseLeftButtonDown" />
+                    <StackPanel Grid.Column="0" Background="Transparent" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown" />
 
                     <Rectangle x:Name="resizeMarker" 
                                Grid.Column="1"

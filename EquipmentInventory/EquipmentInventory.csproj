@@ -172,6 +172,7 @@
     <Compile Include="Classes\Interfaces\IMainTableSwitcher.cs" />
     <Compile Include="Classes\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Interfaces\IMainPanel.cs" />
+    <Compile Include="Classes\Models\IconData.cs" />
     <Compile Include="Classes\Services\NotificationService.cs" />
     <Compile Include="Forms\Pages\GridTables\Archive.xaml.cs">
       <DependentUpon>Archive.xaml</DependentUpon>
