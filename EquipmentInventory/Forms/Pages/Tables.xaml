@@ -35,7 +35,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="titleBlockTxtBl" Grid.Column="0" Foreground="{StaticResource TextColor}"/>
-                <Border BorderBrush="{StaticResource HintColor}" Grid.Column="2" BorderThickness="1.5" Height="1" />
+                <Border BorderBrush="{StaticResource HintColor}" Grid.Column="2" BorderThickness="2" Height="1" />
             </Grid>
 
             <!--#region Cards-->
@@ -43,7 +43,7 @@
             <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
                 <!-- #region Сard archive -->
 
-                <materialDesign:Card Width="260" Margin="5">
+                <materialDesign:Card Width="260" Margin="5" materialDesign:ElevationAssist.Elevation="Dp8">
                     <Grid>
                         <StackPanel>
                             <Image Source="/Resources/Pictures/ArchivePreview.jpg" Stretch="Uniform" Style="{StaticResource ImageHoverStyle}" />
@@ -68,7 +68,7 @@
 
                 <!-- #region Card inventory -->
 
-                <materialDesign:Card Width="260" Margin="5">
+                <materialDesign:Card Width="260" Margin="5" materialDesign:ElevationAssist.Elevation="Dp8">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />

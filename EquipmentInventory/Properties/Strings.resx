@@ -353,4 +353,32 @@
     <value>Clean</value>
     <comment>Tables</comment>
   </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+    <comment>UserAccount</comment>
+  </data>
+  <data name="CreateAccouont" xml:space="preserve">
+    <value>Create an accouont</value>
+    <comment>UserAccount</comment>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>Select an image</value>
+    <comment>UserAccount</comment>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+    <comment>UserAccount</comment>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+    <comment>UserAccount</comment>
+  </data>
+  <data name="HidePassword" xml:space="preserve">
+    <value>Hide password</value>
+    <comment>UserAccount</comment>
+  </data>
+  <data name="Nick" xml:space="preserve">
+    <value>Username</value>
+    <comment>UserAccount</comment>
+  </data>
 </root>

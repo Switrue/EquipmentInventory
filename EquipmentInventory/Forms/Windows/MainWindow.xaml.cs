@@ -2,7 +2,6 @@
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Interfaces;
 using EquipmentInventory.Properties;
-using MaterialDesignThemes.Wpf;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -161,10 +160,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private void UpdateUI()
         {
-            maximizeBtn.Content = new PackIcon
-            {
-                Kind = _maximizedWindow ? PackIconKind.WindowRestore : PackIconKind.WindowMaximize
-            };
+            maximizeBtn.Content = _maximizedWindow ? "WindowRestore" : "WindowMaximize";
 
             resizeMarker.Visibility = _maximizedWindow ? Visibility.Collapsed : Visibility.Visible;
 

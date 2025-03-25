@@ -1,4 +1,6 @@
 ﻿using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
+using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -14,7 +16,21 @@ namespace EquipmentInventory.Forms.Pages
         public UserRegistration()
         {
             InitializeComponent();
+            InitializeUI();
             InitializeParams();
+        }
+
+        private void InitializeUI()
+        {
+            changeImageBtn.Content = Strings.SelectImage;
+            titleUserTxtBl.Text = Strings.User;
+            HintAssist.SetHint(userFieldTxtB, Strings.Nick);
+            HintAssist.SetHint(surnameFieldTxtB, Strings.Surname);
+            HintAssist.SetHint(loginFieldTxtB, Strings.Username);
+            HintAssist.SetHint(passwordFieldTxtB, Strings.Password);
+            createAccountBtn.Content = Strings.CreateAccouont;
+            passwordGenerationBtn.Content = Strings.ChangePassword;
+            hidePasswordTglBtn.ToolTip = Strings.HidePassword;
         }
 
         private void InitializeParams()

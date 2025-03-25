@@ -18,6 +18,7 @@
                 <Setter Property="Padding" Value="5" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="FontSize" Value="18" />
+                <Setter Property="Focusable" Value="False" />
             </Style>
 
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatSecondaryDarkButton}">
