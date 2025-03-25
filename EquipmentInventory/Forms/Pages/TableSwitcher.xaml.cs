@@ -4,7 +4,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using System;
-using System.Threading.Tasks;
 using System.Linq;
 using System.Text.RegularExpressions;
 using EquipmentInventory.Properties;
@@ -12,6 +11,7 @@ using System.Windows.Media;
 using EquipmentInventory.Classes.Interfaces;
 using EquipmentInventory.Classes.Enums;
 using EquipmentInventory.Forms.Pages.GridTables;
+using EquipmentInventory.Classes.Services;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -21,6 +21,7 @@ namespace EquipmentInventory.Forms.Pages
     public partial class TableSwitcher : Page, IMainTableSwitcher
     {
         private TableType _tableType;
+        private NotificationService notification;
 
         public TableSwitcher(TableType tableType)
         {
@@ -28,6 +29,7 @@ namespace EquipmentInventory.Forms.Pages
             _tableType = tableType;
             InitializeUI();
             InitializeTable();
+            InitializeParams();
         }
 
         #region Load
@@ -78,6 +80,11 @@ namespace EquipmentInventory.Forms.Pages
                     CollapseFilters();
                     break;
             }
+        }
+
+        private void InitializeParams()
+        {
+            notification = new NotificationService(notificationSnackbar);
         }
 
         private void CollapseFilters()
@@ -195,10 +202,7 @@ namespace EquipmentInventory.Forms.Pages
 
         public void TriggerANotification(string message)
         {
-            if (NotificationSnackbar.MessageQueue is { } messageQueue && NotificationSnackbar.Message == null)
-            {
-                Task task = Task.Factory.StartNew(() => messageQueue.Enqueue(message));
-            }
+            notification.Show(message);
         }
 
         #endregion

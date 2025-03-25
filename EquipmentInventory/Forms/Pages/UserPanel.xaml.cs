@@ -27,13 +27,13 @@ namespace EquipmentInventory.Forms.Pages.Admin
             InitializeComponent();
             _parentWindow = parentWindow;
             _isAdmin = isAdmin;
-            InitializeData();
+            InitializeParams();
             InitializeUI();
         }
 
         #region Load
 
-        private void InitializeData()
+        private void InitializeParams()
         {
             tables = new Tables(this);
             RadioButton_Click(tablesRb, null);
@@ -60,9 +60,17 @@ namespace EquipmentInventory.Forms.Pages.Admin
 
         private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e) => actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
 
-        public void Archive_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Archive));
+        public void Archive_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateColor(tablesRb);
+            _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Archive));
+        }
 
-        public void Inventory_Click(object sender, RoutedEventArgs e) => _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Inventory));
+        public void Inventory_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateColor(tablesRb);
+            _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Inventory));
+        }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,6 +113,7 @@ namespace EquipmentInventory.Forms.Pages.Admin
             SetRadioButtonColors(textColor);
 
             selectedRadioButton.Foreground = secondaryColor;
+            selectedRadioButton.IsChecked = true;
         }
 
         private void SetRadioButtonColors(SolidColorBrush textColor)

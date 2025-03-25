@@ -7,58 +7,85 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
       Background="Transparent"
-      d:DesignHeight="450" d:DesignWidth="800"
-      MouseDown="Page_MouseDown">
+      MouseDown="Page_MouseDown"
+      d:DesignHeight="450" d:DesignWidth="800">
 
+    <!--#region Styles-->
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="7" />
+                <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                <Setter Property="BorderBrush" Value="{StaticResource HintColor}" />
+                <Setter Property="MaxLength" Value="60" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <!--#endregion-->
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="450" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <!--#region Resistration unit-->
         
         <Border Grid.Column="1" Background="{StaticResource Background}" BorderThickness="2 0 2 0" BorderBrush="{StaticResource SecondaryColor}">
-            <Grid Margin="40 10 40 10" Width="290" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <Grid Margin="40 10 40 10" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                <WrapPanel Grid.Row="0">
-                    <Image Source="/Resources/Pictures/SmallUserIcon.png" Width="80" Height="80" HorizontalAlignment="Left" />
-                    <StackPanel Margin="10">
-                        <Button Content="Выбрать изображение" FontSize="12" Padding="4" Height="25"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Foreground="{StaticResource HintColor}"/>
+                    <WrapPanel Grid.Row="0">
+                        <Image Source="/Resources/Pictures/SmallUserIcon.png" Width="80" Height="80" HorizontalAlignment="Left" />
+                        <StackPanel Margin="10">
+                            <Button Content="Выбрать изображение" 
+                                    FontSize="12" 
+                                    Padding="4" 
+                                    Height="25"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Foreground="{StaticResource HintColor}"/>
+                        </StackPanel>
+                    </WrapPanel>
+
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                        <Border BorderBrush="{StaticResource HintColor}" BorderThickness="2" Height="2" />
+                        <TextBlock Text="Пользователь" Style="{StaticResource MaterialDesignTitleLargeTextBlock}" Foreground="{StaticResource TextColor}" />
                     </StackPanel>
-                </WrapPanel>
 
-                <StackPanel Grid.Row="2">
-                    <TextBox materialDesign:HintAssist.Hint="Имя" Margin="5"
-                             Foreground="{StaticResource TextColor}"
-                             BorderBrush="{StaticResource HintColor}" />
-                    <TextBox materialDesign:HintAssist.Hint="Фамилия" Margin="5"
-                             Foreground="{StaticResource TextColor}"
-                             BorderBrush="{StaticResource HintColor}" />
-                    <TextBox materialDesign:HintAssist.Hint="Логин" Margin="5"
-                             Foreground="{StaticResource TextColor}"
-                             BorderBrush="{StaticResource HintColor}" />
-                    <TextBox materialDesign:HintAssist.Hint="Пароль" Margin="5"
-                             Foreground="{StaticResource TextColor}"
-                             BorderBrush="{StaticResource HintColor}" />
-                </StackPanel>
+                    <StackPanel Grid.Row="2" Width="250">
+                        <TextBox materialDesign:HintAssist.Hint="Имя" />
+                        <TextBox materialDesign:HintAssist.Hint="Фамилия" />
+                        <TextBox materialDesign:HintAssist.Hint="Логин" />
+                        <TextBox materialDesign:HintAssist.Hint="Пароль" />
+                    </StackPanel>
 
-                <Button Content="Зарегестрировать" Grid.Row="4"
-                        materialDesign:RippleAssist.Feedback="#DD000000"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
-            </Grid>
+                    <Button Content="Зарегестрировать" 
+                            Grid.Row="4" 
+                            Width="250"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Click="Button_Click" />
+
+                </Grid>
+            </ScrollViewer>
         </Border>
-
-
+        <materialDesign:Snackbar x:Name="notificationSnackbar"
+                                 Grid.ColumnSpan="3"
+                                 HorizontalAlignment="Stretch"
+                                 MessageQueue="{materialDesign:MessageQueue}"
+                                 Background="{StaticResource Background}" />
         
+        <!--#endregion-->
     </Grid>
 </Page>

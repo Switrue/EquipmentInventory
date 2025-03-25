@@ -10,6 +10,31 @@
       Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800">
 
+    <!--#region Styles-->
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 0 5 0" />
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="materialDesign:TextFieldAssist.HasLeadingIcon" Value="True" />
+                <Setter Property="materialDesign:TextFieldAssist.LeadingIconSize" Value="15" />
+                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource TextColor}" />
+                <Setter Property="BorderBrush" Value="{StaticResource HintColor}" />
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedSecondaryButton}">
+                <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            </Style>
+            <Style TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignActionToggleButton}">
+                <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp3" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <!--#endregion-->
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -53,27 +78,14 @@
                                         Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                         </StackPanel>
 
-                        <!-- #endregion -->
+                        <!--#endregion-->
 
                         <!--#region Filters-->
 
-                        <Grid x:Name="filterButtonUnit" Grid.Row="1" Margin="0 15 0 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="10" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Button x:Name="viewFiltersBtn" Grid.Column="0"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                                    Tag="true"
-                                    Click="ExpendFilters_Click" />
-                            <Button x:Name="hidenFiltersBtn" Grid.Column="2"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    Style="{StaticResource MaterialDesignRaisedSecondaryButton}" 
-                                    Click="ExpendFilters_Click" />
-                        </Grid>
+                        <UniformGrid x:Name="filterButtonUnit" Grid.Row="1" Margin="0 15 0 0" Columns="2">
+                            <Button x:Name="viewFiltersBtn" Tag="true" Margin="0 0 5 0" Click="ExpendFilters_Click" />
+                            <Button x:Name="hidenFiltersBtn" Margin="5 0 0 0" Click="ExpendFilters_Click" />
+                        </UniformGrid>
 
                         <ScrollViewer x:Name="filterUnit" Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False" Margin="-15 5 -15 0">
                             <materialDesign:Card Background="{StaticResource Background}" materialDesign:ElevationAssist.Elevation="Dp0" IsTabStop="False">
@@ -85,22 +97,8 @@
                                             <RadioButton x:Name="techNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <RadioButton x:Name="techCostRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <UniformGrid x:Name="costFields" Columns="2">
-                                                <TextBox x:Name="costFromTxtB" 
-                                                         Margin="0 0 5 0" 
-                                                         IsReadOnly="True"
-                                                         materialDesign:TextFieldAssist.HasLeadingIcon="True"
-                                                         materialDesign:TextFieldAssist.LeadingIconSize="15"
-                                                         BorderBrush="{StaticResource HintColor}"
-                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}"
-                                                         PreviewTextInput="ValidationPrice_PreviewTextInput" />
-                                                <TextBox x:Name="costToTxtB" 
-                                                         Margin="5 0 0 0" 
-                                                         materialDesign:TextFieldAssist.HasLeadingIcon="True"
-                                                         materialDesign:TextFieldAssist.LeadingIconSize="15"
-                                                         IsReadOnly="True"
-                                                         BorderBrush="{StaticResource HintColor}"
-                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}"
-                                                         PreviewTextInput="ValidationPrice_PreviewTextInput" />
+                                                <TextBox x:Name="costFromTxtB" PreviewTextInput="ValidationPrice_PreviewTextInput" />
+                                                <TextBox x:Name="costToTxtB" PreviewTextInput="ValidationPrice_PreviewTextInput" />
                                             </UniformGrid>
                                         </StackPanel>
                                     </Expander>
@@ -167,7 +165,6 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="auto" />
                                             </Grid.ColumnDefinitions>
-
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                                 <RowDefinition Height="*" />
@@ -189,13 +186,10 @@
                                     </StackPanel>
                                 </materialDesign:DrawerHost.BottomDrawerContent>
                                 <StackPanel Margin="0 0 9 0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <ToggleButton Background="{DynamicResource SecondaryColor}"
-                                                  materialDesign:ElevationAssist.Elevation="Dp3"
-                                                  materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseDown}"
+                                    <ToggleButton materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseDown}"
                                                   Content="{materialDesign:PackIcon Kind=ArrowExpandUp}"
-                                                  Style="{StaticResource MaterialDesignActionToggleButton}"
-                                                  CommandParameter="{x:Static Dock.Bottom}" Cursor="Hand"
-                                                  Click="ToggleGridBtn_Click" IsChecked="False" />
+                                                  CommandParameter="{x:Static Dock.Bottom}"
+                                                  Click="ToggleGridBtn_Click" />
                                 </StackPanel>
                             </materialDesign:DrawerHost>
 
@@ -206,33 +200,24 @@
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button x:Name="findBtn"
-                                        Grid.Column="0"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}" />
+                                <Button x:Name="findBtn" Grid.Column="0" />
                                 <Button x:Name="cleanBtn" 
                                         Content="{materialDesign:PackIcon Kind=CloseBoxOutline, Size=20}" 
                                         Grid.Column="2"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
                                         Click="CleanTheForm_Click" />
                             </Grid>
                         </StackPanel>
 
-                        <!-- #endregion -->
+                        <!--#endregion-->
                     </Grid>
                     <Border Background="{StaticResource SecondaryColor}" HorizontalAlignment="Right" Width="2" />
                 </Grid>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <StackPanel Margin="6" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <ToggleButton x:Name="toggleGridBtn"
-                              Background="{StaticResource SecondaryColor}"
-                              materialDesign:ElevationAssist.Elevation="Dp3"
-                              materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseLeft}"
-                              Content="{materialDesign:PackIcon ArrowExpandRight}" 
-                              Style="{StaticResource MaterialDesignActionToggleButton}"
-                              CommandParameter="{x:Static Dock.Left}" Cursor="Hand"
-                              Click="ToggleGridBtn_Click" IsChecked="True" />
+                <ToggleButton materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseLeft}"
+                              Content="{materialDesign:PackIcon ArrowExpandRight}"
+                              IsChecked="True"
+                              Click="ToggleGridBtn_Click" />
             </StackPanel>
         </materialDesign:DrawerHost>
 
@@ -243,7 +228,8 @@
         <Grid Grid.Column="1">
             <Frame x:Name="tableFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
             
-            <materialDesign:Snackbar x:Name="NotificationSnackbar" Grid.Column="1"
+            <materialDesign:Snackbar x:Name="notificationSnackbar" 
+                                     Grid.Column="1"
                                      Margin="-44 0 0 0"
                                      HorizontalAlignment="Stretch"
                                      MessageQueue="{materialDesign:MessageQueue}"
