@@ -9,15 +9,29 @@ namespace EquipmentInventory.Classes.Data
     {
         private static bool IsFieldEmpty(Control control, string message)
         {
-            if (control is TextBox textBox && string.IsNullOrWhiteSpace(textBox.Text))
+            if (control is TextBox textBox )
             {
-                TextFieldHelper.SetTextField(textBox, message);
-                return true;
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    TextFieldHelper.SetTextField(textBox, message);
+                    return true;
+                }
+                else
+                {
+                    TextFieldHelper.ClearTextField(textBox);
+                }
             }
-            else if (control is PasswordBox passwordBox && string.IsNullOrWhiteSpace(passwordBox.Password))
+            else if (control is PasswordBox passwordBox)
             {
-                TextFieldHelper.SetTextField(passwordBox, message);
-                return true;
+                if (string.IsNullOrWhiteSpace(passwordBox.Password))
+                {
+                    TextFieldHelper.SetTextField(passwordBox, message);
+                    return true;
+                }
+                else
+                {
+                    TextFieldHelper.ClearTextField(passwordBox);
+                }
             }
             return false;
         }
@@ -34,6 +48,7 @@ namespace EquipmentInventory.Classes.Data
 
         public static bool AnyTextBoxIsEmpty(Panel parent)
         {
+            TextFieldHelper.ClearAllTextFields(parent);
             return parent.Children.OfType<Control>().Any(child => IsFieldEmpty(child, Strings.FieldEmpty));
         }
     }

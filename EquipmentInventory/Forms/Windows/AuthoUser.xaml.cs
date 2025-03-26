@@ -10,6 +10,8 @@ using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Data.Database;
 using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Classes.Helpers;
+using System.Windows.Controls;
+using Validation = EquipmentInventory.Classes.Data.Validation;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -85,11 +87,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private void Login_Click(object sender, EventArgs e)
         {
-            var container = textFieldContainer;
-
-            TextFieldHelper.ClearAllTextFields(container);
-
-            if (Validation.AnyTextBoxIsEmpty(container))
+            if (Validation.AnyTextBoxIsEmpty(textFieldContainer))
             {
                 return;
             }
@@ -166,6 +164,14 @@ namespace EquipmentInventory.Forms.Windows
                 // Данные пользователя не были получены 
             }
         }
+
+        #endregion
+
+        #region Valid change
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) => Validation.IsPasswordBoxEmpty((PasswordBox)sender);
 
         #endregion
     }

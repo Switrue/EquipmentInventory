@@ -67,10 +67,10 @@
 
                     <StackPanel Grid.Row="2" Width="250">
                         <StackPanel x:Name="textFieldContainer">
-                            <TextBox x:Name="userFieldTxtB" />
-                            <TextBox x:Name="surnameFieldTxtB" />
-                            <TextBox x:Name="loginFieldTxtB" />
-                            <TextBox x:Name="passwordFieldTxtB" />
+                            <TextBox x:Name="userFieldTxtB" TextChanged="ValidBox_TextChanged" />
+                            <TextBox x:Name="surnameFieldTxtB" TextChanged="ValidBox_TextChanged" />
+                            <TextBox x:Name="loginFieldTxtB" TextChanged="ValidBox_TextChanged" />
+                            <TextBox x:Name="passwordFieldTxtB" TextChanged="ValidBox_TextChanged" />
                         </StackPanel>
                         <Button x:Name="passwordGenerationBtn" HorizontalAlignment="Right" Margin="0 15 7 0" Click="PasswordGeneration_Click" />
                     </StackPanel>

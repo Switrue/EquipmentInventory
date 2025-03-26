@@ -28,6 +28,11 @@ namespace EquipmentInventory.Classes.Helpers
             ResetTextField(element, string.Empty, blueGreyColor);
         }
 
+        public static void ClearTextField(Control element)
+        {
+            SetTextField(element);
+        }
+
         public static void ClearAllTextFields(Panel parent)
         {
             foreach (var child in parent.Children)

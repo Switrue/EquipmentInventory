@@ -54,16 +54,14 @@ namespace EquipmentInventory.Forms.Pages
 
         private void CreateAccount_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var container = textFieldContainer;
-
-            TextFieldHelper.ClearAllTextFields(container);
-
-            if (Validation.AnyTextBoxIsEmpty(container))
+            if (Validation.AnyTextBoxIsEmpty(textFieldContainer))
             {
                 return;
             }
 
             notification.Show("Зарегестрирован");
         }
+
+        private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
     }
 }
