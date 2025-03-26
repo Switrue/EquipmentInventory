@@ -37,12 +37,12 @@
         <!--#region Resistration unit-->
 
         <materialDesign:Card Background="{StaticResource Background}" 
-                BorderThickness="2 0 2 0" 
-                BorderBrush="{StaticResource SecondaryColor}"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                materialDesign:ElevationAssist.Elevation="Dp16"
-                UniformCornerRadius="25">
+                             BorderThickness="2 0 2 0" 
+                             BorderBrush="{StaticResource SecondaryColor}"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             materialDesign:ElevationAssist.Elevation="Dp16"
+                             UniformCornerRadius="25">
             <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="10" Focusable="False">
                 <Grid Margin="40 10 40 10">
                     <Grid.RowDefinitions>
@@ -66,25 +66,13 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Width="250">
-                        <StackPanel>
+                        <StackPanel x:Name="textFieldContainer">
                             <TextBox x:Name="userFieldTxtB" />
                             <TextBox x:Name="surnameFieldTxtB" />
                             <TextBox x:Name="loginFieldTxtB" />
                             <TextBox x:Name="passwordFieldTxtB" />
                         </StackPanel>
-                        <UniformGrid Margin="7 20 7 0" Columns="2">
-                            <ToggleButton x:Name="hidePasswordTglBtn"
-                                          Content="{materialDesign:PackIcon Kind=Hide,Size=18}"
-                                          IsChecked="True"
-                                          Focusable="False"
-                                          Height="25"
-                                          Width="25"
-                                          HorizontalContentAlignment="Center"
-                                          VerticalContentAlignment="Center"
-                                          HorizontalAlignment="Left"
-                                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" />
-                            <Button x:Name="passwordGenerationBtn" />
-                        </UniformGrid>
+                        <Button x:Name="passwordGenerationBtn" HorizontalAlignment="Right" Margin="0 15 7 0" Click="PasswordGeneration_Click" />
                     </StackPanel>
 
                     <Button x:Name="createAccountBtn" 
@@ -92,7 +80,7 @@
                             Width="250" 
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            Click="Button_Click" />
+                            Click="CreateAccount_Click" />
                 </Grid>
             </ScrollViewer>
         </materialDesign:Card>

@@ -369,12 +369,8 @@
     <value>User</value>
     <comment>UserAccount</comment>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Change password</value>
-    <comment>UserAccount</comment>
-  </data>
-  <data name="HidePassword" xml:space="preserve">
-    <value>Hide password</value>
+  <data name="GeneratePassword" xml:space="preserve">
+    <value>Generate a password</value>
     <comment>UserAccount</comment>
   </data>
   <data name="Nick" xml:space="preserve">

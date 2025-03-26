@@ -124,15 +124,6 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Change password.
-        /// </summary>
-        internal static string ChangePassword {
-            get {
-                return ResourceManager.GetString("ChangePassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Clean.
         /// </summary>
         internal static string Clean {
@@ -268,6 +259,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Generate a password.
+        /// </summary>
+        internal static string GeneratePassword {
+            get {
+                return ResourceManager.GetString("GeneratePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Help.
         /// </summary>
         internal static string Help {
@@ -282,15 +282,6 @@ namespace EquipmentInventory.Properties {
         internal static string Hide {
             get {
                 return ResourceManager.GetString("Hide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Hide password.
-        /// </summary>
-        internal static string HidePassword {
-            get {
-                return ResourceManager.GetString("HidePassword", resourceCulture);
             }
         }
         

@@ -6,11 +6,10 @@ using MaterialDesignThemes.Wpf;
 using Npgsql;
 using EquipmentInventory.Classes.Cryptography;
 using EquipmentInventory.Classes.Helper;
-using System.Windows.Media;
-using System.Windows.Controls;
 using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Data.Database;
 using EquipmentInventory.Forms.Pages.Admin;
+using EquipmentInventory.Classes.Helpers;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -77,7 +76,7 @@ namespace EquipmentInventory.Forms.Windows
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Keyboard.ClearFocus();
-            ClearTheFields();
+            TextFieldHelper.ClearAllTextFields(textFieldContainer);
         }
 
         #endregion
@@ -86,9 +85,11 @@ namespace EquipmentInventory.Forms.Windows
 
         private void Login_Click(object sender, EventArgs e)
         {
-            ClearTheFields();
+            var container = textFieldContainer;
 
-            if (ValidateTextBox(usernameTextB) || ValidatePasswordBox(passwordPsB))
+            TextFieldHelper.ClearAllTextFields(container);
+
+            if (Validation.AnyTextBoxIsEmpty(container))
             {
                 return;
             }
@@ -164,57 +165,6 @@ namespace EquipmentInventory.Forms.Windows
             {
                 // Данные пользователя не были получены 
             }
-        }
-
-        #endregion
-
-        #region Validation
-
-        private bool ValidateTextBox(TextBox textBox)
-        {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                SetTextBoxHelperText(textBox, Strings.FieldEmpty);
-                return true;
-            }
-            return false;
-        }
-
-        private bool ValidatePasswordBox(PasswordBox passwordBox)
-        {
-            if (string.IsNullOrWhiteSpace(passwordBox.Password))
-            {
-                SetTextBoxHelperText(passwordBox, Strings.FieldEmpty);
-                return true;
-            }
-            return false;
-        }
-
-        private void ClearTheFields()
-        {
-            SetTextBoxHelperText(usernameTextB);
-            SetTextBoxHelperText(passwordPsB);
-        }
-
-        private void SetTextBoxHelperText(Control element, string message, SolidColorBrush color)
-        {
-            SolidColorBrush textColor = (SolidColorBrush)Application.Current.Resources["TextColor"];
-            element.Foreground = message == string.Empty ? textColor : color;
-            HintAssist.SetForeground(element, color);
-            TextFieldAssist.SetUnderlineBrush(element, color);
-            HintAssist.SetHelperText(element, message);
-        }
-
-        private void SetTextBoxHelperText(Control element, string message)
-        {
-            SolidColorBrush accentColor = (SolidColorBrush)Application.Current.Resources["AccentColor"];
-            SetTextBoxHelperText(element, message, accentColor);
-        }
-
-        private void SetTextBoxHelperText(Control element)
-        {
-            SolidColorBrush blueGreyColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
-            SetTextBoxHelperText(element, string.Empty, blueGreyColor);
         }
 
         #endregion
