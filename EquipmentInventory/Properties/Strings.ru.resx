@@ -312,4 +312,58 @@
   <data name="Nick" xml:space="preserve">
     <value>Имя</value>
   </data>
+  <data name="Copyrights" xml:space="preserve">
+    <value>Авторские права</value>
+  </data>
+  <data name="CopyrightsIllustrations" xml:space="preserve">
+    <value>Авторские права иллюстраций</value>
+  </data>
+  <data name="Vresion" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="DateCreation" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="DateAppWasCreated" xml:space="preserve">
+    <value>Дата создания приложения</value>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>Контактные данные</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Почта</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Лицензия</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Все права защищены.</value>
+  </data>
+  <data name="SubjectArea" xml:space="preserve">
+    <value>Предметная область</value>
+  </data>
+  <data name="SubjectAreaDescription" xml:space="preserve">
+    <value>Информационная система «Инвентаризация компьютерной техники» создана с целью автоматизации процессов учета компьютерной техники в Администрации Благовещенского района Алтайского края.</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Разработчик</value>
+  </data>
+  <data name="DeveloperDescription" xml:space="preserve">
+    <value>Cтудент КГБПОУ «Благовещенского строительного техникума» Кухтин К.В.</value>
+  </data>
+  <data name="SystemRequirements" xml:space="preserve">
+    <value>Системные требования</value>
+  </data>
+  <data name="SystemRequirementsDescription" xml:space="preserve">
+    <value>- Операционная система: Windows 10/11 
+- Процессор (CPU): c двумя и более физическими ядрами, поддерживающий технологию SSE2
+- Оперативная память (RAM): 2 ГБ
+- Видеоадаптер: NVIDIA GeForce 8600, ATI</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Совместимость</value>
+  </data>
+  <data name="MinimumSystemSequirements" xml:space="preserve">
+    <value>Минимальные системные требования</value>
+  </data>
 </root>

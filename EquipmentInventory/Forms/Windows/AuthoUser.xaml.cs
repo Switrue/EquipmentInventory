@@ -137,7 +137,7 @@ namespace EquipmentInventory.Forms.Windows
 
             // Данные пользователя
             var user = new UserData(Convert.ToInt64(authResult[0]));
-            var userService = new UserService(user);
+            var userService = new AuthorizationService(user);
 
             userService.InitializeMainWindow();
 

@@ -88,6 +88,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на All rights reserved..
+        /// </summary>
+        internal static string AllRightsReserved {
+            get {
+                return ResourceManager.GetString("AllRightsReserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Archive.
         /// </summary>
         internal static string Archive {
@@ -151,11 +160,47 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Compatibility.
+        /// </summary>
+        internal static string Compatibility {
+            get {
+                return ResourceManager.GetString("Compatibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Computer.
         /// </summary>
         internal static string Computer {
             get {
                 return ResourceManager.GetString("Computer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Contact details.
+        /// </summary>
+        internal static string ContactDetails {
+            get {
+                return ResourceManager.GetString("ContactDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Copyrights.
+        /// </summary>
+        internal static string Copyrights {
+            get {
+                return ResourceManager.GetString("Copyrights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Copyrights of illustrations.
+        /// </summary>
+        internal static string CopyrightsIllustrations {
+            get {
+                return ResourceManager.GetString("CopyrightsIllustrations", resourceCulture);
             }
         }
         
@@ -205,6 +250,24 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Date the application was created.
+        /// </summary>
+        internal static string DateAppWasCreated {
+            get {
+                return ResourceManager.GetString("DateAppWasCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Date of Creation.
+        /// </summary>
+        internal static string DateCreation {
+            get {
+                return ResourceManager.GetString("DateCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Unknown.
         /// </summary>
         internal static string DefaultUserName {
@@ -214,11 +277,38 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Developer.
+        /// </summary>
+        internal static string Developer {
+            get {
+                return ResourceManager.GetString("Developer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Student of KGBPOU “Blagoveshchensk Construction Technical School” Kukhtin K.V..
+        /// </summary>
+        internal static string DeveloperDescription {
+            get {
+                return ResourceManager.GetString("DeveloperDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Dictionaries.
         /// </summary>
         internal static string Dictionaries {
             get {
                 return ResourceManager.GetString("Dictionaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
@@ -322,6 +412,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на License.
+        /// </summary>
+        internal static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string Login {
@@ -363,6 +462,15 @@ namespace EquipmentInventory.Properties {
         internal static string Maximize {
             get {
                 return ResourceManager.GetString("Maximize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Minimum system requirements.
+        /// </summary>
+        internal static string MinimumSystemSequirements {
+            get {
+                return ResourceManager.GetString("MinimumSystemSequirements", resourceCulture);
             }
         }
         
@@ -538,6 +646,24 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Subject area.
+        /// </summary>
+        internal static string SubjectArea {
+            get {
+                return ResourceManager.GetString("SubjectArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The information system “Inventory of computer equipment” was created to automate the processes of accounting of computer equipment in the Administration of Blagoveshchensky District of Altai Krai..
+        /// </summary>
+        internal static string SubjectAreaDescription {
+            get {
+                return ResourceManager.GetString("SubjectAreaDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Supplier.
         /// </summary>
         internal static string Supplier {
@@ -561,6 +687,27 @@ namespace EquipmentInventory.Properties {
         internal static string System {
             get {
                 return ResourceManager.GetString("System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на System Requirements.
+        /// </summary>
+        internal static string SystemRequirements {
+            get {
+                return ResourceManager.GetString("SystemRequirements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на - Operating system: Windows 10/11
+        ///- Processor (CPU): with two or more physical cores, supporting SSE2 technology 
+        ///- RAM (RAM): 2 GB
+        ///- Video adapter: NVIDIA GeForce 8600, ATI.
+        /// </summary>
+        internal static string SystemRequirementsDescription {
+            get {
+                return ResourceManager.GetString("SystemRequirementsDescription", resourceCulture);
             }
         }
         
@@ -624,6 +771,15 @@ namespace EquipmentInventory.Properties {
         internal static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Vresion.
+        /// </summary>
+        internal static string Vresion {
+            get {
+                return ResourceManager.GetString("Vresion", resourceCulture);
             }
         }
         

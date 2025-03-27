@@ -377,4 +377,75 @@
     <value>Username</value>
     <comment>UserAccount</comment>
   </data>
+  <data name="Copyrights" xml:space="preserve">
+    <value>Copyrights</value>
+    <comment>Information</comment>
+  </data>
+  <data name="CopyrightsIllustrations" xml:space="preserve">
+    <value>Copyrights of illustrations</value>
+    <comment>Information</comment>
+  </data>
+  <data name="Vresion" xml:space="preserve">
+    <value>Vresion</value>
+    <comment>Information</comment>
+  </data>
+  <data name="DateCreation" xml:space="preserve">
+    <value>Date of Creation</value>
+    <comment>Information</comment>
+  </data>
+  <data name="DateAppWasCreated" xml:space="preserve">
+    <value>Date the application was created</value>
+    <comment>Information</comment>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>Contact details</value>
+    <comment>Information</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>Information</comment>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>License</value>
+    <comment>Information</comment>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved.</value>
+    <comment>Information</comment>
+  </data>
+  <data name="SubjectArea" xml:space="preserve">
+    <value>Subject area</value>
+    <comment>Information</comment>
+  </data>
+  <data name="SubjectAreaDescription" xml:space="preserve">
+    <value>The information system “Inventory of computer equipment” was created to automate the processes of accounting of computer equipment in the Administration of Blagoveshchensky District of Altai Krai.</value>
+    <comment>Information</comment>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Developer</value>
+    <comment>Information</comment>
+  </data>
+  <data name="DeveloperDescription" xml:space="preserve">
+    <value>Student of KGBPOU “Blagoveshchensk Construction Technical School” Kukhtin K.V.</value>
+    <comment>Information</comment>
+  </data>
+  <data name="SystemRequirements" xml:space="preserve">
+    <value>System Requirements</value>
+    <comment>Information</comment>
+  </data>
+  <data name="SystemRequirementsDescription" xml:space="preserve">
+    <value>- Operating system: Windows 10/11
+- Processor (CPU): with two or more physical cores, supporting SSE2 technology 
+- RAM (RAM): 2 GB
+- Video adapter: NVIDIA GeForce 8600, ATI</value>
+    <comment>Information</comment>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Compatibility</value>
+    <comment>Information</comment>
+  </data>
+  <data name="MinimumSystemSequirements" xml:space="preserve">
+    <value>Minimum system requirements</value>
+    <comment>Information</comment>
+  </data>
 </root>

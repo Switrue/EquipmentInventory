@@ -6,9 +6,52 @@
       xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
+      Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <TextBlock Text="О программе" Foreground="{StaticResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MinWidth="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--#region Program information block-->
+        
+        <StackPanel Grid.Column="0" Background="{StaticResource Background}">
+            <ListView x:Name="informationListV"
+                      SelectedIndex="0"
+                      Focusable="False"
+                      ItemsSource="{Binding}" 
+                      Foreground="{StaticResource TextColor}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      SelectionChanged="InformationList_SelectionChanged" />
+        </StackPanel>
+        
+        <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="2" Width="2" HorizontalAlignment="Right" />
+        
+        <Grid Grid.Column="1">
+            <GroupBox x:Name="titleTextGroupBox"
+                      Margin="16"
+                      materialDesign:ElevationAssist.Elevation="Dp4"
+                      BorderThickness="0"
+                      materialDesign:ColorZoneAssist.Background="{StaticResource PrimaryColor}"
+                      materialDesign:ColorZoneAssist.Foreground="{StaticResource TextColor}"
+                      materialDesign:ColorZoneAssist.Mode="Custom"
+                      Style="{StaticResource MaterialDesignGroupBox}">
+                <TextBox x:Name="descriptionTxtB" 
+                         VerticalAlignment="Stretch"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         IsReadOnly="True"
+                         Padding="15"
+                         VerticalScrollBarVisibility="Auto"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                         Foreground="{StaticResource TextColor}" />
+            </GroupBox>
+        </Grid>
+        
+        <!--#endregion-->
     </Grid>
 </Page>

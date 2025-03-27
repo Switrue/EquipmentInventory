@@ -1,17 +1,7 @@
-﻿using System;
+﻿using EquipmentInventory.Properties;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -20,9 +10,52 @@ namespace EquipmentInventory.Forms.Pages
     /// </summary>
     public partial class ProgramInformation : Page
     {
+        private Dictionary<string, (string title, string description)> items;
+
         public ProgramInformation()
         {
             InitializeComponent();
+            InitializeUI();
         }
+
+        #region Load
+
+        private void InitializeUI()
+        {
+            items = new Dictionary<string, (string title, string description)>
+            {
+                { Strings.Copyrights, (Strings.CopyrightsIllustrations, "- freepic.com\r\n- flaticon.com") },
+                { Strings.Vresion, (Strings.Vresion, "5.0.1") },
+                { Strings.DateCreation, (Strings.DateAppWasCreated, "27.03.2025") },
+                { Strings.ContactDetails, (Strings.ContactDetails, $"{Strings.Email}: kuhtin.kirill2017@mail.ru") },
+                { Strings.License, (Strings.License, Strings.AllRightsReserved) },
+                { Strings.SubjectArea, (Strings.SubjectArea, Strings.SubjectAreaDescription) },
+                { Strings.Developer, (Strings.Developer, Strings.DeveloperDescription) },
+                { Strings.SystemRequirements, (Strings.MinimumSystemSequirements, Strings.SystemRequirementsDescription) },
+                { Strings.Compatibility, (Strings.Compatibility, "- pgAdmin 4 v8\r\n- postgreSQL 15") }
+            };
+
+            var key = items.Keys.ToList();
+            DataContext = key;
+        }
+
+        #endregion
+
+        #region Actions
+
+        private void InformationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItem = informationListV.SelectedItem;
+
+            if (selectedItem == null) return;
+
+            if (items.TryGetValue(selectedItem.ToString(), out var value))
+            {
+                titleTextGroupBox.Header = value.title;
+                descriptionTxtB.Text = value.description;
+            }
+        }
+
+        #endregion
     }
 }

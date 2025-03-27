@@ -8,12 +8,12 @@ using System.Collections.Generic;
 
 namespace EquipmentInventory.Classes.Services
 {
-    public class UserService
+    public class AuthorizationService
     {
         private UserData _user;
         private Dictionary<string, (TabType tabType, bool isAdmin)> userPanelParams;
 
-        public UserService(UserData user)
+        public AuthorizationService(UserData user)
         {
             _user = user;
             InitializeData();
