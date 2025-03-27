@@ -2,14 +2,13 @@
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Properties;
 using Npgsql;
-using System;
 
 namespace EquipmentInventory.Classes.Data
 {
     public class UserData
     {
         public long UserId { get; private set; }
-        public long UserRoleId { get; private set; }
+        public string UserRole { get; private set; }
         public string Username { get; private set; }
         public string Surname { get; private set; }
 
@@ -24,11 +23,11 @@ namespace EquipmentInventory.Classes.Data
             try
             {
                 var userData = ConnectionDatabase.ExecuteQuery(
-                    "select id_role, username, surname from users where id = @id", 
+                    "select r.name, username, surname from users u join roles r on r.id = u.id_role where u.id = @id", 
                     new NpgsqlParameter("@id", UserId)
                 ).Rows[0];
 
-                UserRoleId = Convert.ToInt64(userData[0]);
+                UserRole = userData[0].ToString();
                 Username = userData[1].ToString();
                 Surname = userData[2].ToString();
             }

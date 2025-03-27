@@ -1,6 +1,8 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Interfaces;
+using EquipmentInventory.Forms.Pages;
+using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Properties;
 using System;
 using System.Threading.Tasks;
@@ -19,6 +21,7 @@ namespace EquipmentInventory.Forms.Windows
     public partial class MainWindow : Window, IMainWindow
     {
         private UserData _user;
+        private UserPanel _userPanel;
         private bool isResizing;
         private double previousWidth;
         private double previousHeight;
@@ -88,6 +91,8 @@ namespace EquipmentInventory.Forms.Windows
             Width = Settings.Default.WindowWidth;
             Height = Settings.Default.WindowHeight;
         }
+
+        public void SaveUserPanelObject(UserPanel userPanel) => _userPanel = userPanel;
 
         #endregion
 
@@ -226,19 +231,25 @@ namespace EquipmentInventory.Forms.Windows
 
         private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) => actionsPopup.IsOpen = !actionsPopup.IsOpen;
 
-        private void Settings_Click(object sender, RoutedEventArgs e) => System.Windows.MessageBox.Show("Pressed Settings");
+        private void Settings_Click(object sender, RoutedEventArgs e) => UpdatePageWithDefaultSettings(new ProgramSettings());
 
-        private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) => System.Windows.MessageBox.Show("Pressed About the program");
+        private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) => UpdatePageWithDefaultSettings(new ProgramInformation());
 
-        private void Profile_Click(object sender, EventArgs e) => System.Windows.MessageBox.Show("Pressed Profile");
+        private void Profile_Click(object sender, EventArgs e) => UpdatePageWithDefaultSettings(new UserProfile());
 
         #endregion
 
         #region Change frame
 
+        public void ChangeControlPanelFrameContent(Page newContent) => controlPanelFrame.Content = newContent;
+
         public void ChangeMainFrameContent(Page newContent) => mainFrame.Content = newContent;
 
-        public void ChangeControlPanelFrameContent(Page newContent) => controlPanelFrame.Content = newContent;
+        private void UpdatePageWithDefaultSettings(Page newContent)
+        {
+            _userPanel.SetRadioButtonDefault();
+            ChangeMainFrameContent(newContent);
+        }
 
         #endregion
     }

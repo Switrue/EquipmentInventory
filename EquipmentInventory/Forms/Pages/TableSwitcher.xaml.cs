@@ -12,6 +12,7 @@ using EquipmentInventory.Classes.Interfaces;
 using EquipmentInventory.Classes.Enums;
 using EquipmentInventory.Forms.Pages.GridTables;
 using EquipmentInventory.Classes.Services;
+using System.Collections.Generic;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -70,15 +71,20 @@ namespace EquipmentInventory.Forms.Pages
 
         private void InitializeTable()
         {
-            switch (_tableType)
+            var tableMapping = new Dictionary<TableType, Action>
             {
-                case TableType.Inventory:
-                    tableFrame.Content = new Inventory(this);
-                    break;
-                case TableType.Archive:
-                    tableFrame.Content = new Archive(this);
-                    CollapseFilters();
-                    break;
+                { TableType.Inventory, () => tableFrame.Content = new Inventory(this) },
+                { TableType.Archive, () =>
+                    {
+                        tableFrame.Content = new Archive(this);
+                        CollapseFilters();
+                    }
+                }
+            };
+
+            if (tableMapping.TryGetValue(_tableType, out var action))
+            {
+                action.Invoke();
             }
         }
 

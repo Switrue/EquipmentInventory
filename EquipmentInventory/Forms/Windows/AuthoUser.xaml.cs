@@ -8,10 +8,10 @@ using EquipmentInventory.Classes.Cryptography;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Data.Database;
-using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Classes.Helpers;
 using System.Windows.Controls;
 using Validation = EquipmentInventory.Classes.Data.Validation;
+using EquipmentInventory.Classes.Services;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -131,43 +131,22 @@ namespace EquipmentInventory.Forms.Windows
         private void Authorization(string token)
         {
             var authResult = ConnectionDatabase.ExecuteQuery(
-                "select id from users where id = (select user_id from tokens where access_token = @token)", 
+                "select id from users where id = (select user_id from tokens t where access_token = @token)", 
                 new NpgsqlParameter("@token", token)
             ).Rows[0];
 
             // Данные пользователя
-            UserData user = new UserData(Convert.ToInt64(authResult[0]));
+            var user = new UserData(Convert.ToInt64(authResult[0]));
+            var userService = new UserService(user);
 
-            MainWindow mainWindow = new MainWindow(user);
-            var roleId = user.UserRoleId;
+            userService.InitializeMainWindow();
 
-            if (roleId != 0)
-            {
-                switch (roleId)
-                {
-                    case 1:
-                        mainWindow.ChangeControlPanelFrameContent(new UserPanel(mainWindow, true));
-                        break;
-                    case 2:
-                        mainWindow.ChangeControlPanelFrameContent(new UserPanel(mainWindow, false));
-                        break;
-                    default:
-                        CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);
-                        break;
-                }
-
-                mainWindow.Show();
-                Close();
-            }
-            else
-            {
-                // Данные пользователя не были получены 
-            }
+            Close();
         }
 
         #endregion
 
-        #region Valid change
+        #region Valid changed
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
 

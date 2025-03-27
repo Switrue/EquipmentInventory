@@ -17,26 +17,39 @@ namespace EquipmentInventory.Forms.Pages.Admin
     public partial class UserPanel : Page, IMainPanel
     {
         private IMainWindow _parentWindow;
+        private TabType _tabType;
         private bool _isAdmin;
-        private UserRegistration userRegistration = new UserRegistration();
-        private Dictionaries dictionaries = new Dictionaries();
-        private Tables tables;
 
-        public UserPanel(IMainWindow parentWindow, bool isAdmin)
+        public UserPanel(IMainWindow parentWindow, TabType tabType, bool isAdmin)
         {
             InitializeComponent();
             _parentWindow = parentWindow;
+            _tabType = tabType;
             _isAdmin = isAdmin;
             InitializeParams();
             InitializeUI();
+        }
+
+        public UserPanel(IMainWindow parentWindow, bool isAdmin)
+            :this(parentWindow, TabType.Default, isAdmin)
+        {
         }
 
         #region Load
 
         private void InitializeParams()
         {
-            tables = new Tables(this);
-            RadioButton_Click(tablesRb, null);
+            var tabMapping = new Dictionary<TabType, object>
+            {
+                { TabType.Registration, userRegistrationRb },
+                { TabType.Tables, tablesRb },
+                { TabType.Dictionary, dictionariesRb }
+            };
+
+            if (tabMapping.TryGetValue(_tabType, out var tab))
+            {
+                SelectTheTab(tab);
+            }
         }
 
         private void InitializeUI()
@@ -72,7 +85,9 @@ namespace EquipmentInventory.Forms.Pages.Admin
             _parentWindow.ChangeMainFrameContent(new TableSwitcher(TableType.Inventory));
         }
 
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        private void RadioButton_Click(object sender, RoutedEventArgs e) => SelectTheTab(sender);
+
+        private void SelectTheTab(object sender)
         {
             if (sender is RadioButton selectedRadioButton)
             {
@@ -87,14 +102,14 @@ namespace EquipmentInventory.Forms.Pages.Admin
 
             var pageMappings = new Dictionary<string, Action>
             {
-                { "userRegistrationRb", () => _parentWindow.ChangeMainFrameContent(userRegistration) },
+                { "userRegistrationRb", () => _parentWindow.ChangeMainFrameContent(new UserRegistration()) },
                 { "tablesRb", () =>
                     {
                         actionsPopupRb.IsOpen = false;
-                        _parentWindow.ChangeMainFrameContent(tables);
+                        _parentWindow.ChangeMainFrameContent(new Tables(this));
                     } 
                 },
-                { "dictionariesRb", () => _parentWindow.ChangeMainFrameContent(dictionaries) }
+                { "dictionariesRb", () => _parentWindow.ChangeMainFrameContent(new Dictionaries()) }
             };
 
             if (pageMappings.TryGetValue(selectedRadioButton.Name, out var action))
@@ -107,20 +122,22 @@ namespace EquipmentInventory.Forms.Pages.Admin
         {
             if (selectedRadioButton == null) return;
 
-            SolidColorBrush textColor = (SolidColorBrush)Application.Current.Resources["TextColor"];
             SolidColorBrush secondaryColor = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
 
-            SetRadioButtonColors(textColor);
+            SetRadioButtonDefault();
 
             selectedRadioButton.Foreground = secondaryColor;
             selectedRadioButton.IsChecked = true;
         }
 
-        private void SetRadioButtonColors(SolidColorBrush textColor)
+        public void SetRadioButtonDefault()
         {
+            SolidColorBrush textColor = (SolidColorBrush)Application.Current.Resources["TextColor"];
+
             foreach (var child in radioButtonContainer.Children.OfType<RadioButton>())
             {
                 child.Foreground = textColor;
+                child.IsChecked = false;
             }
         }
 
