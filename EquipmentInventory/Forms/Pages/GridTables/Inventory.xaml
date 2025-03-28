@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.GridTables"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Background="Transparent">
+      Background="Transparent"
+      d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
         <Button Content="Жми" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" />

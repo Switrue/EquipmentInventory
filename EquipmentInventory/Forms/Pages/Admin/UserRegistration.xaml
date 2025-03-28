@@ -13,22 +13,7 @@
     <!--#region Styles-->
     
     <Page.Resources>
-        <ResourceDictionary>
-            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
-                <Setter Property="Margin" Value="7" />
-                <Setter Property="Foreground" Value="{StaticResource TextColor}" />
-                <Setter Property="BorderBrush" Value="{StaticResource HintColor}" />
-                <Setter Property="MaxLength" Value="60" />
-                <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True" />
-            </Style>
-            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
-                <Setter Property="Foreground" Value="{StaticResource HintColor}" />
-                <Setter Property="Height" Value="25" />
-                <Setter Property="Padding" Value="4" />
-                <Setter Property="FontSize" Value="12" />
-            </Style>
-        </ResourceDictionary>
+        <ResourceDictionary Source="/Resources/Styles/UserStyles.xaml" />
     </Page.Resources>
     
     <!--#endregion-->

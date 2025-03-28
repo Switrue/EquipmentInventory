@@ -58,15 +58,6 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // Отключение обработки боковых нажатий мыши
-            if (e.ChangedButton == MouseButton.XButton1 || e.ChangedButton == MouseButton.XButton2)
-            {
-                e.Handled = true; 
-            }
-        }
-
         #endregion
 
         #region Load
@@ -241,14 +232,28 @@ namespace EquipmentInventory.Forms.Windows
 
         #region Change frame
 
-        public void ChangeControlPanelFrameContent(Page newContent) => controlPanelFrame.Content = newContent;
+        public void ChangeControlPanelFrameContent(Page newContent) => ChangeFrameContent(controlPanelFrame, newContent);
 
-        public void ChangeMainFrameContent(Page newContent) => mainFrame.Content = newContent;
+        public void ChangeMainFrameContent(Page newContent) => ChangeFrameContent(mainFrame, newContent);
 
         private void UpdatePageWithDefaultSettings(Page newContent)
         {
             _userPanel.SetRadioButtonDefault();
             ChangeMainFrameContent(newContent);
+        }
+
+        private void ChangeFrameContent(Frame frame, Page newContent)
+        {
+            frame.Content = newContent;
+            CleanNavigationHistory(frame);
+        }
+
+        private void CleanNavigationHistory(Frame frame)
+        {
+            while (frame.CanGoBack)
+            {
+                frame.RemoveBackEntry();
+            }
         }
 
         #endregion

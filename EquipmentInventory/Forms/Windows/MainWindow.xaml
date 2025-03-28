@@ -15,7 +15,6 @@
         MinWidth="800"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        PreviewMouseDown="Window_PreviewMouseDown"
         SizeChanged="Window_SizeChanged">
 
     <Border x:Name="windowEdging" Style="{StaticResource WindowBorder}">

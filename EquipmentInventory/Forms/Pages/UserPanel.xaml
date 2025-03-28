@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.Admin"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
+      Background="Transparent"
       d:DesignHeight="200" d:DesignWidth="400">
 
     <!--#region Styles-->
