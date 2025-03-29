@@ -54,10 +54,7 @@ namespace EquipmentInventory.Forms.Pages
 
         private void CreateAccount_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (Validation.AnyTextBoxIsEmpty(textFieldContainer))
-            {
-                return;
-            }
+            if (Validation.AnyTextBoxIsEmpty(textFieldContainer)) return;
 
             notification.Show("Зарегестрирован");
         }

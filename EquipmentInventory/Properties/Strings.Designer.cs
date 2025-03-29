@@ -133,6 +133,24 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cencel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Are you sure you want to change the data?.
+        /// </summary>
+        internal static string ChangeData {
+            get {
+                return ResourceManager.GetString("ChangeData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Clean.
         /// </summary>
         internal static string Clean {
@@ -228,6 +246,15 @@ namespace EquipmentInventory.Properties {
         internal static string CreateAccouont {
             get {
                 return ResourceManager.GetString("CreateAccouont", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Customization.
+        /// </summary>
+        internal static string Customization {
+            get {
+                return ResourceManager.GetString("Customization", resourceCulture);
             }
         }
         
@@ -592,6 +619,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Search.
         /// </summary>
         internal static string Search {
@@ -744,6 +780,15 @@ namespace EquipmentInventory.Properties {
         internal static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User data.
+        /// </summary>
+        internal static string UserData {
+            get {
+                return ResourceManager.GetString("UserData", resourceCulture);
             }
         }
         

@@ -448,4 +448,24 @@
     <value>Minimum system requirements</value>
     <comment>Information</comment>
   </data>
+  <data name="Customization" xml:space="preserve">
+    <value>Customization</value>
+    <comment>UserProfile</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>Main</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cencel</value>
+    <comment>Main</comment>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>User data</value>
+    <comment>UserProfile</comment>
+  </data>
+  <data name="ChangeData" xml:space="preserve">
+    <value>Are you sure you want to change the data?</value>
+    <comment>Message</comment>
+  </data>
 </root>

@@ -49,7 +49,26 @@ namespace EquipmentInventory.Classes.Data
         public static bool AnyTextBoxIsEmpty(Panel parent)
         {
             TextFieldHelper.ClearAllTextFields(parent);
-            return parent.Children.OfType<Control>().Any(child => IsFieldEmpty(child, Strings.FieldEmpty));
+
+            foreach (var child in parent.Children)
+            {
+                if (child is TextBox textBox)
+                {
+                    if (IsFieldEmpty(textBox, Strings.FieldEmpty))
+                    {
+                        return true; 
+                    }
+                }
+                else if (child is Panel panel)
+                {
+                    if (AnyTextBoxIsEmpty(panel))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

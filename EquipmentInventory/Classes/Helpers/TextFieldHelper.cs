@@ -43,10 +43,13 @@ namespace EquipmentInventory.Classes.Helpers
                 {
                     SetTextField(textBox);
                 }
-
-                if (child is PasswordBox passwordBox)
+                else if(child is PasswordBox passwordBox)
                 {
                     SetTextField(passwordBox);
+                }
+                else if (child is Panel panel)
+                {
+                    ClearAllTextFields(panel);
                 }
             }
         }

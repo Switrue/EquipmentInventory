@@ -39,10 +39,8 @@
                     </Grid.RowDefinitions>
 
                     <WrapPanel Grid.Row="0">
-                        <Image Source="/Resources/Pictures/SmallUserIcon.png" Width="80" Height="80" HorizontalAlignment="Left" />
-                        <StackPanel Margin="10">
-                            <Button x:Name="changeImageBtn" />
-                        </StackPanel>
+                        <Image Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
+                        <Button x:Name="changeImageBtn" Margin="10" />
                     </WrapPanel>
 
                     <StackPanel Grid.Row="1" VerticalAlignment="Center">

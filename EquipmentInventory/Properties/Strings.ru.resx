@@ -366,4 +366,19 @@
   <data name="MinimumSystemSequirements" xml:space="preserve">
     <value>Минимальные системные требования</value>
   </data>
+  <data name="Customization" xml:space="preserve">
+    <value>Кастомизация</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>Данные пользователя</value>
+  </data>
+  <data name="ChangeData" xml:space="preserve">
+    <value>Вы уверены, что хотите изменить данные?</value>
+  </data>
 </root>

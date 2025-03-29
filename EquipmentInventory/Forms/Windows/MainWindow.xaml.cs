@@ -220,13 +220,22 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) => actionsPopup.IsOpen = !actionsPopup.IsOpen;
+        private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) => ToggleActionsPopup();
 
         private void Settings_Click(object sender, RoutedEventArgs e) => UpdatePageWithDefaultSettings(new ProgramSettings());
 
         private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) => UpdatePageWithDefaultSettings(new ProgramInformation());
 
-        private void Profile_Click(object sender, EventArgs e) => UpdatePageWithDefaultSettings(new UserProfile());
+        private void Profile_Click(object sender, EventArgs e)
+        {
+            ToggleActionsPopup();
+            UpdatePageWithDefaultSettings(new UserProfile(_user));
+        } 
+
+        private void ToggleActionsPopup()
+        {
+            actionsPopup.IsOpen = !actionsPopup.IsOpen;
+        }
 
         #endregion
 
