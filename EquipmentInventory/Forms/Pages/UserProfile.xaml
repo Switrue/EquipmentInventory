@@ -21,7 +21,7 @@
             <Style TargetType="GroupBox" BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                 <Setter Property="Margin" Value="0 20 0 0" />
                 <Setter Property="Padding" Value="20" />
-                <Setter Property="Background" Value="{StaticResource Foreground}" />
+                <Setter Property="Background" Value="{StaticResource Background}" />
                 <Setter Property="materialDesign:ColorZoneAssist.Background" Value="{StaticResource Circuit}" />
                 <Setter Property="materialDesign:ColorZoneAssist.Foreground" Value="{StaticResource TextColor}" />
                 <Setter Property="materialDesign:ColorZoneAssist.Mode" Value="Custom" />
@@ -74,7 +74,7 @@
                 </WrapPanel>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Background="{StaticResource Background}">
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
                 <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="1" />
             </StackPanel>
 

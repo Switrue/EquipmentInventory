@@ -37,6 +37,8 @@ namespace EquipmentInventory.Forms.Pages
             HintAssist.SetHint(usernameTxtB, Strings.Nick);
             HintAssist.SetHint(surnameTxtB, Strings.Surname);
             HintAssist.SetHint(userPasswordTxtB, Strings.Password);
+            editUsernameBtn.ToolTip = Strings.Edit;
+            editUserPasswordBtn.ToolTip = Strings.Edit;
             saveUserDataBtn.Content = Strings.Save;
             cancelSaveUserDataBtn.Content = Strings.Cancel;
         }

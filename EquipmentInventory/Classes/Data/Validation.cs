@@ -1,6 +1,5 @@
 ﻿using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Properties;
-using System.Linq;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Classes.Data

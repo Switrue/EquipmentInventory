@@ -381,4 +381,7 @@
   <data name="ChangeData" xml:space="preserve">
     <value>Вы уверены, что хотите изменить данные?</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
 </root>

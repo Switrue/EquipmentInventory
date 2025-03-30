@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace EquipmentInventory.Forms.Pages
 {
@@ -42,6 +43,8 @@ namespace EquipmentInventory.Forms.Pages
         #endregion
 
         #region Actions
+
+        private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void InformationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
