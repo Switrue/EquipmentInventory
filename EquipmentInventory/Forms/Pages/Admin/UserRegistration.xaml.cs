@@ -60,5 +60,7 @@ namespace EquipmentInventory.Forms.Pages
         }
 
         private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
+
+        private void ChangeImage_Click(object sender, System.Windows.RoutedEventArgs e) => UserAccount.SelectTheImage(userImage);
     }
 }

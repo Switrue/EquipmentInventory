@@ -51,10 +51,10 @@
                         </ListView>
                     </StackPanel>
                 </Border>
-                
-                <!--#endregion -->
 
                 <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="1" HorizontalAlignment="Right" />
+
+                <!--#endregion -->
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
