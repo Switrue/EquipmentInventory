@@ -40,7 +40,9 @@ namespace EquipmentInventory.Forms.Pages
             editUsernameBtn.ToolTip = Strings.Edit;
             editUserPasswordBtn.ToolTip = Strings.Edit;
             saveUserDataBtn.Content = Strings.Save;
+            saveUserImage.Content = Strings.Save;
             cancelSaveUserDataBtn.Content = Strings.Cancel;
+            cancelSaveUserImageBtn.Content = Strings.Cancel;
         }
 
         #endregion
@@ -58,6 +60,10 @@ namespace EquipmentInventory.Forms.Pages
         private void EditUserPassword_Click(object sender, RoutedEventArgs e) => IncludeTextFields(sender, userPasswordContainer);
 
         private void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => SaveUserData();
+
+        private void ChangeImage_Click(object sender, RoutedEventArgs e) => UserAccount.SelectTheImage(userImage);
+
+        private void CancelSaveUserImage_Click(object sender, RoutedEventArgs e) => UserAccount.SelectTheDefaultImage(userImage);
 
         #endregion
 

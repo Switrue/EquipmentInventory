@@ -45,6 +45,7 @@
                          TextWrapping="Wrap"
                          IsReadOnly="True"
                          Padding="15"
+                         ContextMenu="{x:Null}"
                          VerticalScrollBarVisibility="Auto"
                          Background="Transparent"
                          BorderBrush="Transparent"

@@ -14,7 +14,8 @@
         SizeToContent="Height" 
         ResizeMode="NoResize" 
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown">
 
     <!--#region Styles-->
     
@@ -58,14 +59,18 @@
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="messageTxtB" 
-                           Grid.Row="0" 
-                           Margin="10"
-                           TextWrapping="Wrap" 
-                           TextAlignment="Justify"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center" 
-                           Foreground="White" />
+                <TextBox x:Name="messageTxtB" 
+                         Grid.Row="0" 
+                         Margin="10"
+                         TextWrapping="Wrap" 
+                         TextAlignment="Justify"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center" 
+                         IsReadOnly="True"
+                         ContextMenu="{x:Null}"        
+                         BorderBrush="Transparent"
+                         materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                         Foreground="White" />
 
                 <WrapPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
                     <Button x:Name="trueBtn" Click="ReturnTrue_Click" />

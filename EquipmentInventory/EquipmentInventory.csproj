@@ -166,7 +166,7 @@
     <Compile Include="Classes\Cryptography\MD5Encryprion.cs" />
     <Compile Include="Classes\Data\Database\ConnectionDatabase.cs" />
     <Compile Include="Classes\Data\Database\TokenValidation.cs" />
-    <Compile Include="Classes\Data\PasswordGenerator.cs" />
+    <Compile Include="Classes\Data\UserAccount.cs" />
     <Compile Include="Classes\Data\UserData.cs" />
     <Compile Include="Classes\Data\Validation.cs" />
     <Compile Include="Classes\Enums\TableType.cs" />

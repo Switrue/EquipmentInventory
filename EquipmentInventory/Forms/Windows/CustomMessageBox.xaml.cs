@@ -45,6 +45,8 @@ namespace EquipmentInventory.Forms.Windows
 
         #region Window management
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
+
         private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
 
         private void CloseWindow_Click(Object sender, EventArgs e) => Close();

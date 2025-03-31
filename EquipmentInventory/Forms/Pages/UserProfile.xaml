@@ -22,9 +22,10 @@
                 <Setter Property="Margin" Value="0 20 0 0" />
                 <Setter Property="Padding" Value="20" />
                 <Setter Property="Background" Value="{StaticResource Background}" />
-                <Setter Property="materialDesign:ColorZoneAssist.Background" Value="{StaticResource Circuit}" />
+                <Setter Property="materialDesign:ColorZoneAssist.Background" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="materialDesign:ColorZoneAssist.Foreground" Value="{StaticResource TextColor}" />
                 <Setter Property="materialDesign:ColorZoneAssist.Mode" Value="Custom" />
+                <Setter Property="materialDesign:GroupBoxAssist.HeaderPadding" Value="5" />
                 <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp4" />
             </Style>
             
@@ -38,10 +39,6 @@
                 <Setter Property="Margin" Value="8 0 0 0" />
                 <Setter Property="Text" Value="{Binding}" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-
-            <Style x:Key="BodyGroupBox" TargetType="StackPanel">
-                <Setter Property="Margin" Value="10" />
             </Style>
         </ResourceDictionary>
     </Page.Resources>
@@ -92,10 +89,17 @@
                             </StackPanel>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
-                    <StackPanel Orientation="Horizontal" Style="{StaticResource BodyGroupBox}">
-                        <Image Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
-                        <Button x:Name="changeImageBtn" Margin="10" />
-                    </StackPanel>
+                    <UniformGrid Rows="2">
+                        <WrapPanel>
+                            <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
+                            <Button x:Name="changeImageBtn" Margin="10" Click="ChangeImage_Click" />
+                        </WrapPanel>
+
+                        <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button x:Name="saveUserImage" Margin="0 0 5 0" />
+                            <Button x:Name="cancelSaveUserImageBtn" Margin="5 0 0 0" Click="CancelSaveUserImage_Click" />
+                        </UniformGrid>
+                    </UniformGrid>
                 </GroupBox>
 
                 <!--#endregion-->
@@ -111,7 +115,7 @@
                             </StackPanel>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
-                    <StackPanel Style="{StaticResource BodyGroupBox}">
+                    <UniformGrid Rows="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -138,11 +142,11 @@
                             </StackPanel>
                         </Grid>
 
-                        <UniformGrid Columns="2" HorizontalAlignment="Right" Margin="0 40 0 0">
+                        <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                             <Button x:Name="saveUserDataBtn" Margin="0 0 5 0" Click="SaveUserData_Click" />
                             <Button x:Name="cancelSaveUserDataBtn" Margin="5 0 0 0" Click="CancelSaveUserData_Click" />
                         </UniformGrid>
-                    </StackPanel>
+                    </UniformGrid>
                 </GroupBox>
 
                 <!--#endregion-->
