@@ -5,18 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentInventory.Forms.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
+        Style="{StaticResource MaterialDesignWindow}"
         Background="Transparent"
         AllowsTransparency="True"
-        MinHeight="200" 
-        Width="400"
         SizeToContent="Height" 
         ResizeMode="NoResize" 
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown">
-
+        MouseDown="Window_MouseDown"
+        Width="400" MinHeight="200">
     <!--#region Styles-->
     
     <Window.Resources>

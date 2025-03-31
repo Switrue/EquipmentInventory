@@ -9,7 +9,6 @@
       Background="Transparent"
       MouseDown="Page_MouseDown"
       d:DesignHeight="450" d:DesignWidth="800">
-
     <!--#region Styles-->
     
     <Page.Resources>
@@ -22,9 +21,11 @@
                 <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource TextColor}" />
                 <Setter Property="BorderBrush" Value="{StaticResource HintColor}" />
             </Style>
+            
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedSecondaryButton}">
                 <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             </Style>
+            
             <Style TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignActionToggleButton}">
                 <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
                 <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp3" />

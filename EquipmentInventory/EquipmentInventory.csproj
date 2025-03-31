@@ -188,9 +188,6 @@
     <Compile Include="Forms\Pages\ProgramInformation.xaml.cs">
       <DependentUpon>ProgramInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pages\ProgramSettings.xaml.cs">
-      <DependentUpon>ProgramSettings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Pages\UserPanel.xaml.cs">
       <DependentUpon>UserPanel.xaml</DependentUpon>
     </Compile>
@@ -208,6 +205,9 @@
     </Compile>
     <Compile Include="Forms\Pages\UserProfile.xaml.cs">
       <DependentUpon>UserProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Windows\ProgramSettings.xaml.cs">
+      <DependentUpon>ProgramSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -269,10 +269,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\Pages\ProgramSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Forms\Pages\UserPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,6 +302,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Windows\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Windows\ProgramSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

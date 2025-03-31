@@ -5,17 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentInventory.Forms.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
+        Style="{StaticResource MaterialDesignWindow}"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="450" 
-        Width="350"
         WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown">
-
+        MouseDown="Window_MouseDown"
+        Height="450" Width="350">
     <Border Style="{StaticResource WindowBorder}">
         <Grid>
             <Grid.RowDefinitions>
@@ -27,7 +25,7 @@
 
             <Border Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
                 <Grid Margin="2.5">
-                    <TextBlock x:Name="authoTitle" Style="{StaticResource WindowTitleTextBlock}" />
+                    <TextBlock x:Name="windowTitle" Style="{StaticResource WindowTitleTextBlock}" />
                     <WrapPanel HorizontalAlignment="Right">
                         <Button x:Name="collapseBtn" Style="{StaticResource CollapseButton}" Click="CollapseWindow_Click" />
                         <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />

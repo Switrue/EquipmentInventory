@@ -55,8 +55,8 @@ namespace EquipmentInventory.Forms.Windows
 
         private void InitializeUI()
         {
-            authoTitle.Text = Strings.AuthoTitle;
-            Title = Strings.AuthoTitle;
+            windowTitle.Text = Strings.AuthoTitle;
+            Title = windowTitle.Text;
             loginBtn.Content = Strings.Login;
             collapseBtn.ToolTip = Strings.Collapse;
             closeBtn.ToolTip = Strings.Close;
