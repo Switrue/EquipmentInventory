@@ -13,32 +13,78 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
-        Height="450" Width="400">
+        Height="550" Width="500">
     <Border Style="{StaticResource WindowBorder}">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!--#region Header-->
-
-            <Border Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
-                <Grid Margin="2.5">
-                    <TextBlock x:Name="windowTitle" Style="{StaticResource WindowTitleTextBlock}" />
-                    <WrapPanel HorizontalAlignment="Right">
-                        <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />
-                    </WrapPanel>
-                </Grid>
-            </Border>
-
-            <!--#endregion-->
-
             <!--#region Body-->
 
-            <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" MinWidth="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--#region Tabs-->
                 
-            </Grid>
+                <Border Grid.Column="0" Background="{StaticResource Background}" CornerRadius="10 0 0 10">
+                    <StackPanel>
+                        <TextBlock x:Name="windowTitle" 
+                                   Padding="0,16"
+                                   Foreground="{StaticResource SecondaryColor}" 
+                                   Style="{StaticResource WindowTitleTextBlock}" />
+                        
+                        <ListView Foreground="{StaticResource TextColor}"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ItemsSource="{Binding}"
+                                  VerticalContentAlignment="Center"
+                                  SelectedIndex="0"
+                                  SelectionChanged="PagesOfSettings_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Margin="5">
+                                        <materialDesign:PackIcon Kind="{Binding Icon}" VerticalAlignment="Center" />
+                                        <Border BorderBrush="{StaticResource HintColor}" BorderThickness="1" Margin="5 0 5 0" />
+                                        <TextBlock Text="{Binding Parameter}" MaxWidth="100" TextWrapping="Wrap" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+                
+                <!--#endregion -->
+
+                <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="1" HorizontalAlignment="Right" />
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Header-->
+                    
+                    <Border Grid.Row="0"  VerticalAlignment="Top" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
+                        <Grid Margin="2.5">
+                            <WrapPanel HorizontalAlignment="Right">
+                                <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />
+                            </WrapPanel>
+                        </Grid>
+                    </Border>
+
+                    <!--#endregion-->
+                    
+                    <!--#region Tab field-->
+                    
+                    <Border Grid.Row="1" Background="{StaticResource Foreground}" CornerRadius="0 0 10 0">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="5" Focusable="False">
+                            <Frame x:Name="settingsFrame" NavigationUIVisibility="Hidden" Focusable="False" />
+                        </ScrollViewer>
+                    </Border>
+                    
+                    <!--#endregion-->
+                </Grid>
+            </Grid> 
 
             <!--#endregion-->
         </Grid>

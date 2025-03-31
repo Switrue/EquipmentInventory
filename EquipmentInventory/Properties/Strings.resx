@@ -472,4 +472,16 @@
     <value>Edit</value>
     <comment>Main</comment>
   </data>
+  <data name="Codes" xml:space="preserve">
+    <value>Codes</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+    <comment>Settings</comment>
+  </data>
 </root>

@@ -5,6 +5,8 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
+    <!--#region General-->
+    
     <Style x:Key="ImageHoverStyle" TargetType="Image">
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
         <Setter Property="RenderTransform">
@@ -110,6 +112,8 @@
         </Setter>
     </Style>
 
+    <!--#endregion-->
+    
     <!--#region DataTemplate-->
     
     <DataTemplate x:Key="IconTemplateSize">

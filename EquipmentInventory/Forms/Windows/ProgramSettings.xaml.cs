@@ -1,6 +1,10 @@
-﻿using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Classes.Models;
+using EquipmentInventory.Forms.Pages.Settings_tabs;
+using EquipmentInventory.Properties;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EquipmentInventory.Forms.Windows
@@ -10,10 +14,13 @@ namespace EquipmentInventory.Forms.Windows
     /// </summary>
     public partial class ProgramSettings : Window
     {
+        private Dictionary<SettingModel, Page> items;
+
         public ProgramSettings()
         {
             InitializeComponent();
             InitializeUI();
+            InitializeParams();
         }
 
         #region Load
@@ -23,6 +30,16 @@ namespace EquipmentInventory.Forms.Windows
             windowTitle.Text = Strings.Settings;
             Title = windowTitle.Text;
             closeBtn.ToolTip = Strings.Close;
+        }
+
+        private void InitializeParams()
+        {
+            items = new Dictionary<SettingModel, Page>
+            {
+                { new SettingModel(Strings.Codes, "Barcode"), new CodesTab(Strings.Codes) },
+                { new SettingModel(Strings.Tables, "TableSearch"), new TablesTab() }
+            };
+            DataContext = items.Keys;
         }
 
         #endregion
@@ -38,5 +55,15 @@ namespace EquipmentInventory.Forms.Windows
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         #endregion
+
+        private void PagesOfSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedSetting = (SettingModel)((ListView)sender).SelectedItem;
+
+            if (selectedSetting != null && items.TryGetValue(selectedSetting, out var value))
+            {
+                settingsFrame.Content = value;
+            }
+        }
     }
 }
