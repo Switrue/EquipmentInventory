@@ -16,21 +16,41 @@
     <!--#endregion-->
 
     <Grid>
+        <!--#region Body-->
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
-            <ComboBox Foreground="{StaticResource TextColor}"
-                      materialDesign:HintAssist.Hint="(Года)"
-                      ItemsSource="{Binding LongIntegerList}"
-                      Margin="5"
-                      materialDesign:ThemeAssist.Theme="Dark"
-                      BorderBrush="{StaticResource HintColor}"
-                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="yearOfObsolescenceCB" 
+                          Grid.Column="0"
+                          Margin="5"
+                          VerticalAlignment="Top"
+                          ItemsSource="{Binding LongIntegerList}"
+                          SelectedIndex="4"
+                          materialDesign:ThemeAssist.Theme="Dark"
+                          Foreground="{StaticResource TextColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+                <materialDesign:PackIcon x:Name="toolTipYearOfObsolescence" 
+                                         Kind="InformationSlabCircleOutline" 
+                                         Grid.Column="1"
+                                         Margin="5"
+                                         Background="Transparent"
+                                         VerticalAlignment="Center"
+                                         Foreground="{StaticResource SecondaryColor}" />
+            </Grid>
+            <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Click="ApplyCode_Click" />
         </StackPanel>
+        
+        <!--#endregion-->
     </Grid>
 </Page>

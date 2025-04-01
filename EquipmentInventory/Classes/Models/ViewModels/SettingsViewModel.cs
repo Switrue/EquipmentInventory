@@ -47,6 +47,11 @@ namespace EquipmentInventory.Classes.Models.ViewModels
                     icon: "Application",
                     page: new AppSettingsTab(Strings.Application))
             };
+
+            if (Items.Count > 0)
+            {
+                SelectedItem = Items[0];
+            }
         }
     }
 }

@@ -811,6 +811,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Interval of obsolete equipment in the main queries of the “Inventory” table.
+        /// </summary>
+        internal static string TheIntervalOfObsoleteTechnology {
+            get {
+                return ResourceManager.GetString("TheIntervalOfObsoleteTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Type.
         /// </summary>
         internal static string Type {
@@ -879,6 +888,15 @@ namespace EquipmentInventory.Properties {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Years.
+        /// </summary>
+        internal static string Years {
+            get {
+                return ResourceManager.GetString("Years", resourceCulture);
             }
         }
         

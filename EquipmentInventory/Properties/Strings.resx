@@ -488,4 +488,12 @@
     <value>Application</value>
     <comment>Settings</comment>
   </data>
+  <data name="Years" xml:space="preserve">
+    <value>Years</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="TheIntervalOfObsoleteTechnology" xml:space="preserve">
+    <value>Interval of obsolete equipment in the main queries of the “Inventory” table</value>
+    <comment>Settings</comment>
+  </data>
 </root>

@@ -396,4 +396,10 @@
   <data name="Application" xml:space="preserve">
     <value>Приложение</value>
   </data>
+  <data name="Years" xml:space="preserve">
+    <value>Года</value>
+  </data>
+  <data name="TheIntervalOfObsoleteTechnology" xml:space="preserve">
+    <value>Интервал устаревшей техники в основных запросах таблицы «Инвентаризация»</value>
+  </data>
 </root>

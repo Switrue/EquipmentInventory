@@ -1,4 +1,7 @@
 ﻿using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Properties;
+using MaterialDesignThemes.Wpf;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Settings_tabs
@@ -23,6 +26,9 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
         private void InitializeUI()
         {
             titleTab.Text = _title;
+            toolTipYearOfObsolescence.ToolTip = Strings.TheIntervalOfObsoleteTechnology;
+            HintAssist.SetHint(yearOfObsolescenceCB, $"({Strings.Years})");
+            applyCodeBtn.Content = Strings.Apply;
         }
 
         private void InitializeParams()
@@ -31,5 +37,14 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
         }
 
         #endregion
+
+        #region Load
+
+        #endregion
+
+        private void ApplyCode_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(yearOfObsolescenceCB.SelectedItem.ToString());
+        }
     }
 }

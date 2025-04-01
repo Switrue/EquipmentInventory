@@ -37,8 +37,7 @@
                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                   ItemsSource="{Binding Items}"
                                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                                  VerticalContentAlignment="Center"
-                                  SelectedIndex="0">
+                                  VerticalContentAlignment="Center">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel Margin="5">

@@ -1,6 +1,6 @@
-﻿using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Services;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -16,48 +16,23 @@ namespace EquipmentInventory.Forms.Pages
         public ProgramInformation()
         {
             InitializeComponent();
-            InitializeUI();
+            InitializeParams();
         }
 
         #region Load
 
-        private void InitializeUI()
+        private void InitializeParams()
         {
-            items = new Dictionary<string, (string title, string description)>
-            {
-                { Strings.Copyrights, (Strings.CopyrightsIllustrations, "- freepic.com\r\n- flaticon.com") },
-                { Strings.Vresion, (Strings.Vresion, "5.0.1") },
-                { Strings.DateCreation, (Strings.DateAppWasCreated, "27.03.2025") },
-                { Strings.ContactDetails, (Strings.ContactDetails, $"{Strings.Email}: kuhtin.kirill2017@mail.ru") },
-                { Strings.License, (Strings.License, Strings.AllRightsReserved) },
-                { Strings.SubjectArea, (Strings.SubjectArea, Strings.SubjectAreaDescription) },
-                { Strings.Developer, (Strings.Developer, Strings.DeveloperDescription) },
-                { Strings.SystemRequirements, (Strings.MinimumSystemSequirements, Strings.SystemRequirementsDescription) },
-                { Strings.Compatibility, (Strings.Compatibility, "- pgAdmin 4 v8\r\n- postgreSQL 15") }
-            };
-
-            var key = items.Keys.ToList();
-            DataContext = key;
+            var programInformationService = new ProgramInformationService();
+            programInformationService.RegisterControls(titleTextGroupBox, descriptionTxtB);
+            DataContext = new ProgramInformationViewModel(programInformationService); ;
         }
 
         #endregion
 
         #region Actions
 
-        private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => Keyboard.ClearFocus();
-
-        private void InformationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedItem = informationListV.SelectedItem;
-
-            if (selectedItem == null) return;
-
-            if (items.TryGetValue(selectedItem.ToString(), out var value))
-            {
-                titleTextGroupBox.Header = value.title;
-                descriptionTxtB.Text = value.description;
-            }
-        }
+        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         #endregion
     }

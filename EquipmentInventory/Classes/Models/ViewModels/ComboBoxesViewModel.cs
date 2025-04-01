@@ -9,7 +9,7 @@ namespace EquipmentInventory.Classes.Models.ViewModels
 
         public ComboBoxesViewModel()
         {
-            LongIntegerList = new List<int>(Enumerable.Range(0, 1000));
+            LongIntegerList = new List<int>(Enumerable.Range(1, 100));
         }
     }
 }
