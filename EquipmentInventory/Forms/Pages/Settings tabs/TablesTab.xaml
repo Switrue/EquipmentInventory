@@ -27,13 +27,9 @@
 
                 <ComboBox x:Name="yearOfObsolescenceCB" 
                           Grid.Column="0"
-                          Margin="5"
                           VerticalAlignment="Top"
                           ItemsSource="{Binding LongIntegerList}"
-                          SelectedIndex="4"
-                          materialDesign:ThemeAssist.Theme="Dark"
-                          Foreground="{StaticResource TextColor}"
-                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                          SelectedIndex="4">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />

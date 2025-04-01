@@ -126,7 +126,7 @@
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
-  <data name="Login" xml:space="preserve">
+  <data name="SignIn" xml:space="preserve">
     <value>Войти</value>
   </data>
   <data name="Collapse" xml:space="preserve">
@@ -396,10 +396,13 @@
   <data name="Application" xml:space="preserve">
     <value>Приложение</value>
   </data>
-  <data name="Years" xml:space="preserve">
-    <value>Года</value>
+  <data name="Year" xml:space="preserve">
+    <value>Год</value>
   </data>
   <data name="TheIntervalOfObsoleteTechnology" xml:space="preserve">
     <value>Интервал устаревшей техники в основных запросах таблицы «Инвентаризация»</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
   </data>
 </root>

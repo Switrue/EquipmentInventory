@@ -484,20 +484,20 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Language.
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на License.
         /// </summary>
         internal static string License {
             get {
                 return ResourceManager.GetString("License", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Login.
-        /// </summary>
-        internal static string Login {
-            get {
-                return ResourceManager.GetString("Login", resourceCulture);
             }
         }
         
@@ -709,6 +709,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Sign in.
+        /// </summary>
+        internal static string SignIn {
+            get {
+                return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Sign out.
         /// </summary>
         internal static string SignOut {
@@ -847,7 +856,7 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Username.
+        ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string Username {
             get {
@@ -892,11 +901,11 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Years.
+        ///   Ищет локализованную строку, похожую на Year.
         /// </summary>
-        internal static string Years {
+        internal static string Year {
             get {
-                return ResourceManager.GetString("Years", resourceCulture);
+                return ResourceManager.GetString("Year", resourceCulture);
             }
         }
         

@@ -12,7 +12,7 @@
       <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="CultureInfo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ru_RU</Value>
+      <Value Profile="(Default)">ru-RU</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -22,7 +22,7 @@ namespace EquipmentInventory
             }
             catch 
             {
-                cultureInfo = new CultureInfo("ru_RU");
+                cultureInfo = new CultureInfo("ru-RU");
             }
             
             Thread.CurrentThread.CurrentCulture = cultureInfo;

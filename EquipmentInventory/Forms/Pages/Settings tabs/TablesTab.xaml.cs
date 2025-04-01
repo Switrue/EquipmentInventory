@@ -27,7 +27,7 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
         {
             titleTab.Text = _title;
             toolTipYearOfObsolescence.ToolTip = Strings.TheIntervalOfObsoleteTechnology;
-            HintAssist.SetHint(yearOfObsolescenceCB, $"({Strings.Years})");
+            HintAssist.SetHint(yearOfObsolescenceCB, Strings.Year);
             applyCodeBtn.Content = Strings.Apply;
         }
 
@@ -35,10 +35,6 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
         {
             DataContext = new ComboBoxesViewModel();
         }
-
-        #endregion
-
-        #region Load
 
         #endregion
 

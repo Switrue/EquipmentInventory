@@ -18,6 +18,12 @@
     <Grid>
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
+            <ComboBox x:Name="appLanguageCB" 
+                      ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Code" />
+            <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Click="ApplyCode_Click" />
         </StackPanel>
     </Grid>
 </Page>

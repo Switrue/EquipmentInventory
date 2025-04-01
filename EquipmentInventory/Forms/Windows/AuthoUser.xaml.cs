@@ -57,7 +57,7 @@ namespace EquipmentInventory.Forms.Windows
         {
             windowTitle.Text = Strings.AuthoTitle;
             Title = windowTitle.Text;
-            loginBtn.Content = Strings.Login;
+            loginBtn.Content = Strings.SignIn;
             collapseBtn.ToolTip = Strings.Collapse;
             closeBtn.ToolTip = Strings.Close;
             rememberUserChB.Content = Strings.RememberUser;

@@ -178,6 +178,7 @@
     <Compile Include="Classes\Interfaces\IMainPanel.cs" />
     <Compile Include="Classes\Interfaces\IProgramInformationService.cs" />
     <Compile Include="Classes\Models\IconData.cs" />
+    <Compile Include="Classes\Models\LanguageItem.cs" />
     <Compile Include="Classes\Models\ProgramInformationItem.cs" />
     <Compile Include="Classes\Models\SettingItem.cs" />
     <Compile Include="Classes\Models\ViewModels\ComboBoxesViewModel.cs" />

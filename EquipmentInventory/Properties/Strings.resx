@@ -122,15 +122,15 @@
     <comment>Autho</comment>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Login</value>
     <comment>Autho</comment>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
     <comment>Autho</comment>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
     <comment>Autho</comment>
   </data>
   <data name="Collapse" xml:space="preserve">
@@ -488,12 +488,16 @@
     <value>Application</value>
     <comment>Settings</comment>
   </data>
-  <data name="Years" xml:space="preserve">
-    <value>Years</value>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
     <comment>Settings</comment>
   </data>
   <data name="TheIntervalOfObsoleteTechnology" xml:space="preserve">
     <value>Interval of obsolete equipment in the main queries of the “Inventory” table</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
     <comment>Settings</comment>
   </data>
 </root>
