@@ -393,4 +393,7 @@
   <data name="Code" xml:space="preserve">
     <value>Код</value>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>Приложение</value>
+  </data>
 </root>

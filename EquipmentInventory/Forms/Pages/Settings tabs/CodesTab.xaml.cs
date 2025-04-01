@@ -31,7 +31,7 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
 
         #endregion
 
-        private void ApplyCode_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ApplyCode_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(codeTxtB.Text)) return;
 

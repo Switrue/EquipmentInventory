@@ -35,16 +35,16 @@
                         
                         <ListView Foreground="{StaticResource TextColor}"
                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  ItemsSource="{Binding}"
+                                  ItemsSource="{Binding Items}"
+                                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                                   VerticalContentAlignment="Center"
-                                  SelectedIndex="0"
-                                  SelectionChanged="PagesOfSettings_SelectionChanged">
+                                  SelectedIndex="0">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel Margin="5">
                                         <materialDesign:PackIcon Kind="{Binding Icon}" VerticalAlignment="Center" />
                                         <Border BorderBrush="{StaticResource HintColor}" BorderThickness="1" Margin="5 0 5 0" />
-                                        <TextBlock Text="{Binding Parameter}" MaxWidth="100" TextWrapping="Wrap" />
+                                        <TextBlock Text="{Binding Title}" MaxWidth="100" TextWrapping="Wrap" />
                                     </WrapPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

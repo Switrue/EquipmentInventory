@@ -1,4 +1,4 @@
-﻿<Page x:Class="EquipmentInventory.Forms.Pages.Settings_tabs.TablesTab"
+﻿<Page x:Class="EquipmentInventory.Forms.Pages.Settings_tabs.AppSettingsTab"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -18,19 +18,6 @@
     <Grid>
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
-            <ComboBox Foreground="{StaticResource TextColor}"
-                      materialDesign:HintAssist.Hint="(Года)"
-                      ItemsSource="{Binding LongIntegerList}"
-                      Margin="5"
-                      materialDesign:ThemeAssist.Theme="Dark"
-                      BorderBrush="{StaticResource HintColor}"
-                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
         </StackPanel>
     </Grid>
 </Page>

@@ -1,8 +1,7 @@
-﻿using EquipmentInventory.Classes.Models;
-using EquipmentInventory.Forms.Pages.Settings_tabs;
+﻿using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +13,6 @@ namespace EquipmentInventory.Forms.Windows
     /// </summary>
     public partial class ProgramSettings : Window
     {
-        private Dictionary<SettingModel, Page> items;
 
         public ProgramSettings()
         {
@@ -34,12 +32,9 @@ namespace EquipmentInventory.Forms.Windows
 
         private void InitializeParams()
         {
-            items = new Dictionary<SettingModel, Page>
-            {
-                { new SettingModel(Strings.Codes, "Barcode"), new CodesTab(Strings.Codes) },
-                { new SettingModel(Strings.Tables, "TableSearch"), new TablesTab() }
-            };
-            DataContext = items.Keys;
+            var navigationService = new NavigationService();
+            navigationService.RegisterFrame(settingsFrame);
+            DataContext = new SettingsViewModel(navigationService);
         }
 
         #endregion
@@ -55,15 +50,5 @@ namespace EquipmentInventory.Forms.Windows
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         #endregion
-
-        private void PagesOfSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedSetting = (SettingModel)((ListView)sender).SelectedItem;
-
-            if (selectedSetting != null && items.TryGetValue(selectedSetting, out var value))
-            {
-                settingsFrame.Content = value;
-            }
-        }
     }
 }

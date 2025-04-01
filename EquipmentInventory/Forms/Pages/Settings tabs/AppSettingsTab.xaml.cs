@@ -1,21 +1,19 @@
-﻿using EquipmentInventory.Classes.Models.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Settings_tabs
 {
     /// <summary>
-    /// Логика взаимодействия для TablesTab.xaml
+    /// Логика взаимодействия для AppSettingsTab.xaml
     /// </summary>
-    public partial class TablesTab : Page
+    public partial class AppSettingsTab : Page
     {
         private string _title;
 
-        public TablesTab(string title)
+        public AppSettingsTab(string title)
         {
             InitializeComponent();
             _title = title;
             InitializeUI();
-            InitializeParams();
         }
 
         #region Load
@@ -23,11 +21,6 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
         private void InitializeUI()
         {
             titleTab.Text = _title;
-        }
-
-        private void InitializeParams()
-        {
-            DataContext = new ComboBoxesViewModel();
         }
 
         #endregion

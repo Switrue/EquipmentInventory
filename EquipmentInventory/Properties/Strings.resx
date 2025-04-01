@@ -484,4 +484,8 @@
     <value>Code</value>
     <comment>Settings</comment>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+    <comment>Settings</comment>
+  </data>
 </root>
