@@ -70,5 +70,17 @@ namespace EquipmentInventory.Properties {
                 this["CultureInfo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int YearOfObsolescence {
+            get {
+                return ((int)(this["YearOfObsolescence"]));
+            }
+            set {
+                this["YearOfObsolescence"] = value;
+            }
+        }
     }
 }

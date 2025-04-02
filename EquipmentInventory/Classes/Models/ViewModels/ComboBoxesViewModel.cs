@@ -1,12 +1,21 @@
-﻿using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Classes.Helper;
+using EquipmentInventory.Properties;
+using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace EquipmentInventory.Classes.Models.ViewModels
 {
-    public class ComboBoxesViewModel
+    public class ComboBoxesViewModel : INotifyPropertyChanged
     {
         private LanguageItem _selectedLanguage;
+        private int _selectedLongInteger;
+        private SettingsBuffer _buffer;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public IList<int> LongIntegerList { get; }
         public List<LanguageItem> Languages { get; }
@@ -18,13 +27,30 @@ namespace EquipmentInventory.Classes.Models.ViewModels
                 if (_selectedLanguage != value)
                 {
                     _selectedLanguage = value;
-                    ApplyLanguage();
+                    _buffer.CultureInfo = value.Code;
+                    OnPropertyChanged(nameof(SelectedLanguage));
+                }
+            }
+        }
+        public int SelectedLongInteger
+        {
+            get => _selectedLongInteger;
+            set
+            {
+                if (_selectedLongInteger != value)
+                {
+                    _selectedLongInteger = value;
+                    _buffer.YearOfObsolescence = value;
+                    _buffer.ApplyToYearOfObsolescence();
+                    OnPropertyChanged(nameof(SelectedLongInteger));
                 }
             }
         }
 
         public ComboBoxesViewModel()
         {
+            _buffer = new SettingsBuffer();
+
             LongIntegerList = new List<int>(Enumerable.Range(1, 100));
 
             Languages = new List<LanguageItem>()
@@ -38,10 +64,29 @@ namespace EquipmentInventory.Classes.Models.ViewModels
                     code: "en-US")
             };
 
-            var savedLang = Settings.Default.CultureInfo;
-            SelectedLanguage = Languages.FirstOrDefault(l => l.Code == savedLang) ?? Languages[0];
+            SelectedLanguage = Languages.FirstOrDefault(l => l.Code == _buffer.CultureInfo) 
+                ?? Languages[0];
+            SelectedLongInteger = LongIntegerList.Contains(_buffer.YearOfObsolescence)
+                ? _buffer.YearOfObsolescence
+                : LongIntegerList[4];
         }
 
-        private void ApplyLanguage() => Settings.Default.CultureInfo = SelectedLanguage.Code;
+        public ICommand ApplyLanguageCommand => new RelayCommand(() =>
+        {
+            var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, "?", true);
+
+            if (dialogResult)
+            {
+                _buffer.ApplyToCultureInfo();
+
+                Application.Current.Shutdown();
+                Process.Start(Application.ResourceAssembly.Location);
+            }
+        });
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

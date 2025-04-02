@@ -23,7 +23,7 @@
                       SelectedItem="{Binding SelectedLanguage}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Code" />
-            <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Click="ApplyCode_Click" />
+            <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Command="{Binding ApplyLanguageCommand}" />
         </StackPanel>
     </Grid>
 </Page>

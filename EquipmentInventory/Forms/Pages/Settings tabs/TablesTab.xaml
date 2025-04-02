@@ -16,7 +16,7 @@
     <!--#endregion-->
 
     <Grid>
-        <!--#region Body-->
+        <!--#region Tab-->
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
             <Grid>
@@ -29,7 +29,7 @@
                           Grid.Column="0"
                           VerticalAlignment="Top"
                           ItemsSource="{Binding LongIntegerList}"
-                          SelectedIndex="4">
+                          SelectedItem="{Binding SelectedLongInteger}">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />
@@ -44,7 +44,6 @@
                                          VerticalAlignment="Center"
                                          Foreground="{StaticResource SecondaryColor}" />
             </Grid>
-            <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Click="ApplyCode_Click" />
         </StackPanel>
         
         <!--#endregion-->

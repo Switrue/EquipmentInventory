@@ -28,7 +28,6 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
             titleTab.Text = _title;
             toolTipYearOfObsolescence.ToolTip = Strings.TheIntervalOfObsoleteTechnology;
             HintAssist.SetHint(yearOfObsolescenceCB, Strings.Year);
-            applyCodeBtn.Content = Strings.Apply;
         }
 
         private void InitializeParams()
@@ -41,6 +40,7 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
         private void ApplyCode_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(yearOfObsolescenceCB.SelectedItem.ToString());
+            Settings.Default.Save();
         }
     }
 }
