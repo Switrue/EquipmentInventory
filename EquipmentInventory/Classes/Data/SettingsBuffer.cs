@@ -1,6 +1,6 @@
 ﻿using EquipmentInventory.Properties;
 
-namespace EquipmentInventory.Classes
+namespace EquipmentInventory.Classes.Data
 {
     public class SettingsBuffer
     {

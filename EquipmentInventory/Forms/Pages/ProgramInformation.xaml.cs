@@ -1,6 +1,5 @@
 ﻿using EquipmentInventory.Classes.Models.ViewModels;
 using EquipmentInventory.Classes.Services;
-using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -11,8 +10,6 @@ namespace EquipmentInventory.Forms.Pages
     /// </summary>
     public partial class ProgramInformation : Page
     {
-        private Dictionary<string, (string title, string description)> items;
-
         public ProgramInformation()
         {
             InitializeComponent();

@@ -188,6 +188,7 @@
     <Compile Include="Classes\Enums\TabType.cs" />
     <Compile Include="Classes\Helpers\CustomMessageBoxHelper.cs" />
     <Compile Include="Classes\Helpers\TextFieldHelper.cs" />
+    <Compile Include="Classes\Services\WindowService.cs" />
     <Compile Include="Classes\Interfaces\IMainTableSwitcher.cs" />
     <Compile Include="Classes\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Interfaces\IMainPanel.cs" />
@@ -204,11 +205,11 @@
     <Compile Include="Classes\Services\NotificationService.cs" />
     <Compile Include="Classes\Services\AuthorizationService.cs" />
     <Compile Include="Classes\Services\ProgramInformationService.cs" />
-    <Compile Include="Classes\SettingsBuffer.cs" />
-    <Compile Include="Forms\Pages\GridTables\Archive.xaml.cs">
+    <Compile Include="Classes\Data\SettingsBuffer.cs" />
+    <Compile Include="Forms\Pages\Grid tables\Archive.xaml.cs">
       <DependentUpon>Archive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pages\GridTables\Inventory.xaml.cs">
+    <Compile Include="Forms\Pages\Grid tables\Inventory.xaml.cs">
       <DependentUpon>Inventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\ProgramInformation.xaml.cs">
@@ -292,11 +293,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Forms\Pages\GridTables\Archive.xaml">
+    <Page Include="Forms\Pages\Grid tables\Archive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\Pages\GridTables\Inventory.xaml">
+    <Page Include="Forms\Pages\Grid tables\Inventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

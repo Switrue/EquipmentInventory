@@ -1,5 +1,6 @@
 ﻿using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Properties;
+using EquipmentInventory.Classes.Data;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.ComponentModel;

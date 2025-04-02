@@ -12,7 +12,6 @@ namespace EquipmentInventory.Forms.Windows
     /// </summary>
     public partial class ProgramSettings : Window
     {
-
         public ProgramSettings()
         {
             InitializeComponent();
@@ -33,7 +32,7 @@ namespace EquipmentInventory.Forms.Windows
         {
             var navigationService = new NavigationService();
             navigationService.RegisterFrame(settingsFrame);
-            DataContext = new SettingsViewModel(navigationService);
+            DataContext = new SettingsViewModel(navigationService); ;
         }
 
         #endregion
