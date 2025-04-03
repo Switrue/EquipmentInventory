@@ -53,6 +53,11 @@ namespace EquipmentInventory.Classes.Data
             {
                 if (child is TextBox textBox)
                 {
+                    if (!textBox.IsEnabled)
+                    {
+                        continue;
+                    }
+
                     if (IsFieldEmpty(textBox, Strings.FieldEmpty))
                     {
                         return true; 

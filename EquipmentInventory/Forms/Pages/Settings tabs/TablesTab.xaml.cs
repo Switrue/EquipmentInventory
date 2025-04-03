@@ -1,7 +1,6 @@
 ﻿using EquipmentInventory.Classes.Models.ViewModels;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Settings_tabs
@@ -32,15 +31,9 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
 
         private void InitializeParams()
         {
-            DataContext = new ComboBoxesViewModel();
+            DataContext = new SettingsComboBoxesViewModel();
         }
 
         #endregion
-
-        private void ApplyCode_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(yearOfObsolescenceCB.SelectedItem.ToString());
-            Settings.Default.Save();
-        }
     }
 }

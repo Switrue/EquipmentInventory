@@ -16,7 +16,7 @@
     <!--#endregion-->
 
     <Grid>
-        <!--#region Tab-->
+        <!--#region Tab body-->
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
             <Grid>

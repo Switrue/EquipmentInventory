@@ -223,7 +223,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) => ToggleActionsPopup();
 
-        private void Settings_Click(object sender, RoutedEventArgs e) => WindowService.ShowDialogWindow(this, new ProgramSettings());
+        private void Settings_Click(object sender, RoutedEventArgs e) => WindowService.ShowDialogWindow(new ProgramSettings());
 
         private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) => UpdatePageWithDefaultSettings(new ProgramInformation());
 

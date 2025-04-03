@@ -84,16 +84,12 @@ namespace EquipmentInventory.Forms.Pages
 
         private bool ValidationSavingUserData()
         {
-            bool isUsernameEditing = !editUsernameBtn.IsEnabled;
-            bool isPasswordEditing = !editUserPasswordBtn.IsEnabled;
+            bool isUsernameEditing = editUsernameBtn.IsEnabled;
+            bool isPasswordEditing = editUserPasswordBtn.IsEnabled;
 
-            if (!isUsernameEditing && !isPasswordEditing) return true;
+            if (isUsernameEditing && isPasswordEditing) return true;
 
-            bool hasValidationErrors =
-                (isUsernameEditing && Validation.AnyTextBoxIsEmpty(usernameContainer)) ||
-                (isPasswordEditing && Validation.AnyTextBoxIsEmpty(userPasswordContainer));
-
-            if (hasValidationErrors) return true;
+            if (Validation.AnyTextBoxIsEmpty(userDataContainer)) return true;
 
             return false;
         }

@@ -1,9 +1,6 @@
-﻿using EquipmentInventory.Classes.Helper;
-using EquipmentInventory.Classes.Models.ViewModels;
+﻿using EquipmentInventory.Classes.Models.ViewModels;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
-using System.Diagnostics;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Settings_tabs
@@ -34,22 +31,9 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
 
         private void InitializeParams()
         {
-            DataContext = new ComboBoxesViewModel();
+            DataContext = new SettingsComboBoxesViewModel();
         }
 
         #endregion
-
-        private void ApplyCode_Click(object sender, RoutedEventArgs e)
-        {
-            var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, "?", true);
-
-            if (dialogResult)
-            {
-                Settings.Default.Save();
-
-                Application.Current.Shutdown();
-                Process.Start(Application.ResourceAssembly.Location);
-            }
-        }
     }
 }

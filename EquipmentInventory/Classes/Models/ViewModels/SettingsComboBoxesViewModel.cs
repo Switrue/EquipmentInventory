@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace EquipmentInventory.Classes.Models.ViewModels
 {
-    public class ComboBoxesViewModel : INotifyPropertyChanged
+    public class SettingsComboBoxesViewModel : INotifyPropertyChanged
     {
         private LanguageItem _selectedLanguage;
         private int _selectedLongInteger;
@@ -48,7 +48,7 @@ namespace EquipmentInventory.Classes.Models.ViewModels
             }
         }
 
-        public ComboBoxesViewModel()
+        public SettingsComboBoxesViewModel()
         {
             _buffer = new SettingsBuffer();
 

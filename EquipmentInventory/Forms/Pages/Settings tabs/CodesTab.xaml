@@ -16,10 +16,14 @@
     <!--#endregion-->
     
     <Grid>
+        <!--#region Tab body-->
+        
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
             <TextBox x:Name="codeTxtB" Margin="5" MaxLength="0" />
             <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Click="ApplyCode_Click" />
         </StackPanel>
+        
+        <!--#endregion-->
     </Grid>
 </Page>

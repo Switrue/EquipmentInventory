@@ -197,7 +197,7 @@
     <Compile Include="Classes\Models\LanguageItem.cs" />
     <Compile Include="Classes\Models\ProgramInformationItem.cs" />
     <Compile Include="Classes\Models\SettingItem.cs" />
-    <Compile Include="Classes\Models\ViewModels\ComboBoxesViewModel.cs" />
+    <Compile Include="Classes\Models\ViewModels\SettingsComboBoxesViewModel.cs" />
     <Compile Include="Classes\Interfaces\INavigationService.cs" />
     <Compile Include="Classes\Models\ViewModels\ProgramInformationViewModel.cs" />
     <Compile Include="Classes\Models\ViewModels\SettingsViewModel.cs" />

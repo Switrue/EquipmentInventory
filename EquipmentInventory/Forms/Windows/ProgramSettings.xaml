@@ -16,7 +16,7 @@
         Height="550" Width="500">
     <Border Style="{StaticResource WindowBorder}">
         <Grid>
-            <!--#region Body-->
+            <!--#region Settings body-->
 
             <Grid>
                 <Grid.ColumnDefinitions>

@@ -16,6 +16,7 @@
     <!--#endregion-->
 
     <Grid>
+        <!--#region Tab body-->
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource setupTabHeader}" />
             <ComboBox x:Name="appLanguageCB" 
@@ -25,5 +26,7 @@
                       SelectedValuePath="Code" />
             <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Command="{Binding ApplyLanguageCommand}" />
         </StackPanel>
+        
+        <!--#endregion-->
     </Grid>
 </Page>
