@@ -41,7 +41,7 @@
                 <Grid Margin="2.5">
                     <TextBlock x:Name="customMessageBoxTitle" Style="{StaticResource WindowTitleTextBlock}" />
                     <WrapPanel HorizontalAlignment="Right">
-                        <Button x:Name="closeMessageBoxBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />
+                        <Button x:Name="closeMessageBoxBtn" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" />
                     </WrapPanel>
                 </Grid>
             </Border>

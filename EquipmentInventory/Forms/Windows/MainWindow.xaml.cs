@@ -2,16 +2,16 @@
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Classes.Interfaces;
-using EquipmentInventory.Forms.Pages;
+using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Handlers;
 using EquipmentInventory.Forms.Pages.Admin;
+using EquipmentInventory.Forms.Pages;
 using EquipmentInventory.Properties;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace EquipmentInventory.Forms.Windows
@@ -21,18 +21,18 @@ namespace EquipmentInventory.Forms.Windows
     /// </summary>
     public partial class MainWindow : Window, IMainWindow
     {
+        private WindowStateHandler _windowState;
+        private WindowService _windowService;
         private UserData _user;
         private UserPanel _userPanel;
         private bool isResizing;
-        private double previousWidth;
-        private double previousHeight;
-        private bool _maximizedWindow;
 
         public MainWindow(UserData user)
         {
             InitializeComponent();
             _user = user;
             InitializeUI();
+            InitializeParams();
         }
 
         #region Virtual methods
@@ -41,7 +41,7 @@ namespace EquipmentInventory.Forms.Windows
         {
             base.OnClosed(e);
 
-            if (!_maximizedWindow)
+            if (!_windowState.IsMaximized)
             {
                 Settings.Default.WindowWidth = Width;
                 Settings.Default.WindowHeight = Height;
@@ -49,7 +49,7 @@ namespace EquipmentInventory.Forms.Windows
             }
         }
 
-        protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
 
@@ -84,6 +84,13 @@ namespace EquipmentInventory.Forms.Windows
             Height = Settings.Default.WindowHeight;
         }
 
+        private void InitializeParams()
+        {
+            _windowState = new WindowStateHandler();
+            _windowService = new WindowService(this, _windowState);
+            DataContext = new WindowManagementViewModel(_windowService, _windowState);
+        }
+
         public void SaveUserPanelObject(UserPanel userPanel) => _userPanel = userPanel;
 
         #endregion
@@ -95,9 +102,9 @@ namespace EquipmentInventory.Forms.Windows
             if (e.ClickCount == 2)
             {
                 await Task.Delay(200);
-                ToggleWindowState();
+                _windowService.ToggleWindowState();
             }
-            else if (!_maximizedWindow)
+            else if (!_windowState.IsMaximized)
             {
                 DragMove();
             }
@@ -107,62 +114,9 @@ namespace EquipmentInventory.Forms.Windows
         {
             if (WindowState == WindowState.Maximized)
             {
-                ToggleWindowState();
+                _windowService.ToggleWindowState();
                 WindowState = WindowState.Normal;
             }
-        }
-
-        private void CollapseWindow_Click(object sender, EventArgs e) => WindowState = WindowState.Minimized;
-
-        private void MaximizeWindow_Click(object sender, EventArgs e) => ToggleWindowState();
-
-        private void CloseWindow_Click(object sender, EventArgs e) => Close();
-
-        private void ToggleWindowState()
-        {
-            var currentScreen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
-
-            Action<Screen> toggleAction = _maximizedWindow ? (Action<Screen>)RestoreWindow : MaximizedWindow;
-
-            toggleAction(currentScreen);
-            UpdateUI();
-        }
-
-        private void MaximizedWindow(Screen currentScreen)
-        {
-            previousWidth = Width;
-            previousHeight = Height;
-
-            var workingArea = currentScreen.WorkingArea;
-
-            Width = workingArea.Width;
-            Height = workingArea.Height;
-
-            Left = workingArea.Left;
-            Top = workingArea.Top;
-
-            _maximizedWindow = true;
-        }
-
-        private void RestoreWindow(Screen currentScreen)
-        {
-            Width = previousWidth;
-            Height = previousHeight;
-
-            Left = currentScreen.WorkingArea.Left + (currentScreen.WorkingArea.Width - previousWidth) / 2;
-            Top = currentScreen.WorkingArea.Top + (currentScreen.WorkingArea.Height - previousHeight) / 2;
-
-            _maximizedWindow = false;
-        }
-
-        private void UpdateUI()
-        {
-            maximizeBtn.Content = _maximizedWindow ? "WindowRestore" : "WindowMaximize";
-
-            resizeMarker.Visibility = _maximizedWindow ? Visibility.Collapsed : Visibility.Visible;
-
-            windowEdging.CornerRadius = _maximizedWindow ? new CornerRadius(0) : new CornerRadius(10);
-            footerBorder.CornerRadius = _maximizedWindow ? new CornerRadius(0) : new CornerRadius(0, 0, 10, 10);
         }
 
         #endregion
@@ -181,7 +135,7 @@ namespace EquipmentInventory.Forms.Windows
             Mouse.Capture(null);
         }
 
-        private void ResizeHandle_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ResizeHandle_MouseMove(object sender, MouseEventArgs e)
         {
             if (isResizing)
             {

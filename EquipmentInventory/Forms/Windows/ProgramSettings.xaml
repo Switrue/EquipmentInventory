@@ -27,7 +27,7 @@
                 <!--#region Tabs-->
                 
                 <Border Grid.Column="0" Background="{StaticResource Background}" CornerRadius="10 0 0 10">
-                    <StackPanel>
+                    <StackPanel DataContext="{Binding SettingsList}">
                         <TextBlock x:Name="windowTitle" 
                                    Padding="0,16"
                                    Foreground="{StaticResource SecondaryColor}" 
@@ -67,9 +67,9 @@
                     <!--#region Header-->
                     
                     <Border Grid.Row="0"  VerticalAlignment="Top" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
-                        <Grid Margin="2.5">
+                        <Grid Margin="2.5" DataContext="{Binding WindowManagement}">
                             <WrapPanel HorizontalAlignment="Right">
-                                <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />
+                                <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" />
                             </WrapPanel>
                         </Grid>
                     </Border>

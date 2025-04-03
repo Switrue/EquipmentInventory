@@ -1,56 +1,22 @@
 ﻿using EquipmentInventory.Classes.Interfaces;
-using EquipmentInventory.Forms.Pages.Settings_tabs;
-using EquipmentInventory.Properties;
-using System.Collections.ObjectModel;
 
 namespace EquipmentInventory.Classes.Models.ViewModels
 {
     public class SettingsViewModel
     {
-        private readonly INavigationService _navigationService;
-        private SettingItem _selectedItem;
+        private IWindowService _windowService;
+        private INavigationService _navigationService;
 
-        public ObservableCollection<SettingItem> Items { get; }
-        public SettingItem SelectedItem
+        public WindowManagementViewModel WindowManagement { get; }
+        public SettingsListViewModel SettingsList { get; }
+
+        public SettingsViewModel(IWindowService windowService, INavigationService navigationService)
         {
-            get => _selectedItem;
-            set
-            {
-                _selectedItem = value;
-
-                if (_selectedItem != null)
-                {
-                    _navigationService.NavigateTo(_selectedItem.Page);
-                }
-            }
-        }
-
-        public SettingsViewModel(INavigationService navigationService)
-        {
+            _windowService = windowService;
             _navigationService = navigationService;
 
-            Items = new ObservableCollection<SettingItem>()
-            {
-                new SettingItem(
-                    title: Strings.Codes,
-                    icon: "Barcode",
-                    page: new CodesTab(Strings.Codes)),
-
-                new SettingItem(
-                    title: Strings.Tables,
-                    icon: "TableSearch",
-                    page: new TablesTab(Strings.Tables)),
-
-                new SettingItem(
-                    title: Strings.Application,
-                    icon: "Application",
-                    page: new AppSettingsTab(Strings.Application))
-            };
-
-            if (Items.Count > 0)
-            {
-                SelectedItem = Items[0];
-            }
+            WindowManagement = new WindowManagementViewModel(_windowService);
+            SettingsList = new SettingsListViewModel(_navigationService);
         }
     }
 }

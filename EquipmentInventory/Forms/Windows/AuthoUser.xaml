@@ -27,8 +27,8 @@
                 <Grid Margin="2.5">
                     <TextBlock x:Name="windowTitle" Style="{StaticResource WindowTitleTextBlock}" />
                     <WrapPanel HorizontalAlignment="Right">
-                        <Button x:Name="collapseBtn" Style="{StaticResource CollapseButton}" Click="CollapseWindow_Click" />
-                        <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Click="CloseWindow_Click" />
+                        <Button x:Name="collapseBtn" Style="{StaticResource CollapseButton}" Command="{Binding MinimizeCommand}" />
+                        <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" />
                     </WrapPanel>
                 </Grid>
             </Border>

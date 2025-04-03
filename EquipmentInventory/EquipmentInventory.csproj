@@ -188,6 +188,10 @@
     <Compile Include="Classes\Enums\TabType.cs" />
     <Compile Include="Classes\Helpers\CustomMessageBoxHelper.cs" />
     <Compile Include="Classes\Helpers\TextFieldHelper.cs" />
+    <Compile Include="Classes\Interfaces\IWindowService.cs" />
+    <Compile Include="Classes\Interfaces\IWindowState.cs" />
+    <Compile Include="Classes\Models\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Classes\Models\ViewModels\WindowManagementViewModel.cs" />
     <Compile Include="Classes\Services\WindowService.cs" />
     <Compile Include="Classes\Interfaces\IMainTableSwitcher.cs" />
     <Compile Include="Classes\Interfaces\IMainWindow.cs" />
@@ -200,12 +204,13 @@
     <Compile Include="Classes\Models\ViewModels\SettingsComboBoxesViewModel.cs" />
     <Compile Include="Classes\Interfaces\INavigationService.cs" />
     <Compile Include="Classes\Models\ViewModels\ProgramInformationViewModel.cs" />
-    <Compile Include="Classes\Models\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Classes\Models\ViewModels\SettingsListViewModel.cs" />
     <Compile Include="Classes\Services\NavigationService.cs" />
     <Compile Include="Classes\Services\NotificationService.cs" />
     <Compile Include="Classes\Services\AuthorizationService.cs" />
     <Compile Include="Classes\Services\ProgramInformationService.cs" />
     <Compile Include="Classes\Data\SettingsBuffer.cs" />
+    <Compile Include="Classes\Handlers\WindowStateHandler.cs" />
     <Compile Include="Forms\Pages\Grid tables\Archive.xaml.cs">
       <DependentUpon>Archive.xaml</DependentUpon>
     </Compile>

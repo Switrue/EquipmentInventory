@@ -12,6 +12,8 @@ using EquipmentInventory.Classes.Helpers;
 using System.Windows.Controls;
 using Validation = EquipmentInventory.Classes.Data.Validation;
 using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Handlers;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -24,6 +26,7 @@ namespace EquipmentInventory.Forms.Windows
         {
             InitializeComponent();
             InitializeUI();
+            InitializeParams();
         }
 
         #region Load
@@ -65,15 +68,16 @@ namespace EquipmentInventory.Forms.Windows
             HintAssist.SetHint(passwordPsB, Strings.Password);
         }
 
+        private void InitializeParams()
+        {
+            DataContext = new WindowManagementViewModel(new WindowService(this, new WindowStateHandler()));
+        }
+
         #endregion
 
         #region Window management
 
         private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
-        private void CollapseWindow_Click(object sender, EventArgs e) => WindowState = WindowState.Minimized;
-
-        private void CloseWindow_Click(object sender, EventArgs e) => Close();
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

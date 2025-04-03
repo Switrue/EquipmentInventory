@@ -50,7 +50,8 @@ namespace EquipmentInventory.Forms.Pages
             TextFieldHelper.ClearAllTextFields(textFieldContainer);
         }
 
-        private void PasswordGeneration_Click(object sender, System.Windows.RoutedEventArgs e) => passwordFieldTxtB.Text = UserAccount.GetGeneratedPassword();
+        private void PasswordGeneration_Click(object sender, System.Windows.RoutedEventArgs e) => 
+            passwordFieldTxtB.Text = UserAccount.GetGeneratedPassword();
 
         private void CreateAccount_Click(object sender, System.Windows.RoutedEventArgs e)
         {

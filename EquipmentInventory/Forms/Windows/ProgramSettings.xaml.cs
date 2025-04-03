@@ -1,7 +1,7 @@
-﻿using EquipmentInventory.Classes.Models.ViewModels;
+﻿using EquipmentInventory.Classes.Handlers;
+using EquipmentInventory.Classes.Models.ViewModels;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
-using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -32,7 +32,7 @@ namespace EquipmentInventory.Forms.Windows
         {
             var navigationService = new NavigationService();
             navigationService.RegisterFrame(settingsFrame);
-            DataContext = new SettingsViewModel(navigationService); ;
+            DataContext = new SettingsViewModel(new WindowService(this, new WindowStateHandler()), navigationService);
         }
 
         #endregion
@@ -40,10 +40,6 @@ namespace EquipmentInventory.Forms.Windows
         #region Window management
 
         private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
-        private void CollapseWindow_Click(object sender, EventArgs e) => WindowState = WindowState.Minimized;
-
-        private void CloseWindow_Click(object sender, EventArgs e) => Close();
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 

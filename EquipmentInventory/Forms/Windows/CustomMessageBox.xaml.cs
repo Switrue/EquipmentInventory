@@ -1,4 +1,7 @@
-﻿using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Classes.Handlers;
+using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -36,6 +39,8 @@ namespace EquipmentInventory.Forms.Windows
 
         private void InitializeParams()
         {
+            DataContext = new WindowManagementViewModel(new WindowService(this, new WindowStateHandler()));
+
             customMessageBoxTitle.Text = _title;
             messageTxtB.Text = _message;
             falseBtn.Visibility = !_visibility ? Visibility.Visible : Visibility.Collapsed;
@@ -48,8 +53,6 @@ namespace EquipmentInventory.Forms.Windows
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
-        private void CloseWindow_Click(Object sender, EventArgs e) => Close();
 
         #endregion
 
