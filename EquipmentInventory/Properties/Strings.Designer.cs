@@ -493,6 +493,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на To change the language, you need to restart the application. Continue?.
+        /// </summary>
+        internal static string LanguageChange {
+            get {
+                return ResourceManager.GetString("LanguageChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на License.
         /// </summary>
         internal static string License {

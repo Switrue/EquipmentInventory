@@ -254,7 +254,7 @@ namespace EquipmentInventory.Forms.Windows
 
         private void ChangeFrameContent(Frame frame, Page newContent)
         {
-            frame.Content = newContent;
+            frame.Navigate(newContent);
             CleanNavigationHistory(frame);
         }
 

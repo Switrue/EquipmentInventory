@@ -74,7 +74,7 @@ namespace EquipmentInventory.Classes.Models.ViewModels
 
         public ICommand ApplyLanguageCommand => new RelayCommand(() =>
         {
-            var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, "?", true);
+            var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, Strings.LanguageChange, true);
 
             if (dialogResult)
             {

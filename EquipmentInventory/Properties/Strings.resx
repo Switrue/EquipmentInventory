@@ -500,4 +500,8 @@
     <value>Language</value>
     <comment>Settings</comment>
   </data>
+  <data name="LanguageChange" xml:space="preserve">
+    <value>To change the language, you need to restart the application. Continue?</value>
+    <comment>Settings</comment>
+  </data>
 </root>

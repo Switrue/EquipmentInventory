@@ -405,4 +405,7 @@
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
   </data>
+  <data name="LanguageChange" xml:space="preserve">
+    <value>Для смены языка необходимо перезапустить приложение. Продолжить?</value>
+  </data>
 </root>

@@ -9,12 +9,12 @@
         Style="{StaticResource MaterialDesignWindow}"
         Background="Transparent"
         AllowsTransparency="True"
-        SizeToContent="Height" 
+        SizeToContent="WidthAndHeight" 
         ResizeMode="NoResize" 
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
-        Width="400" MinHeight="200">
+        MinWidth="400" MinHeight="200">
     <!--#region Styles-->
     
     <Window.Resources>
@@ -60,6 +60,7 @@
                 <TextBox x:Name="messageTxtB" 
                          Grid.Row="0" 
                          Margin="10"
+                         MaxWidth="400"
                          TextWrapping="Wrap" 
                          TextAlignment="Justify"
                          VerticalAlignment="Center"
