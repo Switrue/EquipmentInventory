@@ -6,9 +6,10 @@
     </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
-        <Setter Property="Margin" Value="7" />
-        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="BorderBrush" Value="{StaticResource HintColor}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="Margin" Value="7" />
         <Setter Property="MaxLength" Value="60" />
         <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True" />
     </Style>
@@ -16,9 +17,9 @@
     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
         <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
         <Setter Property="Foreground" Value="{StaticResource HintColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="Height" Value="25" />
         <Setter Property="Padding" Value="4" />
-        <Setter Property="FontSize" Value="12" />
         <Setter Property="Margin" Value="5" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="MinWidth" Value="50" />
@@ -29,15 +30,16 @@
         <Setter Property="Height" Value="80" />
     </Style>
 
-    <Style x:Key="setupTabHeader" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadlineSmallTextBlock}">
-        <Setter Property="Margin" Value="5" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+    <Style x:Key="SetupTabHeader" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadlineSmallTextBlock}">
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5" />
     </Style>
 
     <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
-        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark" />
+        <Setter Property="Margin" Value="5" />
     </Style>
 </ResourceDictionary>

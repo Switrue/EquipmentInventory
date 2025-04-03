@@ -122,9 +122,9 @@ namespace EquipmentInventory.Forms.Windows
                         break;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                CustomMessageBoxHelper.Show(Strings.Error, Strings.DatabaseError + $" {ex.Message}", false);
+                CustomMessageBoxHelper.Show(Strings.Error, Strings.DatabaseError, false);
             }
         }
 

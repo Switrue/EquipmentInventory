@@ -32,7 +32,7 @@
 
                             <StackPanel VerticalAlignment="Center">
                                 <Menu IsMainMenu="True" 
-                                      FontSize="12" 
+                                      FontSize="{DynamicResource DefaultFontSize}" 
                                       Background="{StaticResource Foreground}"
                                       materialDesign:MenuAssist.TopLevelMenuItemHeight="-1"
                                       materialDesign:MenuAssist.MenuItemsPresenterMargin="0 5 0 5"
@@ -84,25 +84,21 @@
                                         <TextBlock x:Name="userNameTexB" 
                                                    VerticalAlignment="Center" 
                                                    MaxWidth="120" 
-                                                   FontSize="12"
+                                                   FontSize="{DynamicResource DefaultFontSize}"
                                                    TextTrimming="CharacterEllipsis" 
                                                    Foreground="{StaticResource SecondaryColor}" />
                                     </WrapPanel>
                                 </Button>
 
-                                <Popup x:Name="actionsPopup" PlacementTarget="{Binding ElementName=manageAccountBtn}" 
-                                       Placement="Bottom" StaysOpen="False" AllowsTransparency="True">
+                                <Popup x:Name="actionsPopup" 
+                                       PlacementTarget="{Binding ElementName=manageAccountBtn}" 
+                                       Placement="Bottom" 
+                                       StaysOpen="False" 
+                                       AllowsTransparency="True">
                                     <StackPanel Background="{StaticResource Background}">
-                                        <Button x:Name="profileBtn" HorizontalContentAlignment="Left"
-                                                Foreground="{StaticResource HintColor}"
-                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                Style="{StaticResource MaterialDesignFlatSecondaryDarkButton}"
-                                                Click="Profile_Click" />
+                                        <Button x:Name="profileBtn" Style="{StaticResource PopupButton}" Click="Profile_Click" />
                                         <Border Height="1" Background="{StaticResource HintColor}" />
-                                        <Button x:Name="logOutBtn" HorizontalContentAlignment="Left"
-                                                Foreground="{StaticResource HintColor}" Click="Logout_Click"
-                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                Style="{StaticResource MaterialDesignFlatSecondaryDarkButton}" />
+                                        <Button x:Name="logOutBtn" Style="{StaticResource PopupButton}" Click="Logout_Click" />
                                     </StackPanel>
                                 </Popup>
                             </StackPanel>

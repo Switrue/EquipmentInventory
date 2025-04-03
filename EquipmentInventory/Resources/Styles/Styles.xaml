@@ -41,29 +41,29 @@
     <Style x:Key="RadioButtonFilter" TargetType="RadioButton">
         <Setter Property="GroupName" Value="one" />
         <Setter Property="Margin" Value="0 5 0 5" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Grid Background="Transparent">
                         <Ellipse x:Name="OuterCircle" 
-                             Stroke="{StaticResource TextColor}" 
-                             HorizontalAlignment="Left"
-                             StrokeThickness="1.5" 
-                             Fill="Transparent"
-                             Width="14" Height="14" />
+                                 Stroke="{StaticResource TextColor}" 
+                                 HorizontalAlignment="Left"
+                                 StrokeThickness="1.5" 
+                                 Fill="Transparent"
+                                 Width="14" Height="14" />
                         <Ellipse x:Name="InnerCircle" 
-                             HorizontalAlignment="Left"
-                             Margin="4.25"
-                             Fill="{StaticResource SecondaryColor}" 
-                             Visibility="Collapsed"
-                             Width="5.5" Height="5.5" />
-                        <ContentPresenter 
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Left"
-                            Margin="20 0 0 0"
-                            Content="{TemplateBinding Content}" 
-                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                 HorizontalAlignment="Left"
+                                 Margin="4.25"
+                                 Fill="{StaticResource SecondaryColor}" 
+                                 Visibility="Collapsed"
+                                 Width="5.5" Height="5.5" />
+                        <ContentPresenter VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left"
+                                          Margin="20 0 0 0"
+                                          Content="{TemplateBinding Content}" 
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
@@ -79,14 +79,14 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="OuterCircle" 
-                                                     Storyboard.TargetProperty="StrokeThickness" 
-                                                     To="5.5" Duration="0:0:0.1" />
+                                                         Storyboard.TargetProperty="StrokeThickness" 
+                                                         To="5.5" Duration="0:0:0.1" />
                                         <DoubleAnimation Storyboard.TargetName="InnerCircle" 
-                                                     Storyboard.TargetProperty="Width" 
-                                                     To="7" Duration="0:0:0.1" />
+                                                         Storyboard.TargetProperty="Width" 
+                                                         To="7" Duration="0:0:0.1" />
                                         <DoubleAnimation Storyboard.TargetName="InnerCircle" 
-                                                     Storyboard.TargetProperty="Height" 
-                                                     To="7" Duration="0:0:0.1" />
+                                                         Storyboard.TargetProperty="Height" 
+                                                         To="7" Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -94,14 +94,14 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="OuterCircle" 
-                                                     Storyboard.TargetProperty="StrokeThickness" 
-                                                     To="1.5" Duration="0:0:0.1" />
+                                                         Storyboard.TargetProperty="StrokeThickness" 
+                                                         To="1.5" Duration="0:0:0.1" />
                                         <DoubleAnimation Storyboard.TargetName="InnerCircle" 
-                                                     Storyboard.TargetProperty="Width" 
-                                                     To="5.5" Duration="0:0:0.1" />
+                                                         Storyboard.TargetProperty="Width" 
+                                                         To="5.5" Duration="0:0:0.1" />
                                         <DoubleAnimation Storyboard.TargetName="InnerCircle" 
-                                                     Storyboard.TargetProperty="Height" 
-                                                     To="5.5" Duration="0:0:0.1" />
+                                                         Storyboard.TargetProperty="Height" 
+                                                         To="5.5" Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -110,6 +110,20 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="PopupButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatSecondaryDarkButton}">
+        <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+        <Setter Property="Foreground" Value="{StaticResource HintColor}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="FontSize" Value="{DynamicResource TitleFontSize}" />
+    </Style>
+
+    <Style x:Key="DefaultButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedSecondaryButton}">
+        <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontSize" Value="{DynamicResource TitleFontSize}" />
+        <Setter Property="Cursor" Value="Hand" />
     </Style>
 
     <!--#endregion-->

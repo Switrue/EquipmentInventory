@@ -43,7 +43,10 @@
                                     <WrapPanel Margin="5">
                                         <materialDesign:PackIcon Kind="{Binding Icon}" VerticalAlignment="Center" />
                                         <Border BorderBrush="{StaticResource HintColor}" BorderThickness="1" Margin="5 0 5 0" />
-                                        <TextBlock Text="{Binding Title}" MaxWidth="100" TextWrapping="Wrap" />
+                                        <TextBlock Text="{Binding Title}" 
+                                                   FontSize="{DynamicResource DefaultFontSize}" 
+                                                   MaxWidth="100" 
+                                                   TextWrapping="Wrap" />
                                     </WrapPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
