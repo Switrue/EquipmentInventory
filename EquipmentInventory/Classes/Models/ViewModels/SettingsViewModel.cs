@@ -20,7 +20,6 @@ namespace EquipmentInventory.Classes.Models.ViewModels
 
                 if (_selectedItem != null)
                 {
-                    _navigationService.ClearHistory();
                     _navigationService.NavigateTo(_selectedItem.Page);
                 }
             }

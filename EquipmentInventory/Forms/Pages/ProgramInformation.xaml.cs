@@ -8,7 +8,7 @@ namespace EquipmentInventory.Forms.Pages
     /// <summary>
     /// Логика взаимодействия для ProgramInformation.xaml
     /// </summary>
-    public partial class ProgramInformation : Page
+    public partial class ProgramInformation : UserControl
     {
         public ProgramInformation()
         {

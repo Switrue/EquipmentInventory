@@ -8,7 +8,7 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
     /// <summary>
     /// Логика взаимодействия для CodesTab.xaml
     /// </summary>
-    public partial class CodesTab : Page
+    public partial class CodesTab : UserControl
     {
         private string _title;
 

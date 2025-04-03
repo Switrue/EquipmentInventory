@@ -12,7 +12,7 @@ namespace EquipmentInventory.Forms.Pages
     /// <summary>
     /// Логика взаимодействия для UserRegistration.xaml
     /// </summary>
-    public partial class UserRegistration : Page
+    public partial class UserRegistration : UserControl
     {
         private NotificationService notification;
 

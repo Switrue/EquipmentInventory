@@ -14,7 +14,7 @@ namespace EquipmentInventory.Forms.Pages.Admin
     /// <summary>
     /// Логика взаимодействия для AdminPanel.xaml
     /// </summary>
-    public partial class UserPanel : Page, IMainPanel
+    public partial class UserPanel : UserControl, IMainPanel
     {
         private IMainWindow _parentWindow;
         private TabType _tabType;

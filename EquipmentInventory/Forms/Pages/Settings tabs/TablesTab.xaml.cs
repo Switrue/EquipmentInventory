@@ -8,7 +8,7 @@ namespace EquipmentInventory.Forms.Pages.Settings_tabs
     /// <summary>
     /// Логика взаимодействия для TablesTab.xaml
     /// </summary>
-    public partial class TablesTab : Page
+    public partial class TablesTab : UserControl
     {
         private string _title;
 

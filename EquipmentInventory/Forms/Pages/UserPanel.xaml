@@ -1,4 +1,4 @@
-﻿<Page x:Class="EquipmentInventory.Forms.Pages.Admin.UserPanel"
+﻿<UserControl x:Class="EquipmentInventory.Forms.Pages.Admin.UserPanel"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
       d:DesignHeight="200" d:DesignWidth="400">
     <!--#region Styles-->
     
-    <Page.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignTabRadioButton}">
                 <Setter Property="Foreground" Value="{StaticResource TextColor}" />
@@ -27,7 +27,7 @@
                 <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             </Style>
         </ResourceDictionary>
-    </Page.Resources>
+    </UserControl.Resources>
     
     <!--#endregion-->
     
@@ -55,4 +55,4 @@
         
         <!--#endregion-->
     </Grid>
-</Page>
+</UserControl>

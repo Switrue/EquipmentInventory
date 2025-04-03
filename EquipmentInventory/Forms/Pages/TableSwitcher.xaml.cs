@@ -19,7 +19,7 @@ namespace EquipmentInventory.Forms.Pages
     /// <summary>
     /// Логика взаимодействия для Inventory.xaml
     /// </summary>
-    public partial class TableSwitcher : Page, IMainTableSwitcher
+    public partial class TableSwitcher : UserControl, IMainTableSwitcher
     {
         private TableType _tableType;
         private NotificationService notification;

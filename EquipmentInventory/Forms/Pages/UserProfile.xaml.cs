@@ -14,7 +14,7 @@ namespace EquipmentInventory.Forms.Pages
     /// <summary>
     /// Логика взаимодействия для UserProfile.xaml
     /// </summary>
-    public partial class UserProfile : Page
+    public partial class UserProfile : UserControl
     {
         private UserData _user;
 

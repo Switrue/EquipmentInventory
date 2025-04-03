@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
-
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace EquipmentInventory.Forms.Windows
 {
@@ -242,28 +242,19 @@ namespace EquipmentInventory.Forms.Windows
 
         #region Change frame
 
-        public void ChangeControlPanelFrameContent(Page newContent) => ChangeFrameContent(controlPanelFrame, newContent);
+        public void ChangeControlPanelFrameContent(UserControl newContent) => ChangeFrameContent(controlPanelFrame, newContent);
 
-        public void ChangeMainFrameContent(Page newContent) => ChangeFrameContent(mainFrame, newContent);
+        public void ChangeMainFrameContent(UserControl newContent) => ChangeFrameContent(mainFrame, newContent);
 
-        private void UpdatePageWithDefaultSettings(Page newContent)
+        private void UpdatePageWithDefaultSettings(UserControl newContent)
         {
             _userPanel.SetRadioButtonDefault();
             ChangeMainFrameContent(newContent);
         }
 
-        private void ChangeFrameContent(Frame frame, Page newContent)
+        private void ChangeFrameContent(ContentControl frame, UserControl newContent)
         {
-            frame.Navigate(newContent);
-            CleanNavigationHistory(frame);
-        }
-
-        private void CleanNavigationHistory(Frame frame)
-        {
-            while (frame.CanGoBack)
-            {
-                frame.RemoveBackEntry();
-            }
+            frame.Content = newContent;
         }
 
         #endregion

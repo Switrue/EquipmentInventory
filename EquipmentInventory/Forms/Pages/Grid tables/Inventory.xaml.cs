@@ -7,7 +7,7 @@ namespace EquipmentInventory.Forms.Pages.GridTables
     /// <summary>
     /// Логика взаимодействия для Inventory.xaml
     /// </summary>
-    public partial class Inventory : Page
+    public partial class Inventory : UserControl
     {
         private IMainTableSwitcher _mainTableSwitcher;
 

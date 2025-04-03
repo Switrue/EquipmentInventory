@@ -5,7 +5,7 @@ namespace EquipmentInventory.Forms.Pages.Admin
     /// <summary>
     /// Логика взаимодействия для Dictionaries.xaml
     /// </summary>
-    public partial class Dictionaries : Page
+    public partial class Dictionaries : UserControl
     {
         public Dictionaries()
         {

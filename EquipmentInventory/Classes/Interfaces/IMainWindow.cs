@@ -4,6 +4,6 @@ namespace EquipmentInventory.Classes.Interfaces
 {
     public interface IMainWindow
     {
-        void ChangeMainFrameContent(Page newContent);
+        void ChangeMainFrameContent(UserControl newContent);
     }
 }

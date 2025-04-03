@@ -5,23 +5,15 @@ namespace EquipmentInventory.Classes.Services
 {
     public class NavigationService : INavigationService
     {
-        private Frame _frame;
+        private ContentControl _frame;
 
         public NavigationService() { }
 
-        public void RegisterFrame(Frame frame) => _frame = frame;
+        public void RegisterFrame(ContentControl frame) => _frame = frame;
 
-        public void NavigateTo(Page page)
+        public void NavigateTo(UserControl page)
         {
-            _frame?.Navigate(page);
-        }
-
-        public void ClearHistory()
-        {
-            if (_frame != null && _frame.CanGoBack)
-            {
-                _frame.RemoveBackEntry();
-            }
+            _frame.Content = page;
         }
     }
 }

@@ -123,7 +123,7 @@
                         <WrapPanel>
                             <!-- #region Control panel -->
 
-                            <Frame x:Name="controlPanelFrame" IsTabStop="False" NavigationUIVisibility="Hidden" Margin="4 0 0 0" />
+                            <ContentControl x:Name="controlPanelFrame" IsTabStop="False" Margin="4 0 0 0" />
 
                             <!-- #endregion -->
                         </WrapPanel>
@@ -136,7 +136,7 @@
             <!--#region Body-->
 
             <Grid Grid.Row="1">
-                <Frame x:Name="mainFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
+                <ContentControl x:Name="mainFrame" IsTabStop="False" />
             </Grid>
 
             <!-- #endregion -->

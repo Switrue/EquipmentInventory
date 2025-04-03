@@ -9,7 +9,7 @@ namespace EquipmentInventory.Forms.Pages
     /// <summary>
     /// Логика взаимодействия для Tables.xaml
     /// </summary>
-    public partial class Tables : Page
+    public partial class Tables : UserControl
     {
         private IMainPanel _parent;
 

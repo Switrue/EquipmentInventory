@@ -77,7 +77,7 @@
                     
                     <Border Grid.Row="1" Background="{StaticResource Foreground}" CornerRadius="0 0 10 0">
                         <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="5" Focusable="False">
-                            <Frame x:Name="settingsFrame" NavigationUIVisibility="Hidden" Focusable="False" />
+                            <ContentControl x:Name="settingsFrame" Focusable="False" />
                         </ScrollViewer>
                     </Border>
                     

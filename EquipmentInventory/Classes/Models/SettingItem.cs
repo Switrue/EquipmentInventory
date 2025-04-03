@@ -6,9 +6,9 @@ namespace EquipmentInventory.Classes.Models
     {
         public string Title { get; set; }
         public string Icon { get; set; }
-        public Page Page { get; set; }
+        public UserControl Page { get; set; }
 
-        public SettingItem(string title, string icon, Page page)
+        public SettingItem(string title, string icon, UserControl page)
         {
             Title = title;
             Icon = icon;
