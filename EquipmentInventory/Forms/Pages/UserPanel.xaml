@@ -27,7 +27,7 @@
     
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <!--#region Control panel-->
-        
+
         <StackPanel x:Name="radioButtonContainer" Orientation="Horizontal">
             <RadioButton x:Name="userRegistrationRb" Click="RadioButton_Click" />
             <RadioButton x:Name="tablesRb" Click="RadioButton_Click" MouseEnter="DisplayTableOptions_Mouse" />

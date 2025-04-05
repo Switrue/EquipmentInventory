@@ -16,7 +16,7 @@ namespace EquipmentInventory.Classes.Models.ViewModels
         public WindowManagementViewModel(IWindowService windowService)
         {
             _windowService = windowService;
-            
+
             CloseCommand = new RelayCommand(() => _windowService.CloseWindow());
             MinimizeCommand = new RelayCommand(() => _windowService.MinimizeWindow());
         }

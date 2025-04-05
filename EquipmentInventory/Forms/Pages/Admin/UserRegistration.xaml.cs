@@ -46,7 +46,7 @@ namespace EquipmentInventory.Forms.Pages
 
         private void Page_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Keyboard.ClearFocus();
+            Focus();
             TextFieldHelper.ClearAllTextFields(textFieldContainer);
         }
 

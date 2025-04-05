@@ -41,6 +41,10 @@ namespace EquipmentInventory.Classes.Data
                     CustomMessageBoxHelper.Show(Strings.Error, $"{Strings.Error}: {ex.Message}", false);
                 }
             }
+            else
+            {
+                SelectTheDefaultImage(image);
+            }
         }
 
         public static void SelectTheDefaultImage(Image image)

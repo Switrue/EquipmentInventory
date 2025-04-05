@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Focusable="True"
              Background="Transparent"
              MouseDown="Page_MouseDown"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -95,10 +96,9 @@
                             <Button x:Name="changeImageBtn" Margin="10" Click="ChangeImage_Click" />
                         </WrapPanel>
 
-                        <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <Button x:Name="saveUserImage" Margin="0 0 5 0" />
-                            <Button x:Name="cancelSaveUserImageBtn" Margin="5 0 0 0" Click="CancelSaveUserImage_Click" />
-                        </UniformGrid>
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button x:Name="saveUserImage" Margin="0" />
+                        </StackPanel>
                     </UniformGrid>
                 </GroupBox>
 

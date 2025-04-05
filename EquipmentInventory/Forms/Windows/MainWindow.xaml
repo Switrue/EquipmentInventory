@@ -12,12 +12,13 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         SizeChanged="Window_SizeChanged"
-        Height="600" Width="1000"
+        Height="650" Width="1000"
         MinHeight="500" MinWidth="800">
+
     <Border Style="{StaticResource WindowBorder}" CornerRadius="{Binding WindowState.WindowCornerRadius}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="85" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -25,7 +26,7 @@
             <!-- #region Header -->
 
             <Border x:Name="windowBorder" Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
-                <StackPanel Orientation="Vertical" Margin="2.5">
+                <StackPanel Orientation="Vertical" Margin="2.5 2.5 2.5 12">
                     <Grid>
                         <WrapPanel HorizontalAlignment="Left">
                             <!-- #region Menu -->
@@ -119,13 +120,13 @@
                     </Grid>
 
                     <Grid>
-                        <WrapPanel>
-                            <!-- #region Control panel -->
-
-                            <ContentControl x:Name="controlPanelFrame" IsTabStop="False" Margin="4 0 0 0" />
-
-                            <!-- #endregion -->
-                        </WrapPanel>
+                        <!-- #region Control panel -->
+                        
+                        <StackPanel HorizontalAlignment="Stretch" Margin="4 0 10 0">
+                            <ContentControl x:Name="controlPanelFrame" IsTabStop="False" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        
+                        <!-- #endregion -->
                     </Grid>
                 </StackPanel>
             </Border>

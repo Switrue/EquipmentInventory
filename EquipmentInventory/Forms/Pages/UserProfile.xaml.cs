@@ -42,14 +42,13 @@ namespace EquipmentInventory.Forms.Pages
             saveUserDataBtn.Content = Strings.Save;
             saveUserImage.Content = Strings.Save;
             cancelSaveUserDataBtn.Content = Strings.Cancel;
-            cancelSaveUserImageBtn.Content = Strings.Cancel;
         }
 
         #endregion
 
         #region Events
 
-        private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => ClearFocus();
+        private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => Focus();
 
         private void CancelSaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => DisableTextFields();
 
@@ -62,8 +61,6 @@ namespace EquipmentInventory.Forms.Pages
         private void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => SaveUserData();
 
         private void ChangeImage_Click(object sender, RoutedEventArgs e) => UserAccount.SelectTheImage(userImage);
-
-        private void CancelSaveUserImage_Click(object sender, RoutedEventArgs e) => UserAccount.SelectTheDefaultImage(userImage);
 
         #endregion
 

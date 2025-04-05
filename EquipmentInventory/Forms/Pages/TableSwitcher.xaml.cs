@@ -104,7 +104,7 @@ namespace EquipmentInventory.Forms.Pages
 
         #region Search panel
 
-        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
+        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Focus();
 
         private void ToggleGridBtn_Click(object sender, RoutedEventArgs e)
         {

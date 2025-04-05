@@ -12,6 +12,7 @@ namespace EquipmentInventory.Classes.Services
     {
         private readonly Window _window;
         private readonly IWindowState _windowState;
+
         public bool IsMaximized => _windowState.IsMaximized;
 
         public WindowService(Window window, IWindowState windowState)
@@ -23,8 +24,10 @@ namespace EquipmentInventory.Classes.Services
         public static void ShowWindow(Window dialogWindow) =>
             ConfigureDialogWindow(FindParentWindow(), dialogWindow).Show();
 
-        public static void ShowDialogWindow(Window dialogWindow) =>
-            ConfigureDialogWindow(FindParentWindow(), dialogWindow).ShowDialog();
+        public static bool ShowDialogWindow(Window dialogWindow)
+        {
+            return ConfigureDialogWindow(FindParentWindow(), dialogWindow).ShowDialog() ?? false;
+        }
 
         private static Window ConfigureDialogWindow(Window parentWindow, Window dialogWindow)
         {

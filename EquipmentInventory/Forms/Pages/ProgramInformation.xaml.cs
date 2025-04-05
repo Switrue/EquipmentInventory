@@ -29,7 +29,7 @@ namespace EquipmentInventory.Forms.Pages
 
         #region Actions
 
-        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
+        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Focus();
 
         #endregion
     }

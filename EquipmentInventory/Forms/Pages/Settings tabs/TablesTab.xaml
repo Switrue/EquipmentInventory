@@ -40,6 +40,7 @@
                                          Kind="InformationSlabCircleOutline" 
                                          Grid.Column="1"
                                          Margin="5"
+                                         Cursor="Help"
                                          Background="Transparent"
                                          VerticalAlignment="Center"
                                          Foreground="{StaticResource SecondaryColor}" />
