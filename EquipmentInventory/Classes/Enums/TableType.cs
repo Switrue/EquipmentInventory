@@ -1,8 +1,7 @@
-﻿namespace EquipmentInventory.Classes.Enums
+﻿namespace EquipmentInventory.Classes.Enums;
+
+public enum TableType
 {
-    public enum TableType
-    {
-        Inventory,
-        Archive
-    }
+    Inventory,
+    Archive
 }

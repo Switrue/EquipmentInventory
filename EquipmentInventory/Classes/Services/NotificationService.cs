@@ -1,23 +1,22 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System.Threading.Tasks;
 
-namespace EquipmentInventory.Classes.Services
+namespace EquipmentInventory.Classes.Services;
+
+class NotificationService
 {
-    class NotificationService
+    private Snackbar _notification;
+
+    public NotificationService(Snackbar notification)
     {
-        private Snackbar _notification;
+        _notification = notification;
+    }
 
-        public NotificationService(Snackbar notification)
+    public void Show(string message)
+    {
+        if (_notification.MessageQueue is { } messageQueue && _notification.Message == null)
         {
-            _notification = notification;
-        }
-
-        public void Show(string message)
-        {
-            if (_notification.MessageQueue is { } messageQueue && _notification.Message == null)
-            {
-                Task task = Task.Factory.StartNew(() => messageQueue.Enqueue(message));
-            }
+            Task task = Task.Factory.StartNew(() => messageQueue.Enqueue(message));
         }
     }
 }

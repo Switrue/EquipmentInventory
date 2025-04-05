@@ -6,48 +6,47 @@ using EquipmentInventory.Forms.Windows;
 using EquipmentInventory.Properties;
 using System.Collections.Generic;
 
-namespace EquipmentInventory.Classes.Services
+namespace EquipmentInventory.Classes.Services;
+
+public class AuthorizationService
 {
-    public class AuthorizationService
+    private UserData _user;
+    private Dictionary<string, (TabType tabType, bool isAdmin)> userPanelParams;
+
+    public AuthorizationService(UserData user)
     {
-        private UserData _user;
-        private Dictionary<string, (TabType tabType, bool isAdmin)> userPanelParams;
+        _user = user;
+        InitializeData();
+    }
 
-        public AuthorizationService(UserData user)
+    private void InitializeData()
+    {
+        userPanelParams = new Dictionary<string, (TabType tabType, bool isAdmin)>
         {
-            _user = user;
-            InitializeData();
-        }
+            { "Системный администратор", (TabType.Tables, true) },
+            { "Бухгалтер", (TabType.Tables, false) }
+        };
+    }
 
-        private void InitializeData()
+    public void InitializeMainWindow()
+    {
+        MainWindow mainWindow = new MainWindow(_user);
+        var role = _user.UserRole;
+
+        if (!string.IsNullOrEmpty(role))
         {
-            userPanelParams = new Dictionary<string, (TabType tabType, bool isAdmin)>
+            if (userPanelParams.TryGetValue(role, out var parameters))
             {
-                { "Системный администратор", (TabType.Tables, true) },
-                { "Бухгалтер", (TabType.Tables, false) }
-            };
-        }
-
-        public void InitializeMainWindow()
-        {
-            MainWindow mainWindow = new MainWindow(_user);
-            var role = _user.UserRole;
-
-            if (!string.IsNullOrEmpty(role))
-            {
-                if (userPanelParams.TryGetValue(role, out var parameters))
-                {
-                    UserPanel userPanel = new UserPanel(mainWindow, parameters.tabType, parameters.isAdmin);
-                    mainWindow.ChangeControlPanelFrameContent(userPanel);
-                    mainWindow.SaveUserPanelObject(userPanel);
-                }
-                else
-                {
-                    CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);
-                }
-
-                mainWindow.Show();
+                UserPanel userPanel = new UserPanel(mainWindow, parameters.tabType, parameters.isAdmin);
+                mainWindow.ChangeControlPanelFrameContent(userPanel);
+                mainWindow.SaveUserPanelObject(userPanel);
             }
+            else
+            {
+                CustomMessageBoxHelper.Show(Strings.Error, Strings.RoleNotFound, false);
+            }
+
+            mainWindow.Show();
         }
     }
 }

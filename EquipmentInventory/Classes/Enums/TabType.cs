@@ -1,10 +1,9 @@
-﻿namespace EquipmentInventory.Classes.Enums
+﻿namespace EquipmentInventory.Classes.Enums;
+
+public enum TabType
 {
-    public enum TabType
-    {
-        Registration,
-        Tables,
-        Dictionary,
-        Default
-    }
+    Registration,
+    Tables,
+    Dictionary,
+    Default
 }

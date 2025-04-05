@@ -1,8 +1,7 @@
-﻿namespace EquipmentInventory.Classes.Models
+﻿namespace EquipmentInventory.Classes.Models;
+
+public class IconData
 {
-    public class IconData
-    {
-        public string Kind { get; set; }
-        public double Size { get; set; }
-    }
+    public string Kind { get; set; }
+    public double Size { get; set; }
 }

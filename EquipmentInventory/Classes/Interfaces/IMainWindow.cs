@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Interfaces
+namespace EquipmentInventory.Classes.Interfaces;
+
+public interface IMainWindow
 {
-    public interface IMainWindow
-    {
-        void ChangeMainFrameContent(UserControl newContent);
-    }
+    void ChangeMainFrameContent(UserControl newContent);
 }

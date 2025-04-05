@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Interfaces
+namespace EquipmentInventory.Classes.Interfaces;
+
+public interface INavigationService
 {
-    public interface INavigationService
-    {
-        void NavigateTo(UserControl page);
-    }
+    void NavigateTo(UserControl page);
 }

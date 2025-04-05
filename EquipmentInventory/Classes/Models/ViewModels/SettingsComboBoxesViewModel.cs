@@ -9,85 +9,84 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace EquipmentInventory.Classes.Models.ViewModels
+namespace EquipmentInventory.Classes.Models.ViewModels;
+
+public class SettingsComboBoxesViewModel : INotifyPropertyChanged
 {
-    public class SettingsComboBoxesViewModel : INotifyPropertyChanged
+    private LanguageItem _selectedLanguage;
+    private int _selectedLongInteger;
+    private SettingsBuffer _buffer;
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public IList<int> LongIntegerList { get; }
+    public List<LanguageItem> Languages { get; }
+    public LanguageItem SelectedLanguage
     {
-        private LanguageItem _selectedLanguage;
-        private int _selectedLongInteger;
-        private SettingsBuffer _buffer;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public IList<int> LongIntegerList { get; }
-        public List<LanguageItem> Languages { get; }
-        public LanguageItem SelectedLanguage
+        get => _selectedLanguage;
+        set
         {
-            get => _selectedLanguage;
-            set
+            if (_selectedLanguage != value)
             {
-                if (_selectedLanguage != value)
-                {
-                    _selectedLanguage = value;
-                    _buffer.CultureInfo = value.Code;
-                    OnPropertyChanged(nameof(SelectedLanguage));
-                }
+                _selectedLanguage = value;
+                _buffer.CultureInfo = value.Code;
+                OnPropertyChanged(nameof(SelectedLanguage));
             }
         }
-        public int SelectedLongInteger
+    }
+    public int SelectedLongInteger
+    {
+        get => _selectedLongInteger;
+        set
         {
-            get => _selectedLongInteger;
-            set
+            if (_selectedLongInteger != value)
             {
-                if (_selectedLongInteger != value)
-                {
-                    _selectedLongInteger = value;
-                    _buffer.YearOfObsolescence = value;
-                    _buffer.ApplyToYearOfObsolescence();
-                    OnPropertyChanged(nameof(SelectedLongInteger));
-                }
+                _selectedLongInteger = value;
+                _buffer.YearOfObsolescence = value;
+                _buffer.ApplyToYearOfObsolescence();
+                OnPropertyChanged(nameof(SelectedLongInteger));
             }
         }
+    }
 
-        public SettingsComboBoxesViewModel()
+    public SettingsComboBoxesViewModel()
+    {
+        _buffer = new SettingsBuffer();
+
+        LongIntegerList = new List<int>(Enumerable.Range(1, 100));
+
+        Languages = new List<LanguageItem>()
         {
-            _buffer = new SettingsBuffer();
+            new LanguageItem(
+                name: "Русский", 
+                code: "ru-RU"),
 
-            LongIntegerList = new List<int>(Enumerable.Range(1, 100));
+            new LanguageItem(
+                name: "English", 
+                code: "en-US")
+        };
 
-            Languages = new List<LanguageItem>()
-            {
-                new LanguageItem(
-                    name: "Русский", 
-                    code: "ru-RU"),
+        SelectedLanguage = Languages.FirstOrDefault(l => l.Code == _buffer.CultureInfo) 
+            ?? Languages[0];
+        SelectedLongInteger = LongIntegerList.Contains(_buffer.YearOfObsolescence)
+            ? _buffer.YearOfObsolescence
+            : LongIntegerList[4];
+    }
 
-                new LanguageItem(
-                    name: "English", 
-                    code: "en-US")
-            };
+    public ICommand ApplyLanguageCommand => new RelayCommand(() =>
+    {
+        var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, Strings.LanguageChange, true);
 
-            SelectedLanguage = Languages.FirstOrDefault(l => l.Code == _buffer.CultureInfo) 
-                ?? Languages[0];
-            SelectedLongInteger = LongIntegerList.Contains(_buffer.YearOfObsolescence)
-                ? _buffer.YearOfObsolescence
-                : LongIntegerList[4];
+        if (dialogResult)
+        {
+            _buffer.ApplyToCultureInfo();
+
+            Application.Current.Shutdown();
+            Process.Start(Application.ResourceAssembly.Location);
         }
+    });
 
-        public ICommand ApplyLanguageCommand => new RelayCommand(() =>
-        {
-            var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, Strings.LanguageChange, true);
-
-            if (dialogResult)
-            {
-                _buffer.ApplyToCultureInfo();
-
-                Application.Current.Shutdown();
-                Process.Start(Application.ResourceAssembly.Location);
-            }
-        });
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

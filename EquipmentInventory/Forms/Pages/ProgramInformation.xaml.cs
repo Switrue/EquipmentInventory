@@ -3,34 +3,33 @@ using EquipmentInventory.Classes.Services;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace EquipmentInventory.Forms.Pages
+namespace EquipmentInventory.Forms.Pages;
+
+/// <summary>
+/// Логика взаимодействия для ProgramInformation.xaml
+/// </summary>
+public partial class ProgramInformation : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для ProgramInformation.xaml
-    /// </summary>
-    public partial class ProgramInformation : UserControl
+    public ProgramInformation()
     {
-        public ProgramInformation()
-        {
-            InitializeComponent();
-            InitializeParams();
-        }
-
-        #region Load
-
-        private void InitializeParams()
-        {
-            var programInformationService = new ProgramInformationService();
-            programInformationService.RegisterControls(titleTextGroupBox, descriptionTxtB);
-            DataContext = new ProgramInformationViewModel(programInformationService); ;
-        }
-
-        #endregion
-
-        #region Actions
-
-        private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Focus();
-
-        #endregion
+        InitializeComponent();
+        InitializeParams();
     }
+
+    #region Load
+
+    private void InitializeParams()
+    {
+        var programInformationService = new ProgramInformationService();
+        programInformationService.RegisterControls(titleTextGroupBox, descriptionTxtB);
+        DataContext = new ProgramInformationViewModel(programInformationService); ;
+    }
+
+    #endregion
+
+    #region Actions
+
+    private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Focus();
+
+    #endregion
 }

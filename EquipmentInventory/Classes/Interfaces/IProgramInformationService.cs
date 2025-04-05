@@ -1,10 +1,9 @@
 ﻿using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Interfaces
+namespace EquipmentInventory.Classes.Interfaces;
+
+public interface IProgramInformationService
 {
-    public interface IProgramInformationService
-    {
-        void SetTitle(string header);
-        void SetDescription(string description);
-    }
+    void SetTitle(string header);
+    void SetDescription(string description);
 }

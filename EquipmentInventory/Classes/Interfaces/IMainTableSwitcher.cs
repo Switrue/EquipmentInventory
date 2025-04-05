@@ -1,7 +1,6 @@
-﻿namespace EquipmentInventory.Classes.Interfaces
+﻿namespace EquipmentInventory.Classes.Interfaces;
+
+public interface IMainTableSwitcher
 {
-    public interface IMainTableSwitcher
-    {
-        void TriggerANotification(string message);
-    }
+    void TriggerANotification(string message);
 }

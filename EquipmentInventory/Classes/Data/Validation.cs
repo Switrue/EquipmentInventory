@@ -2,77 +2,76 @@
 using EquipmentInventory.Properties;
 using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Data
+namespace EquipmentInventory.Classes.Data;
+
+public static class Validation
 {
-    public static class Validation
+    private static bool IsFieldEmpty(Control control, string message)
     {
-        private static bool IsFieldEmpty(Control control, string message)
+        if (control is TextBox textBox)
         {
-            if (control is TextBox textBox )
+            if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
+                TextFieldHelper.SetTextField(textBox, message);
+                return true;
+            }
+            else
+            {
+                TextFieldHelper.ClearTextField(textBox);
+            }
+        }
+        else if (control is PasswordBox passwordBox)
+        {
+            if (string.IsNullOrWhiteSpace(passwordBox.Password))
+            {
+                TextFieldHelper.SetTextField(passwordBox, message);
+                return true;
+            }
+            else
+            {
+                TextFieldHelper.ClearTextField(passwordBox);
+            }
+        }
+        return false;
+    }
+
+    public static bool IsTextBoxEmpty(TextBox textBox)
+    {
+        return IsFieldEmpty(textBox, Strings.FieldEmpty);
+    }
+
+    public static bool IsPasswordBoxEmpty(PasswordBox passwordBox)
+    {
+        return IsFieldEmpty(passwordBox, Strings.FieldEmpty);
+    }
+
+    public static bool AnyTextBoxIsEmpty(Panel parent)
+    {
+        TextFieldHelper.ClearAllTextFields(parent);
+
+        foreach (var child in parent.Children)
+        {
+            if (child is TextBox textBox)
+            {
+                if (!textBox.IsEnabled)
                 {
-                    TextFieldHelper.SetTextField(textBox, message);
+                    continue;
+                }
+
+                if (IsFieldEmpty(textBox, Strings.FieldEmpty))
+                {
                     return true;
                 }
-                else
-                {
-                    TextFieldHelper.ClearTextField(textBox);
-                }
             }
-            else if (control is PasswordBox passwordBox)
+            else if (child is Panel panel)
             {
-                if (string.IsNullOrWhiteSpace(passwordBox.Password))
+                if (AnyTextBoxIsEmpty(panel))
                 {
-                    TextFieldHelper.SetTextField(passwordBox, message);
                     return true;
                 }
-                else
-                {
-                    TextFieldHelper.ClearTextField(passwordBox);
-                }
             }
-            return false;
         }
 
-        public static bool IsTextBoxEmpty(TextBox textBox)
-        {
-            return IsFieldEmpty(textBox, Strings.FieldEmpty);
-        }
-
-        public static bool IsPasswordBoxEmpty(PasswordBox passwordBox)
-        {
-            return IsFieldEmpty(passwordBox, Strings.FieldEmpty);
-        }
-
-        public static bool AnyTextBoxIsEmpty(Panel parent)
-        {
-            TextFieldHelper.ClearAllTextFields(parent);
-
-            foreach (var child in parent.Children)
-            {
-                if (child is TextBox textBox)
-                {
-                    if (!textBox.IsEnabled)
-                    {
-                        continue;
-                    }
-
-                    if (IsFieldEmpty(textBox, Strings.FieldEmpty))
-                    {
-                        return true; 
-                    }
-                }
-                else if (child is Panel panel)
-                {
-                    if (AnyTextBoxIsEmpty(panel))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
+        return false;
     }
 }

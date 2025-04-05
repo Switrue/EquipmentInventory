@@ -1,13 +1,12 @@
-﻿namespace EquipmentInventory.Classes.Interfaces
+﻿namespace EquipmentInventory.Classes.Interfaces;
+
+public interface IWindowService
 {
-    public interface IWindowService
-    {
-        void CloseWindow();
+    void CloseWindow();
 
-        void MinimizeWindow();
+    void MinimizeWindow();
 
-        void ToggleWindowState();
+    void ToggleWindowState();
 
-        bool IsMaximized { get; }
-    }
+    bool IsMaximized { get; }
 }

@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace EquipmentInventory.Forms.Pages.Admin
+namespace EquipmentInventory.Forms.Pages.Admin;
+
+/// <summary>
+/// Логика взаимодействия для Dictionaries.xaml
+/// </summary>
+public partial class Dictionaries : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для Dictionaries.xaml
-    /// </summary>
-    public partial class Dictionaries : UserControl
+    public Dictionaries()
     {
-        public Dictionaries()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
