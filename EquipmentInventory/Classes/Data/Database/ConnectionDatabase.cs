@@ -6,7 +6,7 @@ namespace EquipmentInventory.Classes.Data.Database;
 
 public class ConnectionDatabase
 {
-    private static NpgsqlConnection GetConnection()
+    public static NpgsqlConnection GetConnection()
     {
         string connectionString = Environment.GetEnvironmentVariable("INVENTORY_APP_CONNECTION_STRING");
 

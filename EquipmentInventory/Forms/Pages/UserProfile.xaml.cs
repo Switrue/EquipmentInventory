@@ -48,7 +48,7 @@ public partial class UserProfile : UserControl
 
     #region Events
 
-    private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => Focus();
+    private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => ClearFocus();
 
     private void CancelSaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => DisableTextFields();
 
@@ -93,7 +93,7 @@ public partial class UserProfile : UserControl
 
     private void ClearFocus()
     {
-        Keyboard.ClearFocus();
+        Focus();
         TextFieldHelper.ClearAllTextFields(userDataContainer);
     }
 
