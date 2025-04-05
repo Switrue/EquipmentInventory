@@ -9,9 +9,6 @@
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Словари" 
-                   Foreground="{StaticResource TextColor}"
-                   VerticalAlignment="Center" 
-                   HorizontalAlignment="Center" />
+        
     </Grid>
 </UserControl>

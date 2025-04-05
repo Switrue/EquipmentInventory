@@ -14,7 +14,6 @@
         SizeChanged="Window_SizeChanged"
         Height="650" Width="1000"
         MinHeight="500" MinWidth="800">
-
     <Border Style="{StaticResource WindowBorder}" CornerRadius="{Binding WindowState.WindowCornerRadius}">
         <Grid>
             <Grid.RowDefinitions>

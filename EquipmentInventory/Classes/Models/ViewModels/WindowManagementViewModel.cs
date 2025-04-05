@@ -6,9 +6,9 @@ namespace EquipmentInventory.Classes.Models.ViewModels
 {
     public class WindowManagementViewModel
     {
-        public IWindowState WindowState { get; }
         private IWindowService _windowService;
 
+        public IWindowState WindowState { get; }
         public ICommand MaximizeCommand { get; }
         public ICommand CloseCommand { get; }
         public ICommand MinimizeCommand { get; }
