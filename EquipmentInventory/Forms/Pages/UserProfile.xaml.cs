@@ -6,7 +6,6 @@ using MaterialDesignThemes.Wpf;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Validation = EquipmentInventory.Classes.Data.Validation;
 
 namespace EquipmentInventory.Forms.Pages;

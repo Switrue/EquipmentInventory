@@ -184,11 +184,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\API\Models\AuthRequest.cs" />
-    <Compile Include="Classes\API\Models\User.cs" />
     <Compile Include="Classes\Cryptography\MD5Encryprion.cs" />
-    <Compile Include="Classes\Data\Database\ConnectionDatabase.cs" />
-    <Compile Include="Classes\Data\Database\TokenValidation.cs" />
     <Compile Include="Classes\Data\UserAccount.cs" />
     <Compile Include="Classes\Data\UserData.cs" />
     <Compile Include="Classes\Data\Validation.cs" />
@@ -219,7 +215,6 @@
     <Compile Include="Classes\Models\ViewModels\SettingsListViewModel.cs" />
     <Compile Include="Classes\Services\NavigationService.cs" />
     <Compile Include="Classes\Services\NotificationService.cs" />
-    <Compile Include="Classes\Services\AuthorizationService.cs" />
     <Compile Include="Classes\Services\ProgramInformationService.cs" />
     <Compile Include="Classes\Data\SettingsBuffer.cs" />
     <Compile Include="Classes\Handlers\WindowStateHandler.cs" />

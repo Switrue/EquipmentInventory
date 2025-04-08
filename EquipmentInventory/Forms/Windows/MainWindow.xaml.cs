@@ -196,7 +196,11 @@ public partial class MainWindow : Window, IMainWindow
 
     #region Change frame
 
-    public void ChangeControlPanelFrameContent(UserControl newContent) => ChangeFrameContent(controlPanelFrame, newContent);
+    public void ChangeControlPanelFrameContent(UserControl newContent)
+    {
+        _userPanel = (UserPanel)newContent;
+        ChangeFrameContent(controlPanelFrame, newContent);
+    }
 
     public void ChangeMainFrameContent(UserControl newContent) => ChangeFrameContent(mainFrame, newContent);
 
