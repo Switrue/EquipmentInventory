@@ -38,7 +38,7 @@ public static class UserAccount
             }
             catch (Exception ex)
             {
-                CustomMessageBoxHelper.Show(Strings.Error, $"{Strings.Error}: {ex.Message}", false);
+                CustomMessageBoxHelper.Show(Strings.Error, $"{Strings.Error}: {ex.Message}");
             }
         }
         else

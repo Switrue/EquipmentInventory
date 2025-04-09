@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using EquipmentInventory.Classes.Data;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Admin;
 
@@ -12,8 +14,9 @@ public partial class Dictionaries : UserControl
         InitializeComponent();
     }
 
-    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+    private async void Button_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        
+        var user = await ApiClient.GetUser(150);
+        MessageBox.Show(user?.Username);
     }
 }

@@ -23,11 +23,11 @@ public partial class MainWindow : Window, IMainWindow
 {
     private WindowStateHandler _windowState;
     private WindowService _windowService;
-    private UserData _user;
+    private Users _user;
     private UserPanel _userPanel;
     private bool isResizing;
 
-    public MainWindow(UserData user)
+    public MainWindow(Users user)
     {
         InitializeComponent();
         _user = user;

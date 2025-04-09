@@ -51,21 +51,19 @@ public static class Validation
 
         foreach (var child in parent.Children)
         {
-            if (child is TextBox textBox)
+            if (child is Control control && (control is TextBox || control is PasswordBox))
             {
-                if (!textBox.IsEnabled)
+                if (control.IsEnabled)
                 {
-                    continue;
-                }
-
-                if (IsFieldEmpty(textBox, Strings.FieldEmpty))
-                {
-                    return true;
+                    if (IsFieldEmpty(control, Strings.FieldEmpty))
+                    {
+                        return true;
+                    }
                 }
             }
-            else if (child is Panel panel)
+            else if (child is Panel childPanel)
             {
-                if (AnyTextBoxIsEmpty(panel))
+                if (AnyTextBoxIsEmpty(childPanel))
                 {
                     return true;
                 }

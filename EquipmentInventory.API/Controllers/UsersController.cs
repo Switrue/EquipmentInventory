@@ -26,7 +26,7 @@ namespace EquipmentInventory.API.Controllers
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null) 
-                return NotFound();
+                return NotFound(new { Message = "Пользователь не найден" });
 
             var result = new
             {

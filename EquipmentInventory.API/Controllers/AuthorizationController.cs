@@ -25,12 +25,15 @@ namespace EquipmentInventory.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new { Errors = ModelState });
+
             var user = await _dbContext.Users
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Login == model.Login);
 
             if (user == null || !_authorizationHelper.VerifyPassword(model.Password, user.Password))
-                return Unauthorized();
+                return Unauthorized(new { Message = "Неверные данные" });
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 

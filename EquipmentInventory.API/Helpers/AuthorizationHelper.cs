@@ -40,7 +40,7 @@ public class AuthorizationHelper
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.Surname, user.Surname),
                     new Claim(ClaimTypes.Role, user.IdRoleNavigation.Name),
-                    new Claim("Image", base64Image)
+                    new Claim("image", base64Image)
             }),
             Expires = DateTime.UtcNow.AddDays(Convert.ToDouble(_configuration["Jwt:Expires"])),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)

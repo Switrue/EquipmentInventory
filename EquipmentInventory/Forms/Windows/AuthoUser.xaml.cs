@@ -1,16 +1,17 @@
-﻿using EquipmentInventory.Properties;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
-using EquipmentInventory.Classes.Helpers;
 using System.Windows.Controls;
+using MaterialDesignThemes.Wpf;
+using EquipmentInventory.Properties;
+using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Handlers;
-using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Forms.Pages.Admin;
 using Validation = EquipmentInventory.Classes.Data.Validation;
+using System.Threading.Tasks;
+using EquipmentInventory.Classes.Data;
 
 namespace EquipmentInventory.Forms.Windows;
 
@@ -61,15 +62,36 @@ public partial class AuthoUser : Window
 
     #region Authorization
 
-    private void Login_Click(object sender, EventArgs e)
+    private async void Login_Click(object sender, EventArgs e)
     {
         if (Validation.AnyTextBoxIsEmpty(textFieldContainer))
         {
             return;
         }
 
-        var window = new MainWindow(new UserData(1));
-        var panel = new UserPanel(window, Classes.Data.Enums.TabType.Tables, true);
+        await Autho();
+    }
+
+    private async Task Autho()
+    {
+        var jwt = await ApiClient.GetJwtToken(usernameTextB.Text, passwordPsB.Password);
+        App.SetAuthorizationToken(jwt);
+
+        if (jwt == null) return;
+
+        var user = ApiService.ExtractUserFromJwt(jwt);
+        var window = new MainWindow(user);
+        UserPanel panel;
+
+        if (user.Role == "Бухгалтер")
+        {
+            panel = new UserPanel(window, Classes.Data.Enums.TabType.Tables, false);
+        }
+        else
+        {
+            panel = new UserPanel(window, Classes.Data.Enums.TabType.Tables, true);
+        }
+        
         window.ChangeControlPanelFrameContent(panel);
         window.Show();
         Close();

@@ -10,4 +10,9 @@ public class CustomMessageBoxHelper
         var messageBox = new CustomMessageBox(title, message, !YesNo);
         return WindowService.ShowDialogWindow(messageBox);
     }
+
+    public static bool Show(string title, string message)
+    {
+        return Show(title, message, false);
+    }
 }

@@ -15,9 +15,9 @@ namespace EquipmentInventory.Forms.Pages;
 /// </summary>
 public partial class UserProfile : UserControl
 {
-    private UserData _user;
+    private Users _user;
 
-    public UserProfile(UserData user)
+    public UserProfile(Users user)
     {
         InitializeComponent();
         _user = user;
@@ -29,7 +29,7 @@ public partial class UserProfile : UserControl
     private void InitializeUI()
     {
         userTitleTxtBl.Text = $"{_user.Surname} {_user.Username}";
-        userRoleTxtBl.Text = _user.UserRole;
+        userRoleTxtBl.Text = _user.Role;
         imageGrB.Header = Strings.Customization;
         changeImageBtn.Content = Strings.SelectImage;
         dataGrB.Header = Strings.UserData;
