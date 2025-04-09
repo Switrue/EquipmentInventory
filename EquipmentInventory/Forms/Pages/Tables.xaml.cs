@@ -1,5 +1,5 @@
-﻿using EquipmentInventory.Classes.Interfaces;
-using EquipmentInventory.Classes.Models;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Properties;
 using System.Windows;
 using System.Windows.Controls;

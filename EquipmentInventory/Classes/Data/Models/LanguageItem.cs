@@ -1,4 +1,4 @@
-﻿namespace EquipmentInventory.Classes.Models;
+﻿namespace EquipmentInventory.Classes.Data.Models;
 
 public class LanguageItem
 {

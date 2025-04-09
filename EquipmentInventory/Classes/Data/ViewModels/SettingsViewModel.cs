@@ -1,6 +1,6 @@
-﻿using EquipmentInventory.Classes.Interfaces;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
 
-namespace EquipmentInventory.Classes.Models.ViewModels;
+namespace EquipmentInventory.Classes.Data.ViewModels;
 
 public class SettingsViewModel
 {

@@ -1,4 +1,4 @@
-﻿using EquipmentInventory.Classes.Models.ViewModels;
+﻿using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Services;
 using System.Windows.Controls;
 using System.Windows.Input;

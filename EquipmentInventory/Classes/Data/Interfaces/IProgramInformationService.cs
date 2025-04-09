@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Interfaces;
+namespace EquipmentInventory.Classes.Data.Interfaces;
 
 public interface IProgramInformationService
 {

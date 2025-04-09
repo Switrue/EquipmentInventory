@@ -1,4 +1,4 @@
-﻿namespace EquipmentInventory.Classes.Enums;
+﻿namespace EquipmentInventory.Classes.Data.Enums;
 
 public enum TableType
 {

@@ -1,8 +1,8 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Services;
-using EquipmentInventory.Classes.Interfaces;
-using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Handlers;
 using EquipmentInventory.Forms.Pages.Admin;
 using EquipmentInventory.Forms.Pages;

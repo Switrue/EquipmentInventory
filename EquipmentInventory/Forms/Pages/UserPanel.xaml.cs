@@ -1,5 +1,5 @@
-﻿using EquipmentInventory.Classes.Enums;
-using EquipmentInventory.Classes.Interfaces;
+﻿using EquipmentInventory.Classes.Data.Enums;
+using EquipmentInventory.Classes.Data.Interfaces;
 using EquipmentInventory.Properties;
 using System;
 using System.Collections.Generic;

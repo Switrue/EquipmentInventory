@@ -1,5 +1,5 @@
 ﻿using EquipmentInventory.Classes.Handlers;
-using EquipmentInventory.Classes.Models.ViewModels;
+using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
 using System;

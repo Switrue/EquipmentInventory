@@ -1,4 +1,4 @@
-﻿namespace EquipmentInventory.Classes.Interfaces;
+﻿namespace EquipmentInventory.Classes.Data.Interfaces;
 
 public interface IWindowService
 {

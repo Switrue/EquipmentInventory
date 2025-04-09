@@ -1,4 +1,4 @@
-﻿using EquipmentInventory.Classes.Interfaces;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
 using System;
 using System.Linq;
 using System.Windows;

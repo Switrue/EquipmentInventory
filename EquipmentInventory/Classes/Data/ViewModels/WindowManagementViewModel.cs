@@ -1,8 +1,8 @@
-﻿using EquipmentInventory.Classes.Interfaces;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 
-namespace EquipmentInventory.Classes.Models.ViewModels;
+namespace EquipmentInventory.Classes.Data.ViewModels;
 
 public class WindowManagementViewModel
 {

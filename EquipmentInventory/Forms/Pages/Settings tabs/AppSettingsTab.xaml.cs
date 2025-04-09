@@ -1,4 +1,4 @@
-﻿using EquipmentInventory.Classes.Models.ViewModels;
+﻿using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;

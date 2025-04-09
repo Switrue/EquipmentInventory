@@ -1,9 +1,10 @@
-﻿using EquipmentInventory.Classes.Interfaces;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Forms.Pages.Settings_tabs;
 using EquipmentInventory.Properties;
 using System.Collections.ObjectModel;
 
-namespace EquipmentInventory.Classes.Models.ViewModels;
+namespace EquipmentInventory.Classes.Data.ViewModels;
 
 public class SettingsListViewModel
 {

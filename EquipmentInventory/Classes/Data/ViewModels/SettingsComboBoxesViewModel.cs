@@ -1,6 +1,6 @@
 ﻿using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Properties;
-using EquipmentInventory.Classes.Data;
+using EquipmentInventory.Classes.Data.Models;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace EquipmentInventory.Classes.Models.ViewModels;
+namespace EquipmentInventory.Classes.Data.ViewModels;
 
 public class SettingsComboBoxesViewModel : INotifyPropertyChanged
 {
