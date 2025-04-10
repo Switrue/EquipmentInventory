@@ -34,7 +34,6 @@ namespace EquipmentInventory
 
             if (!string.IsNullOrWhiteSpace(jwt))
             {
-
                 if (await EquipmentInventory.Classes.Data.ApiClient.CheckAuthorization())
                 {
                     AuthorizationService.Authorize(jwt);

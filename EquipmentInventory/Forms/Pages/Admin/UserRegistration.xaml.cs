@@ -57,7 +57,7 @@ public partial class UserRegistration : UserControl
     {
         if (Validation.AnyTextBoxIsEmpty(textFieldContainer)) return;
 
-        notification.Show("Зарегестрирован");
+        
     }
 
     private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);

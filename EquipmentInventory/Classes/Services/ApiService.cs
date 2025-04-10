@@ -7,7 +7,7 @@ namespace EquipmentInventory.Classes.Services;
 
 public static class ApiService
 {
-        public static Users ExtractUserFromJwt(string jwt)
+    public static Users ExtractUserFromJwt(string jwt)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var jwtToken = tokenHandler.ReadJwtToken(jwt);

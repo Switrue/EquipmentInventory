@@ -33,7 +33,7 @@ namespace EquipmentInventory.API.Controllers
                 .FirstOrDefaultAsync(u => u.Login == model.Login);
 
             if (user == null || !_authorizationHelper.VerifyPassword(model.Password, user.Password))
-                return Unauthorized(new { Message = "Неверные данные" });
+                return Unauthorized(new { Message = "Неверный логин или пароль" });
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 
@@ -45,10 +45,19 @@ namespace EquipmentInventory.API.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(new { Errors = ModelState });
+                return BadRequest(new {
+                    Success = false,
+                    Message = "Ошибки валидации",
+                    Errors = ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                });
 
             if (await _dbContext.Users.AnyAsync(u => u.Login == model.Login))
-                return BadRequest(new { Error = "Имя пользователя уже занято" });
+                return BadRequest(new {
+                    Success = false,
+                    Message = "Имя пользователя уже занято"
+                });
 
             var passwordHash = _authorizationHelper.HashPassword(model.Password);
 
@@ -56,7 +65,10 @@ namespace EquipmentInventory.API.Controllers
                 .FirstOrDefaultAsync(r => r.Name == "Бухгалтер");
 
             if (defaultRole == null)
-                return BadRequest(new { Error = "Роль по умолчанию не найдена" });
+                return BadRequest(new { 
+                    Success = false,
+                    Message = "Роль по умолчанию не найдена" 
+                });
 
             var user = new User
             {
@@ -72,13 +84,22 @@ namespace EquipmentInventory.API.Controllers
             {
                 _dbContext.Add(user);
                 await _dbContext.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    Success = true,
+                    Message = "Пользователь успешно создан",
+                });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Error = "Ошибка при создании пользователя", Details = ex.Message });
+                return BadRequest(new
+                {
+                    Success = false,
+                    Message = "Ошибка при создании пользователя",
+                    DebugMessage = ex.Message // только для разработки
+                });
             }
-
-            return Ok(new { Message = "Пользователь успешно создан" });
         }
 
         [Authorize]

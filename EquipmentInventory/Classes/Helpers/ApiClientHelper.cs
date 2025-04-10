@@ -12,9 +12,9 @@ namespace EquipmentInventory.Classes.Helpers;
 public static class ApiClientHelper
 {
     public static async Task<TResponse> PostAsync<TRequest, TResponse>(
-    string endpoint,
-    TRequest requestData,
-    Action<string> onError = null)
+        string endpoint,
+        TRequest requestData,
+        Action<string> onError = null)
     {
         try
         {

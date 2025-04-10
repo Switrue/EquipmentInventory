@@ -213,6 +213,7 @@
     <Compile Include="Classes\Data\Models\JwtResponse.cs" />
     <Compile Include="Classes\Data\Models\LanguageItem.cs" />
     <Compile Include="Classes\Data\Models\ProgramInformationItem.cs" />
+    <Compile Include="Classes\Data\Models\RegisterRequest.cs" />
     <Compile Include="Classes\Data\Models\SettingItem.cs" />
     <Compile Include="Classes\Data\UserAccount.cs" />
     <Compile Include="Classes\Data\Users.cs" />
