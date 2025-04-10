@@ -168,10 +168,8 @@ public partial class MainWindow : Window, IMainWindow
 
         if (result)
         {
-            Settings.Default.Reset();
-            Settings.Default.Save();
-            new AuthoUser().Show();
-            Close();
+            WindowService.ResetSettings();
+            WindowService.RestoreApp();
         }
     }
 

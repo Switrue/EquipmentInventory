@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using EquipmentInventory.Classes.Services;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
 
@@ -80,8 +81,7 @@ public class SettingsComboBoxesViewModel : INotifyPropertyChanged
         {
             _buffer.ApplyToCultureInfo();
 
-            Application.Current.Shutdown();
-            Process.Start(Application.ResourceAssembly.Location);
+            WindowService.RestoreApp();
         }
     });
 

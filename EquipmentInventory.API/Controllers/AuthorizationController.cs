@@ -80,5 +80,12 @@ namespace EquipmentInventory.API.Controllers
 
             return Ok(new { Message = "Пользователь успешно создан" });
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Authorize()
+        {
+            return Ok();
+        }
     }
 }

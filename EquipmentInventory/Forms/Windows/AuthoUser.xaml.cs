@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
@@ -8,10 +9,8 @@ using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Handlers;
-using EquipmentInventory.Forms.Pages.Admin;
-using Validation = EquipmentInventory.Classes.Data.Validation;
-using System.Threading.Tasks;
 using EquipmentInventory.Classes.Data;
+using Validation = EquipmentInventory.Classes.Data.Validation;
 
 namespace EquipmentInventory.Forms.Windows;
 
@@ -75,25 +74,15 @@ public partial class AuthoUser : Window
     private async Task Autho()
     {
         var jwt = await ApiClient.GetJwtToken(usernameTextB.Text, passwordPsB.Password);
-        App.SetAuthorizationToken(jwt);
 
         if (jwt == null) return;
 
-        var user = ApiService.ExtractUserFromJwt(jwt);
-        var window = new MainWindow(user);
-        UserPanel panel;
-
-        if (user.Role == "Бухгалтер")
+        if (rememberUserChB.IsChecked == true)
         {
-            panel = new UserPanel(window, Classes.Data.Enums.TabType.Tables, false);
-        }
-        else
-        {
-            panel = new UserPanel(window, Classes.Data.Enums.TabType.Tables, true);
+            AuthorizationService.SaveJwt(jwt);
         }
         
-        window.ChangeControlPanelFrameContent(panel);
-        window.Show();
+        AuthorizationService.Authorize(jwt);
         Close();
     }
 

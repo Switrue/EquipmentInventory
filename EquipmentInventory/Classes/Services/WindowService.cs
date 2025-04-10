@@ -1,5 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Properties;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
@@ -43,6 +45,18 @@ public class WindowService : IWindowService
             .FirstOrDefault(w => w.IsActive);
 
         return activeWindow ?? Application.Current.MainWindow;
+    }
+
+    public static void RestoreApp()
+    {
+        Application.Current.Shutdown();
+        Process.Start(Application.ResourceAssembly.Location);
+    }
+
+    public static void ResetSettings()
+    {
+        Settings.Default.Reset();
+        Settings.Default.Save();
     }
 
     public void CloseWindow() => _window.Close();

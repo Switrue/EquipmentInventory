@@ -1,4 +1,6 @@
-﻿using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Forms.Windows;
+using EquipmentInventory.Properties;
 using System;
 using System.Globalization;
 using System.Net.Http;
@@ -23,6 +25,24 @@ namespace EquipmentInventory
 
             InitializeApiClient();
             InitializeCulture();
+            InitializeMainWindow();
+        }
+
+        private async void InitializeMainWindow()
+        {
+            var jwt = Settings.Default.UserToken;
+
+            if (!string.IsNullOrWhiteSpace(jwt))
+            {
+
+                if (await EquipmentInventory.Classes.Data.ApiClient.CheckAuthorization())
+                {
+                    AuthorizationService.Authorize(jwt);
+                    return;
+                }
+            }
+
+            new AuthoUser().Show();
         }
 
         private void InitializeCulture()
@@ -46,6 +66,16 @@ namespace EquipmentInventory
             {
                 BaseAddress = new Uri("https://localhost:7278")
             };
+
+            ApiClient.DefaultRequestHeaders.Accept.Clear();
+            ApiClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            if (!string.IsNullOrEmpty(Settings.Default.UserToken))
+            {
+                ApiClient.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", Settings.Default.UserToken);
+            }
         }
 
         public static void SetAuthorizationToken(string token)

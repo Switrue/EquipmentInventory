@@ -228,6 +228,7 @@
     <Compile Include="Classes\Helpers\CustomMessageBoxHelper.cs" />
     <Compile Include="Classes\Helpers\TextFieldHelper.cs" />
     <Compile Include="Classes\Services\ApiService.cs" />
+    <Compile Include="Classes\Services\AuthorizationService.cs" />
     <Compile Include="Classes\Services\WindowService.cs" />
     <Compile Include="Classes\Services\NavigationService.cs" />
     <Compile Include="Classes\Services\NotificationService.cs" />

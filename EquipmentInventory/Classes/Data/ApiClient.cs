@@ -1,6 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
+using EquipmentInventory.Classes.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,6 +16,11 @@ public static class ApiClient
             new AuthRequest { Login = login, Password = password },
             error => CustomMessageBoxHelper.Show("Ошибка входа", error)
         );
+
+        if (response != null)
+        {
+            AuthorizationService.SetAuthorizationToken(response.Token);
+        }
 
         return response?.Token;
     }
@@ -31,5 +37,26 @@ public static class ApiClient
         return await ApiClientHelper.GetAsync<List<Users>>(
             "/api/Users/users",
             error => CustomMessageBoxHelper.Show("Ошибка", error));
+    }
+
+    public static async Task<bool> CheckAuthorization()
+    {
+        try
+        {   
+            var response = await App.ApiClient.GetAsync("/api/Authorization");
+        
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return true;
+            }
+
+            AuthorizationService.ClearJwt();
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
