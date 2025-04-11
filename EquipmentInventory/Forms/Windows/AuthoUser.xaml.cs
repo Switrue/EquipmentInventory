@@ -67,8 +67,19 @@ public partial class AuthoUser : Window
         {
             return;
         }
+        
+        var btn = (Button)sender;
 
-        await Autho();
+        btn.IsEnabled = false;
+
+        try
+        {
+            await Autho();
+        }
+        finally
+        {
+            btn.IsEnabled = true;
+        }
     }
 
     private async Task Autho()

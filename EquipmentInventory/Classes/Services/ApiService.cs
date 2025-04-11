@@ -28,8 +28,7 @@ public static class ApiService
             Id = long.Parse(GetClaimValue("nameid")),
             Username = GetClaimValue("unique_name"),
             Surname = GetClaimValue("family_name"),
-            Role = GetClaimValue("role"),
-            Image = GetImageBytes(jwtToken.Claims.FirstOrDefault(c => c.Type == "image")?.Value)
+            Role = GetClaimValue("role")
         };
     }
 

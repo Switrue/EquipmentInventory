@@ -33,23 +33,44 @@ public static class TextFieldHelper
         SetTextField(element);
     }
 
+    public static void ClearText(Control control)
+    {
+        if (control is TextBox textBox)
+        {
+            textBox.Text = string.Empty;
+        }
+        else if (control is PasswordBox passwordBox)
+        {
+            passwordBox.Password = string.Empty;
+        }
+    }
+
     public static void ClearAllTextFields(Panel parent)
     {
         foreach (var child in parent.Children)
         {
             if (child is null) continue;
 
-            if (child is TextBox textBox)
+            if (child is Control control && (control is TextBox || control is PasswordBox))
             {
-                SetTextField(textBox);
-            }
-            else if(child is PasswordBox passwordBox)
-            {
-                SetTextField(passwordBox);
+                SetTextField(control);
             }
             else if (child is Panel panel)
             {
                 ClearAllTextFields(panel);
+            }
+        }
+    }
+
+    public static void ClearAllText(Panel parent)
+    {
+        foreach (var child in parent.Children)
+        {
+            if (child is null) continue;
+
+            if (child is Control control && (control is TextBox || control is PasswordBox)) 
+            {
+                ClearText(control);
             }
         }
     }

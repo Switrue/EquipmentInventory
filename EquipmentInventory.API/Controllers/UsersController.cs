@@ -3,6 +3,7 @@ using EquipmentInventory.API.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace EquipmentInventory.API.Controllers
 {
@@ -58,6 +59,24 @@ namespace EquipmentInventory.API.Controllers
             });
 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("image")]
+        public async Task<ActionResult> GetUserImage()
+        {
+            var userIdClaim = User.FindFirst("nameid")?.Value;
+
+            if (userIdClaim == null)
+                return Unauthorized();
+
+            if (!long.TryParse(userIdClaim, out var userId))
+                return BadRequest("Invalid user ID");
+
+            var user = await _dbContext.Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return Ok(new { ImageBytea = user?.Image });
         }
     }
 }

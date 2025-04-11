@@ -25,19 +25,15 @@ public static class ApiClient
         return response?.Token;
     }
 
-    /*public static async Task<RegisterRequest> UserRegister(
-        string username, 
-        string surname,
-        string login, 
-        string password)
+    public static async Task<string> UserRegister(RegisterRequest user)
     {
-        var resnonse = await ApiClientHelper.PostAsync<RegisterRequest, string>(
+        var resnonse = await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
             "/api/Authorization/register",
-            new RegisterRequest { Username = username, Surname = surname, Login = login, Password = password },
+            user,
             error => CustomMessageBoxHelper.Show("Ошибка", error));
 
-        return null;
-    }*/
+        return resnonse?.Message;
+    }
 
     public static async Task<Users> GetUser(long id)
     {

@@ -80,6 +80,8 @@ public partial class MainWindow : Window, IMainWindow
         helpMnIt.Header = $"_{Strings.Help}";
         aboutTheProgrammMnIt.Header = $"_{Strings.AboutTheProgramm}";
 
+        UserAccount.SetImageSource(_user.Image, userImage);
+
         Width = Settings.Default.WindowWidth;
         Height = Settings.Default.WindowHeight;
     }

@@ -67,18 +67,19 @@
                         <WrapPanel HorizontalAlignment="Right">
                             <!-- #region Manager Account -->
 
-                            <StackPanel VerticalAlignment="Center">
+                            <StackPanel VerticalAlignment="Center" MinWidth="150">
                                 <Button x:Name="manageAccountBtn" 
-                                        Cursor="Hand" 
+                                        Cursor="Hand"
                                         Padding="10 4 10 4" 
                                         IsTabStop="False"
+                                        Focusable="False"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                         Style="{StaticResource MaterialDesignFlatSecondaryButton}"
                                         Background="Transparent" 
                                         Click="ShowProfileOptions_Click">
                                     <WrapPanel>
                                         <Border Background="Black">
-                                            <Image Source="/Resources/Pictures/SmallUserIcon.png" />
+                                            <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" />
                                         </Border>
                                         <Border Width="2" Background="{StaticResource SecondaryColor}" Margin="0 0 4 0"/>
                                         <TextBlock x:Name="userNameTexB" 
