@@ -65,18 +65,15 @@ namespace EquipmentInventory.API.Controllers
         [HttpGet("image")]
         public async Task<ActionResult> GetUserImage()
         {
-            var userIdClaim = User.FindFirst("nameid")?.Value;
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (userIdClaim == null)
+            if (userIdClaim == null || !long.TryParse(userIdClaim, out var userId))
                 return Unauthorized();
-
-            if (!long.TryParse(userIdClaim, out var userId))
-                return BadRequest("Invalid user ID");
 
             var user = await _dbContext.Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            return Ok(new { ImageBytea = user?.Image });
+            return Ok(new { Message = user?.Image });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
+using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Linq;
@@ -41,6 +42,8 @@ public partial class UserProfile : UserControl
         saveUserDataBtn.Content = Strings.Save;
         saveUserImage.Content = Strings.Save;
         cancelSaveUserDataBtn.Content = Strings.Cancel;
+
+        UserAccount.SetImageSource(_user.Image, userImage);
     }
 
     #endregion

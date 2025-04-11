@@ -30,8 +30,6 @@ public class AuthorizationHelper
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
-        string? base64Image = user.Image != null ? Convert.ToBase64String(user.Image) : null;
-
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]

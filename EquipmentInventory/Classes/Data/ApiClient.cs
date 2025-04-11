@@ -25,29 +25,7 @@ public static class ApiClient
         return response?.Token;
     }
 
-    public static async Task<string> UserRegister(RegisterRequest user)
-    {
-        var resnonse = await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
-            "/api/Authorization/register",
-            user,
-            error => CustomMessageBoxHelper.Show("Ошибка", error));
-
-        return resnonse?.Message;
-    }
-
-    public static async Task<Users> GetUser(long id)
-    {
-        return await ApiClientHelper.GetAsync<Users>(
-            $"/api/Users/user?userId={id}",
-            error => CustomMessageBoxHelper.Show("Ошибка", error));
-    }
-
-    public static async Task<List<Users>> GetUsers()
-    {
-        return await ApiClientHelper.GetAsync<List<Users>>(
-            "/api/Users/users",
-            error => CustomMessageBoxHelper.Show("Ошибка", error));
-    }
+    
 
     public static async Task<bool> CheckAuthorization()
     {

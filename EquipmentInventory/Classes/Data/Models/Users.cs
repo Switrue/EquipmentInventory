@@ -1,4 +1,4 @@
-﻿namespace EquipmentInventory.Classes.Data;
+﻿namespace EquipmentInventory.Classes.Data.Models;
 
 public class Users
 {

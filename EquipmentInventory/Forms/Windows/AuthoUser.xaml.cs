@@ -93,7 +93,7 @@ public partial class AuthoUser : Window
             AuthorizationService.SaveJwt(jwt);
         }
         
-        AuthorizationService.Authorize(jwt);
+        await AuthorizationService.Authorize(jwt);
         Close();
     }
 

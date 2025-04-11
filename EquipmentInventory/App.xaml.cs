@@ -36,7 +36,7 @@ namespace EquipmentInventory
             {
                 if (await EquipmentInventory.Classes.Data.ApiClient.CheckAuthorization())
                 {
-                    AuthorizationService.Authorize(jwt);
+                    await AuthorizationService.Authorize(jwt);
                     return;
                 }
             }

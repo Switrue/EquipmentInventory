@@ -1,7 +1,9 @@
-﻿using EquipmentInventory.Classes.Data;
+﻿using EquipmentInventory.Classes.Data.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Threading.Tasks;
+using EquipmentInventory.Classes.Data.Requests;
 
 namespace EquipmentInventory.Classes.Services;
 
@@ -30,6 +32,14 @@ public static class ApiService
             Surname = GetClaimValue("family_name"),
             Role = GetClaimValue("role")
         };
+    }
+
+    public static async Task<byte[]> GetUserImage()
+    {
+        string? mes = await UserRequest.GetUserImageString() 
+            ?? string.Empty;
+
+        return GetImageBytes(mes);
     }
 
     private static byte[] GetImageBytes(string base64Image)

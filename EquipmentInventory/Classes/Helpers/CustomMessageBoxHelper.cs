@@ -15,4 +15,9 @@ public class CustomMessageBoxHelper
     {
         return Show(title, message, false);
     }
+
+    public static bool Show(string message)
+    {
+        return Show(string.Empty, message, false);
+    }
 }

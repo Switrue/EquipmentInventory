@@ -1,4 +1,4 @@
-﻿using EquipmentInventory.Classes.Data;
+﻿using EquipmentInventory.Classes.Data.Requests;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +16,7 @@ public partial class Dictionaries : UserControl
 
     private async void Button_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        var user = await ApiClient.GetUser(150);
+        var user = await UserRequest.GetUser(150);
         MessageBox.Show(user?.Username);
     }
 }

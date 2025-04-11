@@ -8,9 +8,7 @@ using System.Windows.Controls;
 using Validation = EquipmentInventory.Classes.Data.Validation;
 using EquipmentInventory.Classes.Data.Models;
 using System.Threading.Tasks;
-using EquipmentInventory.Forms.Windows;
-using EquipmentInventory.Classes.Helper;
-using System.Windows;
+using EquipmentInventory.Classes.Data.Requests;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -83,7 +81,7 @@ public partial class UserRegistration : UserControl
             Image = UserAccount.ConvertImageSourceToBytes(userImage.Source)
         };
 
-        var result = await ApiClient.UserRegister(user);
+        var result = await UserRequest.UserRegister(user);
 
         if (result != null)
         {

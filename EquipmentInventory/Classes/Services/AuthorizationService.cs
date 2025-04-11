@@ -2,14 +2,17 @@
 using EquipmentInventory.Forms.Windows;
 using EquipmentInventory.Classes.Data.Enums;
 using EquipmentInventory.Properties;
+using EquipmentInventory.Classes.Data.Models;
+using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Services;
 
 public static class AuthorizationService
 {
-    public static void Authorize(string jwt)
+    public static async Task Authorize(string jwt)
     {
         var user = ApiService.ExtractUserFromJwt(jwt);
+        await SetUserImage(user);
         var window = new MainWindow(user);
         UserPanel panel;
 
@@ -21,7 +24,7 @@ public static class AuthorizationService
         {
             panel = new UserPanel(window, TabType.Tables, true);
         }
-
+        
         window.ChangeControlPanelFrameContent(panel);
         window.Show();
     }
@@ -41,5 +44,14 @@ public static class AuthorizationService
     public static void SetAuthorizationToken(string jwt)
     {
         App.SetAuthorizationToken(jwt);
+    }
+
+    private static async Task SetUserImage(Users user)
+    {
+        try
+        {
+            user.Image = await ApiService.GetUserImage();
+        }
+        catch { }
     }
 }

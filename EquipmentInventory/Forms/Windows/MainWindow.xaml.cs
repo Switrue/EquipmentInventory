@@ -1,6 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Interfaces;
 using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Handlers;
