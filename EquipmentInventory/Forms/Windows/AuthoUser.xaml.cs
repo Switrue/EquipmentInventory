@@ -8,9 +8,8 @@ using EquipmentInventory.Properties;
 using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Classes.Data.ViewModels;
+using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Handlers;
-using EquipmentInventory.Classes.Data;
-using Validation = EquipmentInventory.Classes.Data.Validation;
 
 namespace EquipmentInventory.Forms.Windows;
 
@@ -63,28 +62,17 @@ public partial class AuthoUser : Window
 
     private async void Login_Click(object sender, EventArgs e)
     {
-        if (Validation.AnyTextBoxIsEmpty(textFieldContainer))
+        if (ValidationHelper.AnyTextBoxIsEmpty(textFieldContainer))
         {
             return;
         }
-        
-        var btn = (Button)sender;
 
-        btn.IsEnabled = false;
-
-        try
-        {
-            await Autho();
-        }
-        finally
-        {
-            btn.IsEnabled = true;
-        }
+        await UserAccountService.ExecuteTask((Button)sender, Autho);
     }
 
     private async Task Autho()
     {
-        var jwt = await ApiClient.GetJwtToken(usernameTextB.Text, passwordPsB.Password);
+        var jwt = await AuthoRequest.GetJwtToken(usernameTextB.Text, passwordPsB.Password);
 
         if (jwt == null) return;
 
@@ -101,9 +89,9 @@ public partial class AuthoUser : Window
 
     #region Valid changed
 
-    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
 
-    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) => Validation.IsPasswordBoxEmpty((PasswordBox)sender);
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) => ValidationHelper.IsPasswordBoxEmpty((PasswordBox)sender);
 
     #endregion
 }

@@ -1,10 +1,9 @@
-﻿using EquipmentInventory.Classes.Helpers;
-using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Properties;
 using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Data;
+namespace EquipmentInventory.Classes.Helpers;
 
-public static class Validation
+public static class ValidationHelper
 {
     private static bool IsFieldEmpty(Control control, string message)
     {

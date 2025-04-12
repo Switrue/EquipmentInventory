@@ -2,12 +2,11 @@
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EquipmentInventory.Classes.Data;
+namespace EquipmentInventory.Classes.Data.Requests;
 
-public static class ApiClient
+public class AuthoRequest
 {
     public static async Task<string> GetJwtToken(string login, string password)
     {
@@ -25,14 +24,12 @@ public static class ApiClient
         return response?.Token;
     }
 
-    
-
     public static async Task<bool> CheckAuthorization()
     {
         try
-        {   
+        {
             var response = await App.ApiClient.GetAsync("/api/Authorization");
-        
+
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

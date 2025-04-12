@@ -1,14 +1,12 @@
-﻿using EquipmentInventory.Classes.Services;
-using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Properties;
+using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Classes.Data.Requests;
+using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helpers;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Input;
-using EquipmentInventory.Classes.Data;
-using EquipmentInventory.Classes.Helpers;
 using System.Windows.Controls;
-using Validation = EquipmentInventory.Classes.Data.Validation;
-using EquipmentInventory.Classes.Data.Models;
 using System.Threading.Tasks;
-using EquipmentInventory.Classes.Data.Requests;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -47,27 +45,29 @@ public partial class UserRegistration : UserControl
 
     #endregion
 
+    #region Events
+
     private void Page_MouseDown(object sender, MouseButtonEventArgs e) => ClearFocus();
 
-    private void PasswordGeneration_Click(object sender, System.Windows.RoutedEventArgs e) => 
-        passwordFieldTxtB.Text = UserAccount.GetGeneratedPassword();
+    private void ChangeImage_Click(object sender, System.Windows.RoutedEventArgs e) => UserAccountService.SelectTheImage(userImage);
+
+    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
+
+    private void PasswordGeneration_Click(object sender, System.Windows.RoutedEventArgs e) =>
+        passwordFieldTxtB.Text = UserAccountService.GetGeneratedPassword();
+
+    #endregion
+
+    #region Registration
 
     private async void CreateAccount_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        if (Validation.AnyTextBoxIsEmpty(textFieldContainer)) return;
-
-        var btn = (Button)sender;
-
-        btn.IsEnabled = false;
-
-        try
+        if (ValidationHelper.AnyTextBoxIsEmpty(textFieldContainer))
         {
-            await Registration();
+            return;
         }
-        finally
-        {
-            btn.IsEnabled = true;
-        }
+
+        await UserAccountService.ExecuteTask((Button)sender, Registration);
     }
 
     private async Task Registration()
@@ -78,7 +78,7 @@ public partial class UserRegistration : UserControl
             Surname = surnameFieldTxtB.Text,
             Login = loginFieldTxtB.Text,
             Password = passwordFieldTxtB.Text,
-            Image = UserAccount.ConvertImageSourceToBytes(userImage.Source)
+            Image = UserAccountService.ConvertImageSourceToBytes(userImage.Source)
         };
 
         var result = await UserRequest.UserRegister(user);
@@ -94,7 +94,7 @@ public partial class UserRegistration : UserControl
     {
         TextFieldHelper.ClearAllText(textFieldContainer);
         ClearFocus();
-        UserAccount.SelectTheDefaultImage(userImage);
+        UserAccountService.SelectTheDefaultImage(userImage);
     }
 
     private void ClearFocus()
@@ -103,7 +103,5 @@ public partial class UserRegistration : UserControl
         TextFieldHelper.ClearAllTextFields(textFieldContainer);
     }
 
-    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
-
-    private void ChangeImage_Click(object sender, System.Windows.RoutedEventArgs e) => UserAccount.SelectTheImage(userImage);
+    #endregion
 }

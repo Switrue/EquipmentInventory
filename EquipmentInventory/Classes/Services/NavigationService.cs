@@ -7,8 +7,6 @@ public class NavigationService : INavigationService
 {
     private ContentControl _frame;
 
-    public NavigationService() { }
-
     public void RegisterFrame(ContentControl frame) => _frame = frame;
 
     public void NavigateTo(UserControl page)

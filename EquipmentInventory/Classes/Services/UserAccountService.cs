@@ -6,12 +6,13 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows.Media;
-using System.Windows.Controls;
 using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 
-namespace EquipmentInventory.Classes.Data;
+namespace EquipmentInventory.Classes.Services;
 
-public static class UserAccount
+public static class UserAccountService
 {
     public static string GetGeneratedPassword()
     {
@@ -135,6 +136,20 @@ public static class UserAccount
         else
         {
             SelectTheDefaultImage(image);
+        }
+    }
+
+    public static async Task ExecuteTask(Control control, Func<Task> task)
+    {
+        control.IsEnabled = false;
+
+        try
+        {
+            await task();
+        }
+        finally
+        {
+            control.IsEnabled = true;
         }
     }
 }

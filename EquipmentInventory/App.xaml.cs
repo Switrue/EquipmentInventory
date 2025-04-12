@@ -1,4 +1,5 @@
-﻿using EquipmentInventory.Classes.Services;
+﻿using EquipmentInventory.Classes.Data.Requests;
+using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Forms.Windows;
 using EquipmentInventory.Properties;
 using System;
@@ -28,13 +29,15 @@ namespace EquipmentInventory
             InitializeMainWindow();
         }
 
+        #region Load
+
         private async void InitializeMainWindow()
         {
             var jwt = Settings.Default.UserToken;
 
             if (!string.IsNullOrWhiteSpace(jwt))
             {
-                if (await EquipmentInventory.Classes.Data.ApiClient.CheckAuthorization())
+                if (await AuthoRequest.CheckAuthorization())
                 {
                     await AuthorizationService.Authorize(jwt);
                     return;
@@ -76,6 +79,8 @@ namespace EquipmentInventory
                     new AuthenticationHeaderValue("Bearer", Settings.Default.UserToken);
             }
         }
+
+        #endregion
 
         public static void SetAuthorizationToken(string token)
         {

@@ -1,4 +1,4 @@
-﻿using EquipmentInventory.Classes.Data;
+﻿using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Data.Models;
@@ -7,7 +7,6 @@ using MaterialDesignThemes.Wpf;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Validation = EquipmentInventory.Classes.Data.Validation;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -43,7 +42,7 @@ public partial class UserProfile : UserControl
         saveUserImage.Content = Strings.Save;
         cancelSaveUserDataBtn.Content = Strings.Cancel;
 
-        UserAccount.SetImageSource(_user.Image, userImage);
+        UserAccountService.SetImageSource(_user.Image, userImage);
     }
 
     #endregion
@@ -54,7 +53,7 @@ public partial class UserProfile : UserControl
 
     private void CancelSaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => DisableTextFields();
 
-    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => Validation.IsTextBoxEmpty((TextBox)sender);
+    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
 
     private void EditUsername_Click(object sender, RoutedEventArgs e) => IncludeTextFields(sender, usernameContainer);
 
@@ -62,7 +61,7 @@ public partial class UserProfile : UserControl
 
     private void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => SaveUserData();
 
-    private void ChangeImage_Click(object sender, RoutedEventArgs e) => UserAccount.SelectTheImage(userImage);
+    private void ChangeImage_Click(object sender, RoutedEventArgs e) => UserAccountService.SelectTheImage(userImage);
 
     #endregion
 
@@ -88,7 +87,7 @@ public partial class UserProfile : UserControl
 
         if (isUsernameEditing && isPasswordEditing) return true;
 
-        if (Validation.AnyTextBoxIsEmpty(userDataContainer)) return true;
+        if (ValidationHelper.AnyTextBoxIsEmpty(userDataContainer)) return true;
 
         return false;
     }
@@ -119,7 +118,7 @@ public partial class UserProfile : UserControl
 
             if (child is TextBox textBox)
             {
-                Validation.IsTextBoxEmpty(textBox);
+                ValidationHelper.IsTextBoxEmpty(textBox);
                 textBox.Text = string.Empty;
                 textBox.IsEnabled = isEnabled;
             }

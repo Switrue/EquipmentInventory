@@ -67,7 +67,7 @@
                         <WrapPanel HorizontalAlignment="Right">
                             <!-- #region Manager Account -->
 
-                            <StackPanel VerticalAlignment="Center" MinWidth="150">
+                            <StackPanel VerticalAlignment="Center" MinWidth="60">
                                 <Button x:Name="manageAccountBtn" 
                                         Cursor="Hand"
                                         Padding="10 4 10 4" 
