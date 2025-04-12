@@ -2,6 +2,7 @@
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
 using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
@@ -19,6 +20,26 @@ public class AuthoRequest
         if (response != null)
         {
             AuthorizationService.SetAuthorizationToken(response.Token);
+        }
+
+        return response?.Token;
+    }
+
+    public static async Task<string> UpdateJwtToken()
+    {
+        var response = await ApiClientHelper.GetAsync<JwtResponse>(
+            "/api/Authorization/refresh",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error)
+        );
+
+        if (response != null)
+        {
+            AuthorizationService.SetAuthorizationToken(response.Token);
+
+            if (!string.IsNullOrWhiteSpace(Settings.Default.UserToken))
+            {
+                AuthorizationService.SaveJwt(response.Token);
+            }
         }
 
         return response?.Token;

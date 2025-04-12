@@ -16,7 +16,9 @@ namespace EquipmentInventory.API.Controllers
         private readonly EquipmentInventoryDbContext _dbContext;
         private readonly AuthorizationHelper _authorizationHelper;
 
-        public AuthorizationController(EquipmentInventoryDbContext dbContext, AuthorizationHelper authorizationHelper)
+        public AuthorizationController(
+            EquipmentInventoryDbContext dbContext, 
+            AuthorizationHelper authorizationHelper)
         {
             _dbContext = dbContext;
             _authorizationHelper = authorizationHelper;
@@ -54,7 +56,6 @@ namespace EquipmentInventory.API.Controllers
 
             var defaultRole = await _dbContext.Roles
                 .FirstOrDefaultAsync(r => r.Name == "Бухгалтер");
-
             if (defaultRole == null)
                 return BadRequest(new { Message = "Роль по умолчанию не найдена" });
 
@@ -79,6 +80,24 @@ namespace EquipmentInventory.API.Controllers
             }
 
             return Ok(new { Message = "Пользователь успешно создан" });
+        }
+
+        [Authorize]
+        [HttpGet("refresh")]
+        public async Task<ActionResult> UpdateToken()
+        {
+            if (!User.TryGetUserId(out var userId))
+                return Unauthorized();
+
+            var user = await _dbContext.Users
+                .Include(u => u.IdRoleNavigation)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+            if (user is null) 
+                return NotFound();
+
+            var token = _authorizationHelper.GenerateJwtToken(user);
+
+            return Ok(new { Token = token });
         }
 
         [Authorize]

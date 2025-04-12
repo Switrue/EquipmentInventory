@@ -7,6 +7,8 @@ using MaterialDesignThemes.Wpf;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using EquipmentInventory.Classes.Data.Requests;
+using System.Threading.Tasks;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -16,6 +18,8 @@ namespace EquipmentInventory.Forms.Pages;
 public partial class UserProfile : UserControl
 {
     private Users _user;
+    private bool isUsernameEditing;
+    private bool isPasswordEditing;
 
     public UserProfile(Users user)
     {
@@ -59,15 +63,9 @@ public partial class UserProfile : UserControl
 
     private void EditUserPassword_Click(object sender, RoutedEventArgs e) => IncludeTextFields(sender, userPasswordContainer);
 
-    private void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => SaveUserData();
-
     private void ChangeImage_Click(object sender, RoutedEventArgs e) => UserAccountService.SelectTheImage(userImage);
 
-    #endregion
-
-    #region Methods
-
-    private void SaveUserData()
+    private async void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         if (ValidationSavingUserData()) return;
 
@@ -75,15 +73,50 @@ public partial class UserProfile : UserControl
 
         if (dialogResult)
         {
-            MessageBox.Show("Изменено");
+            var userUpdate = new RegisterRequest();
+
+            if (!isUsernameEditing)
+            {
+                userUpdate.Username = usernameTxtB.Text;
+                userUpdate.Surname = surnameTxtB.Text;
+            }
+
+            if (!isPasswordEditing)
+            {
+                userUpdate.Password = userPasswordTxtB.Text;
+            }
+
             DisableTextFields();
+
+            await UserAccountService.ExecuteTask(
+                (Button)sender, 
+                async () => { await Update(userUpdate); });
+        }
+    }
+
+    #endregion
+
+    #region Methods
+
+    private async Task Update(RegisterRequest userUpdate)
+    {
+        var result = await UserRequest.UpdateUserProfile(userUpdate);
+
+        if (result != null)
+        {
+            var updateJwt = await AuthoRequest.UpdateJwtToken();
+
+            if (updateJwt != null)
+            {
+                CustomMessageBoxHelper.Show(result);
+            }
         }
     }
 
     private bool ValidationSavingUserData()
     {
-        bool isUsernameEditing = editUsernameBtn.IsEnabled;
-        bool isPasswordEditing = editUserPasswordBtn.IsEnabled;
+        isUsernameEditing = editUsernameBtn.IsEnabled;
+        isPasswordEditing = editUserPasswordBtn.IsEnabled;
 
         if (isUsernameEditing && isPasswordEditing) return true;
 

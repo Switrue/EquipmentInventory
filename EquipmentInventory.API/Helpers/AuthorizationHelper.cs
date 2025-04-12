@@ -8,12 +8,14 @@ namespace EquipmentInventory.API.Helpers;
 
 public class AuthorizationHelper
 {
-    private readonly IConfiguration _configuration;
+    private readonly IConfiguration? _configuration;
 
     public AuthorizationHelper(IConfiguration configuration)
     {
         _configuration = configuration;
     }
+
+    public AuthorizationHelper() { }
 
     public bool VerifyPassword(string password, string passwordHash)
     {

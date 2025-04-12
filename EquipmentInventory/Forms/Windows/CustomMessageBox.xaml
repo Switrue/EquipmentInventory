@@ -58,7 +58,7 @@
 
                 <TextBox x:Name="messageTxtB" 
                          Grid.Row="0" 
-                         Margin="10"
+                         Margin="15"
                          MaxWidth="400"
                          TextWrapping="Wrap" 
                          TextAlignment="Justify"
