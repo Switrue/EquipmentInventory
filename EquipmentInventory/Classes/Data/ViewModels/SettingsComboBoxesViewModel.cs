@@ -4,9 +4,7 @@ using EquipmentInventory.Classes.Data.Models;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using EquipmentInventory.Classes.Services;
 

@@ -81,7 +81,7 @@
                                         <Border Background="Black">
                                             <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" />
                                         </Border>
-                                        <Border Width="2" Background="{StaticResource SecondaryColor}" Margin="0 0 4 0"/>
+                                        <Border Width="2" Margin="0 0 4 0" Background="{StaticResource SecondaryColor}" />
                                         <TextBlock x:Name="userNameTexB" 
                                                    VerticalAlignment="Center" 
                                                    MaxWidth="120" 

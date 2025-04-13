@@ -35,7 +35,7 @@ namespace EquipmentInventory.API.Controllers
                 .FirstOrDefaultAsync(u => u.Login == model.Login);
 
             if (user == null || !_authorizationHelper.VerifyPassword(model.Password, user.Password))
-                return Unauthorized(new { Message = "Неверный логин или пароль" });
+                return Unauthorized(ApiResponse.Unauthorized(ApplicationErrors.InvalidLoginOrPassword));
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 
@@ -76,10 +76,10 @@ namespace EquipmentInventory.API.Controllers
             }
             catch
             {
-                return BadRequest(new { Message = "Ошибка при создании пользователя" });
+                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.CreationError));
             }
 
-            return Ok(new { Message = "Пользователь успешно создан" });
+            return Ok(ApiResponse.Ok(ApplicationErrors.UserCreated));
         }
 
         [Authorize]
@@ -93,7 +93,7 @@ namespace EquipmentInventory.API.Controllers
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Id == userId);
             if (user is null) 
-                return NotFound();
+                return NotFound(new { Message = ApplicationErrors.UserNotFound });
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 

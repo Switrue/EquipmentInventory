@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="Background">#282e38</SolidColorBrush>
-    <SolidColorBrush x:Key="Foreground">#24272f</SolidColorBrush>
-    <SolidColorBrush x:Key="Circuit">#3a4456</SolidColorBrush>
-    <SolidColorBrush x:Key="AccentColor">#d77a8a</SolidColorBrush>
-    <SolidColorBrush x:Key="HintColor">#a1a3a8</SolidColorBrush>
-    <SolidColorBrush x:Key="PrimaryColor">#768f9b</SolidColorBrush>
-    <SolidColorBrush x:Key="SecondaryColor">#00c6dc</SolidColorBrush>
-    <SolidColorBrush x:Key="TextColor">white</SolidColorBrush>
+    <SolidColorBrush x:Key="Background" Color="#282e38" />
+    <SolidColorBrush x:Key="Foreground" Color="#24272f" />
+    <SolidColorBrush x:Key="Circuit" Color="#3a4456" />
+    <SolidColorBrush x:Key="AccentColor" Color="#d77a8a" />
+    <SolidColorBrush x:Key="HintColor" Color="#a1a3a8" />
+    <SolidColorBrush x:Key="PrimaryColor" Color="#768f9b" />
+    <SolidColorBrush x:Key="SecondaryColor" Color="#00c6dc" />
+    <SolidColorBrush x:Key="TextColor" Color="white" />
 
     <LinearGradientBrush x:Key="GradientBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="#282e38" Offset="0.0" />

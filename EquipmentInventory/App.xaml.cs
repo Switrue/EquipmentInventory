@@ -20,7 +20,6 @@ namespace EquipmentInventory
         private static CultureInfo cultureInfo;
 
         public static HttpClient ApiClient { get; private set; }
-
         public static Users user { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
