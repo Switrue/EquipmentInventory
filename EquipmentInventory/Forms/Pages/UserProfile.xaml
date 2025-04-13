@@ -45,116 +45,120 @@
     </UserControl.Resources>
     
     <!--#endregion-->
+    
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Focusable="False">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="800" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-    <ScrollViewer VerticalScrollBarVisibility="Hidden" Focusable="False">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="800" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-        
-            <!--#region User profile-->
+                <!--#region User profile-->
 
-            <StackPanel Grid.Row="0" Grid.Column="1">
-                <WrapPanel Orientation="Vertical" Margin="0,20" VerticalAlignment="Center">
-                    <TextBlock x:Name="userTitleTxtBl"
-                               Foreground="{StaticResource TextColor}"
-                               Style="{StaticResource MaterialDesignDisplaySmallTextBlock}" />
-                    <TextBlock x:Name="userRoleTxtBl"
-                               Foreground="{StaticResource HintColor}"
-                               Style="{StaticResource MaterialDesignLabelLargeTextBlock}" />
-                </WrapPanel>
-            </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <WrapPanel Orientation="Vertical" Margin="0,20" VerticalAlignment="Center">
+                        <TextBlock x:Name="userTitleTxtBl"
+                                   Foreground="{StaticResource TextColor}"
+                                   Style="{StaticResource MaterialDesignDisplaySmallTextBlock}" />
+                        <TextBlock x:Name="userRoleTxtBl"
+                                   Foreground="{StaticResource HintColor}"
+                                   Style="{StaticResource MaterialDesignLabelLargeTextBlock}" />
+                    </WrapPanel>
+                </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
-                <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="1" />
-            </StackPanel>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
+                    <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="1" />
+                </StackPanel>
 
-            <!--#region GroupBox-->
+                <!--#region GroupBox-->
 
-            <StackPanel Grid.Row="1" Grid.Column="1">
-                <!--#region Image-->
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <!--#region Image-->
 
-                <GroupBox x:Name="imageGrB">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Image" />
-                                <TextBlock Style="{StaticResource TitleGroupBox}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <UniformGrid Rows="2">
-                        <WrapPanel>
-                            <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
-                            <Button x:Name="changeImageBtn" Margin="10" Click="ChangeImage_Click" />
-                        </WrapPanel>
-
-                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <Button x:Name="saveUserImage" Margin="0" />
-                        </StackPanel>
-                    </UniformGrid>
-                </GroupBox>
-
-                <!--#endregion-->
-
-                <!--#region Data-->
-
-                <GroupBox x:Name="dataGrB">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="User" />
-                                <TextBlock Style="{StaticResource TitleGroupBox}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <UniformGrid Rows="2">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel x:Name="userDataContainer" Grid.Column="0">
-                                <UniformGrid x:Name="usernameContainer" Columns="2">
-                                    <TextBox x:Name="usernameTxtB" IsEnabled="False" TextChanged="ValidBox_TextChanged" />
-                                    <TextBox x:Name="surnameTxtB" IsEnabled="False" TextChanged="ValidBox_TextChanged" />
-                                </UniformGrid>
-                                <StackPanel x:Name="userPasswordContainer">
-                                    <TextBox x:Name="userPasswordTxtB" IsEnabled="False" TextChanged="ValidBox_TextChanged" />
+                    <GroupBox x:Name="imageGrB">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Image" />
+                                    <TextBlock Style="{StaticResource TitleGroupBox}" />
                                 </StackPanel>
-                            </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <UniformGrid Rows="2">
+                            <WrapPanel>
+                                <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
+                                <Button x:Name="changeImageBtn" Margin="10" Click="ChangeImage_Click" />
+                            </WrapPanel>
 
-                            <StackPanel x:Name="editBtnContainer" Grid.Column="1" VerticalAlignment="Center">
-                                <Button x:Name="editUsernameBtn" 
-                                        Content="{materialDesign:PackIcon Kind=Edit,Size=20}"
-                                        Click="EditUsername_Click" />
-                                <Button x:Name="editUserPasswordBtn" 
-                                        Content="{materialDesign:PackIcon Kind=Edit,Size=20}"
-                                        Click="EditUserPassword_Click" />
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Button x:Name="saveUserImage" Margin="0" Click="SaveUserImage_Click" />
                             </StackPanel>
-                        </Grid>
-
-                        <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <Button x:Name="saveUserDataBtn" Margin="0 0 5 0" Click="SaveUserData_Click" />
-                            <Button x:Name="cancelSaveUserDataBtn" Margin="5 0 0 0" Click="CancelSaveUserData_Click" />
                         </UniformGrid>
-                    </UniformGrid>
-                </GroupBox>
+                    </GroupBox>
+
+                    <!--#endregion-->
+
+                    <!--#region Data-->
+
+                    <GroupBox x:Name="dataGrB">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="User" />
+                                    <TextBlock Style="{StaticResource TitleGroupBox}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <UniformGrid Rows="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel x:Name="userDataContainer" Grid.Column="0">
+                                    <UniformGrid x:Name="usernameContainer" Columns="2">
+                                        <TextBox x:Name="usernameTxtB" IsEnabled="False" TextChanged="ValidBox_TextChanged" />
+                                        <TextBox x:Name="surnameTxtB" IsEnabled="False" TextChanged="ValidBox_TextChanged" />
+                                    </UniformGrid>
+                                    <StackPanel x:Name="userPasswordContainer">
+                                        <TextBox x:Name="userPasswordTxtB" IsEnabled="False" TextChanged="ValidBox_TextChanged" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="editBtnContainer" Grid.Column="1" VerticalAlignment="Center">
+                                    <Button x:Name="editUsernameBtn" 
+                                            Content="{materialDesign:PackIcon Kind=Edit,Size=20}"
+                                            Click="EditUsername_Click" />
+                                    <Button x:Name="editUserPasswordBtn" 
+                                            Content="{materialDesign:PackIcon Kind=Edit,Size=20}"
+                                            Click="EditUserPassword_Click" />
+                                </StackPanel>
+                            </Grid>
+
+                            <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Button x:Name="saveUserDataBtn" Margin="0 0 5 0" Click="SaveUserData_Click" />
+                                <Button x:Name="cancelSaveUserDataBtn" Margin="5 0 0 0" Click="CancelSaveUserData_Click" />
+                            </UniformGrid>
+                        </UniformGrid>
+                    </GroupBox>
+
+                    <!--#endregion-->
+                </StackPanel>
 
                 <!--#endregion-->
-            </StackPanel>
 
-            <!--#endregion-->
+                <!--#endregion-->
+            </Grid>
+        </ScrollViewer>
         
-            <!--#endregion-->
-        </Grid>
-    </ScrollViewer>
+        <materialDesign:Snackbar x:Name="notificationSnackbar" />
+    </Grid>
 </UserControl>

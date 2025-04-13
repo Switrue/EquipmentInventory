@@ -1,6 +1,5 @@
 ﻿using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Services;
-using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Interfaces;
 using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Handlers;
@@ -12,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using UserControl = System.Windows.Controls.UserControl;
 
 namespace EquipmentInventory.Forms.Windows;
 
@@ -23,14 +21,12 @@ public partial class MainWindow : Window, IMainWindow
 {
     private WindowStateHandler _windowState;
     private WindowService _windowService;
-    private Users _user;
     private UserPanel _userPanel;
     private bool isResizing;
 
-    public MainWindow(Users user)
+    public MainWindow()
     {
         InitializeComponent();
-        _user = user;
         InitializeUI();
         InitializeParams();
     }
@@ -65,22 +61,20 @@ public partial class MainWindow : Window, IMainWindow
 
     private void InitializeUI()
     {
-        string username =  _user.Surname + " " + _user.Username;
+        SetUsernameOnTheMainWindow();
+        SetUserImageOnTgeMainWindow();
 
         Title = Strings.MainWindowTitle;
         collapseBtn.ToolTip = Strings.Collapse;
         closeBtn.ToolTip = Strings.Close;
         maximizeBtn.ToolTip = Strings.Maximize;
         logOutBtn.Content = Strings.LogOut;
-        userNameTexB.Text = string.IsNullOrWhiteSpace(username) ? Strings.DefaultUserName : username;
         profileBtn.Content = Strings.Profile;
         manageAccountBtn.ToolTip = Strings.ManageAccount;
         fileMnIt.Header = $"_{Strings.MainWindowTitle}";
         settingsMnIt.Header = $"_{Strings.Settings}";
         helpMnIt.Header = $"_{Strings.Help}";
         aboutTheProgrammMnIt.Header = $"_{Strings.AboutTheProgramm}";
-
-        UserAccountService.SetImageSource(_user.Image, userImage);
 
         Width = Settings.Default.WindowWidth;
         Height = Settings.Default.WindowHeight;
@@ -91,6 +85,16 @@ public partial class MainWindow : Window, IMainWindow
         _windowState = new WindowStateHandler();
         _windowService = new WindowService(this, _windowState);
         DataContext = new WindowManagementViewModel(_windowService, _windowState);
+    }
+    public void SetUsernameOnTheMainWindow()
+    {
+        string username = $"{App.user.Surname} {App.user.Username}".Trim();
+        userNameTexB.Text = string.IsNullOrWhiteSpace(username) ? Strings.DefaultUserName : username;
+    }
+
+    public void SetUserImageOnTgeMainWindow()
+    {
+        UserAccountService.SetImageSource(App.user.Image, userImage);
     }
 
     public void SaveUserPanelObject(UserPanel userPanel) => _userPanel = userPanel;
@@ -184,7 +188,7 @@ public partial class MainWindow : Window, IMainWindow
     private void Profile_Click(object sender, EventArgs e)
     {
         ToggleActionsPopup();
-        UpdatePageWithDefaultSettings(new UserProfile(_user));
+        UpdatePageWithDefaultSettings(new UserProfile(this));
     } 
 
     private void ToggleActionsPopup()

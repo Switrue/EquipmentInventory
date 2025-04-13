@@ -408,4 +408,16 @@
   <data name="LanguageChange" xml:space="preserve">
     <value>Для смены языка необходимо перезапустить приложение. Продолжить?</value>
   </data>
+  <data name="DefaultRole" xml:space="preserve">
+    <value>Роль</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Ошибка сети</value>
+  </data>
+  <data name="AnUnforeseenMistake" xml:space="preserve">
+    <value>Непредвиденная ошибка</value>
+  </data>
 </root>

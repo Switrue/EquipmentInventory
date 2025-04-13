@@ -74,4 +74,23 @@ public static class TextFieldHelper
             }
         }
     }
+
+    public static void ToggleTextBoxEnabledStateInPanel(Panel parent, bool isEnabled)
+    {
+        foreach (var child in parent.Children)
+        {
+            if (child is null) continue;
+
+            if (child is TextBox textBox)
+            {
+                ValidationHelper.IsTextBoxEmpty(textBox);
+                textBox.Text = string.Empty;
+                textBox.IsEnabled = isEnabled;
+            }
+            else if (child is Panel panel)
+            {
+                ToggleTextBoxEnabledStateInPanel(panel, isEnabled);
+            }
+        }
+    }
 }

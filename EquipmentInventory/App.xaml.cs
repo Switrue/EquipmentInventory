@@ -1,4 +1,5 @@
-﻿using EquipmentInventory.Classes.Data.Requests;
+﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Forms.Windows;
 using EquipmentInventory.Properties;
@@ -19,6 +20,8 @@ namespace EquipmentInventory
         private static CultureInfo cultureInfo;
 
         public static HttpClient ApiClient { get; private set; }
+
+        public static Users user { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -82,6 +85,8 @@ namespace EquipmentInventory
 
         #endregion
 
+        #region Methods
+
         public static void SetAuthorizationToken(string token)
         {
             if (ApiClient != null)
@@ -90,5 +95,24 @@ namespace EquipmentInventory
                     new AuthenticationHeaderValue("Bearer", token);
             }
         }
+
+        public static void SetUser(Users newUser)
+        {
+            user = newUser;
+        }
+
+        public static void SetUserImage(byte[] bytes)
+        {
+            try
+            {
+                user.Image = bytes;
+            }
+            catch
+            {
+                throw new Exception("user image error");
+            }
+        }
+
+        #endregion
     }
 }

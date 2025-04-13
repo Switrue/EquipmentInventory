@@ -504,4 +504,20 @@
     <value>To change the language, you need to restart the application. Continue?</value>
     <comment>Settings</comment>
   </data>
+  <data name="DefaultRole" xml:space="preserve">
+    <value>Role</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Network</value>
+    <comment>Message</comment>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Network error</value>
+    <comment>Message</comment>
+  </data>
+  <data name="AnUnforeseenMistake" xml:space="preserve">
+    <value>An unforeseen mistake</value>
+    <comment>Message</comment>
+  </data>
 </root>

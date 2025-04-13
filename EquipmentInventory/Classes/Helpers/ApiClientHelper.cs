@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using EquipmentInventory.Properties;
 
 namespace EquipmentInventory.Classes.Helpers;
 
@@ -125,11 +126,11 @@ public static class ApiClientHelper
     }
 
     private static void DefaultErrorHandler(string message)
-        => CustomMessageBoxHelper.Show("Ошибка", message);
+        => CustomMessageBoxHelper.Show(Strings.Error, message);
 
     private static void HandleNetworkError(HttpRequestException ex)
-        => CustomMessageBoxHelper.Show("Сеть", $"Ошибка подключения: {ex.Message}");
+        => CustomMessageBoxHelper.Show(Strings.Network, $"{Strings.NetworkError}: {ex.Message}");
 
     private static void HandleUnexpectedError(Exception ex)
-        => CustomMessageBoxHelper.Show("Ошибка", $"Непредвиденная ошибка: {ex.Message}");
+        => CustomMessageBoxHelper.Show(Strings.Error, $"{Strings.AnUnforeseenMistake}: {ex.Message}");
 }

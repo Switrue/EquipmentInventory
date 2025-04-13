@@ -97,6 +97,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на An unforeseen mistake.
+        /// </summary>
+        internal static string AnUnforeseenMistake {
+            get {
+                return ResourceManager.GetString("AnUnforeseenMistake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Application.
         /// </summary>
         internal static string Application {
@@ -331,6 +340,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Role.
+        /// </summary>
+        internal static string DefaultRole {
+            get {
+                return ResourceManager.GetString("DefaultRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Unknown.
         /// </summary>
         internal static string DefaultUserName {
@@ -561,6 +579,24 @@ namespace EquipmentInventory.Properties {
         internal static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Network.
+        /// </summary>
+        internal static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Network error.
+        /// </summary>
+        internal static string NetworkError {
+            get {
+                return ResourceManager.GetString("NetworkError", resourceCulture);
             }
         }
         

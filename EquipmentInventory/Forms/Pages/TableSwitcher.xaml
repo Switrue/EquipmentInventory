@@ -255,13 +255,7 @@
 
         <Grid Grid.Column="1">
             <Frame x:Name="tableFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
-            
-            <materialDesign:Snackbar x:Name="notificationSnackbar" 
-                                     Grid.Column="1"
-                                     Margin="-44 0 0 0"
-                                     HorizontalAlignment="Stretch"
-                                     MessageQueue="{materialDesign:MessageQueue}"
-                                     Background="{StaticResource Background}" />
+            <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.Column="1" Margin="-44 0 0 0" />
         </Grid>
 
         <!--#endregion-->

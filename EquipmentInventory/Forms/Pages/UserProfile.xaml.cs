@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using EquipmentInventory.Classes.Data.Requests;
 using System.Threading.Tasks;
+using EquipmentInventory.Classes.Data.Interfaces;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -17,23 +18,27 @@ namespace EquipmentInventory.Forms.Pages;
 /// </summary>
 public partial class UserProfile : UserControl
 {
-    private Users _user;
+    private IMainWindow _mainWindow;
+    private NotificationService notification;
     private bool isUsernameEditing;
     private bool isPasswordEditing;
 
-    public UserProfile(Users user)
+    public UserProfile(IMainWindow mainWindow)
     {
         InitializeComponent();
-        _user = user;
+        _mainWindow = mainWindow;
         InitializeUI();
+        InitializeParams();
     }
 
     #region Load
 
     private void InitializeUI()
     {
-        userTitleTxtBl.Text = $"{_user.Surname} {_user.Username}";
-        userRoleTxtBl.Text = _user.Role;
+        SetUserInfo();
+
+        UserAccountService.SetImageSource(App.user.Image, userImage);
+
         imageGrB.Header = Strings.Customization;
         changeImageBtn.Content = Strings.SelectImage;
         dataGrB.Header = Strings.UserData;
@@ -45,8 +50,18 @@ public partial class UserProfile : UserControl
         saveUserDataBtn.Content = Strings.Save;
         saveUserImage.Content = Strings.Save;
         cancelSaveUserDataBtn.Content = Strings.Cancel;
+    }
 
-        UserAccountService.SetImageSource(_user.Image, userImage);
+    private void InitializeParams()
+    {
+        notification = new NotificationService(notificationSnackbar);
+    }
+
+    private void SetUserInfo()
+    {
+        string username = $"{App.user.Surname} {App.user.Username}".Trim();
+        userTitleTxtBl.Text = string.IsNullOrWhiteSpace(username) ? Strings.DefaultUserName : username;
+        userRoleTxtBl.Text = App.user.Role ?? Strings.DefaultRole;
     }
 
     #endregion
@@ -67,7 +82,10 @@ public partial class UserProfile : UserControl
 
     private async void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        if (ValidationSavingUserData()) return;
+        if (ValidationSavingUserData())
+        {
+            return;
+        }
 
         bool dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, Strings.ChangeData, true);
 
@@ -94,6 +112,18 @@ public partial class UserProfile : UserControl
         }
     }
 
+    private async void SaveUserImage_Click(object sender, RoutedEventArgs e)
+    {
+        var userUpdate = new RegisterRequest
+        {
+            Image = UserAccountService.ConvertImageSourceToBytes(userImage.Source)
+        };
+
+        await UserAccountService.ExecuteTask(
+            (Button)sender,
+            async () => { await Update(userUpdate); });
+    }
+
     #endregion
 
     #region Methods
@@ -108,9 +138,20 @@ public partial class UserProfile : UserControl
 
             if (updateJwt != null)
             {
-                CustomMessageBoxHelper.Show(result);
+                await AuthorizationService.SetUser(updateJwt);
+
+                SetUserInfo();
+                UpdateMainWindow();
+
+                notification.Show(result);
             }
         }
+    }
+
+    private void UpdateMainWindow()
+    {
+        _mainWindow.SetUsernameOnTheMainWindow();
+        _mainWindow.SetUserImageOnTgeMainWindow();
     }
 
     private bool ValidationSavingUserData()
@@ -134,33 +175,14 @@ public partial class UserProfile : UserControl
     private void IncludeTextFields(object sender, Panel container)
     {
         ((Button)sender).IsEnabled = false;
-        ToggleTextBoxEnabledStateInPanel(container, true);
+        TextFieldHelper.ToggleTextBoxEnabledStateInPanel(container, true);
+        ClearFocus();
     }
 
     private void DisableTextFields()
     {
         editBtnContainer.Children.OfType<Button>().All(b => b.IsEnabled = true);
-        ToggleTextBoxEnabledStateInPanel(userDataContainer, false);
-    }
-
-    private void ToggleTextBoxEnabledStateInPanel(Panel parent, bool isEnabled)
-    {
-        foreach (var child in parent.Children)
-        {
-            if (child is null) continue;
-
-            if (child is TextBox textBox)
-            {
-                ValidationHelper.IsTextBoxEmpty(textBox);
-                textBox.Text = string.Empty;
-                textBox.IsEnabled = isEnabled;
-            }
-            else if (child is Panel panel)
-            {
-                ToggleTextBoxEnabledStateInPanel(panel, isEnabled);
-            }
-        }
-
+        TextFieldHelper.ToggleTextBoxEnabledStateInPanel(userDataContainer, false);
         ClearFocus();
     }
 

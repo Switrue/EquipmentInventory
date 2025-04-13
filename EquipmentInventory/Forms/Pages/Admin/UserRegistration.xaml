@@ -67,11 +67,7 @@
                 </Grid>
             </ScrollViewer>
         </materialDesign:Card>
-        <materialDesign:Snackbar x:Name="notificationSnackbar"
-                                 Grid.ColumnSpan="3"
-                                 HorizontalAlignment="Stretch"
-                                 MessageQueue="{materialDesign:MessageQueue}"
-                                 Background="{StaticResource Background}" />
+        <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.ColumnSpan="3" />
         
         <!--#endregion-->
     </Grid>

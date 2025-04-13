@@ -126,6 +126,12 @@
         <Setter Property="Cursor" Value="Hand" />
     </Style>
 
+    <Style TargetType="materialDesign:Snackbar">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{StaticResource Foreground}" />
+        <Setter Property="MessageQueue" Value="{materialDesign:MessageQueue}" />
+    </Style>
+
     <!--#endregion-->
     
     <!--#region DataTemplate-->
