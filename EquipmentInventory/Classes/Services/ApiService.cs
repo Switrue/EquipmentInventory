@@ -52,7 +52,7 @@ public static class ApiService
         }
         catch (FormatException ex)
         {
-            Console.WriteLine($"Ошибка конвертации изображения: {ex.Message}");
+            Console.WriteLine($"An image conversion error: {ex.Message}");
             return null;
         }
     }

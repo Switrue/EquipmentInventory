@@ -50,14 +50,14 @@ namespace EquipmentInventory.API.Controllers
                 return BadRequest(new { Errors = ModelState });
 
             if (await _dbContext.Users.AnyAsync(u => u.Login == model.Login))
-                return BadRequest(new { Message = "Имя пользователя уже занято" });
+                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.LoginAlreadyInUse));
 
             var passwordHash = _authorizationHelper.HashPassword(model.Password);
 
             var defaultRole = await _dbContext.Roles
-                .FirstOrDefaultAsync(r => r.Name == "Бухгалтер");
+                .FirstOrDefaultAsync(r => r.Name == RoleNames.Accountant);
             if (defaultRole == null)
-                return BadRequest(new { Message = "Роль по умолчанию не найдена" });
+                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.RoleNotFound));
 
             var user = new User
             {
@@ -93,7 +93,7 @@ namespace EquipmentInventory.API.Controllers
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Id == userId);
             if (user is null) 
-                return NotFound(new { Message = ApplicationErrors.UserNotFound });
+                return NotFound(ApiResponse.NotFound(ApplicationErrors.UserNotFound));
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 
@@ -102,9 +102,6 @@ namespace EquipmentInventory.API.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult Authorize()
-        {
-            return Ok();
-        }
+        public ActionResult Authorize() => Ok();
     }
 }

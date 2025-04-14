@@ -14,7 +14,7 @@ public class AuthoRequest
         var response = await ApiClientHelper.PostAsync<AuthRequest, JwtResponse>(
             "/api/Authorization/login",
             new AuthRequest { Login = login, Password = password },
-            error => CustomMessageBoxHelper.Show("Ошибка входа", error)
+            error => CustomMessageBoxHelper.Show(Strings.LoginError, error)
         );
 
         if (response != null)

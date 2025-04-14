@@ -520,4 +520,8 @@
     <value>An unforeseen mistake</value>
     <comment>Message</comment>
   </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Login error</value>
+    <comment>Message</comment>
+  </data>
 </root>

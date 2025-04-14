@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using EquipmentInventory.API.Data;
+using System.Text.Json;
 
 namespace EquipmentInventory.API.Configurations;
 
@@ -14,7 +15,7 @@ public static class ExceptionHandlerConfiguration
                 context.Response.StatusCode = 500;
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(
-                    JsonSerializer.Serialize(new { Message = "Внутренняя ошибка сервера" }));
+                    JsonSerializer.Serialize(ApiResponse.BadRequest(ApplicationErrors.ServerError)));
             });
         });
     }

@@ -420,4 +420,7 @@
   <data name="AnUnforeseenMistake" xml:space="preserve">
     <value>Непредвиденная ошибка</value>
   </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Ошибка входа</value>
+  </data>
 </root>

@@ -529,6 +529,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Login error.
+        /// </summary>
+        internal static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Sign out of account....
         /// </summary>
         internal static string LogOut {

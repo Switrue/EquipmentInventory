@@ -16,7 +16,9 @@ namespace EquipmentInventory.API.Controllers
         private readonly EquipmentInventoryDbContext _dbContext;
         private readonly AuthorizationHelper _authorizationHelper;
 
-        public UsersController(EquipmentInventoryDbContext dbContext, AuthorizationHelper authorizationHelper)
+        public UsersController(
+            EquipmentInventoryDbContext dbContext, 
+            AuthorizationHelper authorizationHelper)
         {
             _dbContext = dbContext;
             _authorizationHelper = authorizationHelper;
@@ -30,12 +32,12 @@ namespace EquipmentInventory.API.Controllers
                 return BadRequest(new { Errors = ModelState });
 
             if (!User.TryGetUserId(out var userId))
-                return Unauthorized();
+                return Unauthorized(ApiResponse.Unauthorized(ApplicationErrors.AuthenticationError));
 
             var user = await _dbContext.Users
                 .FindAsync(userId);
             if (user is null)
-                return NotFound(new { Message = "Пользователь не найден" });
+                return NotFound(ApiResponse.NotFound(ApplicationErrors.UserNotFound));
 
             UpdateUserFields(user, model);
 
@@ -45,10 +47,10 @@ namespace EquipmentInventory.API.Controllers
             }
             catch
             {
-                return BadRequest(new { Message = "Конфликт при обновлении" });
+                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.UpdateError));
             }
 
-            return Ok(new { Message = "Данные обновлены" });
+            return Ok(ApiResponse.Ok(ApplicationErrors.SuccessfullyUpdated));
         }
 
         [Authorize(Roles = RoleNames.Admin)]
@@ -59,14 +61,14 @@ namespace EquipmentInventory.API.Controllers
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Id == userId);
             if (user is null) 
-                return NotFound(new { Message = "Пользователь не найден" });
+                return NotFound(ApiResponse.NotFound(ApplicationErrors.UserNotFound));
 
             var result = new
             {
                 user.Id,
                 user.Username,
                 user.Surname,
-                role = user.IdRoleNavigation?.Name ?? "Unknown"
+                role = user.IdRoleNavigation?.Name ?? RoleNames.Default,
             };
 
             return Ok(result);
@@ -85,7 +87,7 @@ namespace EquipmentInventory.API.Controllers
                 user.Id,
                 user.Username,
                 user.Surname,
-                role = user.IdRoleNavigation?.Name ?? "Unknown"
+                role = user.IdRoleNavigation?.Name ?? RoleNames.Default
             });
 
             return Ok(result);
@@ -101,7 +103,7 @@ namespace EquipmentInventory.API.Controllers
             var user = await _dbContext.Users
                 .FindAsync(userId);
             if (user is null)
-                return NotFound(new { Message = "Пользователь не найден" });
+                return NotFound(ApiResponse.NotFound(ApplicationErrors.UserNotFound));
 
             return Ok(new { Message = user?.Image });
         }
