@@ -10,6 +10,7 @@ using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Handlers;
+using EquipmentInventory.Classes.Helper;
 
 namespace EquipmentInventory.Forms.Windows;
 
@@ -72,17 +73,24 @@ public partial class AuthoUser : Window
 
     private async Task Autho()
     {
-        var jwt = await AuthoRequest.GetJwtToken(usernameTextB.Text, passwordPsB.Password);
-
-        if (jwt == null) return;
-
-        if (rememberUserChB.IsChecked == true)
+        try
         {
-            AuthorizationService.SaveJwt(jwt);
+            var jwt = await AuthoRequest.GetJwtToken(usernameTextB.Text, passwordPsB.Password);
+
+            if (jwt == null) return;
+
+            if (rememberUserChB.IsChecked == true)
+            {
+                AuthorizationService.SaveJwt(jwt);
+            }
+
+            await AuthorizationService.Authorize(jwt);
+            Close();
         }
-        
-        await AuthorizationService.Authorize(jwt);
-        Close();
+        catch
+        {
+            CustomMessageBoxHelper.Show(Strings.LoginError, Strings.LoginErrorDescription);
+        }
     }
 
     #endregion

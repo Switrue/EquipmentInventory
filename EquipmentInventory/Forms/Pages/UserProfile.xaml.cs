@@ -130,7 +130,7 @@ public partial class UserProfile : UserControl
 
     private async Task Update(RegisterRequest userUpdate)
     {
-        var result = await UserRequest.UpdateUserProfile(userUpdate);
+        var result = await UsersRequest.UpdateUserProfile(userUpdate);
 
         if (result != null)
         {
@@ -143,7 +143,7 @@ public partial class UserProfile : UserControl
                 SetUserInfo();
                 UpdateMainWindow();
 
-                notification.Show(result);
+                notification.Show(result.Message);
             }
         }
     }

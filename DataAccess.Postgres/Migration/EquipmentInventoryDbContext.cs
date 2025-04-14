@@ -285,7 +285,7 @@ public partial class EquipmentInventoryDbContext : DbContext
                 .HasMaxLength(60)
                 .HasColumnName("login");
             entity.Property(e => e.Password)
-                .HasMaxLength(60)
+                .HasMaxLength(100)
                 .HasColumnName("password");
             entity.Property(e => e.Surname)
                 .HasMaxLength(60)

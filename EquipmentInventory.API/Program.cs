@@ -8,6 +8,7 @@ var services = builder.Services;
 services.AddSingleton<AuthorizationHelper>();
 
 services.AddControllers();
+services.AddHandlers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerServices();
 

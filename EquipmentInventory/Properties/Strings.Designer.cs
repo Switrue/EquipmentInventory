@@ -538,6 +538,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на An unexpected error occurred while trying to authorize, please try again..
+        /// </summary>
+        internal static string LoginErrorDescription {
+            get {
+                return ResourceManager.GetString("LoginErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Sign out of account....
         /// </summary>
         internal static string LogOut {
@@ -804,6 +813,15 @@ namespace EquipmentInventory.Properties {
         internal static string SubjectAreaDescription {
             get {
                 return ResourceManager.GetString("SubjectAreaDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

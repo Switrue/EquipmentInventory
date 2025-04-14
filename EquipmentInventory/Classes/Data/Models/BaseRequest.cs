@@ -1,6 +1,6 @@
 ﻿namespace EquipmentInventory.Classes.Data.Models;
 
-public class BaseResponse
+public class BaseRequest
 {
-    public string Message { get; set; }
+    public string Content { get; set; }
 }

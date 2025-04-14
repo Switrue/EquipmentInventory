@@ -3,6 +3,12 @@
 public static class ApplicationErrors
 {
     /// <summary>
+    /// Глобальные настройки
+    /// </summary>
+    public const string InvalidCode = "Код недействителен";
+    public const string AdminPasswordReset = "Пароль администратора сброшен";
+
+    /// <summary>
     /// Авторизация и регистрация
     /// </summary>
     public const string InvalidLoginOrPassword = "Неверный логин или пароль";
@@ -28,4 +34,6 @@ public static class ApplicationErrors
     /// </summary>
     public const string ServerError = "Внутренняя ошибка сервера";
     public const string AuthenticationError = "Ошибка аутентификации";
+    public const string EmptyError = "Контент оказался пуст";
+    public const string Success = "Успех";
 }

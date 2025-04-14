@@ -423,4 +423,10 @@
   <data name="LoginError" xml:space="preserve">
     <value>Ошибка входа</value>
   </data>
+  <data name="LoginErrorDescription" xml:space="preserve">
+    <value>Произошла непредвидимая ошибка при попытке авторизации, попробуйте повторить еще раз.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успех</value>
+  </data>
 </root>

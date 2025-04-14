@@ -524,4 +524,12 @@
     <value>Login error</value>
     <comment>Message</comment>
   </data>
+  <data name="LoginErrorDescription" xml:space="preserve">
+    <value>An unexpected error occurred while trying to authorize, please try again.</value>
+    <comment>Error</comment>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+    <comment>Message</comment>
+  </data>
 </root>

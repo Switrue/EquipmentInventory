@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
 
-public class AuthoRequest
+public static class AuthoRequest
 {
     public static async Task<string> GetJwtToken(string login, string password)
     {

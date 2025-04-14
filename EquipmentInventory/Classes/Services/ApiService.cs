@@ -36,10 +36,8 @@ public static class ApiService
 
     public static async Task<byte[]> GetUserImage()
     {
-        string? mes = await UserRequest.GetUserImageString() 
-            ?? string.Empty;
-
-        return GetImageBytes(mes);
+        var result = await UsersRequest.GetUserImageString();
+        return GetImageBytes(result.Message);
     }
 
     private static byte[] GetImageBytes(string base64Image)

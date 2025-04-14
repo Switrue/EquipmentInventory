@@ -81,12 +81,12 @@ public partial class UserRegistration : UserControl
             Image = UserAccountService.ConvertImageSourceToBytes(userImage.Source)
         };
 
-        var result = await UserRequest.UserRegister(user);
+        var result = await UsersRequest.UserRegister(user);
 
         if (result != null)
         {
             ClearPage();
-            notification.Show(result);
+            notification.Show(result.Message);
         }
     }
 

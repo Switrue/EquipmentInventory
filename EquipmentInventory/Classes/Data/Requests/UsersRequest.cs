@@ -7,28 +7,24 @@ using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
 
-public static class UserRequest
+public static class UsersRequest
 {
-    public static async Task<string> UserRegister(RegisterRequest user)
+    public static async Task<BaseResponse> UserRegister(RegisterRequest user)
     {
-        var resnonse = await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
+        return await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
             "/api/Authorization/register",
             user,
             error => CustomMessageBoxHelper.Show(Strings.Error, error)
         );
-
-        return resnonse?.Message;
     }
 
-    public static async Task<string> UpdateUserProfile(RegisterRequest userUpdate)
+    public static async Task<BaseResponse> UpdateUserProfile(RegisterRequest userUpdate)
     {
-        var response = await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
+        return await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
             "/api/Users/updateProfile",
             userUpdate,
             error => CustomMessageBoxHelper.Show(Strings.Error, error)
         );
-
-        return response?.Message;
     }
 
     public static async Task<Users> GetUser(long id)
@@ -47,13 +43,11 @@ public static class UserRequest
         );
     }
 
-    public static async Task<string> GetUserImageString()
+    public static async Task<BaseResponse> GetUserImageString()
     {
-        var response = await ApiClientHelper.GetAsync<BaseResponse>(
+        return await ApiClientHelper.GetAsync<BaseResponse>(
             "/api/Users/image",
             error => CustomMessageBoxHelper.Show(Strings.Error, error)
         );
-
-        return response?.Message;
     }
 }

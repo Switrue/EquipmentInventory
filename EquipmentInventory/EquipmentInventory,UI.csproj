@@ -208,6 +208,7 @@
     <Compile Include="Classes\Data\Interfaces\IWindowState.cs" />
     <Compile Include="Classes\Data\Models\AuthRequest.cs" />
     <Compile Include="Classes\Data\Models\BaseRequest.cs" />
+    <Compile Include="Classes\Data\Models\BaseResponse.cs" />
     <Compile Include="Classes\Data\Models\IconData.cs" />
     <Compile Include="Classes\Data\Models\JwtResponse.cs" />
     <Compile Include="Classes\Data\Models\LanguageItem.cs" />
@@ -215,7 +216,8 @@
     <Compile Include="Classes\Data\Models\RegisterRequest.cs" />
     <Compile Include="Classes\Data\Models\SettingItem.cs" />
     <Compile Include="Classes\Data\Requests\AuthoRequest.cs" />
-    <Compile Include="Classes\Data\Requests\UserRequest.cs" />
+    <Compile Include="Classes\Data\Requests\SettingsRequest.cs" />
+    <Compile Include="Classes\Data\Requests\UsersRequest.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />
     <Compile Include="Classes\Data\Models\Users.cs" />
     <Compile Include="Classes\Helpers\ValidationHelper.cs" />

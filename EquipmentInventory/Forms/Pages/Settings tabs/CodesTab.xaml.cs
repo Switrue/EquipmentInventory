@@ -1,5 +1,10 @@
-﻿using EquipmentInventory.Properties;
+﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Data.Requests;
+using EquipmentInventory.Classes.Helper;
+using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -31,10 +36,30 @@ public partial class CodesTab : UserControl
 
     #endregion
 
-    private void ApplyCode_Click(object sender, RoutedEventArgs e)
+    #region Methods
+
+    private async void ApplyCode_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(codeTxtB.Text)) return;
 
-        MessageBox.Show("Код", "Тест");
+        await UserAccountService.ExecuteTask((Button)sender, PerformCodeCheck);
     }
+
+    private async Task PerformCodeCheck()
+    {
+        var code = new BaseRequest
+        {
+            Content = codeTxtB.Text
+        };
+
+        var result = await SettingsRequest.UseCode(code);
+
+        if (result != null)
+        {
+            codeTxtB.Text = string.Empty;
+            CustomMessageBoxHelper.Show(Strings.Success, result.Message);
+        }
+    }
+
+    #endregion
 }

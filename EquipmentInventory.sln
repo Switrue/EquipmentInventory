@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventory.API", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Postgres", "DataAccess.Postgres\DataAccess.Postgres.csproj", "{98123953-D5C2-42E4-A0AB-84F2EB076127}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityToolkit", "SecurityToolkit\SecurityToolkit.csproj", "{81B845B9-E619-461F-8FC4-F7364E588B8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{98123953-D5C2-42E4-A0AB-84F2EB076127}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98123953-D5C2-42E4-A0AB-84F2EB076127}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98123953-D5C2-42E4-A0AB-84F2EB076127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B845B9-E619-461F-8FC4-F7364E588B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B845B9-E619-461F-8FC4-F7364E588B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B845B9-E619-461F-8FC4-F7364E588B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B845B9-E619-461F-8FC4-F7364E588B8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
