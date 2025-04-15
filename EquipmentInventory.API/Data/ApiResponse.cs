@@ -12,5 +12,6 @@ public class ApiResponse
     public static object NotFound(string message) => Create(message);
     public static object BadRequest(string message) => Create(message);
     public static object Unauthorized(string message) => Create(message);
+    public static object Forbidden(string message) => Create(message);
     public static object Ok(string message, object? data = null) => Create(message, data);
 }

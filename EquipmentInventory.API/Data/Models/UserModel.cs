@@ -2,7 +2,7 @@
 
 namespace EquipmentInventory.API.Data.Models;
 
-public class UpdateUser
+public class UserModel
 {
     [StringLength(60)]
     public string? Username { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace EquipmentInventory.API.Data;
+﻿using DataAccess.Postgres.Migration.Models;
+
+namespace EquipmentInventory.API.Data;
 
 public static class ApplicationErrors
 {
@@ -23,17 +25,34 @@ public static class ApplicationErrors
     public const string UserCreated = "Пользователь успешно создан";
 
     /// <summary>
+    /// Техника
+    /// </summary>
+    public const string UniqueNumber = "Номер техники должен быть уникальным";
+    public const string UniqueComputer = "Компьютер уже привязан к другой технике";
+    public const string IncorrectTechniqueType = "Неверный тип техники";
+    public const string IncorrectSupplier = "Неверный поставщик";
+    public const string EmployeeNotFound = "Сотрудник не найден";
+    public const string OfficeNotFound = "Кабинет не найден";
+    public const string ComputerNotFound = "Компьютер не найден";
+    public const string TechniqueAdded = "Техника добавлена";
+
+    /// <summary>
     /// Сегмент, связанный с базой данных
     /// </summary>
     public const string CreationError = "Ошибка при создании";
-    public const string UpdateError = "Ошибка при обновлении";
+    public const string EmptyError = "Контент оказался пуст";
+    public const string UpdateError = "Ошибка сохранения данных";
+    public const string NotFound = "Результат не найден";
     public const string SuccessfullyUpdated = "Данные обновлены";
+    public const string Success = "Успех";
 
     /// <summary>
     /// Серверная часть приложения
     /// </summary>
     public const string ServerError = "Внутренняя ошибка сервера";
+    public const string Unauthorized = "Требуется авторизация";
+    public const string Forbidden = "Доступ запрещен";
     public const string AuthenticationError = "Ошибка аутентификации";
-    public const string EmptyError = "Контент оказался пуст";
-    public const string Success = "Успех";
+
+
 }

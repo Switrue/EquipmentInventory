@@ -6,7 +6,7 @@ public partial class Office
 
     public int Floor { get; set; }
 
-    public int? Number { get; set; }
+    public int Number { get; set; }
 
     public string Name { get; set; } = null!;
 

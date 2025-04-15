@@ -31,6 +31,7 @@ namespace EquipmentInventory.API.Controllers
                 return BadRequest(new { Errors = ModelState });
 
             var user = await _dbContext.Users
+                .AsNoTracking()
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Login == model.Login);
 
@@ -90,6 +91,7 @@ namespace EquipmentInventory.API.Controllers
                 return Unauthorized();
 
             var user = await _dbContext.Users
+                .AsNoTracking()
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Id == userId);
             if (user is null) 

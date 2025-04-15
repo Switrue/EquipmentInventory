@@ -5,7 +5,6 @@ using EquipmentInventory.API.Data.Models;
 using EquipmentInventory.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EquipmentInventory.API.Controllers
 {
@@ -26,7 +25,7 @@ namespace EquipmentInventory.API.Controllers
 
         [Authorize]
         [HttpPost("updateProfile")]
-        public async Task<ActionResult> UpdateUser([FromBody] UpdateUser model)
+        public async Task<ActionResult> UpdateUser([FromBody] UserModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new { Errors = ModelState });
@@ -53,46 +52,6 @@ namespace EquipmentInventory.API.Controllers
             return Ok(ApiResponse.Ok(ApplicationErrors.SuccessfullyUpdated));
         }
 
-        [Authorize(Roles = RoleNames.Admin)]
-        [HttpGet("user")]
-        public async Task<ActionResult<object>> GetUser(long userId)
-        {
-            var user = await _dbContext.Users
-                .Include(u => u.IdRoleNavigation)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-            if (user is null) 
-                return NotFound(ApiResponse.NotFound(ApplicationErrors.UserNotFound));
-
-            var result = new
-            {
-                user.Id,
-                user.Username,
-                user.Surname,
-                role = user.IdRoleNavigation?.Name ?? RoleNames.Default,
-            };
-
-            return Ok(result);
-        }
-
-        [Authorize]
-        [HttpGet("users")]
-        public async Task<ActionResult<IEnumerable<object>>> GetUsers()
-        {
-            var users = await _dbContext.Users
-                .Include(u => u.IdRoleNavigation)
-                .ToListAsync();
-
-            var result = users.Select(user => new
-            {
-                user.Id,
-                user.Username,
-                user.Surname,
-                role = user.IdRoleNavigation?.Name ?? RoleNames.Default
-            });
-
-            return Ok(result);
-        }
-
         [Authorize]
         [HttpGet("image")]
         public async Task<ActionResult> GetUserImage()
@@ -108,7 +67,7 @@ namespace EquipmentInventory.API.Controllers
             return Ok(new { Message = user?.Image });
         }
 
-        private void UpdateUserFields(User user, UpdateUser model)
+        private void UpdateUserFields(User user, UserModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.Username)) user.Username = model.Username;
             if (!string.IsNullOrWhiteSpace(model.Surname)) user.Surname = model.Surname;
