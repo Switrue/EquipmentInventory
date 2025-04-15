@@ -1,6 +1,4 @@
-﻿using DataAccess.Postgres.Migration.Models;
-
-namespace EquipmentInventory.API.Data;
+﻿namespace EquipmentInventory.API.Data;
 
 public static class ApplicationErrors
 {
@@ -35,6 +33,7 @@ public static class ApplicationErrors
     public const string OfficeNotFound = "Кабинет не найден";
     public const string ComputerNotFound = "Компьютер не найден";
     public const string TechniqueAdded = "Техника добавлена";
+    public const string TechniqueUpdated = "Техника обновлена";
 
     /// <summary>
     /// Сегмент, связанный с базой данных

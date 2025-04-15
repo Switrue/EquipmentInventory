@@ -85,6 +85,34 @@ public class TechniqueController : ControllerBase
             return NotFound(ApiResponse.NotFound(ApplicationErrors.NotFound));
     }
 
+    //[Authorize]
+    [HttpPatch("update/{id}")]
+    public async Task<ActionResult> UpdateTechnique(long id, [FromBody] TechniqueModel model)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(new { Errors = ModelState });
+
+        var technique = await _dbContext.Techniques.FindAsync(id);
+        if (technique == null)
+            return NotFound(ApiResponse.NotFound(ApplicationErrors.NotFound));
+
+        var validationResult = await ValidateUpdateModelAsync(model, technique);
+        if (validationResult != null)
+            return validationResult;
+
+        UpdateTechniqueEntity(model, technique);
+
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            return Ok(ApiResponse.Ok(ApplicationErrors.TechniqueUpdated));
+        }
+        catch (DbUpdateException ex)
+        {
+            return HandleDatabaseError(ex);
+        }
+    }
+
     #region Helper Methods
     private async Task<ActionResult> ValidateTechniqueModelAsync(TechniqueModel model)
     {
@@ -173,5 +201,60 @@ public class TechniqueController : ControllerBase
             StatusCodes.Status500InternalServerError,
             ApiResponse.BadRequest(ApplicationErrors.UpdateError)
         );
+    #endregion
+
+    #region Update Helpers
+    private async Task<ActionResult> ValidateUpdateModelAsync(TechniqueModel model, Technique existing)
+    {
+        if (model.Number != existing.Number && await IsNumberExistsAsync(model.Number))
+            return CreateErrorResponse(ApplicationErrors.UniqueNumber);
+
+        if (model.IdComputer != existing.IdComputer && await IsComputerAlreadyAssignedAsync(model.IdComputer))
+            return CreateErrorResponse(ApplicationErrors.UniqueComputer);
+
+        var validationTasks = new List<Task<bool>>
+        {
+            ValidateEntityExistsAsync<TypeTechnique>(model.IdTypeTechnique),
+            ValidateEntityExistsAsync<Supplier>(model.IdSupplier),
+            ValidateOptionalEntityExistsAsync<Member>(model.IdMember),
+            ValidateOptionalEntityExistsAsync<Office>(model.IdOffice),
+            ValidateOptionalEntityExistsAsync<Computer>(model.IdComputer)
+        };
+
+        var validationResults = await Task.WhenAll(validationTasks);
+
+        var errorMessages = new[]
+        {
+            ApplicationErrors.IncorrectTechniqueType,
+            ApplicationErrors.IncorrectSupplier,
+            ApplicationErrors.EmployeeNotFound,
+            ApplicationErrors.OfficeNotFound,
+            ApplicationErrors.ComputerNotFound
+        };
+
+        for (int i = 0; i < validationResults.Length; i++)
+        {
+            if (!validationResults[i])
+                return CreateErrorResponse(errorMessages[i]);
+        }
+
+        return null;
+    }
+
+    private void UpdateTechniqueEntity(TechniqueModel model, Technique entity)
+    {
+        entity.Number = model.Number;
+        entity.IdTypeTechnique = model.IdTypeTechnique;
+        entity.Name = model.Name;
+        entity.IdMember = model.IdMember;
+        entity.IdOffice = model.IdOffice;
+        entity.IdComputer = model.IdComputer;
+        entity.DateOfPurchase = model.DateOfPurchase;
+        entity.UnderRepair = model.UnderRepair;
+        entity.DateOfManufacture = model.DateOfManufacture;
+        entity.IdSupplier = model.IdSupplier;
+        entity.Cost = model.Cost;
+        entity.DateOfUse = model.DateOfUse;
+    }
     #endregion
 }
