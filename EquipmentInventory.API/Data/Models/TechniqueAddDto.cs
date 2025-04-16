@@ -2,19 +2,18 @@
 
 namespace EquipmentInventory.API.Data.Models;
 
-public class TechniqueAddModel
+public class TechniqueAddDto
 {
     [Required]
     [StringLength(30)]
     public string Number { get; set; }
 
-    [Range(1, long.MaxValue)]
+    [Required]
     public long IdTypeTechnique { get; set; }
 
     [Required]
     [StringLength(100)]
     public string Name { get; set; }
-
     public long? IdMember { get; set; }
     public long? IdOffice { get; set; }
     public long? IdComputer { get; set; }
@@ -24,14 +23,12 @@ public class TechniqueAddModel
 
     [Required]
     public DateOnly DateOfManufacture { get; set; }
-
     public DateOnly? DateOfUse { get; set; }
 
-    [Range(1, long.MaxValue)]
+    [Required]
     public long IdSupplier { get; set; }
 
-    [Range(0, float.MaxValue)]
+    [Required]
     public float Cost { get; set; }
-
-    public bool? UnderRepair { get; set; }
+    public bool? UnderRepair { get; set; } = false;
 }

@@ -429,4 +429,7 @@
   <data name="Success" xml:space="preserve">
     <value>Успех</value>
   </data>
+  <data name="DateOfUse" xml:space="preserve">
+    <value>Использования</value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ public class ApiResponse
                 kvp => kvp.Key,
                 kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
             );
-        return Create("Произошла одна или несколько ошибок проверки", errors);
+        return Create(ApplicationErrors.Errors, errors);
     }
 
     public static object NotFound(string message) => Create(message);

@@ -5,7 +5,6 @@ using EquipmentInventory.API.Helpers;
 using EquipmentInventory.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EquipmentInventory.API.Controllers;
 
@@ -26,7 +25,7 @@ public class TechniqueController : ControllerBase
 
     [Authorize]
     [HttpPost("add")]
-    public async Task<ActionResult> AddTechnique([FromBody] TechniqueAddModel model)
+    public async Task<ActionResult> AddTechnique([FromBody] TechniqueAddDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
@@ -40,7 +39,7 @@ public class TechniqueController : ControllerBase
 
     [Authorize]
     [HttpPatch("update/{id}")]
-    public async Task<IActionResult> UpdateTechnique(long id, [FromBody] TechniqueUpdateModel model)
+    public async Task<IActionResult> UpdateTechnique(long id, [FromQuery] TechniqueUpdateDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
@@ -67,44 +66,29 @@ public class TechniqueController : ControllerBase
 
     [Authorize]
     [HttpGet("get")]
-    public async Task<ActionResult<IEnumerable<TechniqueDto>>> GetTechnique(int page = 1, int pageSize = 5)
+    public async Task<ActionResult<IEnumerable<TechniqueDto>>> GetTechnique(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 5,
+        [FromQuery] TechniqueUpdateDto filter = null)
     {
-        page = Math.Max(1, page);
-        pageSize = Math.Clamp(pageSize, 1, 100);
+        try
+        {
+            var query = _techniqueService.ApplyFilter(filter, out int filterCount);
 
-        var query = _dbContext.Techniques
-            .AsNoTracking()
-            .OrderBy(t => t.Id);
+            if (filterCount > 1)
+                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.FiltrationRestriction));
 
-        var items = await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .Select(t => new TechniqueDto(
-                t.Id,
-                t.Number,
-                t.IdTypeTechniqueNavigation.Name,
-                t.Name,
-                t.IdMemberNavigation != null
-                    ? $"{t.IdMemberNavigation.Surname} {t.IdMemberNavigation.Username}"
-                    : null,
-                t.IdOfficeNavigation.Number,
-                t.IdComputerNavigation.Number,
-                t.DateOfPurchase,
-                t.DateOfManufacture,
-                t.DateOfUse,
-                t.IdSupplierNavigation.Name,
-                t.Cost,
-                t.UnderRepair
-            ))
-            .ToListAsync();
+            var result = await _techniqueService.GetPaginatedResults(query, page, pageSize);
 
-        var totalCount = await query.CountAsync();
-        Response.Headers.Append("X-Total-Count", totalCount.ToString());
-
-        if (items.Count > 0)
-            return Ok(items);
-        else
-            return NotFound(ApiResponse.NotFound(ApplicationErrors.NotFound));
+            Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
+            return result.TotalCount > 0
+                ? Ok(result.Items)
+                : NotFound(ApiResponse.NotFound(ApplicationErrors.NotFound));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ApiResponse.BadRequest(ex.Message));
+        }
     }
 
     [Authorize]

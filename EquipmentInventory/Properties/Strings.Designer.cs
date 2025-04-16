@@ -340,6 +340,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Of use.
+        /// </summary>
+        internal static string DateOfUse {
+            get {
+                return ResourceManager.GetString("DateOfUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Role.
         /// </summary>
         internal static string DefaultRole {

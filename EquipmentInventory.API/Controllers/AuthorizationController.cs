@@ -28,7 +28,9 @@ namespace EquipmentInventory.API.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(new { Errors = ModelState });
+            {
+                return ApiResponseHelper.ValidationError(ModelState);
+            }
 
             var user = await _dbContext.Users
                 .AsNoTracking()
@@ -48,7 +50,7 @@ namespace EquipmentInventory.API.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(new { Errors = ModelState });
+                return ApiResponseHelper.ValidationError(ModelState);
 
             if (await _dbContext.Users.AnyAsync(u => u.Login == model.Login))
                 return BadRequest(ApiResponse.BadRequest(ApplicationErrors.LoginAlreadyInUse));

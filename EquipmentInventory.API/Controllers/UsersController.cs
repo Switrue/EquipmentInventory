@@ -28,7 +28,7 @@ namespace EquipmentInventory.API.Controllers
         public async Task<ActionResult> UpdateUser([FromBody] UserModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(new { Errors = ModelState });
+                return ApiResponseHelper.ValidationError(ModelState);
 
             if (!User.TryGetUserId(out var userId))
                 return Unauthorized(ApiResponse.Unauthorized(ApplicationErrors.AuthenticationError));

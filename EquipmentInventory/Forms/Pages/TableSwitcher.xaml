@@ -143,6 +143,7 @@
                                         <StackPanel x:Name="dateContainer" Margin="24 8 24 16">
                                             <RadioButton x:Name="dateAcquisitionRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                             <RadioButton x:Name="dateProductionRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
+                                            <RadioButton x:Name="dateOfUseRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />

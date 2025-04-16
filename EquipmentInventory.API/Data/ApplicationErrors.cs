@@ -34,6 +34,7 @@ public static class ApplicationErrors
     public const string ComputerNotFound = "Компьютер не найден";
     public const string TechniqueAdded = "Техника добавлена";
     public const string TechniqueUpdated = "Техника обновлена";
+    public const string FiltrationRestriction = "Только один фильтр за раз";
 
     /// <summary>
     /// Сегмент, связанный с базой данных
@@ -53,6 +54,5 @@ public static class ApplicationErrors
     public const string Unauthorized = "Требуется авторизация";
     public const string Forbidden = "Доступ запрещен";
     public const string AuthenticationError = "Ошибка аутентификации";
-
-
+    public const string Errors = "Произошла одна или несколько ошибок проверки";
 }

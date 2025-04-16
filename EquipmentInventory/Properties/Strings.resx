@@ -532,4 +532,8 @@
     <value>Success</value>
     <comment>Message</comment>
   </data>
+  <data name="DateOfUse" xml:space="preserve">
+    <value>Of use</value>
+    <comment>Tables</comment>
+  </data>
 </root>

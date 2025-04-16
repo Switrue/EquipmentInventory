@@ -57,6 +57,7 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
         dateExpander.Header = Strings.Date;
         dateAcquisitionRBtn.Content = Strings.Acquisition;
         dateProductionRBtn.Content = Strings.Production;
+        dateOfUseRBtn.Content = Strings.DateOfUse;
         suppliersExpander.Header = Strings.Supplier;
         supNameRBtn.Content = Strings.Name;
         HintAssist.SetHint(templateQueriesCB, Strings.SelectRequest);

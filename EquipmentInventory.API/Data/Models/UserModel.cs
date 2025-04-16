@@ -10,8 +10,7 @@ public class UserModel
     [StringLength(60)]
     public string? Surname { get; set; }
 
-    [StringLength(100, MinimumLength = 6, ErrorMessage = ApplicationErrors.IncorrectPasswordLength)]
+    [StringLength(60, MinimumLength = 6, ErrorMessage = ApplicationErrors.IncorrectPasswordLength)]
     public string? Password { get; set; }
-
     public byte[]? Image { get; set; }
 }

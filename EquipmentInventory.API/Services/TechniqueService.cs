@@ -21,15 +21,8 @@ public class TechniqueService
         _entityValidator = entityValidator;
     }
 
-    public async Task<bool> IsNumberUniqueAsync(string number, long? excludeId = null)
-        => !await _context.Techniques
-            .AnyAsync(t => t.Number == number && (excludeId == null || t.Id != excludeId));
-
-    public async Task<bool> IsComputerAvailableAsync(long computerId, long? excludeId = null)
-        => !await _context.Techniques
-            .AnyAsync(t => t.IdComputer == computerId && (excludeId == null || t.Id != excludeId));
-
-    public async Task<Technique> CreateTechniqueAsync(TechniqueAddModel model)
+    #region Add
+    public async Task<Technique> CreateTechniqueAsync(TechniqueAddDto model)
     {
         var technique = new Technique
         {
@@ -51,8 +44,93 @@ public class TechniqueService
         await _context.SaveChangesAsync();
         return technique;
     }
+    #endregion
 
-    public void UpdateTechnique(Technique existing, TechniqueUpdateModel model)
+    #region Get
+    public IQueryable<Technique> ApplyFilter(TechniqueUpdateDto filter, out int filterCount)
+    {
+        var query = _context.Techniques.AsNoTracking();
+
+        // Проверка количества фильтров
+        var filters = new object?[] {
+            filter?.Number,
+            filter?.IdTypeTechnique,
+            filter?.IdMember,
+            filter?.Name,
+            filter?.IdComputer,
+            filter?.IdOffice,
+            filter?.IdSupplier,
+            filter?.UnderRepair,
+            filter?.DateOfPurchase,
+            filter?.DateOfManufacture,
+            filter?.DateOfUse
+        };
+
+        filterCount = filters.Count(f => f != null);
+
+        // Применение фильтра
+        return filter switch
+        {
+            { Number: { } v } => query.Where(t => t.Number == v),
+            { IdTypeTechnique: { } v } => query.Where(t => t.IdTypeTechnique == v),
+            { Name: { } v } => query.Where(t => t.Name == v),
+            { IdMember: { } v } => query.Where(t => t.IdMember == v),
+            { IdComputer: { } v } => query.Where(t => t.IdComputer == v),
+            { IdOffice: { } v } => query.Where(t => t.IdOffice == v),
+            { IdSupplier: { } v } => query.Where(t => t.IdSupplier == v),
+            { UnderRepair: { } v } => query.Where(t => t.UnderRepair == v),
+            { DateOfPurchase: { } v } => query.Where(t => t.DateOfPurchase == v),
+            { DateOfManufacture: { } v } => query.Where(t => t.DateOfManufacture == v),
+            { DateOfUse: { } v } => query.Where(t => t.DateOfUse == v),
+            { Cost: { } v } => query.Where(t => t.Cost == v),
+            _ => query.OrderBy(t => t.Id)
+        };
+    }
+
+    public async Task<PaginatedResult<TechniqueDto>> GetPaginatedResults(
+        IQueryable<Technique> query,
+        int page,
+        int pageSize)
+    {
+        page = Math.Max(1, page);
+        pageSize = Math.Clamp(pageSize, 1, 100);
+
+        var items = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(t => new TechniqueDto(
+                t.Id,
+                t.Number,
+                t.IdTypeTechniqueNavigation.Name,
+                t.Name,
+                t.IdMemberNavigation != null
+                    ? $"{t.IdMemberNavigation.Surname} {t.IdMemberNavigation.Username}"
+                    : null,
+                t.IdOfficeNavigation.Number,
+                t.IdComputerNavigation.Number,
+                t.DateOfPurchase,
+                t.DateOfManufacture,
+                t.DateOfUse,
+                t.IdSupplierNavigation.Name,
+                t.Cost,
+                t.UnderRepair
+            ))
+            .ToListAsync();
+
+        var totalCount = await query.CountAsync();
+
+        return new PaginatedResult<TechniqueDto>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
+    }
+    #endregion
+
+    #region Update
+    public void UpdateTechnique(Technique existing, TechniqueUpdateDto model)
     {
         if (model.Number != null) existing.Number = model.Number;
         if (model.IdTypeTechnique.HasValue) existing.IdTypeTechnique = model.IdTypeTechnique.Value;
@@ -67,9 +145,10 @@ public class TechniqueService
         if (model.Cost.HasValue) existing.Cost = model.Cost.Value;
         if (model.UnderRepair.HasValue) existing.UnderRepair = model.UnderRepair.Value;
     }
+    #endregion
 
     #region Validation Helpers
-    public async Task<ActionResult> ValidateAddModelAsync(TechniqueAddModel model)
+    public async Task<ActionResult> ValidateAddModelAsync(TechniqueAddDto model)
     {
         if (!await IsNumberUniqueAsync(model.Number))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueNumber);
@@ -96,7 +175,7 @@ public class TechniqueService
         return error != null ? ApiResponseHelper.BadRequest(error) : null;
     }
 
-    public async Task<ActionResult> ValidateUpdateModelAsync(TechniqueUpdateModel model, Technique existing)
+    public async Task<ActionResult> ValidateUpdateModelAsync(TechniqueUpdateDto model, Technique existing)
     {
         if (model.Number != null && !await IsNumberUniqueAsync(model.Number, existing.Id))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueNumber);
@@ -122,5 +201,13 @@ public class TechniqueService
         var error = validations.FirstOrDefault(v => !v.Result).Error;
         return error != null ? ApiResponseHelper.BadRequest(error) : null;
     }
+
+    public async Task<bool> IsNumberUniqueAsync(string number, long? excludeId = null)
+        => !await _context.Techniques
+            .AnyAsync(t => t.Number == number && (excludeId == null || t.Id != excludeId));
+
+    public async Task<bool> IsComputerAvailableAsync(long computerId, long? excludeId = null)
+        => !await _context.Techniques
+            .AnyAsync(t => t.IdComputer == computerId && (excludeId == null || t.Id != excludeId));
     #endregion
 }
