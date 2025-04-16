@@ -2,7 +2,7 @@
 
 namespace EquipmentInventory.API.Data.Models;
 
-public class TechniqueModel
+public class TechniqueAddModel
 {
     [Required]
     [StringLength(30)]
@@ -33,5 +33,5 @@ public class TechniqueModel
     [Range(0, float.MaxValue)]
     public float Cost { get; set; }
 
-    public bool UnderRepair { get; set; }
+    public bool? UnderRepair { get; set; }
 }

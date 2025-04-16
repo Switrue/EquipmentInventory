@@ -43,6 +43,7 @@ public static class ApplicationErrors
     public const string UpdateError = "Ошибка сохранения данных";
     public const string NotFound = "Результат не найден";
     public const string SuccessfullyUpdated = "Данные обновлены";
+    public const string DeleteSuccessfully = "Успешно удалено";
     public const string Success = "Успех";
 
     /// <summary>
