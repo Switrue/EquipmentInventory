@@ -8,22 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-    
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/UserStyles.xaml" />
     </UserControl.Resources>
-    
     <!--#endregion-->
     
     <Grid>
         <!--#region Tab body-->
-        
         <StackPanel>
             <TextBlock x:Name="titleTab" Style="{StaticResource SetupTabHeader}" />
             <TextBox x:Name="codeTxtB" Margin="5" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" />
             <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Click="ApplyCode_Click" />
         </StackPanel>
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

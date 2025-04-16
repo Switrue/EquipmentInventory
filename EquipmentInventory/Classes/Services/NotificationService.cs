@@ -7,8 +7,8 @@ class NotificationService
 {
     private Snackbar _notification;
 
-    public NotificationService(Snackbar notification) =>
-        _notification = notification;
+    public NotificationService(Snackbar notification) 
+        => _notification = notification;
 
     public void Show(string message)
     {

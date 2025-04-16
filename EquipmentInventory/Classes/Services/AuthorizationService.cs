@@ -46,7 +46,5 @@ public static class AuthorizationService
     }
 
     public static void SetAuthorizationToken(string jwt)
-    {
-        App.SetAuthorizationToken(jwt);
-    }
+        => App.SetAuthorizationToken(jwt);
 }

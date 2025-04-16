@@ -17,6 +17,7 @@ public class RegisterModel
     public string Login { get; set; }
 
     [Required]
+    [StringLength(60, MinimumLength = 6, ErrorMessage = ApplicationErrors.IncorrectPasswordLength)]
     public string Password { get; set; }
 
     public byte[]? Image { get; set; }

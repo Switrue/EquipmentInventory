@@ -17,19 +17,13 @@ public partial class ProgramInformation : UserControl
     }
 
     #region Load
-
     private void InitializeParams()
     {
         var programInformationService = new ProgramInformationService();
         programInformationService.RegisterControls(titleTextGroupBox, descriptionTxtB);
         DataContext = new ProgramInformationViewModel(programInformationService); ;
     }
-
     #endregion
-
-    #region Actions
 
     private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Focus();
-
-    #endregion
 }

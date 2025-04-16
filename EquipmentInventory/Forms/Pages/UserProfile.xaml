@@ -11,13 +11,12 @@
              MouseDown="Page_MouseDown"
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-    
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Styles/UserStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <Style TargetType="GroupBox" BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                 <Setter Property="Margin" Value="0 20 0 0" />
                 <Setter Property="Padding" Value="20" />
@@ -28,7 +27,7 @@
                 <Setter Property="materialDesign:GroupBoxAssist.HeaderPadding" Value="5" />
                 <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp4" />
             </Style>
-            
+
             <Style TargetType="materialDesign:PackIcon" >
                 <Setter Property="Width" Value="32" />
                 <Setter Property="Height" Value="32" />
@@ -43,7 +42,6 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
     <!--#endregion-->
     
     <Grid>
@@ -61,7 +59,6 @@
                 </Grid.RowDefinitions>
 
                 <!--#region User profile-->
-
                 <StackPanel Grid.Row="0" Grid.Column="1">
                     <WrapPanel Orientation="Vertical" Margin="0,20" VerticalAlignment="Center">
                         <TextBlock x:Name="userTitleTxtBl"
@@ -78,10 +75,8 @@
                 </StackPanel>
 
                 <!--#region GroupBox-->
-
                 <StackPanel Grid.Row="1" Grid.Column="1">
                     <!--#region Image-->
-
                     <GroupBox x:Name="imageGrB">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -102,11 +97,9 @@
                             </StackPanel>
                         </UniformGrid>
                     </GroupBox>
-
                     <!--#endregion-->
 
                     <!--#region Data-->
-
                     <GroupBox x:Name="dataGrB">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -149,12 +142,9 @@
                             </UniformGrid>
                         </UniformGrid>
                     </GroupBox>
-
                     <!--#endregion-->
                 </StackPanel>
-
                 <!--#endregion-->
-
                 <!--#endregion-->
             </Grid>
         </ScrollViewer>

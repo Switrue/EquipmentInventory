@@ -23,13 +23,11 @@
             </Grid.RowDefinitions>
 
             <!-- #region Header -->
-
             <Border x:Name="windowBorder" Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
                 <StackPanel Orientation="Vertical" Margin="2.5 2.5 2.5 12">
                     <Grid>
                         <WrapPanel HorizontalAlignment="Left">
                             <!-- #region Menu -->
-
                             <StackPanel VerticalAlignment="Center">
                                 <Menu IsMainMenu="True" 
                                       FontSize="{DynamicResource DefaultFontSize}" 
@@ -60,13 +58,11 @@
                                     </MenuItem>
                                 </Menu>
                             </StackPanel>
-
                             <!-- #endregion -->
                         </WrapPanel>
 
                         <WrapPanel HorizontalAlignment="Right">
                             <!-- #region Manager Account -->
-
                             <StackPanel VerticalAlignment="Center" MinWidth="60">
                                 <Button x:Name="manageAccountBtn" 
                                         Cursor="Hand"
@@ -103,46 +99,37 @@
                                     </StackPanel>
                                 </Popup>
                             </StackPanel>
-
                             <!-- #endregion -->
 
                             <!-- #region Window options -->
-
                             <Button x:Name="collapseBtn" Style="{StaticResource CollapseButton}" Command="{Binding MinimizeCommand}" />
                             <Button x:Name="maximizeBtn"
                                     Style="{StaticResource MaximizeButton}" 
                                     Content="{Binding WindowState.MaximizeButtonContent}" 
                                     Command="{Binding MaximizeCommand}" />
                             <Button x:Name="closeBtn" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" />
-
                             <!-- #endregion -->
                         </WrapPanel>
                     </Grid>
 
                     <Grid>
                         <!-- #region Control panel -->
-                        
                         <StackPanel HorizontalAlignment="Stretch" Margin="4 0 10 0">
                             <ContentControl x:Name="controlPanelFrame" IsTabStop="False" HorizontalAlignment="Left" />
                         </StackPanel>
-                        
                         <!-- #endregion -->
                     </Grid>
                 </StackPanel>
             </Border>
-
             <!-- #endregion -->
 
             <!--#region Body-->
-
             <Grid Grid.Row="1">
                 <ContentControl x:Name="mainFrame" IsTabStop="False" />
             </Grid>
-
             <!-- #endregion -->
 
             <!-- #region Footer -->
-
             <Border Grid.Row="2" 
                     Style="{StaticResource FooterBorder}" 
                     CornerRadius="{Binding WindowState.FooterCornerRadius}">
@@ -172,7 +159,6 @@
                     </Rectangle>
                 </Grid>
             </Border>
-
             <!-- #endregion -->
         </Grid>
     </Border> 

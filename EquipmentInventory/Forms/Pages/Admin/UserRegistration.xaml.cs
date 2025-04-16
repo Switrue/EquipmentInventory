@@ -25,7 +25,6 @@ public partial class UserRegistration : UserControl
     }
 
     #region Load
-
     private void InitializeUI()
     {
         changeImageBtn.Content = Strings.SelectImage;
@@ -42,24 +41,23 @@ public partial class UserRegistration : UserControl
     {
         notification = new NotificationService(notificationSnackbar);
     }
-
     #endregion
 
     #region Events
+    private void Page_MouseDown(object sender, MouseButtonEventArgs e) 
+        => ClearFocus();
 
-    private void Page_MouseDown(object sender, MouseButtonEventArgs e) => ClearFocus();
+    private void ChangeImage_Click(object sender, System.Windows.RoutedEventArgs e) 
+        => UserAccountService.SelectTheImage(userImage);
 
-    private void ChangeImage_Click(object sender, System.Windows.RoutedEventArgs e) => UserAccountService.SelectTheImage(userImage);
+    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) 
+        => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
 
-    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
-
-    private void PasswordGeneration_Click(object sender, System.Windows.RoutedEventArgs e) =>
-        passwordFieldTxtB.Text = UserAccountService.GetGeneratedPassword();
-
+    private void PasswordGeneration_Click(object sender, System.Windows.RoutedEventArgs e) 
+        => passwordFieldTxtB.Text = UserAccountService.GetGeneratedPassword();
     #endregion
 
     #region Registration
-
     private async void CreateAccount_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         if (ValidationHelper.AnyTextBoxIsEmpty(textFieldContainer))
@@ -102,6 +100,5 @@ public partial class UserRegistration : UserControl
         Focus();
         TextFieldHelper.ClearAllTextFields(textFieldContainer);
     }
-
     #endregion
 }

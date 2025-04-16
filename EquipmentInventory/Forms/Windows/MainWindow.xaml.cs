@@ -32,7 +32,6 @@ public partial class MainWindow : Window, IMainWindow
     }
 
     #region Virtual methods
-
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
@@ -54,11 +53,9 @@ public partial class MainWindow : Window, IMainWindow
             AboutTheProgramm_Click(this, null);
         }
     }
-
     #endregion
 
     #region Load
-
     private void InitializeUI()
     {
         SetUsernameOnTheMainWindow();
@@ -93,16 +90,13 @@ public partial class MainWindow : Window, IMainWindow
     }
 
     public void SetUserImageOnTgeMainWindow()
-    {
-        UserAccountService.SetImageSource(App.user.Image, userImage);
-    }
+        => UserAccountService.SetImageSource(App.user.Image, userImage);
 
-    public void SaveUserPanelObject(UserPanel userPanel) => _userPanel = userPanel;
-
+    public void SaveUserPanelObject(UserPanel userPanel) 
+        => _userPanel = userPanel;
     #endregion
 
     #region Window management
-
     private async void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ClickCount == 2)
@@ -124,11 +118,9 @@ public partial class MainWindow : Window, IMainWindow
             WindowState = WindowState.Normal;
         }
     }
-
     #endregion
 
     #region Resizing a window
-
     private void ResizeHandle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         isResizing = true;
@@ -163,11 +155,9 @@ public partial class MainWindow : Window, IMainWindow
             }
         }
     }
-
     #endregion
 
     #region Click
-
     private void Logout_Click(object sender, EventArgs e)
     {
         bool result = CustomMessageBoxHelper.Show(Strings.SignOut, Strings.SignOutDescription, true);
@@ -179,11 +169,14 @@ public partial class MainWindow : Window, IMainWindow
         }
     }
 
-    private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) => ToggleActionsPopup();
+    private void ShowProfileOptions_Click(object sender, RoutedEventArgs e) 
+        => ToggleActionsPopup();
 
-    private void Settings_Click(object sender, RoutedEventArgs e) => WindowService.ShowDialogWindow(new ProgramSettings());
+    private void Settings_Click(object sender, RoutedEventArgs e) 
+        => WindowService.ShowDialogWindow(new ProgramSettings());
 
-    private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) => UpdatePageWithDefaultSettings(new ProgramInformation());
+    private void AboutTheProgramm_Click(object sender, RoutedEventArgs e) 
+        => UpdatePageWithDefaultSettings(new ProgramInformation());
 
     private void Profile_Click(object sender, EventArgs e)
     {
@@ -192,21 +185,18 @@ public partial class MainWindow : Window, IMainWindow
     } 
 
     private void ToggleActionsPopup()
-    {
-        actionsPopup.IsOpen = !actionsPopup.IsOpen;
-    }
-
+        => actionsPopup.IsOpen = !actionsPopup.IsOpen;
     #endregion
 
     #region Change frame
-
     public void ChangeControlPanelFrameContent(UserControl newContent)
     {
         _userPanel = (UserPanel)newContent;
         ChangeFrameContent(controlPanelFrame, newContent);
     }
 
-    public void ChangeMainFrameContent(UserControl newContent) => ChangeFrameContent(mainFrame, newContent);
+    public void ChangeMainFrameContent(UserControl newContent)
+        => ChangeFrameContent(mainFrame, newContent);
 
     private void UpdatePageWithDefaultSettings(UserControl newContent)
     {
@@ -215,9 +205,6 @@ public partial class MainWindow : Window, IMainWindow
     }
 
     private void ChangeFrameContent(ContentControl frame, UserControl newContent)
-    {
-        frame.Content = newContent;
-    }
-
+        => frame.Content = newContent;
     #endregion
 }

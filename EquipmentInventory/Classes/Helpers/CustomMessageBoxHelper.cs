@@ -12,12 +12,8 @@ public class CustomMessageBoxHelper
     }
 
     public static bool Show(string title, string message)
-    {
-        return Show(title, message, false);
-    }
+        => Show(title, message, false);
 
     public static bool Show(string message)
-    {
-        return Show(string.Empty, message, false);
-    }
+        => Show(string.Empty, message, false);
 }

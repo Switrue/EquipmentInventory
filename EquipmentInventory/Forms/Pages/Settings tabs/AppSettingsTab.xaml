@@ -8,11 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/UserStyles.xaml" />
     </UserControl.Resources>
-
     <!--#endregion-->
 
     <Grid>
@@ -26,7 +24,6 @@
                       SelectedValuePath="Code" />
             <Button x:Name="applyCodeBtn" HorizontalAlignment="Right" Command="{Binding ApplyLanguageCommand}" />
         </StackPanel>
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

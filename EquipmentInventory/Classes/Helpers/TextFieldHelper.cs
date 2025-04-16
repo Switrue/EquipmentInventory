@@ -29,9 +29,7 @@ public static class TextFieldHelper
     }
 
     public static void ClearTextField(Control element)
-    {
-        SetTextField(element);
-    }
+        => SetTextField(element);
 
     public static void ClearText(Control control)
     {

@@ -22,7 +22,6 @@
             </Grid.RowDefinitions>
 
             <!--#region Header-->
-
             <Border Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
                 <Grid Margin="2.5">
                     <TextBlock x:Name="windowTitle" Style="{StaticResource WindowTitleTextBlock}" />
@@ -32,11 +31,9 @@
                     </WrapPanel>
                 </Grid>
             </Border>
-
             <!--#endregion-->
 
             <!--#region Body-->
-
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -79,7 +76,6 @@
                             Click="Login_Click" />
                 </StackPanel>
             </Grid>
-
             <!--#endregion-->
         </Grid>
     </Border>

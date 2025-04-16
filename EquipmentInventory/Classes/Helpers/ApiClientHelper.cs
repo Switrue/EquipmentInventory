@@ -12,37 +12,67 @@ namespace EquipmentInventory.Classes.Helpers;
 
 public static class ApiClientHelper
 {
-    public static async Task<TResponse> PostAsync<TRequest, TResponse>(
+    // Основные методы для запросов с телом
+    public static Task<TResponse> PostAsync<TRequest, TResponse>(
         string endpoint,
         TRequest requestData,
         Action<string> onError = null)
+        => SendRequestAsync<TRequest, TResponse>(
+            HttpMethod.Post,
+            endpoint,
+            requestData,
+            onError
+        );
+
+    public static Task<TResponse> PatchAsync<TRequest, TResponse>(
+        string endpoint,
+        TRequest requestData,
+        Action<string> onError = null)
+        => SendRequestAsync<TRequest, TResponse>(
+            new HttpMethod("PATCH"),
+            endpoint,
+            requestData,
+            onError
+        );
+
+    // Основные методы для запросов без тела
+    public static Task<TResponse> GetAsync<TResponse>(
+        string endpoint,
+        Action<string> onError = null)
+        => SendRequestAsync<TResponse>(
+            HttpMethod.Get,
+            endpoint,
+            onError
+        );
+
+    public static Task<TResponse> DeleteAsync<TResponse>(
+        string endpoint,
+        Action<string> onError = null)
+        => SendRequestAsync<TResponse>(
+            HttpMethod.Delete,
+            endpoint,
+            onError
+        );
+
+    // Общая логика для запросов c телом
+    private static async Task<TResponse> SendRequestAsync<TRequest, TResponse>(
+        HttpMethod method,
+        string endpoint,
+        TRequest requestData,
+        Action<string> onError)
     {
         try
         {
             var json = JsonConvert.SerializeObject(requestData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await App.ApiClient.PostAsync(endpoint, content);
-
-            if (response.IsSuccessStatusCode)
+            var request = new HttpRequestMessage(method, endpoint)
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<TResponse>(responseContent);
-            }
+                Content = content
+            };
 
-            var errorJson = await response.Content.ReadAsStringAsync();
-            var errorMessage = ParseError(errorJson);
-
-            if (onError != null)
-            {
-                onError.Invoke(errorMessage);
-            }
-            else
-            {
-                DefaultErrorHandler(errorMessage);
-            }
-
-            return default;
+            var response = await App.ApiClient.SendAsync(request);
+            return await ProcessResponseAsync<TResponse>(response, onError);
         }
         catch (HttpRequestException ex)
         {
@@ -56,33 +86,16 @@ public static class ApiClientHelper
         }
     }
 
-    public static async Task<TResponse> GetAsync<TResponse>(
+    // Общая логика для запросов без тела
+    private static async Task<TResponse> SendRequestAsync<TResponse>(
+        HttpMethod method,
         string endpoint,
-        Action<string> onError = null)
+        Action<string> onError)
     {
         try
         {
-            var response = await App.ApiClient.GetAsync(endpoint);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<TResponse>(responseContent);
-            }
-
-            var errorJson = await response.Content.ReadAsStringAsync();
-            var errorMessage = ParseError(errorJson);
-
-            if (onError != null)
-            {
-                onError.Invoke(errorMessage);
-            }
-            else
-            {
-                DefaultErrorHandler(errorMessage);
-            }
-
-            return default;
+            var response = await App.ApiClient.SendAsync(new HttpRequestMessage(method, endpoint));
+            return await ProcessResponseAsync<TResponse>(response, onError);
         }
         catch (HttpRequestException ex)
         {
@@ -94,6 +107,26 @@ public static class ApiClientHelper
             HandleUnexpectedError(ex);
             return default;
         }
+    }
+
+    // Общая обработка ответа
+    private static async Task<TResponse> ProcessResponseAsync<TResponse>(
+        HttpResponseMessage response,
+        Action<string> onError)
+    {
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TResponse>(responseContent);
+        }
+
+        var errorJson = await response.Content.ReadAsStringAsync();
+        var errorMessage = ParseError(errorJson);
+
+        if (onError != null) onError.Invoke(errorMessage);
+        else DefaultErrorHandler(errorMessage);
+
+        return default;
     }
 
     // Парсинг ошибок (универсальный)

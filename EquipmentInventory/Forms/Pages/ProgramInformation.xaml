@@ -17,7 +17,6 @@
         </Grid.ColumnDefinitions>
 
         <!--#region Program information block-->
-        
         <StackPanel Grid.Column="0" Background="{StaticResource Background}">
             <ListView x:Name="informationListV"
                       Focusable="False"
@@ -39,7 +38,7 @@
         </StackPanel>
         
         <Border BorderBrush="{StaticResource SecondaryColor}" BorderThickness="2" Width="2" HorizontalAlignment="Right" />
-        
+
         <Grid Grid.Column="1" VerticalAlignment="Top">
             <GroupBox x:Name="titleTextGroupBox"
                       Margin="16"
@@ -64,7 +63,6 @@
                          Foreground="{StaticResource TextColor}" />
             </GroupBox>
         </Grid>
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

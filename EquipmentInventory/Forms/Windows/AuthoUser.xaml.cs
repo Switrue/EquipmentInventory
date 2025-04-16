@@ -27,7 +27,6 @@ public partial class AuthoUser : Window
     }
 
     #region Load
-
     private void InitializeUI()
     {
         windowTitle.Text = Strings.AuthoTitle;
@@ -44,23 +43,20 @@ public partial class AuthoUser : Window
     {
         DataContext = new WindowManagementViewModel(new WindowService(this, new WindowStateHandler()));
     }
-
     #endregion
 
     #region Window management
-
-    private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
+    private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
+        => DragMove();
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
         Keyboard.ClearFocus();
         TextFieldHelper.ClearAllTextFields(textFieldContainer);
     }
-
     #endregion
 
     #region Authorization
-
     private async void Login_Click(object sender, EventArgs e)
     {
         if (ValidationHelper.AnyTextBoxIsEmpty(textFieldContainer))
@@ -92,14 +88,13 @@ public partial class AuthoUser : Window
             CustomMessageBoxHelper.Show(Strings.LoginError, Strings.LoginErrorDescription);
         }
     }
-
     #endregion
 
     #region Valid changed
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) 
+        => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
 
-    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
-
-    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) => ValidationHelper.IsPasswordBoxEmpty((PasswordBox)sender);
-
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        => ValidationHelper.IsPasswordBoxEmpty((PasswordBox)sender);
     #endregion
 }

@@ -25,17 +25,15 @@ public class WindowStateHandler : IWindowState
             OnPropertyChanged(nameof(FooterCornerRadius));
         }
     }
-    public string MaximizeButtonContent => 
-        IsMaximized ? "WindowRestore" : "WindowMaximize";
-    public Visibility ResizeMarkerVisibility => 
-        IsMaximized ? Visibility.Collapsed : Visibility.Visible;
-    public CornerRadius WindowCornerRadius => 
-        IsMaximized ? new CornerRadius(0) : new CornerRadius(10);
-    public CornerRadius FooterCornerRadius => 
-        IsMaximized ? new CornerRadius(0) : new CornerRadius(0, 0, 10, 10);
+    public string MaximizeButtonContent
+        => IsMaximized ? "WindowRestore" : "WindowMaximize";
+    public Visibility ResizeMarkerVisibility
+        => IsMaximized ? Visibility.Collapsed : Visibility.Visible;
+    public CornerRadius WindowCornerRadius 
+        => IsMaximized ? new CornerRadius(0) : new CornerRadius(10);
+    public CornerRadius FooterCornerRadius
+        => IsMaximized ? new CornerRadius(0) : new CornerRadius(0, 0, 10, 10);
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

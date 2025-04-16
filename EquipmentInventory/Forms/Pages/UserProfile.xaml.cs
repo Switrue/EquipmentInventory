@@ -32,7 +32,6 @@ public partial class UserProfile : UserControl
     }
 
     #region Load
-
     private void InitializeUI()
     {
         SetUserInfo();
@@ -63,22 +62,26 @@ public partial class UserProfile : UserControl
         userTitleTxtBl.Text = string.IsNullOrWhiteSpace(username) ? Strings.DefaultUserName : username;
         userRoleTxtBl.Text = App.user.Role ?? Strings.DefaultRole;
     }
-
     #endregion
 
     #region Events
+    private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) 
+        => ClearFocus();
 
-    private void Page_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => ClearFocus();
+    private void CancelSaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) 
+        => DisableTextFields();
 
-    private void CancelSaveUserData_Click(object sender, System.Windows.RoutedEventArgs e) => DisableTextFields();
+    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) 
+        => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
 
-    private void ValidBox_TextChanged(object sender, TextChangedEventArgs e) => ValidationHelper.IsTextBoxEmpty((TextBox)sender);
+    private void EditUsername_Click(object sender, RoutedEventArgs e) 
+        => IncludeTextFields(sender, usernameContainer);
 
-    private void EditUsername_Click(object sender, RoutedEventArgs e) => IncludeTextFields(sender, usernameContainer);
+    private void EditUserPassword_Click(object sender, RoutedEventArgs e) 
+        => IncludeTextFields(sender, userPasswordContainer);
 
-    private void EditUserPassword_Click(object sender, RoutedEventArgs e) => IncludeTextFields(sender, userPasswordContainer);
-
-    private void ChangeImage_Click(object sender, RoutedEventArgs e) => UserAccountService.SelectTheImage(userImage);
+    private void ChangeImage_Click(object sender, RoutedEventArgs e) 
+        => UserAccountService.SelectTheImage(userImage);
 
     private async void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e)
     {
@@ -123,11 +126,9 @@ public partial class UserProfile : UserControl
             (Button)sender,
             async () => { await Update(userUpdate); });
     }
-
     #endregion
 
     #region Methods
-
     private async Task Update(RegisterRequest userUpdate)
     {
         var result = await UsersRequest.UpdateUserProfile(userUpdate);
@@ -185,6 +186,5 @@ public partial class UserProfile : UserControl
         TextFieldHelper.ToggleTextBoxEnabledStateInPanel(userDataContainer, false);
         ClearFocus();
     }
-
     #endregion
 }

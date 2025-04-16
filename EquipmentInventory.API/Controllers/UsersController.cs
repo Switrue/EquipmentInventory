@@ -24,7 +24,7 @@ namespace EquipmentInventory.API.Controllers
         }
 
         [Authorize]
-        [HttpPost("updateProfile")]
+        [HttpPatch("update-me")]
         public async Task<ActionResult> UpdateUser([FromBody] UserModel model)
         {
             if (!ModelState.IsValid)
@@ -53,7 +53,7 @@ namespace EquipmentInventory.API.Controllers
         }
 
         [Authorize]
-        [HttpGet("image")]
+        [HttpGet("image-me")]
         public async Task<ActionResult> GetUserImage()
         {
             if (!User.TryGetUserId(out var userId))

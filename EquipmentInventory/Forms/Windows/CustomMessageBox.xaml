@@ -16,7 +16,6 @@
         MouseDown="Window_MouseDown"
         MinWidth="400" MinHeight="200">
     <!--#region Styles-->
-    
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="Button" BasedOn="{StaticResource DefaultButton}">
@@ -25,7 +24,6 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    
     <!--#endregion-->
     
     <Border Style="{StaticResource WindowBorder}">
@@ -36,7 +34,6 @@
             </Grid.RowDefinitions>
 
             <!-- #region Header -->
-
             <Border Grid.Row="0" Style="{StaticResource TitleBarBorder}" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
                 <Grid Margin="2.5">
                     <TextBlock x:Name="customMessageBoxTitle" Style="{StaticResource WindowTitleTextBlock}" />
@@ -45,11 +42,9 @@
                     </WrapPanel>
                 </Grid>
             </Border>
-
             <!-- #endregion -->
 
             <!-- #region Body -->
-
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -76,7 +71,6 @@
                     <Button x:Name="falseBtn" Click="ReturnFalse_Click" Visibility="Collapsed" />
                 </WrapPanel>
             </Grid>
-
             <!-- #endregion -->
         </Grid>
     </Border>

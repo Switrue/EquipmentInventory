@@ -17,5 +17,6 @@ public partial class Inventory : UserControl
         _mainTableSwitcher = mainTableSwitcher;
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e) => _mainTableSwitcher.TriggerANotification("Inv");
+    private void Button_Click(object sender, RoutedEventArgs e) 
+        => _mainTableSwitcher.TriggerANotification("Inv");
 }

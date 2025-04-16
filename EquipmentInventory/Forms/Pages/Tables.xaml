@@ -9,7 +9,6 @@
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-    
     <UserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}">
@@ -46,7 +45,6 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
     <!--#endregion-->
     
     <Grid>
@@ -64,10 +62,8 @@
             </Grid>
 
             <!--#region Cards-->
-            
             <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
                 <!-- #region Сard archive -->
-
                 <materialDesign:Card>
                     <Grid>
                         <StackPanel>
@@ -88,11 +84,9 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-
                 <!-- #endregion -->
 
                 <!-- #region Card inventory -->
-
                 <materialDesign:Card>
                     <Grid>
                         <StackPanel>
@@ -113,13 +107,10 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-
                 <!-- #endregion -->
             </WrapPanel>
-            
             <!--#endregion-->
         </StackPanel>
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

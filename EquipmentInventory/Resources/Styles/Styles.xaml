@@ -6,7 +6,6 @@
     </ResourceDictionary.MergedDictionaries>
     
     <!--#region General-->
-    
     <Style x:Key="ImageHoverStyle" TargetType="Image">
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
         <Setter Property="RenderTransform">
@@ -131,11 +130,9 @@
         <Setter Property="Background" Value="{StaticResource Foreground}" />
         <Setter Property="MessageQueue" Value="{materialDesign:MessageQueue}" />
     </Style>
-
     <!--#endregion-->
     
     <!--#region DataTemplate-->
-    
     <DataTemplate x:Key="IconTemplateSize">
         <materialDesign:PackIcon Kind="{Binding Kind}" Width="{Binding Size}" Height="{Binding Size}" />
     </DataTemplate>
@@ -143,11 +140,9 @@
     <DataTemplate x:Key="IconTemplate">
         <materialDesign:PackIcon Kind="{Binding}" />
     </DataTemplate>
-    
     <!--#endregion-->
 
     <!--#region Window-->
-
     <Style x:Key="WindowBorder" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource GradientBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource Circuit}" />
@@ -156,7 +151,6 @@
     </Style>
 
     <!--#region Title bar-->
-
     <Style x:Key="WindowTitleTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBodyMediumTextBlock}">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="TextAlignment" Value="Center" />
@@ -194,17 +188,13 @@
         <Setter Property="Content" Value="Close" />
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="{StaticResource AccentColor}" />
     </Style>
-    
     <!--#endregion-->
     
     <!--#region Footer-->
-
     <Style x:Key="FooterBorder" TargetType="Border">
         <Setter Property="CornerRadius" Value="0 0 10 10" />
         <Setter Property="Background" Value="{StaticResource Foreground}" />
     </Style>
-    
     <!--#endregion-->
-    
     <!--#endregion-->
 </ResourceDictionary>

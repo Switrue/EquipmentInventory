@@ -36,7 +36,6 @@ public partial class UserPanel : UserControl, IMainPanel
     }
 
     #region Load
-
     private void InitializeParams()
     {
         var tabMapping = new Dictionary<TabType, object>
@@ -66,12 +65,11 @@ public partial class UserPanel : UserControl, IMainPanel
             dictionariesRb.Visibility = Visibility.Collapsed;
         }
     }
-
     #endregion
 
     #region Control panel
-
-    private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e) => actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
+    private void DisplayTableOptions_Mouse(object sender, MouseEventArgs e) 
+        => actionsPopupRb.IsOpen = !actionsPopupRb.IsOpen;
 
     public void Archive_Click(object sender, RoutedEventArgs e)
     {
@@ -140,6 +138,5 @@ public partial class UserPanel : UserControl, IMainPanel
             child.IsChecked = false;
         }
     }
-
     #endregion
 }

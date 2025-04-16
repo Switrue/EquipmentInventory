@@ -11,7 +11,6 @@
              MouseDown="Page_MouseDown"
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-    
     <UserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
@@ -19,7 +18,7 @@
                 <Setter Property="Background" Value="{StaticResource Background}" />
                 <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
             </Style>
-            
+
             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                 <Setter Property="Margin" Value="0 0 5 0" />
                 <Setter Property="IsReadOnly" Value="True" />
@@ -48,7 +47,6 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
     <!--#endregion-->
     
     <Grid>
@@ -58,7 +56,6 @@
         </Grid.ColumnDefinitions>
 
         <!--#region Search panel-->
-        
         <materialDesign:DrawerHost x:Name="searchPanelDrawerHost" Grid.Column="0" OpenMode="Standard" IsLeftDrawerOpen="True">
             <materialDesign:DrawerHost.Style>
                 <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
@@ -80,7 +77,6 @@
                         </Grid.RowDefinitions>
 
                         <!--#region Search-->
-
                         <StackPanel Grid.Row="0">
                             <DatePicker x:Name="searchTxtB"
                                         materialDesign:TextFieldAssist.HasLeadingIcon="True"
@@ -93,11 +89,9 @@
                                         Foreground="{StaticResource TextColor}"
                                         Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                         </StackPanel>
-
                         <!--#endregion-->
 
                         <!--#region Filters-->
-
                         <UniformGrid x:Name="filterButtonUnit" Grid.Row="1" Margin="0 15 0 0" Columns="2">
                             <Button x:Name="viewFiltersBtn"
                                     Tag="true"
@@ -156,11 +150,9 @@
                                 </StackPanel>
                             </materialDesign:Card>
                         </ScrollViewer>
-
                         <!-- #endregion -->
 
                         <!--#region Control panel-->
-
                         <StackPanel Grid.Row="3">
                             <materialDesign:DrawerHost Margin="0 0 0 10" OpenMode="Standard" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
                                 <materialDesign:DrawerHost.Style>
@@ -236,7 +228,6 @@
                                         Click="CleanTheForm_Click" />
                             </Grid>
                         </StackPanel>
-
                         <!--#endregion-->
                     </Grid>
                     <Border Background="{StaticResource SecondaryColor}" HorizontalAlignment="Right" Width="2" />
@@ -249,16 +240,13 @@
                               Click="ToggleGridBtn_Click" />
             </StackPanel>
         </materialDesign:DrawerHost>
-
         <!--#endregion-->
 
         <!--#region Table-->
-
         <Grid Grid.Column="1">
             <Frame x:Name="tableFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
             <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.Column="1" Margin="-44 0 0 0" />
         </Grid>
-
         <!--#endregion-->
     </Grid>
 </UserControl>

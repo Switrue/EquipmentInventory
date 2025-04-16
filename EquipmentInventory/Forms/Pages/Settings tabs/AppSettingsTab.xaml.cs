@@ -21,7 +21,6 @@ public partial class AppSettingsTab : UserControl
     }
 
     #region Load
-
     private void InitializeUI()
     {
         titleTab.Text = _title;
@@ -33,6 +32,5 @@ public partial class AppSettingsTab : UserControl
     {
         DataContext = new SettingsComboBoxesViewModel();
     }
-
     #endregion
 }

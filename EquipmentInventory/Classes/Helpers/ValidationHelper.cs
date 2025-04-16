@@ -35,14 +35,10 @@ public static class ValidationHelper
     }
 
     public static bool IsTextBoxEmpty(TextBox textBox)
-    {
-        return IsFieldEmpty(textBox, Strings.FieldEmpty);
-    }
+        => IsFieldEmpty(textBox, Strings.FieldEmpty);
 
     public static bool IsPasswordBoxEmpty(PasswordBox passwordBox)
-    {
-        return IsFieldEmpty(passwordBox, Strings.FieldEmpty);
-    }
+        => IsFieldEmpty(passwordBox, Strings.FieldEmpty);
 
     public static bool AnyTextBoxIsEmpty(Panel parent)
     {

@@ -25,19 +25,15 @@ public partial class CodesTab : UserControl
     }
 
     #region Load
-
     private void InitializeUI()
     {
         titleTab.Text = _title;
         applyCodeBtn.Content = Strings.Apply;
         HintAssist.SetHint(codeTxtB, Strings.Code);
     }
-
-
     #endregion
 
     #region Methods
-
     private async void ApplyCode_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(codeTxtB.Text)) return;
@@ -60,6 +56,5 @@ public partial class CodesTab : UserControl
             CustomMessageBoxHelper.Show(Strings.Success, result.Message);
         }
     }
-
     #endregion
 }

@@ -11,16 +11,13 @@
              MouseDown="Page_MouseDown"
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-    
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/UserStyles.xaml" />
     </UserControl.Resources>
-    
     <!--#endregion-->
 
     <Grid>
         <!--#region Resistration unit-->
-
         <materialDesign:Card Background="{StaticResource Background}" 
                              BorderThickness="2 0 2 0" 
                              BorderBrush="{StaticResource SecondaryColor}"
@@ -68,7 +65,6 @@
             </ScrollViewer>
         </materialDesign:Card>
         <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.ColumnSpan="3" />
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

@@ -20,7 +20,6 @@ public partial class ProgramSettings : Window
     }
 
     #region Load
-
     private void InitializeUI()
     {
         windowTitle.Text = Strings.Settings;
@@ -34,14 +33,13 @@ public partial class ProgramSettings : Window
         navigationService.RegisterFrame(settingsFrame);
         DataContext = new SettingsViewModel(new WindowService(this, new WindowStateHandler()), navigationService);
     }
-
     #endregion
 
     #region Window management
+    private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
+        => DragMove();
 
-    private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
-
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        => Keyboard.ClearFocus();
     #endregion
 }

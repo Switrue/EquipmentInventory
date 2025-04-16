@@ -9,7 +9,6 @@
              Background="Transparent"
              d:DesignHeight="200" d:DesignWidth="400">
     <!--#region Styles-->
-    
     <UserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignTabRadioButton}">
@@ -22,12 +21,10 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
     <!--#endregion-->
     
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <!--#region Control panel-->
-
         <StackPanel x:Name="radioButtonContainer" Orientation="Horizontal">
             <RadioButton x:Name="userRegistrationRb" Click="RadioButton_Click" />
             <RadioButton x:Name="tablesRb" Click="RadioButton_Click" MouseEnter="DisplayTableOptions_Mouse" />
@@ -46,7 +43,6 @@
                 </Border>
             </Popup>
         </StackPanel>
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

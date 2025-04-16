@@ -28,7 +28,6 @@ public partial class CustomMessageBox : Window
     }
 
     #region Load
-
     private void InitializeUI()
     {
         Title = _title;
@@ -45,22 +44,21 @@ public partial class CustomMessageBox : Window
         messageTxtB.Text = _message;
         falseBtn.Visibility = !_visibility ? Visibility.Visible : Visibility.Collapsed;
     }
-
     #endregion
 
     #region Window management
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e) 
+        => Keyboard.ClearFocus();
 
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
-
-    private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
+    private void DragWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
+        => DragMove();
     #endregion
 
     #region Return
+    private void ReturnTrue_Click(object sender, EventArgs e) 
+        => DialogResult = true;
 
-    private void ReturnTrue_Click(object sender, EventArgs e) => DialogResult = true;
-
-    private void ReturnFalse_Click(object sender, EventArgs e) => DialogResult = false;
-
+    private void ReturnFalse_Click(object sender, EventArgs e)
+        => DialogResult = false;
     #endregion
 }

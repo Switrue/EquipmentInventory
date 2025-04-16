@@ -34,7 +34,6 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     }
 
     #region Load
-
     private void InitializeUI()
     {
         bool isCurrencyUsd = Settings.Default.CultureInfo == "en_US";
@@ -66,8 +65,16 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
         findBtn.Content = Strings.Find;
         cleanBtn.ToolTip = Strings.Clean;
 
-        TextFieldAssist.SetLeadingIcon(costFromTxtB, isCurrencyUsd ? PackIconKind.CurrencyUsd : PackIconKind.CurrencyRub);
-        TextFieldAssist.SetLeadingIcon(costToTxtB, isCurrencyUsd ? PackIconKind.CurrencyUsd : PackIconKind.CurrencyRub);
+        TextFieldAssist.SetLeadingIcon(
+            costFromTxtB, isCurrencyUsd 
+                ? PackIconKind.CurrencyUsd 
+                : PackIconKind.CurrencyRub);
+
+        TextFieldAssist.SetLeadingIcon(
+            costToTxtB, 
+            isCurrencyUsd 
+                ? PackIconKind.CurrencyUsd 
+                : PackIconKind.CurrencyRub);
     }
 
     private void InitializeTable()
@@ -100,12 +107,11 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
         filterUnit.Visibility = Visibility.Collapsed;
         templateQueriesCB.Visibility = Visibility.Collapsed;
     }
-
     #endregion
 
     #region Search panel
-
-    private void Page_MouseDown(object sender, MouseButtonEventArgs e) => Focus();
+    private void Page_MouseDown(object sender, MouseButtonEventArgs e) 
+        => Focus();
 
     private void ToggleGridBtn_Click(object sender, RoutedEventArgs e)
     {
@@ -116,9 +122,11 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
         }
     }
 
-    private void ExpendFilters_Click(Object sender, RoutedEventArgs e) => ExpendFilters(bool.TryParse(((Button)sender).Tag as string, out bool isExpended));
+    private void ExpendFilters_Click(Object sender, RoutedEventArgs e) 
+        => ExpendFilters(bool.TryParse(((Button)sender).Tag as string, out bool isExpended));
 
-    private void RadioButtonChanged_Checked(object sender, RoutedEventArgs e) => CheckPriceContainer();
+    private void RadioButtonChanged_Checked(object sender, RoutedEventArgs e) 
+        => CheckPriceContainer();
 
     private void ValidationPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
@@ -139,14 +147,10 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     }
 
     private void ClearSearchTextBox()
-    {
-        searchTxtB.Text = string.Empty;
-    }
+        => searchTxtB.Text = string.Empty;
 
     private void ResetTemplateQueriesComboBox()
-    {
-        templateQueriesCB.SelectedItem = null;
-    }
+        => templateQueriesCB.SelectedItem = null;
 
     private void SetDefaultListBoxSelections()
     {
@@ -202,15 +206,10 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
             textBox.Text = isChecked ? textBox.Text : string.Empty;
         }
     }
-
     #endregion
 
     #region Interface methods
-
     public void TriggerANotification(string message)
-    {
-        notification.Show(message);
-    }
-
+        => notification.Show(message);
     #endregion
 }

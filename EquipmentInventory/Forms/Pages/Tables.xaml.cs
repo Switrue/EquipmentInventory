@@ -22,7 +22,6 @@ public partial class Tables : UserControl
     }
 
     #region Load
-
     private void InitializeUI()
     {
         titleArchiveCardTxtBl.Text = Strings.Archive;
@@ -41,14 +40,13 @@ public partial class Tables : UserControl
         };
         DataContext = iconData;
     }
-
     #endregion
 
     #region Click
+    private void GoToArchive_Click(object sender, RoutedEventArgs e) 
+        => _parent.Archive_Click(sender, e);
 
-    private void GoToArchive_Click(object sender, RoutedEventArgs e) => _parent.Archive_Click(sender, e);
-
-    private void GoToInventory_Click(object sender, RoutedEventArgs e) => _parent.Inventory_Click(sender, e);
-
+    private void GoToInventory_Click(object sender, RoutedEventArgs e) 
+        => _parent.Inventory_Click(sender, e);
     #endregion
 }

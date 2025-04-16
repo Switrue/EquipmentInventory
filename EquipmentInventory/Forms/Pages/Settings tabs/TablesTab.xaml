@@ -8,11 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
-
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/UserStyles.xaml" />
     </UserControl.Resources>
-
     <!--#endregion-->
 
     <Grid>
@@ -46,7 +44,6 @@
                                          Foreground="{StaticResource SecondaryColor}" />
             </Grid>
         </StackPanel>
-        
         <!--#endregion-->
     </Grid>
 </UserControl>

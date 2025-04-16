@@ -19,8 +19,8 @@ public static class UsersRequest
 
     public static async Task<BaseResponse> UpdateUserProfile(RegisterRequest userUpdate)
     {
-        return await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
-            "/api/Users/updateProfile",
+        return await ApiClientHelper.PatchAsync<RegisterRequest, BaseResponse>(
+            "/api/Users/update-me",
             userUpdate,
             error => CustomMessageBoxHelper.Show(Strings.Error, error)
         );
@@ -29,7 +29,7 @@ public static class UsersRequest
     public static async Task<BaseResponse> GetUserImageString()
     {
         return await ApiClientHelper.GetAsync<BaseResponse>(
-            "/api/Users/image",
+            "/api/Users/image-me",
             error => CustomMessageBoxHelper.Show(Strings.Error, error)
         );
     }

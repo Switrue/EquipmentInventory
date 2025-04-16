@@ -16,5 +16,6 @@ public partial class Archive : UserControl
         _mainTableSwitcher = mainTableSwitcher;
     }
 
-    private void Button_Click(object sender, System.Windows.RoutedEventArgs e) => _mainTableSwitcher.TriggerANotification("Arc");
+    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        => _mainTableSwitcher.TriggerANotification("Arc");
 }

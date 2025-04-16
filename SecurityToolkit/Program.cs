@@ -13,7 +13,6 @@ class Program
     }
 
     #region Methods
-
     private static void DataGeneration()
     {
         while (true)
@@ -84,6 +83,5 @@ class Program
             }
         }
     }
-
     #endregion
 }
