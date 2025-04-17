@@ -536,4 +536,8 @@
     <value>Of use</value>
     <comment>Tables</comment>
   </data>
+  <data name="UserImageInfo" xml:space="preserve">
+    <value>If you deselect the image, the default profile image will automatically be set</value>
+    <comment>UserProfile</comment>
+  </data>
 </root>

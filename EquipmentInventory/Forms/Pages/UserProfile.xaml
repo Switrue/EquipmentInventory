@@ -89,7 +89,13 @@
                         <UniformGrid Rows="2">
                             <WrapPanel>
                                 <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
-                                <Button x:Name="changeImageBtn" Margin="10" Click="ChangeImage_Click" />
+                                <Button x:Name="changeImageBtn" Margin="5" Click="ChangeImage_Click" />
+                                <materialDesign:PackIcon x:Name="toolTipUserImage" 
+                                                         Kind="InformationSlabCircleOutline"
+                                                         Width="15"
+                                                         Cursor="Help"
+                                                         Background="Transparent"
+                                                         Foreground="{StaticResource SecondaryColor}" />
                             </WrapPanel>
 
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">

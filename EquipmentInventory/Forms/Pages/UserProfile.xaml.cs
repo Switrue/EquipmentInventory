@@ -40,6 +40,7 @@ public partial class UserProfile : UserControl
         UserAccountService.SetImageSource(App.user.Image, userImage);
 
         imageGrB.Header = Strings.Customization;
+        toolTipUserImage.ToolTip = Strings.UserImageInfo;
         changeImageBtn.Content = Strings.SelectImage;
         dataGrB.Header = Strings.UserData;
         HintAssist.SetHint(usernameTxtB, Strings.Nick);

@@ -937,6 +937,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на If you deselect the image, the default profile image will automatically be set.
+        /// </summary>
+        internal static string UserImageInfo {
+            get {
+                return ResourceManager.GetString("UserImageInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string Username {

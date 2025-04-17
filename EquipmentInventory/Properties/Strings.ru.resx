@@ -432,4 +432,7 @@
   <data name="DateOfUse" xml:space="preserve">
     <value>Использования</value>
   </data>
+  <data name="UserImageInfo" xml:space="preserve">
+    <value>Если отменить выбор изображения, автоматически будет установлено изображение профиля по умолчанию</value>
+  </data>
 </root>
