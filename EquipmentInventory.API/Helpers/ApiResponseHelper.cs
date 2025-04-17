@@ -21,8 +21,14 @@ public static class ApiResponseHelper
     public static BadRequestObjectResult ValidationError(ModelStateDictionary modelState)
         => new BadRequestObjectResult(ApiResponse.Error(modelState));
 
+    public static UnauthorizedObjectResult Unauthorized(string message)
+        => new UnauthorizedObjectResult(ApiResponse.Unauthorized(message));
+
     public static NotFoundObjectResult NotFound(string message)
         => new NotFoundObjectResult(ApiResponse.NotFound(message));
+
+    public static OkObjectResult Ok(string message, object? data = null) 
+        => new OkObjectResult(ApiResponse.Ok(message, data));
 
     public static ObjectResult DatabaseError(string message)
         => new ObjectResult(ApiResponse.BadRequest(message))

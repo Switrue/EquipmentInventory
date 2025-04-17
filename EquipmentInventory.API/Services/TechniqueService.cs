@@ -89,15 +89,11 @@ public class TechniqueService
 
     public async Task<PaginatedResult<TechniqueDto>> GetPaginatedResults(
         IQueryable<Technique> query,
-        int page,
-        int pageSize)
+        PaginationModel pagination)
     {
-        page = Math.Max(1, page);
-        pageSize = Math.Clamp(pageSize, 1, 100);
-
         var items = await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
+            .Skip((pagination.Page - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
             .Select(t => new TechniqueDto(
                 t.Id,
                 t.Number,
@@ -123,8 +119,8 @@ public class TechniqueService
         {
             Items = items,
             TotalCount = totalCount,
-            Page = page,
-            PageSize = pageSize
+            Page = pagination.Page,
+            PageSize = pagination.PageSize
         };
     }
     #endregion

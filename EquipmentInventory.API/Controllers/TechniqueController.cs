@@ -33,8 +33,15 @@ public class TechniqueController : ControllerBase
         var validationResult = await _techniqueService.ValidateAddModelAsync(model);
         if (validationResult != null) return validationResult;
 
-        var technique = await _techniqueService.CreateTechniqueAsync(model);
-        return ApiResponseHelper.CreatedAt(nameof(GetTechnique), null, ApplicationErrors.TechniqueAdded);
+        try
+        {
+            var technique = await _techniqueService.CreateTechniqueAsync(model);
+            return ApiResponseHelper.CreatedAt(nameof(GetTechnique), null, ApplicationErrors.SuccessfullyAdded);
+        }
+        catch
+        {
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
+        }
     }
 
     [Authorize]
@@ -56,38 +63,34 @@ public class TechniqueController : ControllerBase
         try
         {
             await _dbContext.SaveChangesAsync();
-            return Ok(ApiResponse.Ok(ApplicationErrors.TechniqueUpdated));
+            return ApiResponseHelper.Ok(ApplicationErrors.SuccessfullyUpdated);
         }
         catch
         {
-            return ApiResponseHelper.DatabaseError(ApplicationErrors.UpdateError);
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
         }
     }
 
     [Authorize]
     [HttpGet("get")]
     public async Task<ActionResult<IEnumerable<TechniqueDto>>> GetTechnique(
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 5,
+        [FromQuery] PaginationModel pagination,
         [FromQuery] TechniqueUpdateDto filter = null)
     {
         try
         {
             var query = _techniqueService.ApplyFilter(filter, out int filterCount);
-
             if (filterCount > 1)
-                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.FiltrationRestriction));
+                return ApiResponseHelper.BadRequest(ApplicationErrors.FiltrationRestriction);
 
-            var result = await _techniqueService.GetPaginatedResults(query, page, pageSize);
+            var result = await _techniqueService.GetPaginatedResults(query, pagination);
 
             Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
-            return result.TotalCount > 0
-                ? Ok(result.Items)
-                : NotFound(ApiResponse.NotFound(ApplicationErrors.NotFound));
+            return Ok(result.Items);
         }
-        catch (Exception ex)
+        catch
         {
-            return StatusCode(500, ApiResponse.BadRequest(ex.Message));
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
         }
     }
 
@@ -97,11 +100,18 @@ public class TechniqueController : ControllerBase
     {
         var technique = await _dbContext.Techniques.FindAsync(id);
         if (technique == null)
-            return NotFound(ApiResponse.NotFound(ApplicationErrors.NotFound));
+            return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
         _dbContext.Techniques.Remove(technique);
-        await _dbContext.SaveChangesAsync();
 
-        return Ok(ApiResponse.Ok(ApplicationErrors.DeleteSuccessfully));
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            return ApiResponseHelper.Ok(ApplicationErrors.DeleteSuccessfully);
+        }
+        catch
+        {
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
+        }
     }
 }

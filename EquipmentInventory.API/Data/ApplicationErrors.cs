@@ -1,4 +1,6 @@
-﻿namespace EquipmentInventory.API.Data;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+
+namespace EquipmentInventory.API.Data;
 
 public static class ApplicationErrors
 {
@@ -25,27 +27,33 @@ public static class ApplicationErrors
     /// <summary>
     /// Техника
     /// </summary>
-    public const string UniqueNumber = "Номер техники должен быть уникальным";
+    public const string UniqueNumber = "Номер должен быть уникальным";
     public const string UniqueComputer = "Компьютер уже привязан к другой технике";
     public const string IncorrectTechniqueType = "Неверный тип техники";
     public const string IncorrectSupplier = "Неверный поставщик";
     public const string EmployeeNotFound = "Сотрудник не найден";
     public const string OfficeNotFound = "Кабинет не найден";
     public const string ComputerNotFound = "Компьютер не найден";
-    public const string TechniqueAdded = "Техника добавлена";
-    public const string TechniqueUpdated = "Техника обновлена";
     public const string FiltrationRestriction = "Только один фильтр за раз";
 
     /// <summary>
     /// Сегмент, связанный с базой данных
     /// </summary>
     public const string CreationError = "Ошибка при создании";
-    public const string EmptyError = "Контент оказался пуст";
     public const string UpdateError = "Ошибка сохранения данных";
+    public const string EmptyError = "Контент оказался пуст";
     public const string NotFound = "Результат не найден";
     public const string SuccessfullyUpdated = "Данные обновлены";
+    public const string SuccessfullyAdded = "Успешно добавлено";
     public const string DeleteSuccessfully = "Успешно удалено";
+    public const string InternalServerError = "Внутренняя ошибка сервера";
     public const string Success = "Успех";
+
+    /// <summary>
+    /// Общая валидация
+    /// </summary>
+    public const string InvalidPage = "Номер страницы должен быть положительным";
+    public const string InvalidPageSize = "Размер страницы должен быть от 1 до 100";
 
     /// <summary>
     /// Серверная часть приложения

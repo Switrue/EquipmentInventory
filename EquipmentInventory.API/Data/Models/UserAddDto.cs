@@ -2,15 +2,23 @@
 
 namespace EquipmentInventory.API.Data.Models;
 
-public class UserModel
+public class UserAddDto
 {
+    [Required]
     [StringLength(60)]
-    public string? Username { get; set; }
+    public string Username { get; set; }
 
+    [Required]
     [StringLength(60)]
-    public string? Surname { get; set; }
+    public string Surname { get; set; }
 
+    [Required]
+    [StringLength(60)]
+    public string Login { get; set; }
+
+    [Required]
     [StringLength(60, MinimumLength = 6, ErrorMessage = ApplicationErrors.IncorrectPasswordLength)]
-    public string? Password { get; set; }
+    public string Password { get; set; }
+
     public byte[]? Image { get; set; }
 }

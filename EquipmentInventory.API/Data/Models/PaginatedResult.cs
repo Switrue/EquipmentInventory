@@ -1,4 +1,4 @@
-﻿namespace EquipmentInventory.API.Data;
+﻿namespace EquipmentInventory.API.Data.Models;
 
 public class PaginatedResult<T>
 {

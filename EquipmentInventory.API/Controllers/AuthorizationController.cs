@@ -32,9 +32,7 @@ namespace EquipmentInventory.API.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return ApiResponseHelper.ValidationError(ModelState);
-            }
 
             var user = await _dbContext.Users
                 .AsNoTracking()
@@ -42,7 +40,7 @@ namespace EquipmentInventory.API.Controllers
                 .FirstOrDefaultAsync(u => u.Login == model.Login);
 
             if (user == null || !_hashPasswordHelper.VerifyPassword(model.Password, user.Password))
-                return Unauthorized(ApiResponse.Unauthorized(ApplicationErrors.InvalidLoginOrPassword));
+                return ApiResponseHelper.Unauthorized(ApplicationErrors.InvalidLoginOrPassword);
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 
@@ -51,20 +49,20 @@ namespace EquipmentInventory.API.Controllers
 
         [Authorize(Roles = RoleNames.Admin)]
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] UserAddDto model)
         {
             if (!ModelState.IsValid)
                 return ApiResponseHelper.ValidationError(ModelState);
 
             if (await _dbContext.Users.AnyAsync(u => u.Login == model.Login))
-                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.LoginAlreadyInUse));
+                return ApiResponseHelper.BadRequest(ApplicationErrors.LoginAlreadyInUse);
 
             var passwordHash = _hashPasswordHelper.HashPassword(model.Password);
 
             var defaultRole = await _dbContext.Roles
                 .FirstOrDefaultAsync(r => r.Name == RoleNames.Accountant);
             if (defaultRole == null)
-                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.RoleNotFound));
+                return ApiResponseHelper.BadRequest(ApplicationErrors.RoleNotFound);
 
             var user = new User
             {
@@ -83,10 +81,10 @@ namespace EquipmentInventory.API.Controllers
             }
             catch
             {
-                return BadRequest(ApiResponse.BadRequest(ApplicationErrors.CreationError));
+                return ApiResponseHelper.DatabaseError(ApplicationErrors.CreationError);
             }
 
-            return Ok(ApiResponse.Ok(ApplicationErrors.UserCreated));
+            return ApiResponseHelper.Ok(ApplicationErrors.UserCreated);
         }
 
         [Authorize]
@@ -94,14 +92,14 @@ namespace EquipmentInventory.API.Controllers
         public async Task<ActionResult> UpdateToken()
         {
             if (!User.TryGetUserId(out var userId))
-                return Unauthorized();
+                return ApiResponseHelper.Unauthorized(ApplicationErrors.AuthenticationError);
 
             var user = await _dbContext.Users
                 .AsNoTracking()
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Id == userId);
             if (user is null) 
-                return NotFound(ApiResponse.NotFound(ApplicationErrors.UserNotFound));
+                return ApiResponseHelper.NotFound(ApplicationErrors.UserNotFound);
 
             var token = _authorizationHelper.GenerateJwtToken(user);
 
