@@ -3,6 +3,7 @@ using DataAccess.Postgres.Migration.Models;
 using EquipmentInventory.API.Data;
 using EquipmentInventory.API.Data.Models;
 using EquipmentInventory.API.Helpers;
+using EquipmentInventory.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,14 +15,17 @@ namespace EquipmentInventory.API.Controllers
     public class AuthorizationController : ControllerBase
     {
         private readonly EquipmentInventoryDbContext _dbContext;
-        private readonly AuthorizationHelper _authorizationHelper;
+        private readonly AuthorizationService _authorizationHelper;
+        private readonly HashPasswordHelper _hashPasswordHelper;
 
         public AuthorizationController(
             EquipmentInventoryDbContext dbContext, 
-            AuthorizationHelper authorizationHelper)
+            AuthorizationService authorizationHelper,
+            HashPasswordHelper hashPasswordHelper)
         {
             _dbContext = dbContext;
             _authorizationHelper = authorizationHelper;
+            _hashPasswordHelper = hashPasswordHelper;
         }
 
         [HttpPost("login")]
@@ -37,7 +41,7 @@ namespace EquipmentInventory.API.Controllers
                 .Include(u => u.IdRoleNavigation)
                 .FirstOrDefaultAsync(u => u.Login == model.Login);
 
-            if (user == null || !_authorizationHelper.VerifyPassword(model.Password, user.Password))
+            if (user == null || !_hashPasswordHelper.VerifyPassword(model.Password, user.Password))
                 return Unauthorized(ApiResponse.Unauthorized(ApplicationErrors.InvalidLoginOrPassword));
 
             var token = _authorizationHelper.GenerateJwtToken(user);
@@ -55,7 +59,7 @@ namespace EquipmentInventory.API.Controllers
             if (await _dbContext.Users.AnyAsync(u => u.Login == model.Login))
                 return BadRequest(ApiResponse.BadRequest(ApplicationErrors.LoginAlreadyInUse));
 
-            var passwordHash = _authorizationHelper.HashPassword(model.Password);
+            var passwordHash = _hashPasswordHelper.HashPassword(model.Password);
 
             var defaultRole = await _dbContext.Roles
                 .FirstOrDefaultAsync(r => r.Name == RoleNames.Accountant);

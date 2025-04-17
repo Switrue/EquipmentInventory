@@ -5,14 +5,19 @@ using EquipmentInventory.API.Services;
 
 namespace EquipmentInventory.API.Configurations;
 
-public static class HandlersConfiguration
+public static class DependenciesConfiguration
 {
-    public static void AddHandlers(this IServiceCollection services)
+    public static void AddDependencies(this IServiceCollection services)
     {
+        // Handlers
         services.AddScoped<ICodeHandler, ResetAdminPasswordHandler>();
 
         // Helpers
         services.AddScoped<EntityValidator>();
+        services.AddScoped<HashPasswordHelper>();
+
+        // Servises
         services.AddScoped<TechniqueService>();
+        services.AddScoped<AuthorizationService>();
     }
 }

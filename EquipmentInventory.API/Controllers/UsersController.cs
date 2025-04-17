@@ -13,14 +13,14 @@ namespace EquipmentInventory.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly EquipmentInventoryDbContext _dbContext;
-        private readonly AuthorizationHelper _authorizationHelper;
+        private readonly HashPasswordHelper _hashPasswordHelper;
 
         public UsersController(
-            EquipmentInventoryDbContext dbContext, 
-            AuthorizationHelper authorizationHelper)
+            EquipmentInventoryDbContext dbContext,
+            HashPasswordHelper hashPasswordHelper)
         {
             _dbContext = dbContext;
-            _authorizationHelper = authorizationHelper;
+            _hashPasswordHelper = hashPasswordHelper;
         }
 
         [Authorize]
@@ -74,7 +74,7 @@ namespace EquipmentInventory.API.Controllers
             if (model.Image != null) user.Image = model.Image;
 
             if (!string.IsNullOrWhiteSpace(model.Password))
-                user.Password = _authorizationHelper.HashPassword(model.Password);
+                user.Password = _hashPasswordHelper.HashPassword(model.Password);
         }
     }
 }

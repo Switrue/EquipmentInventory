@@ -8,9 +8,7 @@ public class EntityValidator
     private readonly EquipmentInventoryDbContext _context;
 
     public EntityValidator(EquipmentInventoryDbContext context)
-    {
-        _context = context;
-    }
+        => _context = context;
 
     public async Task<bool> ExistsAsync<TEntity>(long id) where TEntity : class
         => await _context.Set<TEntity>().AnyAsync(e => EF.Property<long>(e, "Id") == id);

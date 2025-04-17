@@ -12,16 +12,16 @@ public class ResetAdminPasswordHandler : ICodeHandler
 {
     private readonly EquipmentInventoryDbContext _dbContext;
     private readonly IConfiguration _configuration;
-    private readonly AuthorizationHelper _authHelper;
+    private readonly HashPasswordHelper _hashPasswordHelper;
 
     public ResetAdminPasswordHandler(
         EquipmentInventoryDbContext dbContext,
         IConfiguration configuration,
-        AuthorizationHelper authHelper)
+        HashPasswordHelper hashPasswordHelper)
     {
         _dbContext = dbContext;
         _configuration = configuration;
-        _authHelper = authHelper;
+        _hashPasswordHelper = hashPasswordHelper;
     }
 
     public bool CanHandle(string code)
@@ -44,7 +44,7 @@ public class ResetAdminPasswordHandler : ICodeHandler
 
             foreach (var admin in admins)
             {
-                admin.Password = _authHelper.HashPassword(newPassword);
+                admin.Password = _hashPasswordHelper.HashPassword(newPassword);
             }
 
             await _dbContext.SaveChangesAsync();

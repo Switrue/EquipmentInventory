@@ -4,22 +4,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace EquipmentInventory.API.Helpers;
+namespace EquipmentInventory.API.Services;
 
-public class AuthorizationHelper
+public class AuthorizationService
 {
     private readonly IConfiguration? _configuration;
 
-    public AuthorizationHelper(IConfiguration configuration) =>
-        _configuration = configuration;
-
-    public AuthorizationHelper() { }
-
-    public bool VerifyPassword(string password, string passwordHash) =>
-        BCrypt.Net.BCrypt.EnhancedVerify(password, passwordHash);
-
-    public string HashPassword(string password) =>
-        BCrypt.Net.BCrypt.EnhancedHashPassword(password, 13);
+    public AuthorizationService(IConfiguration configuration)
+        => _configuration = configuration;
 
     public string GenerateJwtToken(User user)
     {

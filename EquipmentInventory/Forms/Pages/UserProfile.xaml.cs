@@ -20,6 +20,7 @@ public partial class UserProfile : UserControl
 {
     private IMainWindow _mainWindow;
     private NotificationService notification;
+    private bool isImageEditing;
     private bool isUsernameEditing;
     private bool isPasswordEditing;
 
@@ -80,8 +81,11 @@ public partial class UserProfile : UserControl
     private void EditUserPassword_Click(object sender, RoutedEventArgs e) 
         => IncludeTextFields(sender, userPasswordContainer);
 
-    private void ChangeImage_Click(object sender, RoutedEventArgs e) 
-        => UserAccountService.SelectTheImage(userImage);
+    private void ChangeImage_Click(object sender, RoutedEventArgs e)
+    {
+        isImageEditing = true;
+        UserAccountService.SelectTheImage(userImage);
+    }
 
     private async void SaveUserData_Click(object sender, System.Windows.RoutedEventArgs e)
     {
@@ -117,6 +121,9 @@ public partial class UserProfile : UserControl
 
     private async void SaveUserImage_Click(object sender, RoutedEventArgs e)
     {
+        if (!isImageEditing)
+            return;
+
         var userUpdate = new RegisterRequest
         {
             Image = UserAccountService.ConvertImageSourceToBytes(userImage.Source)
@@ -125,6 +132,8 @@ public partial class UserProfile : UserControl
         await UserAccountService.ExecuteTask(
             (Button)sender,
             async () => { await Update(userUpdate); });
+
+        isImageEditing = false;
     }
     #endregion
 

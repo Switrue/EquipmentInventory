@@ -1,14 +1,11 @@
 using EquipmentInventory.API.Configurations;
-using EquipmentInventory.API.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
 
-services.AddSingleton<AuthorizationHelper>();
-
 services.AddControllers();
-services.AddHandlers();
+services.AddDependencies();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerServices();
 
