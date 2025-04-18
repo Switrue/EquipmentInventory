@@ -1,6 +1,6 @@
 ﻿using DataAccess.Postgres.Migration;
-using EquipmentInventory.API.Data;
 using EquipmentInventory.API.Data.Models;
+using EquipmentInventory.API.Data;
 using EquipmentInventory.API.Helpers;
 using EquipmentInventory.API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -10,33 +10,33 @@ namespace EquipmentInventory.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ComputersController : ControllerBase
+public class SuppliersController : ControllerBase
 {
     private readonly EquipmentInventoryDbContext _dbContext;
-    private readonly ComputersService _computersService;
+    private readonly SuppliersService _suppliersService;
 
-    public ComputersController(
+    public SuppliersController(
         EquipmentInventoryDbContext dbContext,
-        ComputersService computersService)
+        SuppliersService suppliersService)
     {
         _dbContext = dbContext;
-        _computersService = computersService;
+        _suppliersService = suppliersService;
     }
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpPost("add")]
-    public async Task<ActionResult> AddComputer([FromBody] ComputerAddDto model)
+    public async Task<ActionResult> AddSupplier([FromBody] BaseAddDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var validationResult = await _computersService.ValidateAddModelAsync(model);
+        var validationResult = await _suppliersService.ValidateAddModelAsync(model);
         if (validationResult != null) return validationResult;
 
         try
         {
-            var computer = await _computersService.CreateComputerAsync(model);
-            return ApiResponseHelper.CreatedAt(nameof(GetComputers), null, ApplicationErrors.SuccessfullyAdded);
+            var supplier = await _suppliersService.CreateSupplierAsync(model);
+            return ApiResponseHelper.CreatedAt(nameof(GetSuppliers), null, ApplicationErrors.SuccessfullyAdded);
         }
         catch
         {
@@ -46,23 +46,23 @@ public class ComputersController : ControllerBase
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpPatch("update/{id}")]
-    public async Task<ActionResult> UpdateComputer(
+    public async Task<ActionResult> UpdateSupplier(
         long id,
-        [FromQuery] ComputerUpdateDto model)
+        [FromQuery] BaseUpdateDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var computer = await _dbContext.Computers.FindAsync(id);
-        if (computer == null)
+        var supplier = await _dbContext.Suppliers.FindAsync(id);
+        if (supplier == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        var validationResult = await _computersService.ValidateUpdateModelAsync(model, computer);
+        var validationResult = await _suppliersService.ValidateUpdateModelAsync(model, supplier);
         if (validationResult != null) return validationResult;
 
         try
         {
-            await _computersService.UpdateComputer(computer, model);
+            await _suppliersService.UpdateSupplier(supplier, model);
             return ApiResponseHelper.Ok(ApplicationErrors.SuccessfullyUpdated);
         }
         catch
@@ -71,16 +71,16 @@ public class ComputersController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpGet("get")]
-    public async Task<ActionResult> GetComputers([FromQuery] PaginationModel pagination)
+    public async Task<ActionResult> GetSuppliers([FromQuery] PaginationModel pagination)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
         try
         {
-            var items = await _computersService.GetPaginatedResults(pagination);
+            var items = await _suppliersService.GetPaginatedResults(pagination);
             return Ok(items);
         }
         catch
@@ -91,14 +91,14 @@ public class ComputersController : ControllerBase
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpDelete("delete/{id}")]
-    public async Task<ActionResult> DeleteComputer(long id)
+    public async Task<ActionResult> DeleteSupplier(long id)
     {
-        var computer = await _dbContext.Computers.FindAsync(id);
-        if (computer == null)
+        var supplier = await _dbContext.Suppliers.FindAsync(id);
+        if (supplier == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        _dbContext.Computers.Remove(computer);
-        
+        _dbContext.Suppliers.Remove(supplier);
+
         try
         {
             await _dbContext.SaveChangesAsync();

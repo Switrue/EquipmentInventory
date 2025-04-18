@@ -40,7 +40,7 @@ public class ComputersService
                 .Take(pagination.PageSize.Value);
         }
 
-        var items = await GetQuery()
+        var items = await query
             .Select(c => new ComputerDto(
                 c.Id,
                 c.Number,

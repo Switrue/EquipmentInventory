@@ -10,33 +10,33 @@ namespace EquipmentInventory.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ComputersController : ControllerBase
+public class PositionsController : ControllerBase
 {
     private readonly EquipmentInventoryDbContext _dbContext;
-    private readonly ComputersService _computersService;
+    private readonly PositionsServise _positionsServise;
 
-    public ComputersController(
+    public PositionsController(
         EquipmentInventoryDbContext dbContext,
-        ComputersService computersService)
+        PositionsServise positionsServise)
     {
         _dbContext = dbContext;
-        _computersService = computersService;
+        _positionsServise = positionsServise;
     }
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpPost("add")]
-    public async Task<ActionResult> AddComputer([FromBody] ComputerAddDto model)
+    public async Task<ActionResult> AddPosition([FromBody] BaseAddDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var validationResult = await _computersService.ValidateAddModelAsync(model);
+        var validationResult = await _positionsServise.ValidateAddModelAsync(model);
         if (validationResult != null) return validationResult;
 
         try
         {
-            var computer = await _computersService.CreateComputerAsync(model);
-            return ApiResponseHelper.CreatedAt(nameof(GetComputers), null, ApplicationErrors.SuccessfullyAdded);
+            var position = await _positionsServise.CreatePositionAsync(model);
+            return ApiResponseHelper.CreatedAt(nameof(GetPositions), null, ApplicationErrors.SuccessfullyAdded);
         }
         catch
         {
@@ -46,23 +46,23 @@ public class ComputersController : ControllerBase
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpPatch("update/{id}")]
-    public async Task<ActionResult> UpdateComputer(
-        long id,
-        [FromQuery] ComputerUpdateDto model)
+    public async Task<ActionResult> UpdatePosition(
+        long id, 
+        [FromQuery] BaseUpdateDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var computer = await _dbContext.Computers.FindAsync(id);
-        if (computer == null)
+        var position = await _dbContext.Positions.FindAsync(id);
+        if (position == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        var validationResult = await _computersService.ValidateUpdateModelAsync(model, computer);
+        var validationResult = await _positionsServise.ValidateUpdateModelAsync(model, position);
         if (validationResult != null) return validationResult;
 
         try
         {
-            await _computersService.UpdateComputer(computer, model);
+            await _positionsServise.UpdatePosition(position, model);
             return ApiResponseHelper.Ok(ApplicationErrors.SuccessfullyUpdated);
         }
         catch
@@ -71,16 +71,16 @@ public class ComputersController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpGet("get")]
-    public async Task<ActionResult> GetComputers([FromQuery] PaginationModel pagination)
+    public async Task<ActionResult> GetPositions([FromQuery] PaginationModel pagination)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
         try
         {
-            var items = await _computersService.GetPaginatedResults(pagination);
+            var items = await _positionsServise.GetPaginatedResults(pagination);
             return Ok(items);
         }
         catch
@@ -91,14 +91,14 @@ public class ComputersController : ControllerBase
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpDelete("delete/{id}")]
-    public async Task<ActionResult> DeleteComputer(long id)
+    public async Task<ActionResult> DeletePosition(long id)
     {
-        var computer = await _dbContext.Computers.FindAsync(id);
-        if (computer == null)
+        var position = await _dbContext.Positions.FindAsync(id);
+        if (position == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        _dbContext.Computers.Remove(computer);
-        
+        _dbContext.Positions.Remove(position);
+
         try
         {
             await _dbContext.SaveChangesAsync();

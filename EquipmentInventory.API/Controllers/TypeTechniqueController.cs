@@ -1,6 +1,6 @@
 ﻿using DataAccess.Postgres.Migration;
-using EquipmentInventory.API.Data;
 using EquipmentInventory.API.Data.Models;
+using EquipmentInventory.API.Data;
 using EquipmentInventory.API.Helpers;
 using EquipmentInventory.API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -10,33 +10,33 @@ namespace EquipmentInventory.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ComputersController : ControllerBase
+public class TypeTechniqueController : ControllerBase
 {
     private readonly EquipmentInventoryDbContext _dbContext;
-    private readonly ComputersService _computersService;
+    private readonly TypeTechniqueService _typeTechniqueService;
 
-    public ComputersController(
+    public TypeTechniqueController(
         EquipmentInventoryDbContext dbContext,
-        ComputersService computersService)
+        TypeTechniqueService typeTechniqueService)
     {
         _dbContext = dbContext;
-        _computersService = computersService;
+        _typeTechniqueService = typeTechniqueService;
     }
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpPost("add")]
-    public async Task<ActionResult> AddComputer([FromBody] ComputerAddDto model)
+    public async Task<ActionResult> AddTypeTechnique([FromBody] BaseAddDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var validationResult = await _computersService.ValidateAddModelAsync(model);
+        var validationResult = await _typeTechniqueService.ValidateAddModelAsync(model);
         if (validationResult != null) return validationResult;
 
         try
         {
-            var computer = await _computersService.CreateComputerAsync(model);
-            return ApiResponseHelper.CreatedAt(nameof(GetComputers), null, ApplicationErrors.SuccessfullyAdded);
+            var typeTechnique = await _typeTechniqueService.CreateTypeTechniqueAsync(model);
+            return ApiResponseHelper.CreatedAt(nameof(GetTypeTechnique), null, ApplicationErrors.SuccessfullyAdded);
         }
         catch
         {
@@ -46,23 +46,23 @@ public class ComputersController : ControllerBase
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpPatch("update/{id}")]
-    public async Task<ActionResult> UpdateComputer(
+    public async Task<ActionResult> UpdateTypeTechnique(
         long id,
-        [FromQuery] ComputerUpdateDto model)
+        [FromQuery] BaseUpdateDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var computer = await _dbContext.Computers.FindAsync(id);
-        if (computer == null)
+        var typeTechnique = await _dbContext.TypeTechniques.FindAsync(id);
+        if (typeTechnique == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        var validationResult = await _computersService.ValidateUpdateModelAsync(model, computer);
+        var validationResult = await _typeTechniqueService.ValidateUpdateModelAsync(model, typeTechnique);
         if (validationResult != null) return validationResult;
 
         try
         {
-            await _computersService.UpdateComputer(computer, model);
+            await _typeTechniqueService.UpdateTypeTechnique(typeTechnique, model);
             return ApiResponseHelper.Ok(ApplicationErrors.SuccessfullyUpdated);
         }
         catch
@@ -71,16 +71,16 @@ public class ComputersController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpGet("get")]
-    public async Task<ActionResult> GetComputers([FromQuery] PaginationModel pagination)
+    public async Task<ActionResult> GetTypeTechnique([FromQuery] PaginationModel pagination)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
         try
         {
-            var items = await _computersService.GetPaginatedResults(pagination);
+            var items = await _typeTechniqueService.GetPaginatedResults(pagination);
             return Ok(items);
         }
         catch
@@ -91,14 +91,14 @@ public class ComputersController : ControllerBase
 
     [Authorize(Roles = RoleNames.Admin)]
     [HttpDelete("delete/{id}")]
-    public async Task<ActionResult> DeleteComputer(long id)
+    public async Task<ActionResult> DeleteTypeTechnique(long id)
     {
-        var computer = await _dbContext.Computers.FindAsync(id);
-        if (computer == null)
+        var typeTechnique = await _dbContext.TypeTechniques.FindAsync(id);
+        if (typeTechnique == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        _dbContext.Computers.Remove(computer);
-        
+        _dbContext.TypeTechniques.Remove(typeTechnique);
+
         try
         {
             await _dbContext.SaveChangesAsync();

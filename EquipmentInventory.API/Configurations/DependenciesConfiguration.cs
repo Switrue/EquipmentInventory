@@ -21,6 +21,9 @@ public static class DependenciesConfiguration
         services.AddScoped<ComputersService>();
         services.AddScoped<MembersService>();
         services.AddScoped<OfficesService>();
+        services.AddScoped<PositionsServise>();
+        services.AddScoped<SuppliersService>();
         services.AddScoped<TechniqueService>();
+        services.AddScoped<TypeTechniqueService>();
     }
 }
