@@ -21,31 +21,6 @@ public class TechniqueService
         _entityValidator = entityValidator;
     }
 
-    #region Add
-    public async Task<Technique> CreateTechniqueAsync(TechniqueAddDto model)
-    {
-        var technique = new Technique
-        {
-            Number = model.Number,
-            IdTypeTechnique = model.IdTypeTechnique,
-            Name = model.Name,
-            IdMember = model.IdMember,
-            IdOffice = model.IdOffice,
-            IdComputer = model.IdComputer,
-            DateOfPurchase = model.DateOfPurchase,
-            UnderRepair = model.UnderRepair ?? false,
-            DateOfManufacture = model.DateOfManufacture,
-            IdSupplier = model.IdSupplier,
-            Cost = model.Cost,
-            DateOfUse = model.DateOfUse
-        };
-
-        _context.Techniques.Add(technique);
-        await _context.SaveChangesAsync();
-        return technique;
-    }
-    #endregion
-
     #region Get
     public IQueryable<Technique> ApplyFilter(TechniqueUpdateDto filter, out int filterCount)
     {
@@ -122,6 +97,31 @@ public class TechniqueService
             Page = pagination.Page,
             PageSize = pagination.PageSize
         };
+    }
+    #endregion
+
+    #region Add
+    public async Task<Technique> CreateTechniqueAsync(TechniqueAddDto model)
+    {
+        var technique = new Technique
+        {
+            Number = model.Number,
+            IdTypeTechnique = model.IdTypeTechnique,
+            Name = model.Name,
+            IdMember = model.IdMember,
+            IdOffice = model.IdOffice,
+            IdComputer = model.IdComputer,
+            DateOfPurchase = model.DateOfPurchase,
+            UnderRepair = model.UnderRepair ?? false,
+            DateOfManufacture = model.DateOfManufacture,
+            IdSupplier = model.IdSupplier,
+            Cost = model.Cost,
+            DateOfUse = model.DateOfUse
+        };
+
+        _context.Techniques.Add(technique);
+        await _context.SaveChangesAsync();
+        return technique;
     }
     #endregion
 

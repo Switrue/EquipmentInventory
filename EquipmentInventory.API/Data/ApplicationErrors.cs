@@ -37,6 +37,11 @@ public static class ApplicationErrors
     public const string FiltrationRestriction = "Только один фильтр за раз";
 
     /// <summary>
+    /// Сотрудники
+    /// </summary>
+    public const string IncorrectPosition = "Неправильная должность";
+
+    /// <summary>
     /// Сегмент, связанный с базой данных
     /// </summary>
     public const string CreationError = "Ошибка при создании";
@@ -54,6 +59,7 @@ public static class ApplicationErrors
     /// </summary>
     public const string InvalidPage = "Номер страницы должен быть положительным";
     public const string InvalidPageSize = "Размер страницы должен быть от 1 до 100";
+    public const string InvalidModelType = "Неверный тип модели";
 
     /// <summary>
     /// Серверная часть приложения

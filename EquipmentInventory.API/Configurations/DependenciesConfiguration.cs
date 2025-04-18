@@ -17,8 +17,9 @@ public static class DependenciesConfiguration
         services.AddScoped<HashPasswordHelper>();
 
         // Servises
-        services.AddScoped<TechniqueService>();
-        services.AddScoped<ComputersService>();
         services.AddScoped<AuthorizationService>();
+        services.AddScoped<ComputersService>();
+        services.AddScoped<TechniqueService>();
+        services.AddScoped<MembersService>();
     }
 }
