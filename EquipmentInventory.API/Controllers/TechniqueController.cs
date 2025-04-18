@@ -93,6 +93,26 @@ public class TechniqueController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet("outdated")]
+    public async Task<ActionResult> GetOutdated(
+        [FromQuery] PaginationModel pagination, 
+        [FromQuery] BaseModel model)
+    {
+        if (int.TryParse(model.Content, out int yearsDifference))
+        {
+            var query = _techniqueService.GetOutdatedQuery(yearsDifference);
+            var result = await _techniqueService.GetPaginatedResults(query, pagination);
+
+            Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
+            return Ok(result.Items);
+        }
+        else
+        {
+            return ApiResponseHelper.BadRequest(ApplicationErrors.IncorrectFormat);
+        }
+    }
+
+    [Authorize]
     [HttpDelete("delete/{id}")]
     public async Task<ActionResult> DeleteTechnique(long id)
     {

@@ -5,6 +5,7 @@ using EquipmentInventory.API.Helpers;
 using Microsoft.EntityFrameworkCore;
 using EquipmentInventory.API.Data;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EquipmentInventory.API.Services;
 
@@ -22,6 +23,19 @@ public class TechniqueService
     }
 
     #region Get
+    public IQueryable<Technique> GetOutdatedQuery(int value)
+    {
+        DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
+        DateOnly thresholdDate = currentDate.AddYears(-value);
+
+        var query = _context.Techniques
+            .AsNoTracking()
+            .Where(t => t.DateOfPurchase <= thresholdDate)
+            .OrderBy(t => t.Id);
+
+        return query;
+    }
+
     public IQueryable<Technique> ApplyFilter(TechniqueUpdateDto filter, out int filterCount)
     {
         var query = _context.Techniques.AsNoTracking();

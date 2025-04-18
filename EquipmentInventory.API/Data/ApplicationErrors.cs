@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
-
-namespace EquipmentInventory.API.Data;
+﻿namespace EquipmentInventory.API.Data;
 
 public static class ApplicationErrors
 {
@@ -61,6 +59,7 @@ public static class ApplicationErrors
     public const string InvalidPageSize = "Размер страницы должен быть от 1 до 100";
     public const string InvalidModelType = "Неверный тип модели";
     public const string UniqueName = "Название должно быть уникальным";
+    public const string IncorrectFormat = "Неверный формат";
 
     /// <summary>
     /// Серверная часть приложения
