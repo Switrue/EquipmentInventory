@@ -19,7 +19,8 @@ public static class DependenciesConfiguration
         // Servises
         services.AddScoped<AuthorizationService>();
         services.AddScoped<ComputersService>();
-        services.AddScoped<TechniqueService>();
         services.AddScoped<MembersService>();
+        services.AddScoped<OfficesService>();
+        services.AddScoped<TechniqueService>();
     }
 }

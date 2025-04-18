@@ -131,7 +131,7 @@ public class TechniqueService
     #endregion
 
     #region Update
-    public void UpdateTechnique(Technique existing, TechniqueUpdateDto model)
+    public async Task UpdateTechnique(Technique existing, TechniqueUpdateDto model)
     {
         if (model.Number != null) existing.Number = model.Number;
         if (model.IdTypeTechnique.HasValue) existing.IdTypeTechnique = model.IdTypeTechnique.Value;
@@ -145,17 +145,19 @@ public class TechniqueService
         if (model.IdSupplier.HasValue) existing.IdSupplier = model.IdSupplier.Value;
         if (model.Cost.HasValue) existing.Cost = model.Cost.Value;
         if (model.UnderRepair.HasValue) existing.UnderRepair = model.UnderRepair.Value;
+
+        await _context.SaveChangesAsync();
     }
     #endregion
 
     #region Validation Helpers
     public async Task<ActionResult> ValidateAddModelAsync(TechniqueAddDto model)
     {
-        if (!await IsNumberUniqueAsync(model.Number))
+        if (!await _entityValidator.IsUniqueAsync(_context.Techniques, p => p.Number, model.Number))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueNumber);
 
         if (model.IdComputer.HasValue &&
-            !await IsComputerAvailableAsync(model.IdComputer.Value))
+            !await _entityValidator.IsUniqueAsync(_context.Techniques, p => p.IdComputer, model.IdComputer.Value))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueComputer);
 
         var validations = new List<(bool Result, string Error)>
@@ -178,11 +180,11 @@ public class TechniqueService
 
     public async Task<ActionResult> ValidateUpdateModelAsync(TechniqueUpdateDto model, Technique existing)
     {
-        if (model.Number != null && !await IsNumberUniqueAsync(model.Number, existing.Id))
+        if (!await _entityValidator.IsUniqueAsync(_context.Techniques, p => p.Number, model.Number, existing.Id))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueNumber);
 
         if (model.IdComputer.HasValue &&
-            !await IsComputerAvailableAsync(model.IdComputer.Value, existing.Id))
+            !await _entityValidator.IsUniqueAsync(_context.Techniques, p => p.IdComputer, model.IdComputer.Value, existing.Id))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueComputer);
 
         var validations = new List<(bool Result, string Error)>
@@ -202,13 +204,5 @@ public class TechniqueService
         var error = validations.FirstOrDefault(v => !v.Result).Error;
         return error != null ? ApiResponseHelper.BadRequest(error) : null;
     }
-
-    public async Task<bool> IsNumberUniqueAsync(string number, long? excludeId = null)
-        => !await _context.Techniques
-            .AnyAsync(t => t.Number == number && (excludeId == null || t.Id != excludeId));
-
-    public async Task<bool> IsComputerAvailableAsync(long computerId, long? excludeId = null)
-        => !await _context.Techniques
-            .AnyAsync(t => t.IdComputer == computerId && (excludeId == null || t.Id != excludeId));
     #endregion
 }

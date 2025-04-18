@@ -60,6 +60,7 @@ public static class ApplicationErrors
     public const string InvalidPage = "Номер страницы должен быть положительным";
     public const string InvalidPageSize = "Размер страницы должен быть от 1 до 100";
     public const string InvalidModelType = "Неверный тип модели";
+    public const string UniqueName = "Название должно быть уникальным";
 
     /// <summary>
     /// Серверная часть приложения

@@ -6,47 +6,46 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace EquipmentInventory.API.Controllers
+namespace EquipmentInventory.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ArchiveController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ArchiveController : ControllerBase
+    private readonly EquipmentInventoryDbContext _dbContext;
+
+    public ArchiveController(EquipmentInventoryDbContext dbContext)
+        => _dbContext = dbContext;
+
+    [Authorize]
+    [HttpGet("get")]
+    public async Task<ActionResult> GetArchive(
+        [FromQuery] PaginationModel pagination)
     {
-        private readonly EquipmentInventoryDbContext _dbContext;
+        var query = _dbContext.Archives
+            .AsNoTracking()
+            .OrderBy(a => a.Id);
 
-        public ArchiveController(EquipmentInventoryDbContext dbContext)
-            => _dbContext = dbContext;
-
-        [Authorize]
-        [HttpGet("get")]
-        public async Task<ActionResult> GetArchive(
-            [FromQuery] PaginationModel pagination)
+        try
         {
-            var query = _dbContext.Archives
-                .AsNoTracking()
-                .OrderBy(a => a.Id);
-
-            try
+            if (pagination.Page.HasValue && pagination.PageSize.HasValue)
             {
-                if (pagination.Page.HasValue && pagination.PageSize.HasValue)
-                {
-                    var items = await query
-                        .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
-                        .Take(pagination.PageSize.Value)
-                        .ToListAsync();
+                var items = await query
+                    .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                    .Take(pagination.PageSize.Value)
+                    .ToListAsync();
 
-                    return Ok(items);
-                }
-                else
-                {
-                    var items = await query.ToListAsync();
-                    return Ok(items);
-                }
+                return Ok(items);
             }
-            catch
+            else
             {
-                return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
+                var items = await query.ToListAsync();
+                return Ok(items);
             }
+        }
+        catch
+        {
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
         }
     }
 }

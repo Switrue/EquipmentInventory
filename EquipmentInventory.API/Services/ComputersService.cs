@@ -11,9 +11,15 @@ namespace EquipmentInventory.API.Services;
 public class ComputersService
 {
     private readonly EquipmentInventoryDbContext _context;
+    private readonly EntityValidator _entityValidator;
 
-    public ComputersService(EquipmentInventoryDbContext context)
-        => _context = context;
+    public ComputersService(
+        EquipmentInventoryDbContext context,
+        EntityValidator entityValidator)
+    {
+        _context = context;
+        _entityValidator = entityValidator;
+    }
 
     #region Get
     private IQueryable<Computer> GetQuery()
@@ -72,7 +78,7 @@ public class ComputersService
     #endregion
 
     #region Update
-    public void UpdateComputer(Computer existing, ComputerUpdateDto model)
+    public async Task UpdateComputer(Computer existing, ComputerUpdateDto model)
     {
         existing.Number = model.Number ?? existing.Number;
         existing.PowerSupply = model.PowerSupply ?? existing.PowerSupply;
@@ -81,13 +87,16 @@ public class ComputersService
         existing.Cpu = model.Cpu ?? existing.Cpu;
         existing.Os = model.Os ?? existing.Os;
         existing.VideoCard = model.VideoCard ?? existing.VideoCard;
+
+        await _context.SaveChangesAsync();
     }
     #endregion
 
     #region Validation Helpers
-    public async Task<ActionResult> ValidateUpdateModelAsync(ComputerUpdateDto model, Computer computer)
+    public async Task<ActionResult> ValidateUpdateModelAsync(ComputerUpdateDto model, Computer existing)
     {
-        if (model.Number != null && !await IsNumberUniqueAsync(model.Number.Value, computer.Id))
+        if (model.Number != null && 
+            !await _entityValidator.IsUniqueAsync(_context.Computers, p => p.Number, model.Number.Value, existing.Id))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueNumber);
 
         return null;
@@ -95,14 +104,10 @@ public class ComputersService
 
     public async Task<ActionResult> ValidateAddModelAsync(ComputerAddDto model)
     {
-        if (!await IsNumberUniqueAsync(model.Number))
+        if (!await _entityValidator.IsUniqueAsync(_context.Computers, p => p.Number, model.Number))
             return ApiResponseHelper.BadRequest(ApplicationErrors.UniqueNumber);
 
         return null;
     }
-
-    private async Task<bool> IsNumberUniqueAsync(int number, long? excludeId = null)
-            => !await _context.Computers
-                .AnyAsync(t => t.Number == number && (excludeId == null || t.Id != excludeId));
     #endregion
 }

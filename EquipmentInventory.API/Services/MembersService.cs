@@ -5,7 +5,6 @@ using EquipmentInventory.API.Data.Models;
 using EquipmentInventory.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EquipmentInventory.API.Services;
 
@@ -72,11 +71,13 @@ public class MembersService
     #endregion
 
     #region Update
-    public void UpdateMember(Member existing, MemberUpdateDto model)
+    public async Task UpdateMember(Member existing, MemberUpdateDto model)
     {
         existing.Username = model.Username ?? existing.Username;
         existing.Surname = model.Surname ?? existing.Surname;
         existing.IdPosition = model.IdPosition ?? existing.IdPosition;
+
+        await _context.SaveChangesAsync();
     }
     #endregion
 

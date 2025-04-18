@@ -6,110 +6,107 @@ using EquipmentInventory.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EquipmentInventory.API.Controllers
+namespace EquipmentInventory.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ComputersController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ComputersController : ControllerBase
+    private readonly EquipmentInventoryDbContext _dbContext;
+    private readonly ComputersService _computersService;
+
+    public ComputersController(
+        EquipmentInventoryDbContext dbContext,
+        ComputersService computersService)
     {
-        private readonly EquipmentInventoryDbContext _dbContext;
-        private readonly ComputersService _computersService;
+        _dbContext = dbContext;
+        _computersService = computersService;
+    }
 
-        public ComputersController(
-            EquipmentInventoryDbContext dbContext,
-            ComputersService computersService)
+    [Authorize(Roles = RoleNames.Admin)]
+    [HttpPost("add")]
+    public async Task<ActionResult> AddComputer([FromBody] ComputerAddDto model)
+    {
+        if (!ModelState.IsValid)
+            return ApiResponseHelper.ValidationError(ModelState);
+
+        var validationResult = await _computersService.ValidateAddModelAsync(model);
+        if (validationResult != null) return validationResult;
+
+        try
         {
-            _dbContext = dbContext;
-            _computersService = computersService;
+            var computer = await _computersService.CreateComputerAsync(model);
+            return ApiResponseHelper.CreatedAt(nameof(GetComputers), null, ApplicationErrors.SuccessfullyAdded);
         }
-
-        [Authorize(Roles = RoleNames.Admin)]
-        [HttpPost("add")]
-        public async Task<ActionResult> AddComputer([FromBody] ComputerAddDto model)
+        catch
         {
-            if (!ModelState.IsValid)
-                return ApiResponseHelper.ValidationError(ModelState);
-
-            var validationResult = await _computersService.ValidateAddModelAsync(model);
-            if (validationResult != null) return validationResult;
-
-            try
-            {
-                var computer = await _computersService.CreateComputerAsync(model);
-                return ApiResponseHelper.CreatedAt(nameof(GetComputers), null, ApplicationErrors.SuccessfullyAdded);
-            }
-            catch
-            {
-                return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
-            }
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
         }
+    }
 
-        [Authorize(Roles = RoleNames.Admin)]
-        [HttpPatch("update/{id}")]
-        public async Task<ActionResult> UpdateComputer(
-            long id,
-            [FromQuery] ComputerUpdateDto model)
+    [Authorize(Roles = RoleNames.Admin)]
+    [HttpPatch("update/{id}")]
+    public async Task<ActionResult> UpdateComputer(
+        long id,
+        [FromQuery] ComputerUpdateDto model)
+    {
+        if (!ModelState.IsValid)
+            return ApiResponseHelper.ValidationError(ModelState);
+
+        var computer = await _dbContext.Computers.FindAsync(id);
+        if (computer == null)
+            return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
+
+        var validationResult = await _computersService.ValidateUpdateModelAsync(model, computer);
+        if (validationResult != null) return validationResult;
+
+        try
         {
-            if (!ModelState.IsValid)
-                return ApiResponseHelper.ValidationError(ModelState);
-
-            var computer = await _dbContext.Computers.FindAsync(id);
-            if (computer == null)
-                return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
-
-            var validationResult = await _computersService.ValidateUpdateModelAsync(model, computer);
-            if (validationResult != null) return validationResult;
-
-            _computersService.UpdateComputer(computer, model);
-
-            try
-            {
-                await _dbContext.SaveChangesAsync();
-                return Ok(ApiResponse.Ok(ApplicationErrors.SuccessfullyUpdated));
-            }
-            catch
-            {
-                return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
-            }
+            await _computersService.UpdateComputer(computer, model);
+            return ApiResponseHelper.Ok(ApplicationErrors.SuccessfullyUpdated);
         }
-
-        [Authorize(Roles = RoleNames.Admin)]
-        [HttpGet("get")]
-        public async Task<ActionResult> GetComputers([FromQuery] PaginationModel pagination)
+        catch
         {
-            if (!ModelState.IsValid)
-                return ApiResponseHelper.ValidationError(ModelState);
-
-            try
-            {
-                var items = await _computersService.GetPaginatedResults(pagination);
-                return Ok(items);
-            }
-            catch
-            {
-                return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
-            }
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
         }
+    }
 
-        [Authorize(Roles = RoleNames.Admin)]
-        [HttpDelete("delete/{id}")]
-        public async Task<ActionResult> DeleteComputer(long id)
+    [Authorize(Roles = RoleNames.Admin)]
+    [HttpGet("get")]
+    public async Task<ActionResult> GetComputers([FromQuery] PaginationModel pagination)
+    {
+        if (!ModelState.IsValid)
+            return ApiResponseHelper.ValidationError(ModelState);
+
+        try
         {
-            var computer = await _dbContext.Computers.FindAsync(id);
-            if (computer == null)
-                return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
+            var items = await _computersService.GetPaginatedResults(pagination);
+            return Ok(items);
+        }
+        catch
+        {
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
+        }
+    }
 
-            _dbContext.Computers.Remove(computer);
-            
-            try
-            {
-                await _dbContext.SaveChangesAsync();
-                return ApiResponseHelper.Ok(ApplicationErrors.DeleteSuccessfully);
-            }
-            catch
-            {
-                return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
-            }
+    [Authorize(Roles = RoleNames.Admin)]
+    [HttpDelete("delete/{id}")]
+    public async Task<ActionResult> DeleteComputer(long id)
+    {
+        var computer = await _dbContext.Computers.FindAsync(id);
+        if (computer == null)
+            return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
+
+        _dbContext.Computers.Remove(computer);
+        
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            return ApiResponseHelper.Ok(ApplicationErrors.DeleteSuccessfully);
+        }
+        catch
+        {
+            return ApiResponseHelper.DatabaseError(ApplicationErrors.InternalServerError);
         }
     }
 }

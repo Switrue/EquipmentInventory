@@ -10,33 +10,33 @@ namespace EquipmentInventory.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TechniqueController : ControllerBase
+public class OfficesController : ControllerBase
 {
     private readonly EquipmentInventoryDbContext _dbContext;
-    private readonly TechniqueService _techniqueService;
+    private readonly OfficesService _officesService;
 
-    public TechniqueController(
+    public OfficesController(
         EquipmentInventoryDbContext dbContext,
-        TechniqueService techniqueService)
+        OfficesService officesService)
     {
         _dbContext = dbContext;
-        _techniqueService = techniqueService;
+        _officesService = officesService;
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpPost("add")]
-    public async Task<ActionResult> AddTechnique([FromBody] TechniqueAddDto model)
+    public async Task<ActionResult> AddOffice([FromBody] OfficeAddDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var validationResult = await _techniqueService.ValidateAddModelAsync(model);
+        var validationResult = await _officesService.ValidateAddModelAsync(model);
         if (validationResult != null) return validationResult;
 
         try
         {
-            var technique = await _techniqueService.CreateTechniqueAsync(model);
-            return ApiResponseHelper.CreatedAt(nameof(GetTechnique), null, ApplicationErrors.SuccessfullyAdded);
+            var office = await _officesService.CreateOfficeAsync(model);
+            return ApiResponseHelper.CreatedAt(nameof(GetOffices), null, ApplicationErrors.SuccessfullyAdded);
         }
         catch
         {
@@ -44,23 +44,23 @@ public class TechniqueController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpPatch("update/{id}")]
-    public async Task<ActionResult> UpdateTechnique(long id, [FromQuery] TechniqueUpdateDto model)
+    public async Task<ActionResult> UpdateOffice(long id, [FromQuery] OfficeUpdateDto model)
     {
         if (!ModelState.IsValid)
             return ApiResponseHelper.ValidationError(ModelState);
 
-        var technique = await _dbContext.Techniques.FindAsync(id);
-        if (technique == null)
+        var office = await _dbContext.Offices.FindAsync(id);
+        if (office == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        var validationResult = await _techniqueService.ValidateUpdateModelAsync(model, technique);
+        var validationResult = await _officesService.ValidateUpdateModelAsync(model, office);
         if (validationResult != null) return validationResult;
 
         try
         {
-            await _techniqueService.UpdateTechnique(technique, model);
+            await _officesService.UpdateOfficeAsync(office, model);
             return ApiResponseHelper.Ok(ApplicationErrors.SuccessfullyUpdated);
         }
         catch
@@ -69,22 +69,17 @@ public class TechniqueController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpGet("get")]
-    public async Task<ActionResult<IEnumerable<TechniqueDto>>> GetTechnique(
-        [FromQuery] PaginationModel pagination,
-        [FromQuery] TechniqueUpdateDto filter = null)
+    public async Task<ActionResult> GetOffices([FromQuery] PaginationModel pagination)
     {
+        if (!ModelState.IsValid)
+            return ApiResponseHelper.ValidationError(ModelState);
+
         try
         {
-            var query = _techniqueService.ApplyFilter(filter, out int filterCount);
-            if (filterCount > 1)
-                return ApiResponseHelper.BadRequest(ApplicationErrors.FiltrationRestriction);
-
-            var result = await _techniqueService.GetPaginatedResults(query, pagination);
-
-            Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
-            return Ok(result.Items);
+            var items = await _officesService.GetPaginatedResults(pagination);
+            return Ok(items);
         }
         catch
         {
@@ -92,15 +87,15 @@ public class TechniqueController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleNames.Admin)]
     [HttpDelete("delete/{id}")]
-    public async Task<ActionResult> DeleteTechnique(long id)
+    public async Task<ActionResult> DeleteOffice(long id)
     {
-        var technique = await _dbContext.Techniques.FindAsync(id);
-        if (technique == null)
+        var office = await _dbContext.Offices.FindAsync(id);
+        if (office == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
-        _dbContext.Techniques.Remove(technique);
+        _dbContext.Offices.Remove(office);
 
         try
         {
