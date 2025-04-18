@@ -3,6 +3,7 @@ using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
@@ -49,11 +50,13 @@ public static class AuthoRequest
     {
         try
         {
-            var response = await App.ApiClient.GetAsync("/api/Authorization");
+            var response = await App.ApiClient.SendAsync(
+                new HttpRequestMessage(HttpMethod.Head,
+                "/api/Authorization")
+            );
 
             if (response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
                 return true;
             }
 
@@ -65,4 +68,4 @@ public static class AuthoRequest
             return false;
         }
     }
-}
+}   

@@ -107,7 +107,7 @@ namespace EquipmentInventory.API.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpHead]
         public ActionResult Authorize() => Ok();
     }
 }
