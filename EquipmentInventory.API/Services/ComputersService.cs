@@ -25,9 +25,16 @@ public class ComputersService
 
     public async Task<IEnumerable<ComputerDto>> GetPaginatedResults(PaginationModel pagination)
     {
+        var query = GetQuery();
+
+        if (pagination.Page.HasValue && pagination.PageSize.HasValue)
+        {
+            query = query
+                .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                .Take(pagination.PageSize.Value);
+        }
+
         var items = await GetQuery()
-            .Skip((pagination.Page - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
             .Select(c => new ComputerDto(
                 c.Id,
                 c.Number,

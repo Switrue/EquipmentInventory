@@ -28,12 +28,20 @@ namespace EquipmentInventory.API.Controllers
 
             try
             {
-                var items = await query
-                .Skip((pagination.Page - 1) * pagination.PageSize)
-                .Take(pagination.PageSize)
-                .ToListAsync();
+                if (pagination.Page.HasValue && pagination.PageSize.HasValue)
+                {
+                    var items = await query
+                        .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                        .Take(pagination.PageSize.Value)
+                        .ToListAsync();
 
-                return Ok(items);
+                    return Ok(items);
+                }
+                else
+                {
+                    var items = await query.ToListAsync();
+                    return Ok(items);
+                }
             }
             catch
             {

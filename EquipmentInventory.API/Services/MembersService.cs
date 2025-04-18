@@ -5,6 +5,7 @@ using EquipmentInventory.API.Data.Models;
 using EquipmentInventory.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EquipmentInventory.API.Services;
 
@@ -26,15 +27,22 @@ public class MembersService
     {
         return _context.Members
             .AsNoTracking()
+            .Include(m => m.IdPositionNavigation)
             .OrderBy(m => m.Id);
     }
 
     public async Task<IEnumerable<MemberDto>> GetPaginatedResults(PaginationModel pagination)
     {
-        var items = await GetQuery()
-            .Include(m => m.IdPositionNavigation)
-            .Skip((pagination.Page - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+        var query = GetQuery();
+
+        if (pagination.Page.HasValue && pagination.PageSize.HasValue)
+        {
+            query = query
+                .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                .Take(pagination.PageSize.Value);
+        }
+
+        var items = await query
             .Select(c => new MemberDto(
                 c.Id,
                 c.Surname,

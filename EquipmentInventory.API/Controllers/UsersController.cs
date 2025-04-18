@@ -58,13 +58,19 @@ namespace EquipmentInventory.API.Controllers
         {
             var query = _dbContext.Users
                 .AsNoTracking()
-                .OrderBy(u => u.Id);
+                .Include(u => u.IdRoleNavigation)
+                .Where(u => u.IdRoleNavigation.Name != RoleNames.Admin);
+
+            query = query.OrderBy(u => u.Id);
+
+            if (pagination.Page.HasValue && pagination.PageSize.HasValue)
+            {
+                query = query
+                    .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                    .Take(pagination.PageSize.Value);
+            }
 
             var items = await query
-                .Include(u => u.IdRoleNavigation)
-                .Where(u => u.IdRoleNavigation.Name != RoleNames.Admin)
-                .Skip((pagination.Page - 1) * pagination.PageSize)
-                .Take(pagination.PageSize)
                 .Select(c => new
                 {
                     c.Id,

@@ -66,9 +66,14 @@ public class TechniqueService
         IQueryable<Technique> query,
         PaginationModel pagination)
     {
+        if (pagination.Page.HasValue && pagination.PageSize.HasValue)
+        {
+            query = query
+                .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                .Take(pagination.PageSize.Value);
+        }
+
         var items = await query
-            .Skip((pagination.Page - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
             .Select(t => new TechniqueDto(
                 t.Id,
                 t.Number,
@@ -94,8 +99,8 @@ public class TechniqueService
         {
             Items = items,
             TotalCount = totalCount,
-            Page = pagination.Page,
-            PageSize = pagination.PageSize
+            Page = pagination.Page ?? 1,
+            PageSize = pagination.PageSize ?? items.Count()
         };
     }
     #endregion
