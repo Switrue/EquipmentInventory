@@ -5,7 +5,6 @@ using EquipmentInventory.API.Helpers;
 using Microsoft.EntityFrameworkCore;
 using EquipmentInventory.API.Data;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EquipmentInventory.API.Services;
 
@@ -36,7 +35,7 @@ public class TechniqueService
         return query;
     }
 
-    public IQueryable<Technique> ApplyFilter(TechniqueUpdateDto filter, out int filterCount)
+    public IQueryable<Technique> ApplyFilter(TechniqueFiltersDto filter, out int filterCount)
     {
         var query = _context.Techniques.AsNoTracking();
 
@@ -52,10 +51,23 @@ public class TechniqueService
             filter?.UnderRepair,
             filter?.DateOfPurchase,
             filter?.DateOfManufacture,
-            filter?.DateOfUse
+            filter?.DateOfUse,
+            filter?.Cost
         };
 
         filterCount = filters.Count(f => f != null);
+
+        if (filter?.IsUnderRepair is { } isUnderRepair)
+        {
+            query = query.Where(t => t.UnderRepair == isUnderRepair);
+        }
+
+        if (filter?.IsFastened is { } isFastened) 
+        {
+            query = isFastened
+                ? query.Where(t => t.IdMember != null || t.IdOffice != null)
+                : query.Where(t => t.IdMember == null || t.IdOffice == null);
+        }
 
         // Применение фильтра
         return filter switch

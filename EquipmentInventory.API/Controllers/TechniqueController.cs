@@ -73,7 +73,7 @@ public class TechniqueController : ControllerBase
     [HttpGet("get")]
     public async Task<ActionResult<IEnumerable<TechniqueDto>>> GetTechnique(
         [FromQuery] PaginationModel pagination,
-        [FromQuery] TechniqueUpdateDto filter = null)
+        [FromQuery] TechniqueFiltersDto filter = null)
     {
         try
         {
