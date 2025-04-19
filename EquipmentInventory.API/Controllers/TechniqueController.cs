@@ -69,11 +69,11 @@ public class TechniqueController : ControllerBase
         }
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet("get")]
     public async Task<ActionResult<IEnumerable<TechniqueDto>>> GetTechnique(
         [FromQuery] PaginationModel pagination,
-        [FromQuery] TechniqueFiltersDto filter = null)
+        [FromQuery] TechniqueFiltersDto filter)
     {
         try
         {

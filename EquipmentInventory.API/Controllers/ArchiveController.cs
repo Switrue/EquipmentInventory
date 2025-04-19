@@ -20,28 +20,49 @@ public class ArchiveController : ControllerBase
     [Authorize]
     [HttpGet("get")]
     public async Task<ActionResult> GetArchive(
-        [FromQuery] PaginationModel pagination)
+        [FromQuery] PaginationModel pagination,
+        [FromQuery] string? filter)
     {
         var query = _dbContext.Archives
-            .AsNoTracking()
-            .OrderBy(a => a.Id);
+            .AsNoTracking();
+
+        if (!string.IsNullOrEmpty(filter))
+        {
+            var request = filter.ToLower();
+            DateOnly parsedDate;
+            float parsedFloat;
+
+            bool isDateParsed = DateOnly.TryParse(request, out parsedDate);
+            bool isFloatParsed = float.TryParse(request, out parsedFloat);
+
+            query = query.Where(t =>
+                t.Number.ToLower().Contains(request) ||
+                t.TechniqueName.ToLower().Contains(request) ||
+                t.TypeTechniqueName.ToLower().Contains(request) ||
+                t.Supplier.ToLower().Contains(request) ||
+                (t.MemberName != null && t.MemberName.ToLower().Contains(request)) ||
+                (t.OfficeNumber != null && t.OfficeNumber.ToLower().Contains(request)) ||
+                (t.ComputerNumber.HasValue && t.ComputerNumber.Value.ToString() == request) ||
+                (isFloatParsed && t.Cost == parsedFloat) ||
+                (isDateParsed && (
+                    t.WriteOffDate == parsedDate || 
+                    t.DateOfPurchase == parsedDate || 
+                    t.DateOfManufacture == parsedDate || 
+                    t.DateOfUse == parsedDate))
+            );
+        }
+
+        query = query.OrderBy(t => t.Id);
 
         try
         {
-            if (pagination.Page.HasValue && pagination.PageSize.HasValue)
-            {
-                var items = await query
-                    .Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
-                    .Take(pagination.PageSize.Value)
-                    .ToListAsync();
+            var items = pagination.Page.HasValue && pagination.PageSize.HasValue
+                ? await query.Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
+                             .Take(pagination.PageSize.Value)
+                             .ToListAsync()
+                : await query.ToListAsync();
 
-                return Ok(items);
-            }
-            else
-            {
-                var items = await query.ToListAsync();
-                return Ok(items);
-            }
+            return Ok(items);
         }
         catch
         {

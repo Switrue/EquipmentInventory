@@ -1,7 +1,18 @@
 ﻿namespace EquipmentInventory.API.Data.Models;
 
-public class TechniqueFiltersDto : TechniqueUpdateDto
-{
-    public bool? IsFastened { get; set; }
-    public bool? IsUnderRepair { get; set; }
-}
+public record TechniqueFiltersDto(
+    string? Number,
+    string? TypeTechnique,
+    string? Name,
+    string? Member,
+    int? Office,
+    int? Computer,
+    DateOnly? DateOfPurchase,
+    DateOnly? DateOfManufacture,
+    DateOnly? DateOfUse,
+    string? Supplier,
+    float? Cost,
+    bool? UnderRepair,
+    bool? IsFastened,
+    bool? IsUnderRepair
+); 

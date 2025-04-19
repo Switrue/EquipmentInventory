@@ -42,12 +42,12 @@ public class TechniqueService
         // Проверка количества фильтров
         var filters = new object?[] {
             filter?.Number,
-            filter?.IdTypeTechnique,
-            filter?.IdMember,
+            filter?.TypeTechnique,
+            filter?.Member,
             filter?.Name,
-            filter?.IdComputer,
-            filter?.IdOffice,
-            filter?.IdSupplier,
+            filter?.Computer,
+            filter?.Office,
+            filter?.Supplier,
             filter?.UnderRepair,
             filter?.DateOfPurchase,
             filter?.DateOfManufacture,
@@ -69,23 +69,55 @@ public class TechniqueService
                 : query.Where(t => t.IdMember == null || t.IdOffice == null);
         }
 
-        // Применение фильтра
-        return filter switch
-        {
-            { Number: { } v } => query.Where(t => t.Number == v),
-            { IdTypeTechnique: { } v } => query.Where(t => t.IdTypeTechnique == v),
-            { Name: { } v } => query.Where(t => t.Name == v),
-            { IdMember: { } v } => query.Where(t => t.IdMember == v),
-            { IdComputer: { } v } => query.Where(t => t.IdComputer == v),
-            { IdOffice: { } v } => query.Where(t => t.IdOffice == v),
-            { IdSupplier: { } v } => query.Where(t => t.IdSupplier == v),
-            { UnderRepair: { } v } => query.Where(t => t.UnderRepair == v),
-            { DateOfPurchase: { } v } => query.Where(t => t.DateOfPurchase == v),
-            { DateOfManufacture: { } v } => query.Where(t => t.DateOfManufacture == v),
-            { DateOfUse: { } v } => query.Where(t => t.DateOfUse == v),
-            { Cost: { } v } => query.Where(t => t.Cost == v),
-            _ => query.OrderBy(t => t.Id)
-        };
+        // Основной фильтр
+        return ApplyFilters(query, filter);
+    }
+
+    private IQueryable<Technique> ApplyFilters(
+        IQueryable<Technique> query,
+        TechniqueFiltersDto? filter)
+    {
+        if (filter != null) 
+        { 
+            if (filter.Number is { } number)
+                query = query.Where(t => t.Number.ToLower().Contains(number.ToLower()));
+
+            if (filter.TypeTechnique is  { } typeTechnique)
+                query = query.Where(t => t.IdTypeTechniqueNavigation.Name.ToLower().Contains(typeTechnique.ToLower()));
+
+            if (filter.Name is { } name)
+                query = query.Where(t => t.Name.ToLower().Contains(name.ToLower()));
+
+            if (filter.Member is { } member)
+                query = query.Where(t =>
+                    t.IdMemberNavigation.Username.ToLower().Contains(member.ToLower()) ||
+                    t.IdMemberNavigation.Surname.ToLower().Contains(member.ToLower()));
+
+            if (filter.Computer is { } computer)
+                query = query.Where(t => t.IdComputerNavigation.Number == computer);
+
+            if (filter.Office is { } office)
+                query = query.Where(t => t.IdOfficeNavigation.Number == office);
+
+            if (filter.Supplier is { } supplier)
+                query = query.Where(t => t.IdSupplierNavigation.Name.ToLower().Contains(supplier.ToLower()));
+
+            if (filter.UnderRepair is { } underRepair)
+                query = query.Where(t => t.UnderRepair == underRepair);
+
+            if (filter.DateOfPurchase is { } dateOfPurchase)
+                query = query.Where(t => t.DateOfPurchase == dateOfPurchase);
+
+            if (filter.DateOfManufacture is { } dateOfManufacture)
+                query = query.Where(t => t.DateOfManufacture == dateOfManufacture);
+
+            if (filter.DateOfUse is { } dateOfUse)
+                query = query.Where(t => t.DateOfUse == dateOfUse);
+
+            if (filter.Cost is { } cost)
+                query = query.Where(t => t.Cost == cost);
+        }
+        return query.OrderBy(t => t.Id);
     }
 
     public async Task<PaginatedResult<TechniqueDto>> GetPaginatedResults(
