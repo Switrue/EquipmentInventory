@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="EquipmentInventory.Forms.Pages.TableSwitcher"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
              mc:Ignorable="d" 
              Focusable="True"
              Background="Transparent"
@@ -13,6 +13,8 @@
     <!--#region Styles-->
     <UserControl.Resources>
         <ResourceDictionary>
+            <local:RadioButtonConverter x:Key="RadioConverter" />
+
             <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
                 <Setter Property="Foreground" Value="{StaticResource TextColor}" />
                 <Setter Property="Background" Value="{StaticResource Background}" />
@@ -78,16 +80,16 @@
 
                         <!--#region Search-->
                         <StackPanel Grid.Row="0">
-                            <DatePicker x:Name="searchTxtB"
-                                        materialDesign:TextFieldAssist.HasLeadingIcon="True"
-                                        materialDesign:TextFieldAssist.LeadingIcon="Search"                              
-                                        Margin="0 0 0 15"
-                                        materialDesign:HintAssist.HintPaddingBrush="{StaticResource Background}"
-                                        materialDesign:ThemeAssist.Theme="Dark"
-                                        FontSize="{DynamicResource DefaultFontSize}"
-                                        BorderBrush="{StaticResource TextColor}"
-                                        Foreground="{StaticResource TextColor}"
-                                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                            <TextBox x:Name="searchDatePc"
+                                     materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                     materialDesign:TextFieldAssist.LeadingIcon="Search"                              
+                                     Margin="0 0 0 15"
+                                     materialDesign:HintAssist.HintPaddingBrush="{StaticResource Background}"
+                                     FontSize="{DynamicResource DefaultFontSize}"
+                                     BorderBrush="{StaticResource TextColor}"
+                                     Foreground="{StaticResource TextColor}"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                         </StackPanel>
                         <!--#endregion-->
 
@@ -104,46 +106,100 @@
                                     Click="ExpendFilters_Click" />
                         </UniformGrid>
 
-                        <ScrollViewer x:Name="filterUnit" Grid.Row="2" VerticalScrollBarVisibility="Hidden" Focusable="False" Margin="-15 5 -15 0">
-                            <materialDesign:Card Background="{StaticResource Background}" materialDesign:ElevationAssist.Elevation="Dp0" IsTabStop="False">
+                        <ScrollViewer x:Name="filterUnit" 
+                                      Grid.Row="2" 
+                                      VerticalScrollBarVisibility="Hidden" 
+                                      Focusable="False" 
+                                      Margin="-15 5 -15 0">
+                            <materialDesign:Card Background="{StaticResource Background}" 
+                                                 materialDesign:ElevationAssist.Elevation="Dp0" 
+                                                 IsTabStop="False">
                                 <StackPanel x:Name="filterContainer">
                                     <Expander x:Name="techniqueExpander">
                                         <StackPanel x:Name="techniqueContainer" Margin="24 8 24 16">
-                                            <RadioButton x:Name="techNameRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
-                                            <RadioButton x:Name="techTypeRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
-                                            <RadioButton x:Name="techNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
-                                            <RadioButton x:Name="techCostRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
+                                            <RadioButton x:Name="techNameRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}"
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=TechName}" />
+                                            <RadioButton x:Name="techTypeRBtn"
+                                                         Style="{StaticResource RadioButtonFilter}"
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=TechType}" />
+                                            <RadioButton x:Name="techNumberRBtn"
+                                                         Style="{StaticResource RadioButtonFilter}"
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=TechNumber}" />
+                                            <RadioButton x:Name="techCostRBtn"
+                                                         Style="{StaticResource RadioButtonFilter}"
+                                                         Checked="RadioButtonChanged_Checked"
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=TechCost}" />
                                             <UniformGrid x:Name="costFields" Columns="2">
-                                                <TextBox x:Name="costFromTxtB" PreviewTextInput="ValidationPrice_PreviewTextInput" />
-                                                <TextBox x:Name="costToTxtB" PreviewTextInput="ValidationPrice_PreviewTextInput" />
+                                                <TextBox x:Name="costFromTxtB" 
+                                                         Text="{Binding SearchFloat, UpdateSourceTrigger=PropertyChanged}"
+                                                         PreviewTextInput="ValidationPrice_PreviewTextInput" />
+                                                <TextBox x:Name="costToTxtB" 
+                                                         PreviewTextInput="ValidationPrice_PreviewTextInput" />
                                             </UniformGrid>
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
                                     <Expander x:Name="responsibleExpander">
                                         <StackPanel x:Name="responsibleContainer" Margin="24 8 24 16">
-                                            <RadioButton x:Name="respEmployeeRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
-                                            <RadioButton x:Name="respNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
+                                            <RadioButton x:Name="respEmployeeRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=RespEmployee}" />
+                                            <RadioButton x:Name="respNumberRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=RespNumber}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
                                     <Expander x:Name="computerExpander">
                                         <StackPanel x:Name="computerContainer" Margin="24 8 24 16">
-                                            <RadioButton x:Name="compNumberRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
+                                            <RadioButton x:Name="compNumberRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=CompNumber}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
                                     <Expander x:Name="dateExpander">
                                         <StackPanel x:Name="dateContainer" Margin="24 8 24 16">
-                                            <RadioButton x:Name="dateAcquisitionRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
-                                            <RadioButton x:Name="dateProductionRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
-                                            <RadioButton x:Name="dateOfUseRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
+                                            <RadioButton x:Name="dateAcquisitionRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=DateAcquisition}" />
+                                            <RadioButton x:Name="dateProductionRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=DateProduction}" />
+                                            <RadioButton x:Name="dateOfUseRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=DateOfUse}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
                                     <Expander x:Name="suppliersExpander">
                                         <StackPanel x:Name="suppliersContainer" Margin="24 8 24 16">
-                                            <RadioButton x:Name="supNameRBtn" Style="{StaticResource RadioButtonFilter}" Checked="RadioButtonChanged_Checked" />
+                                            <RadioButton x:Name="supNameRBtn" 
+                                                         Style="{StaticResource RadioButtonFilter}" 
+                                                         IsChecked="{Binding SelectedOption, 
+                                                                    Converter={StaticResource RadioConverter}, 
+                                                                    ConverterParameter=SupName}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />

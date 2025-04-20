@@ -1,40 +1,36 @@
-﻿using System.Windows;
+﻿using EquipmentInventory.Classes.Data.Enums;
+using EquipmentInventory.Classes.Data.ViewModels;
+using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Forms.Pages.GridTables;
+using EquipmentInventory.Properties;
+using MaterialDesignThemes.Wpf;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using EquipmentInventory.Properties;
 using System.Windows.Media;
-using EquipmentInventory.Classes.Data.Interfaces;
-using EquipmentInventory.Classes.Data.Enums;
-using EquipmentInventory.Forms.Pages.GridTables;
-using EquipmentInventory.Classes.Services;
-using System.Collections.Generic;
-using EquipmentInventory.Classes.Data.ViewModels;
 
 namespace EquipmentInventory.Forms.Pages;
 
 /// <summary>
 /// Логика взаимодействия для Inventory.xaml
 /// </summary>
-public partial class TableSwitcher : UserControl, IMainTableSwitcher
+public partial class TableSwitcher : UserControl
 {
-    private readonly TableSwitcherInventoryViewModel viewModel;
+    private TableSwitcherInventoryViewModel viewModel;
     private TableType _tableType;
-    private NotificationService notification;
 
     public TableSwitcher(TableType tableType)
     {
         InitializeComponent();
         _tableType = tableType;
-        viewModel = new TableSwitcherInventoryViewModel();
-        DataContext = viewModel;
         InitializeUI();
-        InitializeTable();
         InitializeParams();
+        InitializeTable();
     }
 
     #region Load
@@ -42,7 +38,7 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     {
         bool isCurrencyUsd = Settings.Default.CultureInfo == "en_US";
 
-        HintAssist.SetHint(searchTxtB, Strings.Search);
+        HintAssist.SetHint(searchDatePc, Strings.Search);
         viewFiltersBtn.Content = Strings.View;
         hidenFiltersBtn.Content = Strings.Hide;
         techniqueExpander.Header = Strings.Technique;
@@ -85,10 +81,10 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     {
         var tableMapping = new Dictionary<TableType, Action>
         {
-            { TableType.Inventory, () => tableFrame.Content = new Inventory(this, viewModel) },
+            { TableType.Inventory, () => tableFrame.Content = new Inventory(viewModel) },
             { TableType.Archive, () =>
                 {
-                    tableFrame.Content = new Archive(this);
+                    tableFrame.Content = new Archive();
                     CollapseFilters();
                 }
             }
@@ -102,14 +98,16 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
 
     private void InitializeParams()
     {
-        notification = new NotificationService(notificationSnackbar);
+        var notification = new NotificationService(notificationSnackbar);
+        viewModel = new TableSwitcherInventoryViewModel(notification);
+        DataContext = viewModel;
     }
 
     private void CollapseFilters()
     {
-        filterButtonUnit.Visibility = Visibility.Collapsed;
-        filterUnit.Visibility = Visibility.Collapsed;
-        templateQueriesCB.Visibility = Visibility.Collapsed;
+        filterButtonUnit.Visibility = Visibility.Hidden;
+        filterUnit.Visibility = Visibility.Hidden;
+        templateQueriesCB.Visibility = Visibility.Hidden;
     }
     #endregion
 
@@ -151,7 +149,7 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     }
 
     private void ClearSearchTextBox()
-        => searchTxtB.Text = string.Empty;
+        => searchDatePc.Text = string.Empty;
 
     private void ResetTemplateQueriesComboBox()
         => templateQueriesCB.SelectedItem = null;
@@ -210,10 +208,5 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
             textBox.Text = isChecked ? textBox.Text : string.Empty;
         }
     }
-    #endregion
-
-    #region Interface methods
-    public void TriggerANotification(string message)
-        => notification.Show(message);
     #endregion
 }

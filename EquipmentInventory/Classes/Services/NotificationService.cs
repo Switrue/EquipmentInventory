@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Services;
 
-class NotificationService
+public class NotificationService
 {
     private Snackbar _notification;
 

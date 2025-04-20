@@ -1,5 +1,4 @@
-﻿using EquipmentInventory.Classes.Data.Interfaces;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.GridTables;
 
@@ -8,14 +7,8 @@ namespace EquipmentInventory.Forms.Pages.GridTables;
 /// </summary>
 public partial class Archive : UserControl
 {
-    IMainTableSwitcher _mainTableSwitcher;
-
-    public Archive(IMainTableSwitcher mainTableSwitcher)
+    public Archive()
     {
         InitializeComponent();
-        _mainTableSwitcher = mainTableSwitcher;
     }
-
-    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        => _mainTableSwitcher.TriggerANotification("Arc");
 }
