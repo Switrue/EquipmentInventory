@@ -1,17 +1,52 @@
-﻿using EquipmentInventory.Classes.Helper;
-using Newtonsoft.Json.Linq;
+﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helper;
+using EquipmentInventory.Properties;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.Linq;
-using EquipmentInventory.Properties;
 
 namespace EquipmentInventory.Classes.Helpers;
 
 public static class ApiClientHelper
 {
+    public static async Task<PaginatedResult<T>> GetPaginatedAsync<T>(
+        string endpoint,
+        Action<string> onError = null)
+    {
+        try
+        {
+            // Отправляем GET-запрос
+            var response = await SendRequestAsync(endpoint, HttpMethod.Get, onError);
+
+            // Обрабатываем ответ
+            if (response != null)
+            {
+                var items = await response.Content.ReadAsAsync<IEnumerable<T>>();
+                var totalCount = GetTotalCountFromHeaders(response);
+
+                return new PaginatedResult<T>
+                {
+                    Items = items,
+                    TotalCount = totalCount,
+                    Page = 1,
+                    PageSize = 10
+                };
+            }
+
+            return null;
+        }
+        catch (Exception ex)
+        {
+            HandleUnexpectedError(ex);
+            return null;
+        }
+    }
+
     // Основные методы для запросов с телом
     public static Task<TResponse> PostAsync<TRequest, TResponse>(
         string endpoint,
@@ -109,6 +144,24 @@ public static class ApiClientHelper
         }
     }
 
+    private static async Task<HttpResponseMessage> SendRequestAsync(
+        string endpoint,
+        HttpMethod method,
+        Action<string> onError)
+    {
+        try
+        {
+            var request = new HttpRequestMessage(method, endpoint);
+            var response = await App.ApiClient.SendAsync(request);
+            return response;
+        }
+        catch (HttpRequestException ex)
+        {
+            HandleNetworkError(ex);
+            return null;
+        }
+    }
+
     // Общая обработка ответа
     private static async Task<TResponse> ProcessResponseAsync<TResponse>(
         HttpResponseMessage response,
@@ -127,6 +180,15 @@ public static class ApiClientHelper
         else DefaultErrorHandler(errorMessage);
 
         return default;
+    }
+
+    private static int GetTotalCountFromHeaders(HttpResponseMessage response)
+    {
+        if (response.Headers.TryGetValues("X-Total-Count", out var values))
+        {
+            return int.Parse(values.First());
+        }
+        return 0; 
     }
 
     // Парсинг ошибок (универсальный)

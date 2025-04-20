@@ -39,9 +39,7 @@ public class TechniqueService
     {
         var query = _context.Techniques.AsNoTracking();
 
-        float? cost = filter.FromCost.HasValue || filter.UpToCost.HasValue
-            ? 1
-            : null;
+        var hasCostFilter = filter.FromCost.HasValue || filter.UpToCost.HasValue;
 
         // Проверка количества фильтров
         var filters = new object?[] {
@@ -55,7 +53,7 @@ public class TechniqueService
             filter?.DateOfPurchase,
             filter?.DateOfManufacture,
             filter?.DateOfUse,
-            cost
+            hasCostFilter ? true : null
         };
 
         filterCount = filters.Count(f => f != null);
@@ -69,7 +67,7 @@ public class TechniqueService
         {
             query = isFastened
                 ? query.Where(t => t.IdMember != null || t.IdOffice != null)
-                : query.Where(t => t.IdMember == null || t.IdOffice == null);
+                : query.Where(t => t.IdMember == null && t.IdOffice == null);
         }
 
         // Основной фильтр
@@ -92,15 +90,21 @@ public class TechniqueService
                 query = query.Where(t => t.Name.ToLower().Contains(name.ToLower()));
 
             if (filter.Member is { } member)
+            {
                 query = query.Where(t =>
-                    t.IdMemberNavigation.Username.ToLower().Contains(member.ToLower()) ||
-                    t.IdMemberNavigation.Surname.ToLower().Contains(member.ToLower()));
+                    t.IdMemberNavigation != null &&
+                        (t.IdMemberNavigation.Username.ToLower().Contains(member.ToLower()) ||
+                        t.IdMemberNavigation.Surname.ToLower().Contains(member.ToLower()))
+                );
+            }
 
             if (filter.Computer is { } computer)
-                query = query.Where(t => t.IdComputerNavigation.Number == computer);
+                query = query.Where(
+                    t => t.IdComputerNavigation != null && t.IdComputerNavigation.Number == computer);
 
             if (filter.Office is { } office)
-                query = query.Where(t => t.IdOfficeNavigation.Number == office);
+                query = query.Where(
+                    t => t.IdOfficeNavigation != null && t.IdOfficeNavigation.Number == office);
 
             if (filter.Supplier is { } supplier)
                 query = query.Where(t => t.IdSupplierNavigation.Name.ToLower().Contains(supplier.ToLower()));
@@ -134,6 +138,8 @@ public class TechniqueService
         IQueryable<Technique> query,
         PaginationModel pagination)
     {
+        var totalCount = await query.CountAsync();
+
         if (pagination.Page.HasValue && pagination.PageSize.HasValue)
         {
             query = query
@@ -160,8 +166,6 @@ public class TechniqueService
                 t.UnderRepair
             ))
             .ToListAsync();
-
-        var totalCount = await query.CountAsync();
 
         return new PaginatedResult<TechniqueDto>
         {

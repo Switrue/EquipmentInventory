@@ -219,6 +219,8 @@
                                 <Button x:Name="findBtn" 
                                         Grid.Column="0" 
                                         Margin="0"
+                                        Command="{Binding Search}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                         Style="{StaticResource DefaultButton}" />
                                 <Button x:Name="cleanBtn" 
                                         Grid.Column="2"

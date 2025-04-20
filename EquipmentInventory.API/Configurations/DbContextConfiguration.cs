@@ -9,7 +9,10 @@ public static class DbContextConfiguration
     {
         services.AddDbContext<EquipmentInventoryDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString(nameof(EquipmentInventoryDbContext)));
+            options
+                .UseNpgsql(configuration.GetConnectionString(nameof(EquipmentInventoryDbContext)))
+                .EnableSensitiveDataLogging()
+                .LogTo(Console.WriteLine, LogLevel.Information);
         });
     }
 }

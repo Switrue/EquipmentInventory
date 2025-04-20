@@ -13,6 +13,7 @@ using EquipmentInventory.Classes.Data.Enums;
 using EquipmentInventory.Forms.Pages.GridTables;
 using EquipmentInventory.Classes.Services;
 using System.Collections.Generic;
+using EquipmentInventory.Classes.Data.ViewModels;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -21,6 +22,7 @@ namespace EquipmentInventory.Forms.Pages;
 /// </summary>
 public partial class TableSwitcher : UserControl, IMainTableSwitcher
 {
+    private readonly TableSwitcherInventoryViewModel viewModel;
     private TableType _tableType;
     private NotificationService notification;
 
@@ -28,6 +30,8 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     {
         InitializeComponent();
         _tableType = tableType;
+        viewModel = new TableSwitcherInventoryViewModel();
+        DataContext = viewModel;
         InitializeUI();
         InitializeTable();
         InitializeParams();
@@ -81,7 +85,7 @@ public partial class TableSwitcher : UserControl, IMainTableSwitcher
     {
         var tableMapping = new Dictionary<TableType, Action>
         {
-            { TableType.Inventory, () => tableFrame.Content = new Inventory(this) },
+            { TableType.Inventory, () => tableFrame.Content = new Inventory(this, viewModel) },
             { TableType.Archive, () =>
                 {
                     tableFrame.Content = new Archive(this);
