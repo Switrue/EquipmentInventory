@@ -39,6 +39,10 @@ public class TechniqueService
     {
         var query = _context.Techniques.AsNoTracking();
 
+        float? cost = filter.FromCost.HasValue || filter.UpToCost.HasValue
+            ? 1
+            : null;
+
         // Проверка количества фильтров
         var filters = new object?[] {
             filter?.Number,
@@ -48,11 +52,10 @@ public class TechniqueService
             filter?.Computer,
             filter?.Office,
             filter?.Supplier,
-            filter?.UnderRepair,
             filter?.DateOfPurchase,
             filter?.DateOfManufacture,
             filter?.DateOfUse,
-            filter?.Cost
+            cost
         };
 
         filterCount = filters.Count(f => f != null);
@@ -102,9 +105,6 @@ public class TechniqueService
             if (filter.Supplier is { } supplier)
                 query = query.Where(t => t.IdSupplierNavigation.Name.ToLower().Contains(supplier.ToLower()));
 
-            if (filter.UnderRepair is { } underRepair)
-                query = query.Where(t => t.UnderRepair == underRepair);
-
             if (filter.DateOfPurchase is { } dateOfPurchase)
                 query = query.Where(t => t.DateOfPurchase == dateOfPurchase);
 
@@ -114,8 +114,18 @@ public class TechniqueService
             if (filter.DateOfUse is { } dateOfUse)
                 query = query.Where(t => t.DateOfUse == dateOfUse);
 
-            if (filter.Cost is { } cost)
-                query = query.Where(t => t.Cost == cost);
+            if (filter.FromCost is { } from && filter.UpToCost is { } upTo)
+            {
+                query = query.Where(t => t.Cost >= from && t.Cost <= upTo);
+            }
+            else
+            {
+                if (filter.FromCost is { } fromCost)
+                    query = query.Where(t => t.Cost >= fromCost);
+
+                if (filter.UpToCost is { } upToCost)
+                    query = query.Where(t => t.Cost <= upToCost);
+            }
         }
         return query.OrderBy(t => t.Id);
     }

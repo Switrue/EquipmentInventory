@@ -11,8 +11,8 @@ public record TechniqueFiltersDto(
     DateOnly? DateOfManufacture,
     DateOnly? DateOfUse,
     string? Supplier,
-    float? Cost,
-    bool? UnderRepair,
+    float? FromCost,
+    float? UpToCost,
     bool? IsFastened,
     bool? IsUnderRepair
 ); 
