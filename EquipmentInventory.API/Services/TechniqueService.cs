@@ -39,7 +39,7 @@ public class TechniqueService
     {
         var query = _context.Techniques.AsNoTracking();
 
-        var hasCostFilter = filter.FromCost.HasValue || filter.UpToCost.HasValue;
+        var hasCostFilter = filter.FromCost.HasValue || filter.ToCost.HasValue;
 
         // Проверка количества фильтров
         var filters = new object?[] {
@@ -93,8 +93,9 @@ public class TechniqueService
             {
                 query = query.Where(t =>
                     t.IdMemberNavigation != null &&
-                        (t.IdMemberNavigation.Username.ToLower().Contains(member.ToLower()) ||
-                        t.IdMemberNavigation.Surname.ToLower().Contains(member.ToLower()))
+                        string.Concat(t.IdMemberNavigation.Surname, " ", t.IdMemberNavigation.Username)
+                            .ToLower()
+                            .Contains(member.ToLower())
                 );
             }
 
@@ -118,17 +119,17 @@ public class TechniqueService
             if (filter.DateOfUse is { } dateOfUse)
                 query = query.Where(t => t.DateOfUse == dateOfUse);
 
-            if (filter.FromCost is { } from && filter.UpToCost is { } upTo)
+            if (filter.FromCost is { } from && filter.ToCost is { } to)
             {
-                query = query.Where(t => t.Cost >= from && t.Cost <= upTo);
+                query = query.Where(t => t.Cost >= from && t.Cost <= to);
             }
             else
             {
                 if (filter.FromCost is { } fromCost)
                     query = query.Where(t => t.Cost >= fromCost);
 
-                if (filter.UpToCost is { } upToCost)
-                    query = query.Where(t => t.Cost <= upToCost);
+                if (filter.ToCost is { } ToCost)
+                    query = query.Where(t => t.Cost <= ToCost);
             }
         }
         return query.OrderBy(t => t.Id);

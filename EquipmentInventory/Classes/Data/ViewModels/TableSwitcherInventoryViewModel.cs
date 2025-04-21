@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
     private ObservableCollection<TechniqueDto> _items;
     private string _selectedOption;
     private string _searchText;
-    private float _searchFloat;
+    private string _fromCost;
+    private string _toCost;
 
     public ObservableCollection<TechniqueDto> Items
     {
@@ -37,10 +39,15 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
         get => _searchText;
         set => SetField(ref _searchText, value);
     }
-    public float SearchFloat
+    public string FromCost
     {
-        get => _searchFloat;
-        set => SetField(ref _searchFloat, value);
+        get => _fromCost;
+        set => SetField(ref _fromCost, value);
+    }
+    public string ToCost
+    {
+        get => _toCost;
+        set => SetField(ref _toCost, value);
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
@@ -49,7 +56,12 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
     {
         _notificationService = notificationService;
         _items = new ObservableCollection<TechniqueDto>();
+
+        DefaultSelectedOption();
     }
+
+    public void DefaultSelectedOption() 
+        => SelectedOption = "TechName";
 
     public ICommand Search => new RelayCommand<Button>(async (sender) =>
     {
@@ -61,11 +73,17 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
         var pagination = new PaginationModel { Page = 1, PageSize = 10 };
         var filter = GetFilter();
 
+        if (filter == null)
+        {
+            DataNotFound();
+            return;
+        }
+
         var result = await TechniqueRequest.GetTechnique(pagination, filter);
 
         if (result?.Items.Any() == true)
         {
-            _items.Clear();
+            ClearItems();
 
             foreach (var item in result.Items)
             {
@@ -75,22 +93,68 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
         }
         else
         {
-            TriggerANotification("Данные не найдены");
+            DataNotFound();
         }
     }
 
-    private TechniqueFiltersDto GetFilter()
-    {w
-        return SelectedOption switch
-        {
-            "TechName" => new TechniqueFiltersDto { Name = SearchText },
-            "TechType" => new TechniqueFiltersDto { TypeTechnique = SearchText },
-            "TechNumber" => new TechniqueFiltersDto { Number = SearchText },
-            "TechCost" => new TechniqueFiltersDto { FromCost = SearchFloat },
+    private void DataNotFound()
+    {
+        ClearItems();
+        TriggerANotification("Данные не найдены");
+    }
 
-            "DateProduction" => new TechniqueFiltersDto { DateOfManufacture = DateTime.Parse(SearchText) },
-            _ => new TechniqueFiltersDto { Name = SearchText }
-        };
+    private void ClearItems()
+        => _items.Clear();
+
+    private TechniqueFiltersDto GetFilter()
+    {
+        try
+        {
+            return SelectedOption switch
+            {
+                "TechName" => new TechniqueFiltersDto { Name = SearchText },
+                "TechType" => new TechniqueFiltersDto { TypeTechnique = SearchText },
+                "TechNumber" => new TechniqueFiltersDto { Number = SearchText },
+                "TechCost" => GetCostFilter(),
+                "RespEmployee" => new TechniqueFiltersDto { Member = SearchText },
+                "RespNumber" => new TechniqueFiltersDto { Office = int.Parse(SearchText) },
+                "CompNumber" => new TechniqueFiltersDto { Computer = int.Parse(SearchText) },
+                "DateAcquisition" => new TechniqueFiltersDto { DateOfPurchase = DateTime.Parse(SearchText) },
+                "DateProduction" => new TechniqueFiltersDto { DateOfManufacture = DateTime.Parse(SearchText) },
+                "DateOfUse" => new TechniqueFiltersDto { DateOfUse = DateTime.Parse(SearchText) },
+                "SupName" => new TechniqueFiltersDto { Supplier = SearchText },
+                _ => new TechniqueFiltersDto()
+            };
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private TechniqueFiltersDto GetCostFilter()
+    {
+        TechniqueFiltersDto techCost = null;
+
+        var hasFrom = !string.IsNullOrWhiteSpace(FromCost);
+        var hasTo = !string.IsNullOrWhiteSpace(ToCost);
+
+        if (hasFrom || hasTo)
+        {
+            techCost = new TechniqueFiltersDto();
+
+            if (hasFrom)
+            {
+                techCost.FromCost = float.Parse(FromCost, CultureInfo.InvariantCulture);
+            }
+
+            if (hasTo)
+            {
+                techCost.ToCost = float.Parse(ToCost, CultureInfo.InvariantCulture);
+            }
+        }
+
+        return techCost;
     }
 
     private void TriggerANotification(string message)

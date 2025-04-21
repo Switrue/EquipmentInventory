@@ -23,7 +23,7 @@
 
             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                 <Setter Property="Margin" Value="0 0 5 0" />
-                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="ContextMenu" Value="{x:Null}" />
                 <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
                 <Setter Property="materialDesign:TextFieldAssist.HasLeadingIcon" Value="True" />
                 <Setter Property="materialDesign:TextFieldAssist.LeadingIconSize" Value="15" />
@@ -85,6 +85,7 @@
                                      materialDesign:TextFieldAssist.LeadingIcon="Search"                              
                                      Margin="0 0 0 15"
                                      materialDesign:HintAssist.HintPaddingBrush="{StaticResource Background}"
+                                     materialDesign:TextFieldAssist.HasClearButton="True"
                                      FontSize="{DynamicResource DefaultFontSize}"
                                      BorderBrush="{StaticResource TextColor}"
                                      Foreground="{StaticResource TextColor}"
@@ -117,32 +118,39 @@
                                 <StackPanel x:Name="filterContainer">
                                     <Expander x:Name="techniqueExpander">
                                         <StackPanel x:Name="techniqueContainer" Margin="24 8 24 16">
-                                            <RadioButton x:Name="techNameRBtn" 
+                                            <RadioButton x:Name="techNameRBtn"
                                                          Style="{StaticResource RadioButtonFilter}"
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=TechName}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=TechName}" />
                                             <RadioButton x:Name="techTypeRBtn"
                                                          Style="{StaticResource RadioButtonFilter}"
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=TechType}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=TechType}" />
                                             <RadioButton x:Name="techNumberRBtn"
                                                          Style="{StaticResource RadioButtonFilter}"
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=TechNumber}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=TechNumber}" />
                                             <RadioButton x:Name="techCostRBtn"
                                                          Style="{StaticResource RadioButtonFilter}"
                                                          Checked="RadioButtonChanged_Checked"
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=TechCost}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=TechCost}" />
                                             <UniformGrid x:Name="costFields" Columns="2">
                                                 <TextBox x:Name="costFromTxtB" 
-                                                         Text="{Binding SearchFloat, UpdateSourceTrigger=PropertyChanged}"
+                                                         IsEnabled="{Binding SelectedOption, 
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=TechCost}"
+                                                         Text="{Binding FromCost, UpdateSourceTrigger=PropertyChanged}"
                                                          PreviewTextInput="ValidationPrice_PreviewTextInput" />
                                                 <TextBox x:Name="costToTxtB" 
+                                                         IsEnabled="{Binding SelectedOption, 
+                                                                            Converter={StaticResource RadioConverter}, 
+                                                                            ConverterParameter=TechCost}"
+                                                         Text="{Binding ToCost, UpdateSourceTrigger=PropertyChanged}"
                                                          PreviewTextInput="ValidationPrice_PreviewTextInput" />
                                             </UniformGrid>
                                         </StackPanel>
@@ -153,13 +161,13 @@
                                             <RadioButton x:Name="respEmployeeRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=RespEmployee}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=RespEmployee}" />
                                             <RadioButton x:Name="respNumberRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=RespNumber}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=RespNumber}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
@@ -168,8 +176,8 @@
                                             <RadioButton x:Name="compNumberRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=CompNumber}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=CompNumber}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
@@ -178,18 +186,18 @@
                                             <RadioButton x:Name="dateAcquisitionRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=DateAcquisition}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=DateAcquisition}" />
                                             <RadioButton x:Name="dateProductionRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=DateProduction}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=DateProduction}" />
                                             <RadioButton x:Name="dateOfUseRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=DateOfUse}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=DateOfUse}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />
@@ -198,8 +206,8 @@
                                             <RadioButton x:Name="supNameRBtn" 
                                                          Style="{StaticResource RadioButtonFilter}" 
                                                          IsChecked="{Binding SelectedOption, 
-                                                                    Converter={StaticResource RadioConverter}, 
-                                                                    ConverterParameter=SupName}" />
+                                                                             Converter={StaticResource RadioConverter}, 
+                                                                             ConverterParameter=SupName}" />
                                         </StackPanel>
                                     </Expander>
                                     <Border Style="{StaticResource Separator}" />

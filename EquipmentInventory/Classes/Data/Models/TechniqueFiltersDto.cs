@@ -15,7 +15,7 @@ public class TechniqueFiltersDto
     public DateTime? DateOfUse { get; set; }
     public string? Supplier { get; set; }
     public float? FromCost { get; set; }
-    public float? UpToCost { get; set; }
+    public float? ToCost { get; set; }
     public bool? IsFastened { get; set; }
     public bool? IsUnderRepair { get; set; }
 }

@@ -10,6 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DataGrid CanUserAddRows="False"
+                  Focusable="False"
                   ItemsSource="{Binding Items}"
                   SelectionMode="Extended"
                   Background="Transparent"

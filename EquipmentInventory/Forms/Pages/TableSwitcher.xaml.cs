@@ -142,7 +142,9 @@ public partial class TableSwitcher : UserControl
 
     private void CleanTheForm_Click(object sender, RoutedEventArgs e)
     {
-        ResetExpanders();
+        //ResetExpanders();
+        viewModel.DefaultSelectedOption();
+
         ClearSearchTextBox();
         ResetTemplateQueriesComboBox();
         SetDefaultListBoxSelections();

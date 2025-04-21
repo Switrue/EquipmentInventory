@@ -12,7 +12,7 @@ public record TechniqueFiltersDto(
     DateOnly? DateOfUse,
     string? Supplier,
     float? FromCost,
-    float? UpToCost,
+    float? ToCost,
     bool? IsFastened,
     bool? IsUnderRepair
 ); 
