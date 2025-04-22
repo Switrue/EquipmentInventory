@@ -435,4 +435,10 @@
   <data name="UserImageInfo" xml:space="preserve">
     <value>Если отменить выбор изображения, автоматически будет установлено изображение профиля по умолчанию</value>
   </data>
+  <data name="DataNotFound" xml:space="preserve">
+    <value>Данные не найдены</value>
+  </data>
+  <data name="TotalFound" xml:space="preserve">
+    <value>Всего найдено</value>
+  </data>
 </root>

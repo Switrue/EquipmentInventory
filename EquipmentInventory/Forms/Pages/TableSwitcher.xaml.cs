@@ -12,7 +12,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -127,9 +126,6 @@ public partial class TableSwitcher : UserControl
     private void ExpendFilters_Click(Object sender, RoutedEventArgs e) 
         => ExpendFilters(bool.TryParse(((Button)sender).Tag as string, out bool isExpended));
 
-    private void RadioButtonChanged_Checked(object sender, RoutedEventArgs e) 
-        => CheckPriceContainer();
-
     private void ValidationPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
         Regex regex = new Regex(@"^[0-9]*(\.[0-9]*)?$");
@@ -140,74 +136,11 @@ public partial class TableSwitcher : UserControl
         e.Handled = !regex.IsMatch(newText);
     }
 
-    private void CleanTheForm_Click(object sender, RoutedEventArgs e)
-    {
-        //ResetExpanders();
-        viewModel.DefaultSelectedOption();
-
-        ClearSearchTextBox();
-        ResetTemplateQueriesComboBox();
-        SetDefaultListBoxSelections();
-    }
-
-    private void ClearSearchTextBox()
-        => searchDatePc.Text = string.Empty;
-
-    private void ResetTemplateQueriesComboBox()
-        => templateQueriesCB.SelectedItem = null;
-
-    private void SetDefaultListBoxSelections()
-    {
-        absentListB.SelectedIndex = 1;
-        repairListB.SelectedIndex = 1;
-    }
-
-    private void ResetExpanders()
-    {
-        foreach (Expander expander in filterContainer.Children.OfType<Expander>())
-        {
-            ClearRadioButtons(expander);
-        }
-
-        // Очистить текстовые поля со стоимостью
-        CheckPriceContainer();
-    }
-
-    private void ClearRadioButtons(DependencyObject parent)
-    {
-        if (parent == null) return;
-
-        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-        {
-            var child = VisualTreeHelper.GetChild(parent, i);
-
-            if (child is RadioButton radioButton)
-            {
-                radioButton.IsChecked = false;
-            }
-            else
-            {
-                ClearRadioButtons(child);
-            }
-        }
-    }
-
     private void ExpendFilters(bool isExpended)
     {
         foreach(Expander expander in filterContainer.Children.OfType<Expander>())
         {
             expander.IsExpanded = isExpended;
-        }
-    }
-
-    private void CheckPriceContainer()
-    {
-        bool isChecked = techCostRBtn.IsChecked.GetValueOrDefault();
-
-        foreach (TextBox textBox in costFields.Children.OfType<TextBox>())
-        {
-            textBox.IsReadOnly = !isChecked;
-            textBox.Text = isChecked ? textBox.Text : string.Empty;
         }
     }
     #endregion

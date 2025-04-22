@@ -15,6 +15,7 @@
                   SelectionMode="Extended"
                   Background="Transparent"
                   IsReadOnly="True"
+                  VerticalScrollBarVisibility="Hidden"
                   materialDesign:ThemeAssist.Theme="Dark"
                   SelectionUnit="Cell" />
     </Grid>

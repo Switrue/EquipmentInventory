@@ -199,6 +199,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\Data\Converters\InverseBoolConverter.cs" />
     <Compile Include="Classes\Data\Interfaces\IMainPanel.cs" />
     <Compile Include="Classes\Data\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Data\Interfaces\INavigationService.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Classes\Data\Requests\UsersRequest.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherInventoryViewModel.cs" />
     <Compile Include="Classes\Helpers\QueryParamsHelper.cs" />
+    <Compile Include="Classes\Services\PageNavigationService.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />
     <Compile Include="Classes\Data\Models\Users.cs" />
     <Compile Include="Classes\Helpers\ValidationHelper.cs" />

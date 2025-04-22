@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <local:RadioButtonConverter x:Key="RadioConverter" />
+            <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
 
             <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
                 <Setter Property="Foreground" Value="{StaticResource TextColor}" />
@@ -135,7 +136,6 @@
                                                                              ConverterParameter=TechNumber}" />
                                             <RadioButton x:Name="techCostRBtn"
                                                          Style="{StaticResource RadioButtonFilter}"
-                                                         Checked="RadioButtonChanged_Checked"
                                                          IsChecked="{Binding SelectedOption, 
                                                                              Converter={StaticResource RadioConverter}, 
                                                                              ConverterParameter=TechCost}" />
@@ -251,15 +251,23 @@
                                             </Grid.RowDefinitions>
 
                                             <TextBlock x:Name="absentTxtB" Grid.Column="0" Grid.Row="0" Style="{StaticResource ControlPanelTextBlock}" />
-                                            <ListBox x:Name="absentListB" Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="0">
+                                            <ListBox x:Name="absentListB" 
+                                                     Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" 
+                                                     SelectedIndex="{Binding AbsentStatusIndex, Mode=TwoWay}"
+                                                     Grid.Column="2" 
+                                                     Grid.Row="0">
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
-                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" />
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
                                             </ListBox>
                                             <TextBlock x:Name="repairTxtB" Grid.Column="0" Grid.Row="1" Style="{StaticResource ControlPanelTextBlock}" />
-                                            <ListBox x:Name="repairListB" Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" Grid.Column="2" Grid.Row="1">
+                                            <ListBox x:Name="repairListB" 
+                                                     Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" 
+                                                     SelectedIndex="{Binding RepairStatusIndex, Mode=TwoWay}"
+                                                     Grid.Column="2"
+                                                     Grid.Row="1">
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
-                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" IsSelected="True" />
+                                                <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Minus, Size=15}" />
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Close, Size=15}" />
                                             </ListBox>
                                         </Grid>
@@ -283,15 +291,15 @@
                                 <Button x:Name="findBtn" 
                                         Grid.Column="0" 
                                         Margin="0"
-                                        Command="{Binding Search}"
-                                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                                        Style="{StaticResource DefaultButton}" />
+                                        Command="{Binding SearchCommand}"
+                                        Style="{StaticResource DefaultButton}"
+                                        IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}" />
                                 <Button x:Name="cleanBtn" 
                                         Grid.Column="2"
                                         Margin="0"
                                         Content="{materialDesign:PackIcon Kind=CloseBoxOutline, Size=20}" 
                                         Style="{StaticResource DefaultButton}"
-                                        Click="CleanTheForm_Click" />
+                                        Command="{Binding CleanCommand}" />
                             </Grid>
                         </StackPanel>
                         <!--#endregion-->
@@ -299,19 +307,35 @@
                     <Border Background="{StaticResource SecondaryColor}" HorizontalAlignment="Right" Width="2" />
                 </Grid>
             </materialDesign:DrawerHost.LeftDrawerContent>
-            <StackPanel Margin="6" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid Margin="6" Width="35">
                 <ToggleButton materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon ArrowCollapseLeft}"
                               Content="{materialDesign:PackIcon ArrowExpandRight}"
                               IsChecked="True"
+                              VerticalAlignment="Top"
                               Click="ToggleGridBtn_Click" />
-            </StackPanel>
+                <StackPanel VerticalAlignment="Center">
+                    <Button Style="{StaticResource PageButton}"
+                            Command="{Binding BackCommand}"
+                            Content="{materialDesign:PackIcon Kind=ChevronUp, Size=25}" />
+                    <TextBlock Text="{Binding CurrentPage}"
+                               Style="{StaticResource PageTextBlock}" />
+                    <Button Style="{StaticResource PageButton}"
+                            Command="{Binding ForwardCommand}"
+                            IsEnabled="{Binding IsButtonEnabled}"
+                            Content="{materialDesign:PackIcon Kind=ChevronDown, Size=25}" />
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom">
+                    <TextBlock Text="{Binding TotalItems}"
+                               Style="{StaticResource PageTextBlock}" />
+                </StackPanel>
+            </Grid>
         </materialDesign:DrawerHost>
         <!--#endregion-->
 
         <!--#region Table-->
         <Grid Grid.Column="1">
             <Frame x:Name="tableFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
-            <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.Column="1" Margin="-44 0 0 0" />
+            <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.Column="1" Margin="-46 0 0 0" />
         </Grid>
         <!--#endregion-->
     </Grid>

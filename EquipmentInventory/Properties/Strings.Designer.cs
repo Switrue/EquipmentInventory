@@ -313,6 +313,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Data not found.
+        /// </summary>
+        internal static string DataNotFound {
+            get {
+                return ResourceManager.GetString("DataNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Date.
         /// </summary>
         internal static string Date {
@@ -906,6 +915,15 @@ namespace EquipmentInventory.Properties {
         internal static string TheIntervalOfObsoleteTechnology {
             get {
                 return ResourceManager.GetString("TheIntervalOfObsoleteTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Total found.
+        /// </summary>
+        internal static string TotalFound {
+            get {
+                return ResourceManager.GetString("TotalFound", resourceCulture);
             }
         }
         

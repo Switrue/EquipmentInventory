@@ -540,4 +540,12 @@
     <value>If you deselect the image, the default profile image will automatically be set</value>
     <comment>UserProfile</comment>
   </data>
+  <data name="DataNotFound" xml:space="preserve">
+    <value>Data not found</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="TotalFound" xml:space="preserve">
+    <value>Total found</value>
+    <comment>Tables</comment>
+  </data>
 </root>
