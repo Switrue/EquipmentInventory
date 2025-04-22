@@ -317,12 +317,14 @@
                               VerticalAlignment="Top"
                               Click="ToggleGridBtn_Click" />
                 <StackPanel VerticalAlignment="Center">
-                    <Button Style="{StaticResource PageButton}"
+                    <Button x:Name="backBtn" 
+                            Style="{StaticResource PageButton}"
                             Command="{Binding BackCommand}"
                             Content="{materialDesign:PackIcon Kind=ChevronUp, Size=25}" />
                     <TextBlock Text="{Binding CurrentPage}"
                                Style="{StaticResource PageTextBlock}" />
-                    <Button Style="{StaticResource PageButton}"
+                    <Button x:Name="forwardBtn"
+                            Style="{StaticResource PageButton}"
                             Command="{Binding ForwardCommand}"
                             Content="{materialDesign:PackIcon Kind=ChevronDown, Size=25}" />
                 </StackPanel>

@@ -160,6 +160,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Back.
+        /// </summary>
+        internal static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Cencel.
         /// </summary>
         internal static string Cancel {
@@ -457,6 +466,24 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на First name.
+        /// </summary>
+        internal static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Forward.
+        /// </summary>
+        internal static string Forward {
+            get {
+                return ResourceManager.GetString("Forward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Generate a password.
         /// </summary>
         internal static string GeneratePassword {
@@ -637,15 +664,6 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Username.
-        /// </summary>
-        internal static string Nick {
-            get {
-                return ResourceManager.GetString("Nick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на No.
         /// </summary>
         internal static string No {
@@ -763,6 +781,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Second name.
+        /// </summary>
+        internal static string SecondName {
+            get {
+                return ResourceManager.GetString("SecondName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Select an image.
         /// </summary>
         internal static string SelectImage {
@@ -849,15 +876,6 @@ namespace EquipmentInventory.Properties {
         internal static string Supplier {
             get {
                 return ResourceManager.GetString("Supplier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Surname.
-        /// </summary>
-        internal static string Surname {
-            get {
-                return ResourceManager.GetString("Surname", resourceCulture);
             }
         }
         

@@ -1,15 +1,15 @@
-﻿using EquipmentInventory.Classes.Services;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
-using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using EquipmentInventory.Classes.Data.Requests;
-using System.Threading.Tasks;
-using EquipmentInventory.Classes.Data.Interfaces;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -43,8 +43,8 @@ public partial class UserProfile : UserControl
         toolTipUserImage.ToolTip = Strings.UserImageInfo;
         changeImageBtn.Content = Strings.SelectImage;
         dataGrB.Header = Strings.UserData;
-        HintAssist.SetHint(usernameTxtB, Strings.Nick);
-        HintAssist.SetHint(surnameTxtB, Strings.Surname);
+        HintAssist.SetHint(usernameTxtB, Strings.FirstName);
+        HintAssist.SetHint(surnameTxtB, Strings.SecondName);
         HintAssist.SetHint(userPasswordTxtB, Strings.Password);
         editUsernameBtn.ToolTip = Strings.Edit;
         editUserPasswordBtn.ToolTip = Strings.Edit;

@@ -227,6 +227,7 @@
     <Compile Include="Classes\Data\Requests\TechniqueRequest.cs" />
     <Compile Include="Classes\Data\Requests\UsersRequest.cs" />
     <Compile Include="Classes\Data\ViewModels\TablesSwitcherArchiveViewModel.cs" />
+    <Compile Include="Classes\Data\ViewModels\TableSwitcherBaseViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherInventoryViewModel.cs" />
     <Compile Include="Classes\Helpers\QueryParamsHelper.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />

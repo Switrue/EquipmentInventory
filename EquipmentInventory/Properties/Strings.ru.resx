@@ -294,7 +294,7 @@
   <data name="Clean" xml:space="preserve">
     <value>Очистить</value>
   </data>
-  <data name="Surname" xml:space="preserve">
+  <data name="SecondName" xml:space="preserve">
     <value>Фамилия</value>
   </data>
   <data name="CreateAccouont" xml:space="preserve">
@@ -309,7 +309,7 @@
   <data name="GeneratePassword" xml:space="preserve">
     <value>Сгенерировать пароль</value>
   </data>
-  <data name="Nick" xml:space="preserve">
+  <data name="FirstName" xml:space="preserve">
     <value>Имя</value>
   </data>
   <data name="Copyrights" xml:space="preserve">
@@ -440,5 +440,11 @@
   </data>
   <data name="TotalFound" xml:space="preserve">
     <value>Всего найдено</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Вперед</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
   </data>
 </root>

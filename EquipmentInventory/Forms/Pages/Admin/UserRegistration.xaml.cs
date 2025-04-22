@@ -1,12 +1,12 @@
-﻿using EquipmentInventory.Properties;
-using EquipmentInventory.Classes.Services;
+﻿using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Requests;
-using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Helpers;
+using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
 using MaterialDesignThemes.Wpf;
-using System.Windows.Input;
-using System.Windows.Controls;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace EquipmentInventory.Forms.Pages;
 
@@ -29,8 +29,9 @@ public partial class UserRegistration : UserControl
     {
         changeImageBtn.Content = Strings.SelectImage;
         titleUserTxtBl.Text = Strings.User;
-        HintAssist.SetHint(userFieldTxtB, Strings.Nick);
-        HintAssist.SetHint(surnameFieldTxtB, Strings.Surname);
+        toolTipUserImage.ToolTip = Strings.UserImageInfo;
+        HintAssist.SetHint(userFieldTxtB, Strings.FirstName);
+        HintAssist.SetHint(surnameFieldTxtB, Strings.SecondName);
         HintAssist.SetHint(loginFieldTxtB, Strings.Username);
         HintAssist.SetHint(passwordFieldTxtB, Strings.Password);
         createAccountBtn.Content = Strings.CreateAccouont;
