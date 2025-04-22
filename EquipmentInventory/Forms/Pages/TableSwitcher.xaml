@@ -236,11 +236,10 @@
                                         <ComboBox x:Name="templateQueriesCB"
                                                   Foreground="{StaticResource TextColor}"
                                                   FontSize="{DynamicResource DefaultFontSize}"
+                                                  ItemsSource="{Binding QueryItems}"
+                                                  SelectedItem="{Binding SelectedQuery, Mode=TwoWay}"
                                                   materialDesign:ThemeAssist.Theme="Dark"
-                                                  materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}">
-                                            <ComboBoxItem Content="Пример 1" />
-                                            <ComboBoxItem Content="Пример 2" />
-                                        </ComboBox>
+                                                  materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}" />
 
                                         <Grid Margin="0 15 0 0">
                                             <Grid.ColumnDefinitions>

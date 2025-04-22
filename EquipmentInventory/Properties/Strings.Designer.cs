@@ -250,6 +250,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Computer components.
+        /// </summary>
+        internal static string ComputerComponents {
+            get {
+                return ResourceManager.GetString("ComputerComponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Contact details.
         /// </summary>
         internal static string ContactDetails {
@@ -696,6 +705,15 @@ namespace EquipmentInventory.Properties {
         internal static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Outdated technology.
+        /// </summary>
+        internal static string OutdatedTechnology {
+            get {
+                return ResourceManager.GetString("OutdatedTechnology", resourceCulture);
             }
         }
         

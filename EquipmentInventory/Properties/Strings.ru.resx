@@ -447,4 +447,10 @@
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="OutdatedTechnology" xml:space="preserve">
+    <value>Устаревшая техника</value>
+  </data>
+  <data name="ComputerComponents" xml:space="preserve">
+    <value>Компоненты компьютера</value>
+  </data>
 </root>

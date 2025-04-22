@@ -1,7 +1,9 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
 using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 
@@ -9,11 +11,25 @@ namespace EquipmentInventory.Classes.Data.ViewModels;
 
 public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<TechniqueDto>
 {
+    private ObservableCollection<string> _queryItems;
+    private string _selectedQuery;
     private int _absentStatusIndex;
     private int _repairStatusIndex;
     private string _selectedOption;
     private string _fromCost;
     private string _toCost;
+
+    public ObservableCollection<string> QueryItems
+    {
+        get => _queryItems;
+        set => SetField(ref _queryItems, value);
+    }
+
+    public string SelectedQuery
+    {
+        get => _selectedQuery;
+        set => SetField(ref _selectedQuery, value);
+    }
 
     public int AbsentStatusIndex
     {
@@ -48,6 +64,12 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     public TableSwitcherInventoryViewModel(NotificationService notificationService)
         : base(notificationService)
     {
+        _queryItems = new ObservableCollection<string>
+        {
+            Strings.OutdatedTechnology,
+            Strings.ComputerComponents
+        };
+
         DefaultSelectedOption();
         DefaultStatusIndices();
     }
@@ -60,6 +82,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
         DefaultStatusIndices();
         DefaultSearchFields();
         DefautlSearchInformation();
+        DefaultSelectedItems();
         ClearItems();
     }
 
@@ -86,6 +109,9 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
         AbsentStatusIndex = 1;
         RepairStatusIndex = 1;
     }
+
+    private void DefaultSelectedItems()
+        => SelectedQuery = null;
 
     private void DefaultSearchFields()
     {

@@ -556,4 +556,12 @@
     <value>Back</value>
     <comment>Tables</comment>
   </data>
+  <data name="OutdatedTechnology" xml:space="preserve">
+    <value>Outdated technology</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="ComputerComponents" xml:space="preserve">
+    <value>Computer components</value>
+    <comment>Tables</comment>
+  </data>
 </root>

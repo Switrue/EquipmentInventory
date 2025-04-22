@@ -1,12 +1,12 @@
-﻿using EquipmentInventory.Classes.Helper;
+﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helper;
+using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
-using EquipmentInventory.Classes.Data.Models;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using EquipmentInventory.Classes.Services;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
 
