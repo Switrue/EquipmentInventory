@@ -34,46 +34,55 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
     public ICommand ForwardCommand { get; }
     public ICommand BackCommand { get; }
     public ICommand SearchCommand { get; }
+
     public ObservableCollection<TechniqueDto> Items
     {
         get => _items;
         set => SetField(ref _items, value);
     }
+
     public int AbsentStatusIndex
     {
         get => _absentStatusIndex;
         set => SetField(ref _absentStatusIndex, value);
     }
+
     public int RepairStatusIndex
     {
         get => _repairStatusIndex;
         set => SetField(ref _repairStatusIndex, value);
     }
+
     public string SelectedOption
     {
         get => _selectedOption;
         set => SetField(ref _selectedOption, value);
     }
+
     public string SearchText
     {
         get => _searchText;
         set => SetField(ref _searchText, value);
     }
+
     public string FromCost
     {
         get => _fromCost;
         set => SetField(ref _fromCost, value);
     }
+
     public string ToCost
     {
         get => _toCost;
         set => SetField(ref _toCost, value);
     }
+
     public bool IsLoading
     {
         get => _isLoading;
         set => SetField(ref _isLoading, value);
     }
+
     public int TotalItems
     {
         get => _totalItems;
@@ -88,6 +97,7 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
             }
         }
     }
+
     public int CurrentPage
     {
         get => _currentPage;
@@ -101,6 +111,7 @@ public class TableSwitcherInventoryViewModel : INotifyPropertyChanged
             }
         }
     }
+
     private int TotalPages
         => TotalItems > 0 ? (int)Math.Ceiling((double)TotalItems / PageSize) : 0;
 

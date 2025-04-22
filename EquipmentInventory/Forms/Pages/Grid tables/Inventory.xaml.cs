@@ -8,13 +8,9 @@ namespace EquipmentInventory.Forms.Pages.GridTables;
 /// </summary>
 public partial class Inventory : UserControl
 {
-    private TableSwitcherInventoryViewModel _viewModel;
-
     public Inventory(TableSwitcherInventoryViewModel viewModel)
     {
         InitializeComponent();
-        _viewModel = viewModel;
-
-        DataContext = _viewModel;
+        DataContext = viewModel;
     }
 }

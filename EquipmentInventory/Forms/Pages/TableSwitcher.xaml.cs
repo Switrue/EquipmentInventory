@@ -20,7 +20,6 @@ namespace EquipmentInventory.Forms.Pages;
 /// </summary>
 public partial class TableSwitcher : UserControl
 {
-    private TableSwitcherInventoryViewModel viewModel;
     private TableType _tableType;
 
     public TableSwitcher(TableType tableType)
@@ -28,7 +27,6 @@ public partial class TableSwitcher : UserControl
         InitializeComponent();
         _tableType = tableType;
         InitializeUI();
-        InitializeParams();
         InitializeTable();
     }
 
@@ -80,10 +78,18 @@ public partial class TableSwitcher : UserControl
     {
         var tableMapping = new Dictionary<TableType, Action>
         {
-            { TableType.Inventory, () => tableFrame.Content = new Inventory(viewModel) },
+            { TableType.Inventory, () =>
+                {
+                    var viewModel = new TableSwitcherInventoryViewModel(new NotificationService(notificationSnackbar));
+                    DataContext = viewModel;
+                    tableFrame.Content = new Inventory(viewModel);
+                } 
+            },
             { TableType.Archive, () =>
                 {
-                    tableFrame.Content = new Archive();
+                    var viewModel = new TablesSwitcherArchiveViewModel(new NotificationService(notificationSnackbar));
+                    DataContext = viewModel;
+                    tableFrame.Content = new Archive(viewModel);
                     CollapseFilters();
                 }
             }
@@ -95,18 +101,11 @@ public partial class TableSwitcher : UserControl
         }
     }
 
-    private void InitializeParams()
-    {
-        var notification = new NotificationService(notificationSnackbar);
-        viewModel = new TableSwitcherInventoryViewModel(notification);
-        DataContext = viewModel;
-    }
-
     private void CollapseFilters()
     {
         filterButtonUnit.Visibility = Visibility.Hidden;
         filterUnit.Visibility = Visibility.Hidden;
-        templateQueriesCB.Visibility = Visibility.Hidden;
+        controlUnit.Visibility = Visibility.Hidden;
     }
     #endregion
 

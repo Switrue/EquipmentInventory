@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using EquipmentInventory.Classes.Data.ViewModels;
+using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.GridTables;
 
@@ -7,8 +8,9 @@ namespace EquipmentInventory.Forms.Pages.GridTables;
 /// </summary>
 public partial class Archive : UserControl
 {
-    public Archive()
+    public Archive(TablesSwitcherArchiveViewModel viewModel)
     {
         InitializeComponent();
+        DataContext = viewModel;
     }
 }

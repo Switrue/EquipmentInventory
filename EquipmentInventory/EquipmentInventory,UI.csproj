@@ -206,6 +206,7 @@
     <Compile Include="Classes\Data\Interfaces\IProgramInformationService.cs" />
     <Compile Include="Classes\Data\Interfaces\IWindowService.cs" />
     <Compile Include="Classes\Data\Interfaces\IWindowState.cs" />
+    <Compile Include="Classes\Data\Models\ArchiveDto.cs" />
     <Compile Include="Classes\Data\Models\AuthRequest.cs" />
     <Compile Include="Classes\Data\Models\BaseRequest.cs" />
     <Compile Include="Classes\Data\Models\BaseResponse.cs" />
@@ -220,13 +221,14 @@
     <Compile Include="Classes\Data\Models\TechniqueDto.cs" />
     <Compile Include="Classes\Data\Models\TechniqueFiltersDto.cs" />
     <Compile Include="Classes\Data\Converters\RadioButtonConverter.cs" />
+    <Compile Include="Classes\Data\Requests\ArchiveRequest.cs" />
     <Compile Include="Classes\Data\Requests\AuthoRequest.cs" />
     <Compile Include="Classes\Data\Requests\SettingsRequest.cs" />
     <Compile Include="Classes\Data\Requests\TechniqueRequest.cs" />
     <Compile Include="Classes\Data\Requests\UsersRequest.cs" />
+    <Compile Include="Classes\Data\ViewModels\TablesSwitcherArchiveViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherInventoryViewModel.cs" />
     <Compile Include="Classes\Helpers\QueryParamsHelper.cs" />
-    <Compile Include="Classes\Services\PageNavigationService.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />
     <Compile Include="Classes\Data\Models\Users.cs" />
     <Compile Include="Classes\Helpers\ValidationHelper.cs" />

@@ -218,7 +218,10 @@
 
                         <!--#region Control panel-->
                         <StackPanel Grid.Row="3">
-                            <materialDesign:DrawerHost Margin="0 0 0 10" OpenMode="Standard" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
+                            <materialDesign:DrawerHost x:Name="controlUnit" 
+                                                       Margin="0 0 0 10" 
+                                                       OpenMode="Standard"
+                                                       BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
                                 <materialDesign:DrawerHost.Style>
                                     <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
                                         <Style.Triggers>
@@ -321,7 +324,6 @@
                                Style="{StaticResource PageTextBlock}" />
                     <Button Style="{StaticResource PageButton}"
                             Command="{Binding ForwardCommand}"
-                            IsEnabled="{Binding IsButtonEnabled}"
                             Content="{materialDesign:PackIcon Kind=ChevronDown, Size=25}" />
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">

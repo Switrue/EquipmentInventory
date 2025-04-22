@@ -1,4 +1,5 @@
 ﻿using DataAccess.Postgres.Migration;
+using DataAccess.Postgres.Migration.Models;
 using EquipmentInventory.API.Data;
 using EquipmentInventory.API.Data.Models;
 using EquipmentInventory.API.Helpers;
@@ -19,7 +20,7 @@ public class ArchiveController : ControllerBase
 
     [Authorize]
     [HttpGet("get")]
-    public async Task<ActionResult> GetArchive(
+    public async Task<ActionResult<IEnumerable<Archive>>> GetArchive(
         [FromQuery] PaginationModel pagination,
         [FromQuery] string? filter)
     {
@@ -56,13 +57,24 @@ public class ArchiveController : ControllerBase
 
         try
         {
+            var totalCount = await query.CountAsync();
+
             var items = pagination.Page.HasValue && pagination.PageSize.HasValue
                 ? await query.Skip((pagination.Page.Value - 1) * pagination.PageSize.Value)
                              .Take(pagination.PageSize.Value)
                              .ToListAsync()
                 : await query.ToListAsync();
 
-            return Ok(items);
+            var result = new PaginatedResult<Archive>
+            {
+                Items = items,
+                TotalCount = totalCount,
+                Page = pagination.Page,
+                PageSize = pagination.PageSize,
+            };
+
+            Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
+            return Ok(result.Items);
         }
         catch
         {
