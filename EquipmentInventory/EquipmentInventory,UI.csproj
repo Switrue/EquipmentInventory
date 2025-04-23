@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Classes\Data\Converters\InverseBoolConverter.cs" />
     <Compile Include="Classes\Data\Converters\SelectedQueryToIsEnabledConverter.cs" />
+    <Compile Include="Classes\Data\Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Classes\Data\Interfaces\IMainPanel.cs" />
     <Compile Include="Classes\Data\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Data\Interfaces\INavigationService.cs" />
@@ -412,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\TablesStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

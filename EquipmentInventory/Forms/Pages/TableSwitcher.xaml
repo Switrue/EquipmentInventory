@@ -16,6 +16,7 @@
             <local:RadioButtonConverter x:Key="RadioConverter" />
             <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
             <local:SelectedQueryToIsEnabledConverter x:Key="SelectedQueryToIsEnabledConverter"/>
+            <local:ValueToVisibilityConverter x:Key="ValueToVisibilityConverter" />
 
             <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
                 <Setter Property="Foreground" Value="{StaticResource TextColor}" />
@@ -325,20 +326,26 @@
                               VerticalAlignment="Top"
                               Click="ToggleGridBtn_Click" />
                 <StackPanel VerticalAlignment="Center">
-                    <Button x:Name="backBtn" 
-                            Style="{StaticResource PageButton}"
+                    <Button Style="{StaticResource PageButton}"
+                            Command="{Binding FirstPageCommand}"
+                            Content="{materialDesign:PackIcon Kind=ChevronDoubleUp, Size=20}" />
+                    <Button Style="{StaticResource PageButton}"
                             Command="{Binding BackCommand}"
-                            Content="{materialDesign:PackIcon Kind=ChevronUp, Size=25}" />
+                            Content="{materialDesign:PackIcon Kind=ChevronUp, Size=20}" />
                     <TextBlock Text="{Binding CurrentPage}"
                                Style="{StaticResource PageTextBlock}" />
-                    <Button x:Name="forwardBtn"
-                            Style="{StaticResource PageButton}"
+                    <Button Style="{StaticResource PageButton}"
                             Command="{Binding ForwardCommand}"
-                            Content="{materialDesign:PackIcon Kind=ChevronDown, Size=25}" />
+                            Content="{materialDesign:PackIcon Kind=ChevronDown, Size=20}" />
+                    <Button Style="{StaticResource PageButton}"
+                            Command="{Binding LastPageCommand}"
+                            Content="{materialDesign:PackIcon Kind=ChevronDoubleDown, Size=20}" />
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">
                     <TextBlock Text="{Binding TotalItems}"
-                               Style="{StaticResource PageTextBlock}" />
+                               Style="{StaticResource PageTextBlock}"
+                               Visibility="{Binding TotalItems, 
+                                                    Converter={StaticResource ValueToVisibilityConverter}}"/>
                 </StackPanel>
             </Grid>
         </materialDesign:DrawerHost>

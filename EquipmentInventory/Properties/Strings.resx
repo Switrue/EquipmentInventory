@@ -409,10 +409,6 @@
     <value>License</value>
     <comment>Information</comment>
   </data>
-  <data name="AllRightsReserved" xml:space="preserve">
-    <value>All rights reserved.</value>
-    <comment>Information</comment>
-  </data>
   <data name="SubjectArea" xml:space="preserve">
     <value>Subject area</value>
     <comment>Information</comment>
@@ -548,16 +544,12 @@
     <value>Total found</value>
     <comment>Tables</comment>
   </data>
-  <data name="Forward" xml:space="preserve">
-    <value>Forward</value>
-    <comment>Tables</comment>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Back</value>
-    <comment>Tables</comment>
-  </data>
   <data name="OutdatedTechnology" xml:space="preserve">
     <value>Outdated technology</value>
     <comment>Tables</comment>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved.</value>
+    <comment>Information</comment>
   </data>
 </root>

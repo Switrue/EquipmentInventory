@@ -142,7 +142,7 @@
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
@@ -151,8 +151,9 @@
         <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
         <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp2" />
         <Setter Property="materialDesign:RippleAssist.IsDisabled" Value="true" />
-        <Setter Property="Width" Value="35" />
-        <Setter Property="Height" Value="35" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Margin" Value="0 2 0 2" />
+        <Setter Property="Height" Value="25" />
         <Setter Property="Padding" Value="0" />
     </Style>
     <!--#endregion-->

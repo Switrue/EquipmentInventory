@@ -160,15 +160,6 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Back.
-        /// </summary>
-        internal static string Back {
-            get {
-                return ResourceManager.GetString("Back", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Cencel.
         /// </summary>
         internal static string Cancel {
@@ -471,15 +462,6 @@ namespace EquipmentInventory.Properties {
         internal static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Forward.
-        /// </summary>
-        internal static string Forward {
-            get {
-                return ResourceManager.GetString("Forward", resourceCulture);
             }
         }
         

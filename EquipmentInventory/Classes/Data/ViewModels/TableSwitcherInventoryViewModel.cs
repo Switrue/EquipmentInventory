@@ -2,10 +2,13 @@
 using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
 
@@ -18,6 +21,9 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     private string _selectedOption;
     private string _fromCost;
     private string _toCost;
+
+    public ICommand DeleteItemCommand { get; }
+    public ICommand EditItemCommand { get; }
 
     public ObservableCollection<string> QueryItems
     {
@@ -69,8 +75,26 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
             Strings.OutdatedTechnology
         };
 
+        DeleteItemCommand = new RelayCommand<TechniqueDto>(DeleteMessage);
+        EditItemCommand = new RelayCommand<TechniqueDto>(EditMessage);
+
         DefaultSelectedOption();
         DefaultStatusIndices();
+    }
+
+    private void DeleteMessage(TechniqueDto item)
+    {
+        MessageBox.Show($"Удалить: {item.Id}");
+
+       /* if (item != null && Items.Contains(item))
+        {
+            Items.Remove(item);
+        }*/
+    }
+
+    private void EditMessage(TechniqueDto item)
+    {
+        MessageBox.Show($"Редактировать: {item.Id}");
     }
 
     protected override void ResetSearchParameters()

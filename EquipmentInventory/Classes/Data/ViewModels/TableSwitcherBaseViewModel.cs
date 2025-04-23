@@ -17,21 +17,30 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
 {
     protected readonly NotificationService _notificationService;
     private ObservableCollection<T> _items;
+    private T _selectedItem;
     private string _searchText;
     private int _totalItems;
     private bool _isLoading;
     private int _currentPage = 1;
-    protected const int PageSize = 20;
+    protected const int PageSize = 5;
 
     public ICommand CleanCommand { get; }
     public ICommand ForwardCommand { get; }
+    public ICommand LastPageCommand { get; }
     public ICommand BackCommand { get; }
+    public ICommand FirstPageCommand { get; }
     public ICommand SearchCommand { get; }
 
     public ObservableCollection<T> Items
     {
         get => _items;
         set => SetField(ref _items, value);
+    }
+
+    public T SelectedItem
+    {
+        get => _selectedItem;
+        set => SetField(ref _selectedItem, value);
     }
 
     // Общие свойства
@@ -81,8 +90,10 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
 
         SearchCommand = new RelayCommand(async () => await ExecuteSearch(), () => !IsLoading);
         CleanCommand = new RelayCommand(ResetSearchParameters);
-        ForwardCommand = new RelayCommand(async () => await ChangePage(1), () => CurrentPage < TotalPages && !IsLoading);
-        BackCommand = new RelayCommand(async () => await ChangePage(-1), () => CurrentPage > 1 && !IsLoading);
+        ForwardCommand = new RelayCommand(async () => await ChangePage(1), CanForwardCommand);
+        LastPageCommand = new RelayCommand(async () => await ChangePage(TotalPages - CurrentPage), CanForwardCommand);
+        BackCommand = new RelayCommand(async () => await ChangePage(-1), CanBackCommand);
+        FirstPageCommand = new RelayCommand(async () => await ChangePage(-(CurrentPage - 1)), CanBackCommand);
     }
 
     protected virtual async Task ExecuteSearch()
@@ -99,6 +110,12 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
             UpdateCommandStates();
         }
     }
+
+    protected bool CanBackCommand()
+        => CurrentPage > 1 && !IsLoading;
+
+    protected bool CanForwardCommand() 
+        => CurrentPage < TotalPages && !IsLoading;
 
     protected async Task ChangePage(int delta)
     {
@@ -120,7 +137,9 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
     protected void UpdateCommandStates()
     {
         (ForwardCommand as RelayCommand)?.RaiseCanExecuteChanged();
+        (LastPageCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (BackCommand as RelayCommand)?.RaiseCanExecuteChanged();
+        (FirstPageCommand as RelayCommand)?.RaiseCanExecuteChanged();
     }
 
     protected void ProcessResult(PaginatedResult<T> result)

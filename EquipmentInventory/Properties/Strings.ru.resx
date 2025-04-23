@@ -336,9 +336,6 @@
   <data name="License" xml:space="preserve">
     <value>Лицензия</value>
   </data>
-  <data name="AllRightsReserved" xml:space="preserve">
-    <value>Все права защищены.</value>
-  </data>
   <data name="SubjectArea" xml:space="preserve">
     <value>Предметная область</value>
   </data>
@@ -441,13 +438,10 @@
   <data name="TotalFound" xml:space="preserve">
     <value>Всего найдено</value>
   </data>
-  <data name="Forward" xml:space="preserve">
-    <value>Вперед</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Назад</value>
-  </data>
   <data name="OutdatedTechnology" xml:space="preserve">
     <value>Устаревшая техника</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Все права защищены.</value>
   </data>
 </root>
