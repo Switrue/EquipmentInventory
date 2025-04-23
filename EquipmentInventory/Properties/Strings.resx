@@ -377,12 +377,12 @@
     <value>First name</value>
     <comment>UserAccount</comment>
   </data>
-  <data name="Copyrights" xml:space="preserve">
-    <value>Copyrights</value>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright</value>
     <comment>Information</comment>
   </data>
-  <data name="CopyrightsIllustrations" xml:space="preserve">
-    <value>Copyrights of illustrations</value>
+  <data name="CopyrightIllustrations" xml:space="preserve">
+    <value>Copyright of illustrations</value>
     <comment>Information</comment>
   </data>
   <data name="Vresion" xml:space="preserve">
@@ -558,10 +558,6 @@
   </data>
   <data name="OutdatedTechnology" xml:space="preserve">
     <value>Outdated technology</value>
-    <comment>Tables</comment>
-  </data>
-  <data name="ComputerComponents" xml:space="preserve">
-    <value>Computer components</value>
     <comment>Tables</comment>
   </data>
 </root>

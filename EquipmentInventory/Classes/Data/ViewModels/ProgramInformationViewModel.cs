@@ -33,8 +33,8 @@ public class ProgramInformationViewModel
         Items = new ObservableCollection<ProgramInformationItem>()
         {
             new ProgramInformationItem(
-                tabHeader: Strings.Copyrights, 
-                title: Strings.CopyrightsIllustrations, 
+                tabHeader: Strings.Copyright, 
+                title: Strings.CopyrightIllustrations, 
                 description: "- freepic.com\r\n- flaticon.com"),
 
             new ProgramInformationItem(

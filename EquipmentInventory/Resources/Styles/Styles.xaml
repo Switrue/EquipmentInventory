@@ -105,6 +105,10 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="OuterCircle" Property="Stroke" Value="{StaticResource HintColor}" />
+                            <Setter TargetName="InnerCircle" Property="Fill" Value="{StaticResource HintColor}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

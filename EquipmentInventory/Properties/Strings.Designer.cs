@@ -250,15 +250,6 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Computer components.
-        /// </summary>
-        internal static string ComputerComponents {
-            get {
-                return ResourceManager.GetString("ComputerComponents", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Contact details.
         /// </summary>
         internal static string ContactDetails {
@@ -268,20 +259,20 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Copyrights.
+        ///   Ищет локализованную строку, похожую на Copyright.
         /// </summary>
-        internal static string Copyrights {
+        internal static string Copyright {
             get {
-                return ResourceManager.GetString("Copyrights", resourceCulture);
+                return ResourceManager.GetString("Copyright", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Copyrights of illustrations.
+        ///   Ищет локализованную строку, похожую на Copyright of illustrations.
         /// </summary>
-        internal static string CopyrightsIllustrations {
+        internal static string CopyrightIllustrations {
             get {
-                return ResourceManager.GetString("CopyrightsIllustrations", resourceCulture);
+                return ResourceManager.GetString("CopyrightIllustrations", resourceCulture);
             }
         }
         

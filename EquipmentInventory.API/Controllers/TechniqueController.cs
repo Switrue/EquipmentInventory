@@ -96,20 +96,13 @@ public class TechniqueController : ControllerBase
     [HttpGet("outdated")]
     public async Task<ActionResult> GetOutdated(
         [FromQuery] PaginationModel pagination, 
-        [FromQuery] BaseModel model)
+        [FromQuery] int filter)
     {
-        if (int.TryParse(model.Content, out int yearsDifference))
-        {
-            var query = _techniqueService.GetOutdatedQuery(yearsDifference);
-            var result = await _techniqueService.GetPaginatedResults(query, pagination);
+        var query = _techniqueService.GetOutdatedQuery(filter);
+        var result = await _techniqueService.GetPaginatedResults(query, pagination);
 
-            Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
-            return Ok(result.Items);
-        }
-        else
-        {
-            return ApiResponseHelper.BadRequest(ApplicationErrors.IncorrectFormat);
-        }
+        Response.Headers.Append("X-Total-Count", result.TotalCount.ToString());
+        return Ok(result.Items);
     }
 
     [Authorize]

@@ -30,7 +30,7 @@ public class TechniqueService
         var query = _context.Techniques
             .AsNoTracking()
             .Where(t => t.DateOfPurchase <= thresholdDate)
-            .OrderBy(t => t.Id);
+            .OrderByDescending(t => t.Id);
 
         return query;
     }
@@ -132,7 +132,7 @@ public class TechniqueService
                     query = query.Where(t => t.Cost <= ToCost);
             }
         }
-        return query.OrderBy(t => t.Id);
+        return query.OrderByDescending(t => t.Id);
     }
 
     public async Task<PaginatedResult<TechniqueDto>> GetPaginatedResults(

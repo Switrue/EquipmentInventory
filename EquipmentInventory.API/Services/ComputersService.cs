@@ -26,7 +26,7 @@ public class ComputersService
     {
         return _context.Computers
             .AsNoTracking()
-            .OrderBy(c => c.Id);
+            .OrderByDescending(c => c.Id);
     }
 
     public async Task<IEnumerable<ComputerDto>> GetPaginatedResults(PaginationModel pagination)

@@ -27,7 +27,7 @@ public class MembersService
         return _context.Members
             .AsNoTracking()
             .Include(m => m.IdPositionNavigation)
-            .OrderBy(m => m.Id);
+            .OrderByDescending(m => m.Id);
     }
 
     public async Task<IEnumerable<MemberDto>> GetPaginatedResults(PaginationModel pagination)

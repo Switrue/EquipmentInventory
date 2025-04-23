@@ -312,10 +312,10 @@
   <data name="FirstName" xml:space="preserve">
     <value>Имя</value>
   </data>
-  <data name="Copyrights" xml:space="preserve">
+  <data name="Copyright" xml:space="preserve">
     <value>Авторские права</value>
   </data>
-  <data name="CopyrightsIllustrations" xml:space="preserve">
+  <data name="CopyrightIllustrations" xml:space="preserve">
     <value>Авторские права иллюстраций</value>
   </data>
   <data name="Vresion" xml:space="preserve">
@@ -449,8 +449,5 @@
   </data>
   <data name="OutdatedTechnology" xml:space="preserve">
     <value>Устаревшая техника</value>
-  </data>
-  <data name="ComputerComponents" xml:space="preserve">
-    <value>Компоненты компьютера</value>
   </data>
 </root>

@@ -66,8 +66,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     {
         _queryItems = new ObservableCollection<string>
         {
-            Strings.OutdatedTechnology,
-            Strings.ComputerComponents
+            Strings.OutdatedTechnology
         };
 
         DefaultSelectedOption();
@@ -89,7 +88,11 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     protected override async Task LoadData()
     {
         var pagination = new PaginationModel { Page = CurrentPage, PageSize = PageSize };
-        var filter = GetFilter();
+        var result = new PaginatedResult<TechniqueDto>();
+
+        object filter = SelectedQuery != null
+            ? Settings.Default.YearOfObsolescence
+            : GetFilter();
 
         if (filter == null)
         {
@@ -97,7 +100,10 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
             return;
         }
 
-        var result = await TechniqueRequest.GetTechnique(pagination, filter);
+        result = SelectedQuery != null
+            ? await TechniqueRequest.GetTechniqueOutdated(pagination, (int)filter)
+            : await TechniqueRequest.GetTechniqueWithFiltration(pagination, (TechniqueFiltersDto)filter);
+
         ProcessResult(result);
     }
 

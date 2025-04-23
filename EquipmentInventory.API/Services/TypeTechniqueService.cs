@@ -26,7 +26,7 @@ public class TypeTechniqueService
     {
         return _context.TypeTechniques
             .AsNoTracking()
-            .OrderBy(t => t.Id);
+            .OrderByDescending(t => t.Id);
     }
 
     public async Task<IEnumerable<BaseDto>> GetPaginatedResults(PaginationModel pagination)

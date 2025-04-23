@@ -61,7 +61,7 @@ public class UsersController : ControllerBase
             .Include(u => u.IdRoleNavigation)
             .Where(u => u.IdRoleNavigation.Name != RoleNames.Admin);
 
-        query = query.OrderBy(u => u.Id);
+        query = query.OrderByDescending(u => u.Id);
 
         if (pagination.Page.HasValue && pagination.PageSize.HasValue)
         {

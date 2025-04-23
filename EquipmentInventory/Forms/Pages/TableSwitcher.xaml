@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <local:RadioButtonConverter x:Key="RadioConverter" />
             <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <local:SelectedQueryToIsEnabledConverter x:Key="SelectedQueryToIsEnabledConverter"/>
 
             <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
                 <Setter Property="Foreground" Value="{StaticResource TextColor}" />
@@ -91,6 +92,8 @@
                                      BorderBrush="{StaticResource TextColor}"
                                      Foreground="{StaticResource TextColor}"
                                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding SelectedQuery, 
+                                                         Converter={StaticResource SelectedQueryToIsEnabledConverter}}"
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                         </StackPanel>
                         <!--#endregion-->
@@ -115,7 +118,9 @@
                                       Margin="-15 5 -15 0">
                             <materialDesign:Card Background="{StaticResource Background}" 
                                                  materialDesign:ElevationAssist.Elevation="Dp0" 
-                                                 IsTabStop="False">
+                                                 IsTabStop="False"
+                                                 IsEnabled="{Binding SelectedQuery, 
+                                                                     Converter={StaticResource SelectedQueryToIsEnabledConverter}}">
                                 <StackPanel x:Name="filterContainer">
                                     <Expander x:Name="techniqueExpander">
                                         <StackPanel x:Name="techniqueContainer" Margin="24 8 24 16">
@@ -256,6 +261,8 @@
                                             <ListBox x:Name="absentListB" 
                                                      Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" 
                                                      SelectedIndex="{Binding AbsentStatusIndex, Mode=TwoWay}"
+                                                     IsEnabled="{Binding SelectedQuery, 
+                                                                         Converter={StaticResource SelectedQueryToIsEnabledConverter}}"
                                                      Grid.Column="2" 
                                                      Grid.Row="0">
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />
@@ -266,6 +273,8 @@
                                             <ListBox x:Name="repairListB" 
                                                      Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}" 
                                                      SelectedIndex="{Binding RepairStatusIndex, Mode=TwoWay}"
+                                                     IsEnabled="{Binding SelectedQuery, 
+                                                                         Converter={StaticResource SelectedQueryToIsEnabledConverter}}"
                                                      Grid.Column="2"
                                                      Grid.Row="1">
                                                 <ListBoxItem Foreground="{StaticResource TextColor}" Content="{materialDesign:PackIcon Kind=Check, Size=15}" />

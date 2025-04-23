@@ -10,7 +10,7 @@ namespace EquipmentInventory.Classes.Data.Requests;
 
 public static class TechniqueRequest
 {
-    public static async Task<PaginatedResult<TechniqueDto>> GetTechnique(
+    public static async Task<PaginatedResult<TechniqueDto>> GetTechniqueWithFiltration(
         PaginationModel pagination, 
         TechniqueFiltersDto filter)
     {
@@ -21,6 +21,19 @@ public static class TechniqueRequest
 
         return await ApiClientHelper.GetPaginatedAsync<TechniqueDto>(
             $"api/Technique/get?{filterQueryString}&page={pagination.Page}&pageSize={pagination.PageSize}", 
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<PaginatedResult<TechniqueDto>> GetTechniqueOutdated(
+        PaginationModel pagination,
+        int? filter)
+    {
+        var filterQueryString = filter != null
+            ? string.Join("&", $"filter={Uri.EscapeDataString(filter.ToString())}")
+            : string.Empty;
+
+        return await ApiClientHelper.GetPaginatedAsync<TechniqueDto>(
+            $"api/Technique/outdated?{filterQueryString}&page={pagination.Page}&pageSize={pagination.PageSize}",
             error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 }

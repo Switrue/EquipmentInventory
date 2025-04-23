@@ -53,7 +53,7 @@ public class ArchiveController : ControllerBase
             );
         }
 
-        query = query.OrderBy(t => t.Id);
+        query = query.OrderByDescending(t => t.Id);
 
         try
         {

@@ -26,7 +26,7 @@ public class SuppliersService
     {
         return _context.Suppliers
             .AsNoTracking()
-            .OrderBy(s => s.Id);
+            .OrderByDescending(s => s.Id);
     }
 
     public async Task<IEnumerable<BaseDto>> GetPaginatedResults(PaginationModel pagination)

@@ -26,7 +26,7 @@ public class PositionsServise
     {
         return _context.Positions
             .AsNoTracking()
-            .OrderBy(p => p.Id);
+            .OrderByDescending(p => p.Id);
     }
 
     public async Task<IEnumerable<BaseDto>> GetPaginatedResults(PaginationModel pagination)
