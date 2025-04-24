@@ -48,6 +48,7 @@
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="User"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                 materialDesign:ThemeAssist.Theme="Dark"
                                  BorderBrush="{StaticResource HintColor}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  Foreground="{StaticResource TextColor}" 
@@ -67,6 +68,7 @@
                     </StackPanel>
                     <CheckBox x:Name="rememberUserChB" 
                               Margin="0 10 0 0" 
+                              materialDesign:ThemeAssist.Theme="Dark"
                               FontSize="{DynamicResource DefaultFontSize}"
                               Foreground="{StaticResource HintColor}"
                               Style="{StaticResource MaterialDesignSecondaryCheckBox}" />

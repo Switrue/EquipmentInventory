@@ -89,8 +89,8 @@
                                      Margin="0 0 0 15"
                                      materialDesign:HintAssist.HintPaddingBrush="{StaticResource Background}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
+                                     materialDesign:ThemeAssist.Theme="Dark"
                                      FontSize="{DynamicResource DefaultFontSize}"
-                                     BorderBrush="{StaticResource TextColor}"
                                      Foreground="{StaticResource TextColor}"
                                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                      IsEnabled="{Binding SelectedQuery, 
@@ -353,7 +353,7 @@
 
         <!--#region Table-->
         <Grid Grid.Column="1">
-            <Frame x:Name="tableFrame" IsTabStop="False" NavigationUIVisibility="Hidden" />
+            <Frame x:Name="tableFrame" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden" />
             <materialDesign:Snackbar x:Name="notificationSnackbar" Grid.Column="1" Margin="-46 0 0 0" />
         </Grid>
         <!--#endregion-->

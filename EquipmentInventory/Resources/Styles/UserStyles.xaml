@@ -11,6 +11,7 @@
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="Margin" Value="7" />
         <Setter Property="MaxLength" Value="60" />
+        <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark" />
         <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True" />
     </Style>
     
