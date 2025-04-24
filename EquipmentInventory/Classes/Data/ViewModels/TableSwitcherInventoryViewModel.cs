@@ -1,5 +1,6 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Requests;
+using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
 using GalaSoft.MvvmLight.Command;
@@ -7,7 +8,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
@@ -75,26 +75,30 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
             Strings.OutdatedTechnology
         };
 
-        DeleteItemCommand = new RelayCommand<TechniqueDto>(DeleteMessage);
+        DeleteItemCommand = new RelayCommand<TechniqueDto>(async (TechniqueDto) => await DeleteMessage(TechniqueDto));
         EditItemCommand = new RelayCommand<TechniqueDto>(EditMessage);
 
         DefaultSelectedOption();
         DefaultStatusIndices();
     }
 
-    private void DeleteMessage(TechniqueDto item)
+    private async Task DeleteMessage(TechniqueDto item)
     {
-        MessageBox.Show($"Удалить: {item.Id}");
+        var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, Strings.DeleteItem, true);
 
-       /* if (item != null && Items.Contains(item))
+        if (!dialogResult) return;
+
+        var result = await TechniqueRequest.Delete(item.Id);
+        if (result != null)
         {
-            Items.Remove(item);
-        }*/
+            await LoadData();
+            TriggerANotification(result.Message);
+        }
     }
 
     private void EditMessage(TechniqueDto item)
     {
-        MessageBox.Show($"Редактировать: {item.Id}");
+        
     }
 
     protected override void ResetSearchParameters()

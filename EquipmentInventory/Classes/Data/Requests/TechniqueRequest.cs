@@ -36,5 +36,12 @@ public static class TechniqueRequest
             $"api/Technique/outdated?{filterQueryString}&page={pagination.Page}&pageSize={pagination.PageSize}",
             error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
+
+    public static async Task<BaseResponse> Delete(long id)
+    {
+        return await ApiClientHelper.DeleteAsync<BaseResponse>(
+            $"api/Technique/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error)); ;
+    }
 }
     

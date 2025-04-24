@@ -44,8 +44,8 @@
                                             VerticalAlignment="Center"
                                             CornerRadius="5" 
                                             Padding="2">
-                                        <TextBlock Text="{Binding Number}"
-                                                   Style="{StaticResource BaseDataTextBlock}" />
+                                        <TextBox Text="{Binding Number}"
+                                                 Style="{StaticResource BaseDataTextBox}" />
                                     </Border>
                                     <WrapPanel HorizontalAlignment="Right">
                                         <Button Command="{Binding DataContext.EditItemCommand, 
@@ -121,5 +121,42 @@
             </ItemsControl>
         </ScrollViewer>
         <!--#endregion-->
+
+        <materialDesign:DrawerHost BottomDrawerBackground="Wheat">
+            <materialDesign:DrawerHost.Style>
+                <Style TargetType="materialDesign:DrawerHost" 
+                       BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
+                                     Value="True">
+                            <Setter Property="OverlayBackground"
+                                    Value="{DynamicResource PrimaryHueMidBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </materialDesign:DrawerHost.Style>
+            <materialDesign:DrawerHost.BottomDrawerContent>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Margin="4"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource SecondaryHueMidForegroundBrush}"
+                                   Text="BOTTOM BRACKET" />
+                        <Button Margin="4"
+                                VerticalAlignment="Center"
+                                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                CommandParameter="{x:Static Dock.Bottom}"
+                                Content="CLOSE THIS"
+                                Style="{StaticResource MaterialDesignFlatButton}" />
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DrawerHost.BottomDrawerContent>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Margin="4"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Bottom}"
+                        Content="{materialDesign:PackIcon Kind=ArrowDown}" />
+            </Grid>
+        </materialDesign:DrawerHost>
     </Grid>
 </UserControl>

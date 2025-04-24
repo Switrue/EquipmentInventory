@@ -169,7 +169,7 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
         TriggerANotification(Strings.DataNotFound);
     }
 
-    private void TriggerANotification(string message)
+    protected void TriggerANotification(string message)
         => _notificationService.Show(message);
 
     // Общие методы для INotifyPropertyChanged

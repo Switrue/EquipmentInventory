@@ -444,4 +444,7 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Все права защищены.</value>
   </data>
+  <data name="DeleteItem" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить запись?</value>
+  </data>
 </root>
