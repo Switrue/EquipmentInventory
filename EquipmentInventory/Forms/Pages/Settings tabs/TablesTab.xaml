@@ -35,13 +35,9 @@
                     </ComboBox.ItemsPanel>
                 </ComboBox>
                 <materialDesign:PackIcon x:Name="toolTipYearOfObsolescence" 
-                                         Kind="InformationSlabCircleOutline" 
                                          Grid.Column="1"
                                          Margin="5"
-                                         Cursor="Help"
-                                         Background="Transparent"
-                                         VerticalAlignment="Center"
-                                         Foreground="{StaticResource SecondaryColor}" />
+                                         Style="{StaticResource BaseInformation}" />
             </Grid>
         </StackPanel>
         <!--#endregion-->

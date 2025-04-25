@@ -24,6 +24,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
     public ICommand DeleteItemCommand { get; }
     public ICommand EditItemCommand { get; }
+    public ICommand SaveDataCommand { get; }
 
     public ObservableCollection<string> QueryItems
     {
@@ -77,9 +78,15 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
         DeleteItemCommand = new RelayCommand<TechniqueDto>(async (TechniqueDto) => await DeleteMessage(TechniqueDto));
         EditItemCommand = new RelayCommand<TechniqueDto>(EditMessage);
+        SaveDataCommand = new RelayCommand(SaveData);
 
         DefaultSelectedOption();
         DefaultStatusIndices();
+    }
+
+    private void SaveData()
+    {
+        CustomMessageBoxHelper.Show("Сохранено");
     }
 
     private async Task DeleteMessage(TechniqueDto item)
@@ -98,7 +105,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
     private void EditMessage(TechniqueDto item)
     {
-        
+        CustomMessageBoxHelper.Show(item.Id.ToString());
     }
 
     protected override void ResetSearchParameters()

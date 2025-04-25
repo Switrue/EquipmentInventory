@@ -5,6 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <!--#region Get-->
     <Style x:Key="BaseDataTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Cursor" Value="Arrow" />
@@ -33,4 +34,53 @@
         <Setter Property="Padding" Value="5" />
         <Setter Property="Margin" Value="5 0 0 0" />
     </Style>
+    <!--#endregion-->
+    
+    <!--#region Card-->
+    <Style x:Key="FieldTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+        <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True" />
+        <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Margin" Value="6" />
+    </Style>
+
+    <Style x:Key="FieldComboBox" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+        <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True" />
+        <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Margin" Value="6" />
+        <Setter Property="IsReadOnly" Value="True" />
+    </Style>
+
+    <Style x:Key="OptionalFieldComboBox" TargetType="ComboBox" BasedOn="{StaticResource FieldComboBox}">
+        <Setter Property="materialDesign:TextFieldAssist.HasLeadingIcon" Value="True" />
+        <Setter Property="materialDesign:TextFieldAssist.LeadingIcon" Value="StarFourPointsOutline" />
+        <Setter Property="materialDesign:TextFieldAssist.LeadingIconSize" Value="10" />
+    </Style>
+
+    <Style x:Key="FieldDatePicker" TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignDatePicker}">
+        <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True" />
+        <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Margin" Value="6" />
+    </Style>
+
+    <Style x:Key="OptionalFieldPicker" TargetType="DatePicker" BasedOn="{StaticResource FieldDatePicker}">
+        <Setter Property="materialDesign:TextFieldAssist.HasLeadingIcon" Value="True" />
+        <Setter Property="materialDesign:TextFieldAssist.LeadingIcon" Value="StarFourPointsOutline" />
+        <Setter Property="materialDesign:TextFieldAssist.LeadingIconSize" Value="10" />
+    </Style>
+
+    <Style x:Key="FieldCheckBox" TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignSecondaryCheckBox}">
+        <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Margin" Value="6" />
+    </Style>
+
+    <Style x:Key="FieldTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="6" />
+    </Style>
+    <!--#endregion-->
 </ResourceDictionary>

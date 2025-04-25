@@ -92,10 +92,7 @@
                                 <Button x:Name="changeImageBtn" Margin="5" Click="ChangeImage_Click" />
                                 <materialDesign:PackIcon x:Name="toolTipUserImage" 
                                                          Kind="InformationSlabCircleOutline"
-                                                         Width="15"
-                                                         Cursor="Help"
-                                                         Background="Transparent"
-                                                         Foreground="{StaticResource SecondaryColor}" />
+                                                         Style="{StaticResource BaseInformation}" />
                             </WrapPanel>
 
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">

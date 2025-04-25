@@ -447,4 +447,7 @@
   <data name="DeleteItem" xml:space="preserve">
     <value>Вы уверены, что хотите удалить запись?</value>
   </data>
+  <data name="OptionalField" xml:space="preserve">
+    <value>Поля, отмеченные звездочкой, являются необязательными</value>
+  </data>
 </root>

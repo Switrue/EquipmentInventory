@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -21,114 +22,13 @@
     
     <Grid>
         <!--#region Items-->
-        <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding Items}"
-                          Background="Transparent"
-                          Focusable="False"
-                          Foreground="{StaticResource TextColor}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <materialDesign:Card BorderBrush="{StaticResource SecondaryColor}" 
-                                             Background="{StaticResource Background}"
-                                             UniformCornerRadius="10" 
-                                             Margin="0 10 0 10"
-                                             BorderThickness="2 0 2 0" >
-                            <StackPanel Margin="10" Orientation="Vertical">
-                                <UniformGrid Columns="2">
-                                    <Border HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            CornerRadius="5" 
-                                            Padding="2">
-                                        <TextBox Text="{Binding Number}"
-                                                 Style="{StaticResource BaseDataTextBox}" />
-                                    </Border>
-                                    <WrapPanel HorizontalAlignment="Right">
-                                        <Button Command="{Binding DataContext.EditItemCommand, 
-                                                                  RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                CommandParameter="{Binding}"
-                                                Content="{materialDesign:PackIcon Kind=Edit}" 
-                                                Foreground="{StaticResource HintColor}" />
-                                        <Button Command="{Binding DataContext.DeleteItemCommand, 
-                                                                  RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                CommandParameter="{Binding}"
-                                                Content="{materialDesign:PackIcon Kind=Delete}" 
-                                                Foreground="{StaticResource AccentColor}" />
-                                    </WrapPanel>
-                                </UniformGrid>
-
-                                <TextBox Text="{Binding Name}"
-                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                         materialDesign:ThemeAssist.Theme="Dark"
-                                         IsReadOnly="True"
-                                         Margin="0 10 0 10"/>
-                                
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding TypeTechnique}" 
-                                               Style="{StaticResource BaseDataTextBlock}"/>
-                                    <Border Style="{StaticResource BaseDataBorder}" />
-                                    <TextBlock Text="{Binding Supplier}"
-                                               Style="{StaticResource BaseDataTextBlock}" />
-                                    <StackPanel Orientation="Horizontal" 
-                                                Visibility="{Binding UnderRepair, 
-                                                                     Converter={StaticResource ValueToVisibilityConverter}}">
-                                        <Border Style="{StaticResource BaseDataBorder}"/>
-                                        <TextBlock Text="В ремонте"
-                                                   Style="{StaticResource BaseDataTextBlock}" />
-                                    </StackPanel>
-                                    
-                                </StackPanel>
-
-                                <UniformGrid Columns="2" Margin="0 10 0 5">
-                                    <StackPanel>
-                                        <TextBox Text="{Binding DateOfPurchase, StringFormat='Покупки: {0:dd.MM.yyyy}'}"
-                                                 Style="{StaticResource IconDataTextBox}"
-                                                 materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
-                                        <TextBox Text="{Binding DateOfManufacture, StringFormat='Произодства: {0:dd.MM.yyyy}'}" 
-                                                 Style="{StaticResource IconDataTextBox}"
-                                                 materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
-                                        <TextBox Text="{Binding DateOfUse, StringFormat='Использования: {0:dd.MM.yyyy}'}"
-                                                 Visibility="{Binding DateOfUse, Converter={StaticResource ValueToVisibilityConverter}}"
-                                                 Style="{StaticResource IconDataTextBox}"
-                                                 materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <TextBox Text="{Binding Member}"
-                                                 materialDesign:TextFieldAssist.LeadingIcon="User"
-                                                 Style="{StaticResource IconDataTextBox}"
-                                                 Visibility="{Binding Member, Converter={StaticResource ValueToVisibilityConverter}}" />
-                                        <TextBox Text="{Binding Office}"
-                                                 materialDesign:TextFieldAssist.LeadingIcon="Door"
-                                                 Style="{StaticResource IconDataTextBox}"
-                                                 Visibility="{Binding Office, Converter={StaticResource ValueToVisibilityConverter}}" />
-                                        <TextBox Text="{Binding Computer}"
-                                                 Style="{StaticResource IconDataTextBox}"
-                                                 materialDesign:TextFieldAssist.LeadingIcon="ComputerClassic"
-                                                 Visibility="{Binding Computer, Converter={StaticResource ValueToVisibilityConverter}}" />
-                                    </StackPanel>
-                                </UniformGrid>
-
-                                <TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0}'}"
-                                           Style="{StaticResource BaseDataTextBlock}" />
-                            </StackPanel>
-                        </materialDesign:Card>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        <!--#endregion-->
-
-        <materialDesign:DrawerHost BottomDrawerBackground="Wheat">
+        <materialDesign:DrawerHost BottomDrawerBackground="Transparent">
             <materialDesign:DrawerHost.Style>
                 <Style TargetType="materialDesign:DrawerHost" 
                        BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
-                                     Value="True">
+                                     Value="true">
                             <Setter Property="OverlayBackground"
                                     Value="{DynamicResource PrimaryHueMidBrush}" />
                         </DataTrigger>
@@ -136,27 +36,207 @@
                 </Style>
             </materialDesign:DrawerHost.Style>
             <materialDesign:DrawerHost.BottomDrawerContent>
-                <Grid>
-                    <StackPanel>
-                        <TextBlock Margin="4"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource SecondaryHueMidForegroundBrush}"
-                                   Text="BOTTOM BRACKET" />
-                        <Button Margin="4"
-                                VerticalAlignment="Center"
-                                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                CommandParameter="{x:Static Dock.Bottom}"
-                                Content="CLOSE THIS"
-                                Style="{StaticResource MaterialDesignFlatButton}" />
-                    </StackPanel>
-                </Grid>
+                <!--#region Fields-->
+                <materialDesign:Card Background="{StaticResource Background}" 
+                                     Width="350"
+                                     Margin="10"
+                                     BorderBrush="{StaticResource SecondaryColor}"
+                                     BorderThickness="2 0 2 0"
+                                     UniformCornerRadius="20">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="15" Focusable="False">
+                        <StackPanel>
+                            <UniformGrid Columns="2">
+                                <WrapPanel>
+                                    <TextBlock Text="Техника" 
+                                               Style="{StaticResource MaterialDesignTitleLargeTextBlock}" 
+                                               Foreground="{StaticResource TextColor}" 
+                                               Margin="6" />
+                                    <materialDesign:PackIcon x:Name="toolTipOptionalField" Style="{StaticResource BaseInformation}" />
+                                </WrapPanel>
+                                <Button HorizontalAlignment="Right" 
+                                        Padding="5"
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Bottom}"
+                                        Content="{materialDesign:PackIcon Kind=Close}"
+                                        Foreground="{StaticResource AccentColor}"
+                                        materialDesign:RippleAssist.IsDisabled="True"
+                                        Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
+                            </UniformGrid>
+
+                            <StackPanel Margin="0 0 0 15">
+                                <TextBox materialDesign:HintAssist.Hint="Номер" 
+                                         MaxLength="30"
+                                         Style="{StaticResource FieldTextBox}" />
+                                <TextBox materialDesign:HintAssist.Hint="Наименование" 
+                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+                                         MaxLength="100"
+                                         Style="{StaticResource FieldTextBox}" />
+
+                                <ComboBox materialDesign:HintAssist.Hint="Тип" 
+                                          Style="{StaticResource FieldComboBox}" />
+                                <ComboBox materialDesign:HintAssist.Hint="Поставщик" 
+                                          Style="{StaticResource FieldComboBox}" />
+
+                                <UniformGrid Columns="2">
+                                    <StackPanel>
+                                        <DatePicker materialDesign:HintAssist.Hint="Приобретения" 
+                                                    Style="{StaticResource FieldDatePicker}" />
+                                        <DatePicker materialDesign:HintAssist.Hint="Производства" 
+                                                    Style="{StaticResource FieldDatePicker}" />
+                                        <DatePicker materialDesign:HintAssist.Hint="Использования"
+                                                    Style="{StaticResource OptionalFieldPicker}" />
+                                    </StackPanel>   
+                                    <StackPanel>
+                                        <ComboBox materialDesign:HintAssist.Hint="Сотрудник" 
+                                                  Style="{StaticResource OptionalFieldComboBox}" />
+                                        <ComboBox materialDesign:HintAssist.Hint="Кабинет" 
+                                                  Style="{StaticResource OptionalFieldComboBox}" />
+                                        <ComboBox materialDesign:HintAssist.Hint="Компьютер"
+                                                  Style="{StaticResource OptionalFieldComboBox}" />
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <TextBox materialDesign:HintAssist.Hint="Стоимость" 
+                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+                                         MaxLength="50"
+                                         Style="{StaticResource FieldTextBox}" />
+                                <CheckBox Content="В ремонте"
+                                          Style="{StaticResource FieldCheckBox}" />
+                            </StackPanel>
+
+                            <Button Content="Подтвердить" Style="{StaticResource DefaultButton}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding SaveDataCommand}" />
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                                               CommandParameter="{x:Static Dock.Bottom}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </materialDesign:Card>
+                <!--#endregion-->
             </materialDesign:DrawerHost.BottomDrawerContent>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Margin="4"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Bottom}"
-                        Content="{materialDesign:PackIcon Kind=ArrowDown}" />
+            <!--#region List-->
+            <Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Items}"
+                                  Background="Transparent"
+                                  Focusable="False"
+                                  Foreground="{StaticResource TextColor}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card BorderBrush="{StaticResource SecondaryColor}" 
+                                                     Background="{StaticResource Background}"
+                                                     UniformCornerRadius="10" 
+                                                     Margin="0 10 0 10"
+                                                     BorderThickness="2 0 2 0" >
+                                    <StackPanel Margin="10" Orientation="Vertical">
+                                        <UniformGrid Columns="2">
+                                            <Border HorizontalAlignment="Left"
+                                                    VerticalAlignment="Center"
+                                                    CornerRadius="5" 
+                                                    Padding="2">
+                                                <TextBox Text="{Binding Number}"
+                                                         Style="{StaticResource BaseDataTextBox}" />
+                                            </Border>
+                                            <WrapPanel HorizontalAlignment="Right">
+                                                <Button Content="{materialDesign:PackIcon Kind=Edit}" 
+                                                        Foreground="{StaticResource HintColor}">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:InvokeCommandAction Command="{Binding DataContext.EditItemCommand, 
+                                                                                                     RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                                   CommandParameter="{Binding}" />
+                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                                                                                   CommandParameter="{x:Static Dock.Bottom}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.DeleteItemCommand, 
+                                                                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="{materialDesign:PackIcon Kind=Delete}" 
+                                                        Foreground="{StaticResource AccentColor}" />
+                                            </WrapPanel>
+                                        </UniformGrid>
+
+                                        <TextBox Text="{Binding Name}"
+                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 materialDesign:ThemeAssist.Theme="Dark"
+                                                 IsReadOnly="True"
+                                                 Margin="0 10 0 10"/>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding TypeTechnique}" 
+                                                       Style="{StaticResource BaseDataTextBlock}"/>
+                                            <Border Style="{StaticResource BaseDataBorder}" />
+                                            <TextBlock Text="{Binding Supplier}"
+                                                       Style="{StaticResource BaseDataTextBlock}" />
+                                            <StackPanel Orientation="Horizontal" 
+                                                        Visibility="{Binding UnderRepair, 
+                                                             Converter={StaticResource ValueToVisibilityConverter}}">
+                                                <Border Style="{StaticResource BaseDataBorder}"/>
+                                                <TextBlock Text="В ремонте"
+                                                           Style="{StaticResource BaseDataTextBlock}" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <UniformGrid Columns="2" Margin="0 10 0 5">
+                                            <StackPanel>
+                                                <TextBox Text="{Binding DateOfPurchase, StringFormat='Приобретения: {0:dd.MM.yyyy}'}"
+                                                         Style="{StaticResource IconDataTextBox}"
+                                                         materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
+                                                <TextBox Text="{Binding DateOfManufacture, StringFormat='Произодства: {0:dd.MM.yyyy}'}" 
+                                                         Style="{StaticResource IconDataTextBox}"
+                                                         materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
+                                                <TextBox Text="{Binding DateOfUse, StringFormat='Использования: {0:dd.MM.yyyy}'}"
+                                                         Visibility="{Binding DateOfUse, Converter={StaticResource ValueToVisibilityConverter}}"
+                                                         Style="{StaticResource IconDataTextBox}"
+                                                         materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBox Text="{Binding Member}"
+                                                         materialDesign:TextFieldAssist.LeadingIcon="User"
+                                                         Style="{StaticResource IconDataTextBox}"
+                                                         Visibility="{Binding Member, Converter={StaticResource ValueToVisibilityConverter}}" />
+                                                <TextBox Text="{Binding Office}"
+                                                         materialDesign:TextFieldAssist.LeadingIcon="Door"
+                                                         Style="{StaticResource IconDataTextBox}"
+                                                         Visibility="{Binding Office, Converter={StaticResource ValueToVisibilityConverter}}" />
+                                                <TextBox Text="{Binding Computer}"
+                                                         Style="{StaticResource IconDataTextBox}"
+                                                         materialDesign:TextFieldAssist.LeadingIcon="ComputerClassic"
+                                                         Visibility="{Binding Computer, Converter={StaticResource ValueToVisibilityConverter}}" />
+                                            </StackPanel>
+                                        </UniformGrid>
+
+                                        <TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0}'}"
+                                                   Style="{StaticResource BaseDataTextBlock}" />
+                                    </StackPanel>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <StackPanel VerticalAlignment="Bottom">
+                    <Button Content="{materialDesign:PackIcon Kind=Add}" 
+                            Foreground="{StaticResource HintColor}"
+                            HorizontalAlignment="Right"
+                            Margin="0 0 30 10"
+                            Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Bottom}" />
+                </StackPanel>
             </Grid>
+            <!--#endregion-->
         </materialDesign:DrawerHost>
+        <!--#endregion-->
     </Grid>
 </UserControl>

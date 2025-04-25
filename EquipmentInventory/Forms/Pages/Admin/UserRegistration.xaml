@@ -40,12 +40,7 @@
                         <Image x:Name="userImage" Source="/Resources/Pictures/SmallUserIcon.png" HorizontalAlignment="Left" />
                         <Button x:Name="changeImageBtn" Margin="5" Click="ChangeImage_Click" />
                         <materialDesign:PackIcon x:Name="toolTipUserImage" 
-                                                 Kind="InformationSlabCircleOutline"
-                                                 Width="15"
-                                                 Cursor="Help"
-                                                 Background="Transparent"
-                                                 VerticalAlignment="Center"
-                                                 Foreground="{StaticResource SecondaryColor}" />
+                                                 Style="{StaticResource BaseInformation}" />
                     </WrapPanel>
 
                     <StackPanel Grid.Row="1" VerticalAlignment="Center">

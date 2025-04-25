@@ -691,6 +691,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Fields with an asterisk are optional.
+        /// </summary>
+        internal static string OptionalField {
+            get {
+                return ResourceManager.GetString("OptionalField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Outdated technology.
         /// </summary>
         internal static string OutdatedTechnology {

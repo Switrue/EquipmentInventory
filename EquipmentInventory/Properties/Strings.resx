@@ -556,4 +556,8 @@
     <value>Are you sure you want to delete the record?</value>
     <comment>Tables</comment>
   </data>
+  <data name="OptionalField" xml:space="preserve">
+    <value>Fields with an asterisk are optional</value>
+    <comment>Information</comment>
+  </data>
 </root>

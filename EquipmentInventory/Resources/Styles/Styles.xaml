@@ -156,6 +156,14 @@
         <Setter Property="Height" Value="25" />
         <Setter Property="Padding" Value="0" />
     </Style>
+
+    <Style x:Key="BaseInformation" TargetType="materialDesign:PackIcon">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Help" />
+        <Setter Property="Kind" Value="InformationSlabCircleOutline" />
+        <Setter Property="Foreground" Value="{StaticResource SecondaryColor}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
     <!--#endregion-->
     
     <!--#region DataTemplate-->

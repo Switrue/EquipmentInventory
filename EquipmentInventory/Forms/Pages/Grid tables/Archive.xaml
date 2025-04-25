@@ -21,7 +21,7 @@
     
     <Grid>
         <!--#region Items-->
-        <ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Items}"
                           Background="Transparent"
                           Focusable="False"
@@ -74,7 +74,7 @@
                                         <TextBox Text="{Binding WriteOffDate, StringFormat='Изменения: {0:dd.MM.yyyy}'}"
                                                  Style="{StaticResource IconDataTextBox}"
                                                  materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
-                                        <TextBox Text="{Binding DateOfPurchase, StringFormat='Покупки: {0:dd.MM.yyyy}'}"
+                                        <TextBox Text="{Binding DateOfPurchase, StringFormat='Приобретения: {0:dd.MM.yyyy}'}"
                                                  Style="{StaticResource IconDataTextBox}"
                                                  materialDesign:TextFieldAssist.LeadingIcon="Calendar" />
                                         <TextBox Text="{Binding DateOfManufacture, StringFormat='Произодства: {0:dd.MM.yyyy}'}" 
