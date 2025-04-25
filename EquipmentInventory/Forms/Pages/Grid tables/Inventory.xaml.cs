@@ -12,12 +12,6 @@ public partial class Inventory : UserControl
     public Inventory(TableSwitcherInventoryViewModel viewModel)
     {
         InitializeComponent();
-        InitializeUI();
         DataContext = viewModel;
-    }
-
-    private void InitializeUI()
-    {
-        toolTipOptionalField.ToolTip = Strings.OptionalField;
     }
 }

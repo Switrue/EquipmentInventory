@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:props="clr-namespace:EquipmentInventory.Properties"
              mc:Ignorable="d" 
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -47,11 +48,12 @@
                         <StackPanel>
                             <UniformGrid Columns="2">
                                 <WrapPanel>
-                                    <TextBlock Text="Техника" 
+                                    <TextBlock Text="{x:Static props:Strings.Technique}" 
                                                Style="{StaticResource MaterialDesignTitleLargeTextBlock}" 
                                                Foreground="{StaticResource TextColor}" 
                                                Margin="6" />
-                                    <materialDesign:PackIcon x:Name="toolTipOptionalField" Style="{StaticResource BaseInformation}" />
+                                    <materialDesign:PackIcon ToolTip="{x:Static props:Strings.OptionalField }" 
+                                                             Style="{StaticResource BaseInformation}" />
                                 </WrapPanel>
                                 <Button HorizontalAlignment="Right" 
                                         Padding="5"
@@ -60,51 +62,52 @@
                                         Content="{materialDesign:PackIcon Kind=Close}"
                                         Foreground="{StaticResource AccentColor}"
                                         materialDesign:RippleAssist.IsDisabled="True"
+                                        ToolTip="{x:Static props:Strings.Close}"
                                         Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
                             </UniformGrid>
 
                             <StackPanel Margin="0 0 0 15">
-                                <TextBox materialDesign:HintAssist.Hint="Номер" 
+                                <TextBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Number}" 
                                          MaxLength="30"
                                          Style="{StaticResource FieldTextBox}" />
-                                <TextBox materialDesign:HintAssist.Hint="Наименование" 
+                                <TextBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Name}" 
                                          materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
                                          MaxLength="100"
                                          Style="{StaticResource FieldTextBox}" />
 
-                                <ComboBox materialDesign:HintAssist.Hint="Тип" 
+                                <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Type}" 
                                           Style="{StaticResource FieldComboBox}" />
-                                <ComboBox materialDesign:HintAssist.Hint="Поставщик" 
+                                <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Supplier}" 
                                           Style="{StaticResource FieldComboBox}" />
 
                                 <UniformGrid Columns="2">
                                     <StackPanel>
-                                        <DatePicker materialDesign:HintAssist.Hint="Приобретения" 
+                                        <DatePicker materialDesign:HintAssist.Hint="{x:Static props:Strings.Acquisition}" 
                                                     Style="{StaticResource FieldDatePicker}" />
-                                        <DatePicker materialDesign:HintAssist.Hint="Производства" 
+                                        <DatePicker materialDesign:HintAssist.Hint="{x:Static props:Strings.Production}" 
                                                     Style="{StaticResource FieldDatePicker}" />
-                                        <DatePicker materialDesign:HintAssist.Hint="Использования"
+                                        <DatePicker materialDesign:HintAssist.Hint="{x:Static props:Strings.DateOfUse}"
                                                     Style="{StaticResource OptionalFieldPicker}" />
                                     </StackPanel>   
                                     <StackPanel>
-                                        <ComboBox materialDesign:HintAssist.Hint="Сотрудник" 
+                                        <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Employee}" 
                                                   Style="{StaticResource OptionalFieldComboBox}" />
-                                        <ComboBox materialDesign:HintAssist.Hint="Кабинет" 
+                                        <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.OfficeNumber}" 
                                                   Style="{StaticResource OptionalFieldComboBox}" />
-                                        <ComboBox materialDesign:HintAssist.Hint="Компьютер"
+                                        <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Computer}"
                                                   Style="{StaticResource OptionalFieldComboBox}" />
                                     </StackPanel>
                                 </UniformGrid>
 
-                                <TextBox materialDesign:HintAssist.Hint="Стоимость" 
+                                <TextBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Price}" 
                                          materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
                                          MaxLength="50"
                                          Style="{StaticResource FieldTextBox}" />
-                                <CheckBox Content="В ремонте"
+                                <CheckBox Content="{x:Static props:Strings.InRepair}"
                                           Style="{StaticResource FieldCheckBox}" />
                             </StackPanel>
 
-                            <Button Content="Подтвердить" Style="{StaticResource DefaultButton}">
+                            <Button Content="{x:Static props:Strings.Save}" Style="{StaticResource DefaultButton}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <i:InvokeCommandAction Command="{Binding SaveDataCommand}" />
@@ -148,7 +151,8 @@
                                             </Border>
                                             <WrapPanel HorizontalAlignment="Right">
                                                 <Button Content="{materialDesign:PackIcon Kind=Edit}" 
-                                                        Foreground="{StaticResource HintColor}">
+                                                        Foreground="{StaticResource HintColor}"
+                                                        ToolTip="{x:Static props:Strings.Edit}">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
                                                             <i:InvokeCommandAction Command="{Binding DataContext.EditItemCommand, 
@@ -163,6 +167,7 @@
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                         CommandParameter="{Binding}"
                                                         Content="{materialDesign:PackIcon Kind=Delete}" 
+                                                        ToolTip="{x:Static props:Strings.Delete}"
                                                         Foreground="{StaticResource AccentColor}" />
                                             </WrapPanel>
                                         </UniformGrid>
@@ -217,7 +222,7 @@
                                             </StackPanel>
                                         </UniformGrid>
 
-                                        <TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0}'}"
+                                        <TextBlock Text="{Binding Cost, StringFormat='Цена: {0}'}"
                                                    Style="{StaticResource BaseDataTextBlock}" />
                                     </StackPanel>
                                 </materialDesign:Card>

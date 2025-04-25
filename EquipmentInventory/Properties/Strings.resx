@@ -560,4 +560,8 @@
     <value>Fields with an asterisk are optional</value>
     <comment>Information</comment>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Tables</comment>
+  </data>
 </root>

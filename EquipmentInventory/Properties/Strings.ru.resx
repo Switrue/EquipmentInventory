@@ -450,4 +450,7 @@
   <data name="OptionalField" xml:space="preserve">
     <value>Поля, отмеченные звездочкой, являются необязательными</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
 </root>
