@@ -76,9 +76,23 @@
                                          Style="{StaticResource FieldTextBox}" />
 
                                 <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Type}" 
-                                          Style="{StaticResource FieldComboBox}" />
+                                          ItemsSource="{Binding TypeTechniqueItems}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Id"
+                                          Style="{StaticResource FieldComboBox}">
+                                    <ComboBox.ItemContainerStyle>
+                                        <StaticResource ResourceKey="ComboBoxItemStyle" />
+                                    </ComboBox.ItemContainerStyle>
+                                </ComboBox>
                                 <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Supplier}" 
-                                          Style="{StaticResource FieldComboBox}" />
+                                          ItemsSource="{Binding SuppliersItems}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Id"
+                                          Style="{StaticResource FieldComboBox}">
+                                    <ComboBox.ItemContainerStyle>
+                                        <StaticResource ResourceKey="ComboBoxItemStyle" />
+                                    </ComboBox.ItemContainerStyle>
+                                </ComboBox>
 
                                 <UniformGrid Columns="2">
                                     <StackPanel>
@@ -91,11 +105,32 @@
                                     </StackPanel>   
                                     <StackPanel>
                                         <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Employee}" 
-                                                  Style="{StaticResource OptionalFieldComboBox}" />
+                                                  ItemsSource="{Binding MembersItems}"
+                                                  DisplayMemberPath="FullName"
+                                                  SelectedValuePath="Id"
+                                                  Style="{StaticResource OptionalFieldComboBox}" >
+                                            <ComboBox.ItemContainerStyle>
+                                                <StaticResource ResourceKey="ComboBoxItemStyle" />
+                                            </ComboBox.ItemContainerStyle>
+                                        </ComboBox>
                                         <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.OfficeNumber}" 
-                                                  Style="{StaticResource OptionalFieldComboBox}" />
+                                                  ItemsSource="{Binding OfficesItems}"
+                                                  DisplayMemberPath="DisplayData"
+                                                  SelectedValuePath="Id"
+                                                  Style="{StaticResource OptionalFieldComboBox}">
+                                            <ComboBox.ItemContainerStyle>
+                                                <StaticResource ResourceKey="ComboBoxItemStyle" />
+                                            </ComboBox.ItemContainerStyle>
+                                        </ComboBox>
                                         <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Computer}"
-                                                  Style="{StaticResource OptionalFieldComboBox}" />
+                                                  ItemsSource="{Binding ComputersItems}"
+                                                  DisplayMemberPath="Number"
+                                                  SelectedValuePath="Id"
+                                                  Style="{StaticResource OptionalFieldComboBox}">
+                                            <ComboBox.ItemContainerStyle>
+                                                <StaticResource ResourceKey="ComboBoxItemStyle" />
+                                            </ComboBox.ItemContainerStyle>
+                                        </ComboBox>
                                     </StackPanel>
                                 </UniformGrid>
 

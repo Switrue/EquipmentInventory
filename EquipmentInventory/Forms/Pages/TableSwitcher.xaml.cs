@@ -78,9 +78,9 @@ public partial class TableSwitcher : UserControl
     {
         var tableMapping = new Dictionary<TableType, Action>
         {
-            { TableType.Inventory, () =>
+            { TableType.Inventory, async () =>
                 {
-                    var viewModel = new TableSwitcherInventoryViewModel(new NotificationService(notificationSnackbar));
+                    var viewModel = await TableSwitcherInventoryViewModel.CreateAsync(new NotificationService(notificationSnackbar));
                     DataContext = viewModel;
                     tableFrame.Content = new Inventory(viewModel);
                 } 

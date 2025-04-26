@@ -1,5 +1,5 @@
 ﻿using EquipmentInventory.Classes.Data.ViewModels;
-using EquipmentInventory.Properties;
+using EquipmentInventory.Classes.Helpers;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.GridTables;

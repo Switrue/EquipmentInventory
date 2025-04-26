@@ -15,6 +15,11 @@ namespace EquipmentInventory.Classes.Data.ViewModels;
 public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<TechniqueDto>
 {
     private ObservableCollection<string> _queryItems;
+    private ObservableCollection<BaseDto> _typeTechniqueItems;
+    private ObservableCollection<BaseDto> _suppliersItems;
+    private ObservableCollection<MemberDto> _membersItems;
+    private ObservableCollection<OfficeDto> _officesItems;
+    private ObservableCollection<ComputerDto> _computersItems;
     private string _selectedQuery;
     private int _absentStatusIndex;
     private int _repairStatusIndex;
@@ -30,6 +35,36 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     {
         get => _queryItems;
         set => SetField(ref _queryItems, value);
+    }
+
+    public ObservableCollection<BaseDto> TypeTechniqueItems
+    {
+        get => _typeTechniqueItems;
+        set => SetField(ref _typeTechniqueItems, value);
+    }
+
+    public ObservableCollection<BaseDto> SuppliersItems
+    {
+        get => _suppliersItems;
+        set => SetField(ref _suppliersItems, value);
+    }
+
+    public ObservableCollection<MemberDto> MembersItems
+    {
+        get => _membersItems;
+        set => SetField(ref _membersItems, value);
+    }
+
+    public ObservableCollection<OfficeDto> OfficesItems
+    {
+        get => _officesItems;
+        set => SetField(ref _officesItems, value);
+    }
+
+    public ObservableCollection<ComputerDto> ComputersItems
+    {
+        get => _computersItems;
+        set => SetField(ref _computersItems, value);
     }
 
     public string SelectedQuery
@@ -82,6 +117,22 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
         DefaultSelectedOption();
         DefaultStatusIndices();
+    }
+
+    public static async Task<TableSwitcherInventoryViewModel> CreateAsync(NotificationService notificationService)
+    {
+        var viewModel = new TableSwitcherInventoryViewModel(notificationService);
+        await viewModel.InitializeAsync();
+        return viewModel;
+    }
+
+    public async Task InitializeAsync()
+    {
+        TypeTechniqueItems = await TypeTechniqueReques.GetTypeTechniqueItems();
+        SuppliersItems = await SuppliersRequest.GetSuppliersItems();
+        MembersItems = await MembersRequest.GetMembersItems();
+        OfficesItems = await OfficesRequest.GetOfficesItems();
+        ComputersItems = await ComputersRequest.GetComputersItems();
     }
 
     private void SaveData()
