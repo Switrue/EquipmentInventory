@@ -20,27 +20,14 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <!--#endregion-->
-    
+
     <Grid>
-        <!--#region Items-->
-        <materialDesign:DrawerHost BottomDrawerBackground="Transparent">
-            <materialDesign:DrawerHost.Style>
-                <Style TargetType="materialDesign:DrawerHost" 
-                       BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
-                                     Value="true">
-                            <Setter Property="OverlayBackground"
-                                    Value="{DynamicResource PrimaryHueMidBrush}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </materialDesign:DrawerHost.Style>
-            <materialDesign:DrawerHost.BottomDrawerContent>
-                <!--#region Fields-->
+        <!--#region Technique-->
+        <materialDesign:DialogHost DialogBackground="Transparent">
+            <!--#region Card-->
+            <materialDesign:DialogHost.DialogContent>
                 <materialDesign:Card Background="{StaticResource Background}" 
                                      Width="350"
-                                     Margin="10"
                                      BorderBrush="{StaticResource SecondaryColor}"
                                      BorderThickness="2 0 2 0"
                                      UniformCornerRadius="20">
@@ -57,10 +44,10 @@
                                 </WrapPanel>
                                 <Button HorizontalAlignment="Right" 
                                         Padding="5"
-                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                        CommandParameter="{x:Static Dock.Bottom}"
+                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                         Content="{materialDesign:PackIcon Kind=Close}"
                                         Foreground="{StaticResource AccentColor}"
+                                        Focusable="False"
                                         materialDesign:RippleAssist.IsDisabled="True"
                                         ToolTip="{x:Static props:Strings.Close}"
                                         Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
@@ -112,7 +99,7 @@
                                                     materialDesign:HintAssist.Hint="{x:Static props:Strings.DateOfUse}"
                                                     PreviewTextInput="DatePicker_PreviewTextInput"
                                                     Style="{StaticResource OptionalFieldPicker}" />
-                                    </StackPanel>   
+                                    </StackPanel>
                                     <StackPanel>
                                         <ComboBox SelectedValue="{Binding TechniqueUpdate.IdMember, UpdateSourceTrigger=PropertyChanged}"
                                                   materialDesign:HintAssist.Hint="{x:Static props:Strings.Employee}" 
@@ -165,11 +152,12 @@
                         </StackPanel>
                     </ScrollViewer>
                 </materialDesign:Card>
-                <!--#endregion-->
-            </materialDesign:DrawerHost.BottomDrawerContent>
+            </materialDesign:DialogHost.DialogContent>
+            <!--#endregion-->
+
             <!--#region List-->
             <Grid>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False">
                     <ItemsControl ItemsSource="{Binding Items}"
                                   Background="Transparent"
                                   Focusable="False"
@@ -204,8 +192,7 @@
                                                             <i:InvokeCommandAction Command="{Binding DataContext.EditItemCommand, 
                                                                                                      RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                                    CommandParameter="{Binding}" />
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                                                                                   CommandParameter="{x:Static Dock.Bottom}" />
+                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -287,15 +274,14 @@
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding DataContext.AddItemCommand, 
                                                                          RelativeSource={RelativeSource AncestorType=UserControl}}" />
-                                <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" 
-                                                       CommandParameter="{x:Static Dock.Bottom}" />
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
                 </StackPanel>
             </Grid>
             <!--#endregion-->
-        </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
         <!--#endregion-->
     </Grid>
 </UserControl>

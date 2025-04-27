@@ -245,6 +245,7 @@
                                                   ItemsSource="{Binding QueryItems}"
                                                   SelectedItem="{Binding SelectedQuery, Mode=TwoWay}"
                                                   materialDesign:ThemeAssist.Theme="Dark"
+                                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                                   materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource TextColor}" />
 
                                         <Grid Margin="0 15 0 0">

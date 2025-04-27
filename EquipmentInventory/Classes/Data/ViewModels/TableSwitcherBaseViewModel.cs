@@ -132,7 +132,7 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
 
     protected abstract Task LoadData();
 
-    protected void ClearItems() => _items.Clear();
+    protected void ClearItems() => Items.Clear();
 
     protected void UpdateCommandStates()
     {

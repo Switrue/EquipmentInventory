@@ -170,7 +170,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     }
 
     private void ResetTechniqueUpdate()
-        => TechniqueUpdate = new TechniqueUpdateDto();
+        => TechniqueUpdate = null;
 
     private async Task DeleteItem(TechniqueDto item)
     {
@@ -264,6 +264,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
             ? await TechniqueRequest.GetTechniqueOutdated(pagination, (int)filter)
             : await TechniqueRequest.GetTechniqueWithFiltration(pagination, (TechniqueFiltersDto)filter);
 
+        filter = null;
         ProcessResult(result);
     }
 
