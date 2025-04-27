@@ -1,5 +1,6 @@
 ﻿using EquipmentInventory.Classes.Data.Enums;
 using EquipmentInventory.Classes.Data.ViewModels;
+using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Forms.Pages.GridTables;
 using EquipmentInventory.Properties;
@@ -127,12 +128,10 @@ public partial class TableSwitcher : UserControl
 
     private void ValidationPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
-        Regex regex = new Regex(@"^[0-9]*(\.[0-9]*)?$");
-
         var textBox = sender as TextBox;
-        string newText = textBox.Text.Insert(textBox.CaretIndex, e.Text);
+        if (textBox == null) return;
 
-        e.Handled = !regex.IsMatch(newText);
+        e.Handled = !ValidationHelper.IsValidPriceInput(textBox, e.Text);
     }
 
     private void ExpendFilters(bool isExpended)

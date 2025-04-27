@@ -43,5 +43,28 @@ public static class TechniqueRequest
             $"api/Technique/delete/{id}",
             error => CustomMessageBoxHelper.Show(Strings.Error, error)); ;
     }
+
+    public static async Task<BaseResponse> Add(TechniqueUpdateDto model)
+    {
+        return await ApiClientHelper.PostAsync<TechniqueUpdateDto, BaseResponse>(
+            "/api/Technique/add",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<BaseResponse> Update(
+        TechniqueUpdateDto model,
+        long id)
+    {
+        var addParams = QueryParamsHelper.ToQueryParams(model);
+
+        var addQueryString = string.Join("&", addParams
+            .Select(kvp => $"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}")); 
+
+        return await ApiClientHelper.PatchAsync<TechniqueUpdateDto, BaseResponse>(
+            $"api/Technique/update/{id}?{addQueryString}",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
 }
     

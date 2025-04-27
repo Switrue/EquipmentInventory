@@ -19,11 +19,11 @@ public class TechniqueAddDto
     public long? IdComputer { get; set; }
 
     [Required]
-    public DateOnly DateOfPurchase { get; set; }
+    public DateTime DateOfPurchase { get; set; }
 
     [Required]
-    public DateOnly DateOfManufacture { get; set; }
-    public DateOnly? DateOfUse { get; set; }
+    public DateTime DateOfManufacture { get; set; }
+    public DateTime? DateOfUse { get; set; }
 
     [Required]
     public long IdSupplier { get; set; }

@@ -1,4 +1,6 @@
 ﻿using EquipmentInventory.Properties;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Classes.Helpers;
@@ -66,5 +68,20 @@ public static class ValidationHelper
         }
 
         return false;
+    }
+
+    public static bool IsValidPriceInput(TextBox textBox, string inputText)
+    {
+        // Разрешаем и точку, и запятую, но заменяем запятые на точки
+        Regex regex = new Regex(@"^[0-9]*([.,]?[0-9]*)?$");
+        string newText = textBox.Text.Insert(textBox.CaretIndex, inputText);
+
+        // Заменяем запятые на точки для корректной валидации
+        newText = newText.Replace(',', '.');
+
+        // Проверяем, что точка/запятая не вводится повторно
+        bool hasDecimalSeparator = newText.Count(c => c == '.') > 1;
+
+        return regex.IsMatch(newText) && !hasDecimalSeparator;
     }
 }

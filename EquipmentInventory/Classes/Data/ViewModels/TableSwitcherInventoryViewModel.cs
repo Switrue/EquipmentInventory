@@ -7,13 +7,17 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
 
 public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<TechniqueDto>
 {
+    #region Fields
+    private TechniqueUpdateDto _techniqueUpdate;
     private ObservableCollection<string> _queryItems;
     private ObservableCollection<BaseDto> _typeTechniqueItems;
     private ObservableCollection<BaseDto> _suppliersItems;
@@ -26,10 +30,20 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     private string _selectedOption;
     private string _fromCost;
     private string _toCost;
+    private long? id;
+    #endregion
 
+    #region Properties
     public ICommand DeleteItemCommand { get; }
     public ICommand EditItemCommand { get; }
+    public ICommand AddItemCommand { get; }
     public ICommand SaveDataCommand { get; }
+
+    public TechniqueUpdateDto TechniqueUpdate
+    {
+        get => _techniqueUpdate;
+        set => SetField(ref _techniqueUpdate, value);
+    }
 
     public ObservableCollection<string> QueryItems
     {
@@ -102,18 +116,21 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
         get => _toCost;
         set => SetField(ref _toCost, value);
     }
+    #endregion
 
     public TableSwitcherInventoryViewModel(NotificationService notificationService)
         : base(notificationService)
     {
+        _techniqueUpdate = new TechniqueUpdateDto();
         _queryItems = new ObservableCollection<string>
         {
             Strings.OutdatedTechnology
         };
 
-        DeleteItemCommand = new RelayCommand<TechniqueDto>(async (TechniqueDto) => await DeleteMessage(TechniqueDto));
-        EditItemCommand = new RelayCommand<TechniqueDto>(EditMessage);
-        SaveDataCommand = new RelayCommand(SaveData);
+        DeleteItemCommand = new RelayCommand<TechniqueDto>(async (TechniqueDto) => await DeleteItem(TechniqueDto));
+        EditItemCommand = new RelayCommand<TechniqueDto>(EditItem);
+        AddItemCommand = new RelayCommand(AddItem);
+        SaveDataCommand = new RelayCommand<object>(async (sender) => await UserAccountService.ExecuteTask((Button)sender, SaveData));
 
         DefaultSelectedOption();
         DefaultStatusIndices();
@@ -135,12 +152,27 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
         ComputersItems = await ComputersRequest.GetComputersItems();
     }
 
-    private void SaveData()
+    private async Task SaveData()
     {
-        CustomMessageBoxHelper.Show("Сохранено");
+        if (!TechniqueUpdate.IsValid()) return;
+
+        var response = new BaseResponse();
+
+        response = id is null
+                ? await TechniqueRequest.Add(TechniqueUpdate)
+                : await TechniqueRequest.Update(TechniqueUpdate, id.Value);
+
+        if (response != null)
+        {
+            TriggerANotification(response.Message);
+            await LoadData();
+        }
     }
 
-    private async Task DeleteMessage(TechniqueDto item)
+    private void ResetTechniqueUpdate()
+        => TechniqueUpdate = new TechniqueUpdateDto();
+
+    private async Task DeleteItem(TechniqueDto item)
     {
         var dialogResult = CustomMessageBoxHelper.Show(Strings.Warning, Strings.DeleteItem, true);
 
@@ -149,14 +181,56 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
         var result = await TechniqueRequest.Delete(item.Id);
         if (result != null)
         {
-            await LoadData();
             TriggerANotification(result.Message);
+            await LoadData();
         }
     }
 
-    private void EditMessage(TechniqueDto item)
+    private void EditItem(TechniqueDto item)
     {
-        CustomMessageBoxHelper.Show(item.Id.ToString());
+        id = item.Id;
+        TechniqueUpdate = ConvertToUpdateDto(item);
+    }
+
+    private void AddItem()
+    {
+        id = null;
+        ResetTechniqueUpdate();
+    }
+
+    private TechniqueUpdateDto ConvertToUpdateDto(TechniqueDto techniqueDto)
+    {
+        if (techniqueDto == null)
+        {
+            throw new ArgumentNullException(nameof(techniqueDto));
+        }
+
+        var typeTechnique = TypeTechniqueItems?
+            .FirstOrDefault(item => item.Name == techniqueDto.TypeTechnique);
+        var member = MembersItems?
+            .FirstOrDefault(item => item.FullName == techniqueDto.Member);
+        var office = OfficesItems?
+            .FirstOrDefault(item => item.Number == techniqueDto.Office);
+        var computer = ComputersItems?
+            .FirstOrDefault(item => item.Number == techniqueDto.Computer);
+        var supplier = SuppliersItems?
+            .FirstOrDefault(item => item.Name == techniqueDto.Supplier);
+
+        return new TechniqueUpdateDto
+        {
+            Number = techniqueDto.Number,
+            IdTypeTechnique = typeTechnique.Id,
+            Name = techniqueDto.Name,
+            IdMember = member?.Id,
+            IdOffice = office?.Id,
+            IdComputer = computer?.Id,
+            DateOfPurchase = techniqueDto.DateOfPurchase,
+            DateOfManufacture = techniqueDto.DateOfManufacture,
+            DateOfUse = techniqueDto.DateOfUse.HasValue ? techniqueDto.DateOfUse.Value : null,
+            IdSupplier = supplier.Id,
+            Cost = techniqueDto.Cost,
+            UnderRepair = techniqueDto.UnderRepair
+        };
     }
 
     protected override void ResetSearchParameters()

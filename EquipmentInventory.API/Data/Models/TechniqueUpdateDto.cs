@@ -14,9 +14,9 @@ public class TechniqueUpdateDto
     public long? IdMember { get; set; }
     public long? IdOffice { get; set; }
     public long? IdComputer { get; set; }
-    public DateOnly? DateOfPurchase { get; set; }
-    public DateOnly? DateOfManufacture { get; set; }
-    public DateOnly? DateOfUse { get; set; }
+    public DateTime? DateOfPurchase { get; set; }
+    public DateTime? DateOfManufacture { get; set; }
+    public DateTime? DateOfUse { get; set; }
     public long? IdSupplier { get; set; }
     public float? Cost { get; set; }
     public bool? UnderRepair { get; set; }

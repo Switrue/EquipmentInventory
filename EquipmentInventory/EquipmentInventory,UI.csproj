@@ -227,6 +227,7 @@
     <Compile Include="Classes\Data\Models\TechniqueDto.cs" />
     <Compile Include="Classes\Data\Models\TechniqueFiltersDto.cs" />
     <Compile Include="Classes\Data\Converters\RadioButtonConverter.cs" />
+    <Compile Include="Classes\Data\Models\TechniqueUpdateDto.cs" />
     <Compile Include="Classes\Data\Requests\ArchiveRequest.cs" />
     <Compile Include="Classes\Data\Requests\AuthoRequest.cs" />
     <Compile Include="Classes\Data\Requests\ComputersRequest.cs" />

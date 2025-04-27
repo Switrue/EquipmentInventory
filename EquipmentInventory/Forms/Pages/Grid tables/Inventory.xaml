@@ -67,15 +67,18 @@
                             </UniformGrid>
 
                             <StackPanel Margin="0 0 0 15">
-                                <TextBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Number}" 
+                                <TextBox Text="{Binding TechniqueUpdate.Number, UpdateSourceTrigger=PropertyChanged}" 
+                                         materialDesign:HintAssist.Hint="{x:Static props:Strings.Number}" 
                                          MaxLength="30"
                                          Style="{StaticResource FieldTextBox}" />
-                                <TextBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Name}" 
+                                <TextBox Text="{Binding TechniqueUpdate.Name, UpdateSourceTrigger=PropertyChanged}"
+                                         materialDesign:HintAssist.Hint="{x:Static props:Strings.Name}" 
                                          materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
                                          MaxLength="100"
                                          Style="{StaticResource FieldTextBox}" />
 
-                                <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Type}" 
+                                <ComboBox SelectedValue="{Binding TechniqueUpdate.IdTypeTechnique, UpdateSourceTrigger=PropertyChanged}"
+                                          materialDesign:HintAssist.Hint="{x:Static props:Strings.Type}" 
                                           ItemsSource="{Binding TypeTechniqueItems}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -84,7 +87,8 @@
                                         <StaticResource ResourceKey="ComboBoxItemStyle" />
                                     </ComboBox.ItemContainerStyle>
                                 </ComboBox>
-                                <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Supplier}" 
+                                <ComboBox SelectedValue="{Binding TechniqueUpdate.IdSupplier, UpdateSourceTrigger=PropertyChanged}"
+                                          materialDesign:HintAssist.Hint="{x:Static props:Strings.Supplier}" 
                                           ItemsSource="{Binding SuppliersItems}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -96,15 +100,22 @@
 
                                 <UniformGrid Columns="2">
                                     <StackPanel>
-                                        <DatePicker materialDesign:HintAssist.Hint="{x:Static props:Strings.Acquisition}" 
+                                        <DatePicker SelectedDate="{Binding TechniqueUpdate.DateOfPurchase, UpdateSourceTrigger=PropertyChanged}" 
+                                                    materialDesign:HintAssist.Hint="{x:Static props:Strings.Acquisition}" 
+                                                    PreviewTextInput="DatePicker_PreviewTextInput"
                                                     Style="{StaticResource FieldDatePicker}" />
-                                        <DatePicker materialDesign:HintAssist.Hint="{x:Static props:Strings.Production}" 
+                                        <DatePicker SelectedDate="{Binding TechniqueUpdate.DateOfManufacture, UpdateSourceTrigger=PropertyChanged}" 
+                                                    materialDesign:HintAssist.Hint="{x:Static props:Strings.Production}" 
+                                                    PreviewTextInput="DatePicker_PreviewTextInput"
                                                     Style="{StaticResource FieldDatePicker}" />
-                                        <DatePicker materialDesign:HintAssist.Hint="{x:Static props:Strings.DateOfUse}"
+                                        <DatePicker SelectedDate="{Binding TechniqueUpdate.DateOfUse, UpdateSourceTrigger=PropertyChanged}" 
+                                                    materialDesign:HintAssist.Hint="{x:Static props:Strings.DateOfUse}"
+                                                    PreviewTextInput="DatePicker_PreviewTextInput"
                                                     Style="{StaticResource OptionalFieldPicker}" />
                                     </StackPanel>   
                                     <StackPanel>
-                                        <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Employee}" 
+                                        <ComboBox SelectedValue="{Binding TechniqueUpdate.IdMember, UpdateSourceTrigger=PropertyChanged}"
+                                                  materialDesign:HintAssist.Hint="{x:Static props:Strings.Employee}" 
                                                   ItemsSource="{Binding MembersItems}"
                                                   DisplayMemberPath="FullName"
                                                   SelectedValuePath="Id"
@@ -113,7 +124,8 @@
                                                 <StaticResource ResourceKey="ComboBoxItemStyle" />
                                             </ComboBox.ItemContainerStyle>
                                         </ComboBox>
-                                        <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.OfficeNumber}" 
+                                        <ComboBox SelectedValue="{Binding TechniqueUpdate.IdOffice, UpdateSourceTrigger=PropertyChanged}"
+                                                  materialDesign:HintAssist.Hint="{x:Static props:Strings.OfficeNumber}" 
                                                   ItemsSource="{Binding OfficesItems}"
                                                   DisplayMemberPath="DisplayData"
                                                   SelectedValuePath="Id"
@@ -122,7 +134,8 @@
                                                 <StaticResource ResourceKey="ComboBoxItemStyle" />
                                             </ComboBox.ItemContainerStyle>
                                         </ComboBox>
-                                        <ComboBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Computer}"
+                                        <ComboBox SelectedValue="{Binding TechniqueUpdate.IdComputer, UpdateSourceTrigger=PropertyChanged}"
+                                                  materialDesign:HintAssist.Hint="{x:Static props:Strings.Computer}"
                                                   ItemsSource="{Binding ComputersItems}"
                                                   DisplayMemberPath="Number"
                                                   SelectedValuePath="Id"
@@ -134,23 +147,21 @@
                                     </StackPanel>
                                 </UniformGrid>
 
-                                <TextBox materialDesign:HintAssist.Hint="{x:Static props:Strings.Price}" 
+                                <TextBox Text="{Binding TechniqueUpdate.Cost, UpdateSourceTrigger=PropertyChanged, StringFormat='0.0#####'}"
+                                         materialDesign:HintAssist.Hint="{x:Static props:Strings.Price}" 
                                          materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
                                          MaxLength="50"
+                                         PreviewTextInput="ValidationPrice_PreviewTextInput"
                                          Style="{StaticResource FieldTextBox}" />
-                                <CheckBox Content="{x:Static props:Strings.InRepair}"
+                                <CheckBox IsChecked="{Binding TechniqueUpdate.UnderRepair, UpdateSourceTrigger=PropertyChanged}" 
+                                          Content="{x:Static props:Strings.InRepair}"
                                           Style="{StaticResource FieldCheckBox}" />
                             </StackPanel>
 
-                            <Button Content="{x:Static props:Strings.Save}" Style="{StaticResource DefaultButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <i:InvokeCommandAction Command="{Binding SaveDataCommand}" />
-                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                                               CommandParameter="{x:Static Dock.Bottom}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Button>
+                            <Button Content="{x:Static props:Strings.Save}" 
+                                    Command="{Binding SaveDataCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                    Style="{StaticResource DefaultButton}" />
                         </StackPanel>
                     </ScrollViewer>
                 </materialDesign:Card>
@@ -221,7 +232,7 @@
                                                        Style="{StaticResource BaseDataTextBlock}" />
                                             <StackPanel Orientation="Horizontal" 
                                                         Visibility="{Binding UnderRepair, 
-                                                             Converter={StaticResource ValueToVisibilityConverter}}">
+                                                                             Converter={StaticResource ValueToVisibilityConverter}}">
                                                 <Border Style="{StaticResource BaseDataBorder}"/>
                                                 <TextBlock Text="В ремонте"
                                                            Style="{StaticResource BaseDataTextBlock}" />
@@ -269,10 +280,18 @@
                 <StackPanel VerticalAlignment="Bottom">
                     <Button Content="{materialDesign:PackIcon Kind=Add}" 
                             Foreground="{StaticResource HintColor}"
+                            ToolTip="{x:Static props:Strings.Add}"
                             HorizontalAlignment="Right"
-                            Margin="0 0 30 10"
-                            Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                            CommandParameter="{x:Static Dock.Bottom}" />
+                            Margin="0 0 30 10">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding DataContext.AddItemCommand, 
+                                                                         RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" 
+                                                       CommandParameter="{x:Static Dock.Bottom}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
                 </StackPanel>
             </Grid>
             <!--#endregion-->

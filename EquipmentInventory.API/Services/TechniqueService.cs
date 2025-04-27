@@ -189,12 +189,12 @@ public class TechniqueService
             IdMember = model.IdMember,
             IdOffice = model.IdOffice,
             IdComputer = model.IdComputer,
-            DateOfPurchase = model.DateOfPurchase,
+            DateOfPurchase = DateOnly.FromDateTime(model.DateOfPurchase),
             UnderRepair = model.UnderRepair ?? false,
-            DateOfManufacture = model.DateOfManufacture,
+            DateOfManufacture = DateOnly.FromDateTime(model.DateOfManufacture),
             IdSupplier = model.IdSupplier,
             Cost = model.Cost,
-            DateOfUse = model.DateOfUse
+            DateOfUse = model.DateOfUse.HasValue ? DateOnly.FromDateTime(model.DateOfUse.Value) : null,
         };
 
         _context.Techniques.Add(technique);
@@ -206,18 +206,37 @@ public class TechniqueService
     #region Update
     public async Task UpdateTechnique(Technique existing, TechniqueUpdateDto model)
     {
-        if (model.Number != null) existing.Number = model.Number;
-        if (model.IdTypeTechnique.HasValue) existing.IdTypeTechnique = model.IdTypeTechnique.Value;
-        if (model.Name != null) existing.Name = model.Name;
-        if (model.IdMember != null) existing.IdMember = model.IdMember;
-        if (model.IdOffice != null) existing.IdOffice = model.IdOffice;
-        if (model.IdComputer != null) existing.IdComputer = model.IdComputer;
-        if (model.DateOfPurchase.HasValue) existing.DateOfPurchase = model.DateOfPurchase.Value;
-        if (model.DateOfManufacture.HasValue) existing.DateOfManufacture = model.DateOfManufacture.Value;
-        if (model.DateOfUse != null) existing.DateOfUse = model.DateOfUse;
-        if (model.IdSupplier.HasValue) existing.IdSupplier = model.IdSupplier.Value;
-        if (model.Cost.HasValue) existing.Cost = model.Cost.Value;
-        if (model.UnderRepair.HasValue) existing.UnderRepair = model.UnderRepair.Value;
+        if (model.Number != null) 
+            existing.Number = model.Number;
+
+        if (model.IdTypeTechnique.HasValue) 
+            existing.IdTypeTechnique = model.IdTypeTechnique.Value;
+
+        if (model.Name != null)
+            existing.Name = model.Name;
+
+        existing.IdMember = model.IdMember;
+        existing.IdOffice = model.IdOffice;
+        existing.IdComputer = model.IdComputer;
+
+        if (model.DateOfPurchase.HasValue) 
+            existing.DateOfPurchase = DateOnly.FromDateTime(model.DateOfPurchase.Value);
+
+        if (model.DateOfManufacture.HasValue) 
+            existing.DateOfManufacture = DateOnly.FromDateTime(model.DateOfManufacture.Value);
+
+        existing.DateOfUse = model.DateOfUse.HasValue
+            ? DateOnly.FromDateTime(model.DateOfUse.Value)
+            : null;
+
+        if (model.IdSupplier.HasValue) 
+            existing.IdSupplier = model.IdSupplier.Value;
+
+        if (model.Cost.HasValue) 
+            existing.Cost = model.Cost.Value;
+
+        if (model.UnderRepair.HasValue)
+            existing.UnderRepair = model.UnderRepair.Value;
 
         await _context.SaveChangesAsync();
     }

@@ -564,4 +564,8 @@
     <value>Delete</value>
     <comment>Tables</comment>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+    <comment>Tables</comment>
+  </data>
 </root>
