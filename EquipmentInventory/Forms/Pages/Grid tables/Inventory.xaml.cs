@@ -1,7 +1,5 @@
 ﻿using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Helpers;
-using MaterialDesignThemes.Wpf;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;

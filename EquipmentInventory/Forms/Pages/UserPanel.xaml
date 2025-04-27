@@ -27,7 +27,10 @@
         <!--#region Control panel-->
         <StackPanel x:Name="radioButtonContainer" Orientation="Horizontal">
             <RadioButton x:Name="userRegistrationRb" Click="RadioButton_Click" />
-            <RadioButton x:Name="tablesRb" Click="RadioButton_Click" MouseEnter="DisplayTableOptions_Mouse" />
+            <RadioButton x:Name="tablesRb" 
+                         Click="RadioButton_Click" 
+                         MouseEnter="TablesRb_MouseEnter" 
+                         MouseLeave="TablesRb_MouseLeave" />
             <RadioButton x:Name="dictionariesRb" Click="RadioButton_Click" />
 
             <Popup x:Name="actionsPopupRb" 
@@ -35,8 +38,10 @@
                    AllowsTransparency="True"
                    Placement="Bottom" 
                    StaysOpen="False">
-                <Border Padding="0 5 0 0">
-                    <StackPanel Background="{StaticResource Background}" MouseLeave="DisplayTableOptions_Mouse">
+                <Border Padding="0 5 0 0" >
+                    <StackPanel Background="{StaticResource Background}" 
+                                MouseEnter="PopupContent_MouseEnter" 
+                                MouseLeave="PopupContent_MouseLeave">
                         <Button x:Name="archiveBtn" Style="{StaticResource PopupButton}" Click="Archive_Click" />
                         <Button x:Name="inventoryBtn" Style="{StaticResource PopupButton}" Click="Inventory_Click" />
                     </StackPanel>

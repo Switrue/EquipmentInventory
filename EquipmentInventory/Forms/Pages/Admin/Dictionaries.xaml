@@ -9,33 +9,7 @@
              Focusable="True"
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UniformGrid Columns="2">
-        <materialDesign:DialogHost>
-            <materialDesign:DialogHost.DialogContent>
-                <StackPanel Background="Beige">
-                    <Grid Margin="10">
-                        <TextBlock Text="Это диалоговое окно" 
-                           FontSize="16"
-                           HorizontalAlignment="Center" />
-                        <Button Content="Закрыть"
-                        Margin="0,20,0,0"
-                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                        HorizontalAlignment="Center" />
-                    </Grid>
-                </StackPanel>
-            </materialDesign:DialogHost.DialogContent>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Width="128"
-                Margin="0,32,0,0"
-                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                Content="Кнопка 1" />
-
-                <Button Width="128"
-                Margin="0,16,0,0"
-                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                Content="Кнопка 2" />
-            </StackPanel>
-        </materialDesign:DialogHost>
-    </UniformGrid>
+    <Grid>
+        
+    </Grid>
 </UserControl>
