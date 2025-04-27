@@ -26,6 +26,7 @@ public partial class TablesTab : UserControl
         titleTab.Text = _title;
         toolTipYearOfObsolescence.ToolTip = Strings.TheIntervalOfObsoleteTechnology;
         HintAssist.SetHint(yearOfObsolescenceCB, Strings.Year);
+        HintAssist.SetHint(numberOfRecordsCB, Strings.PageSize);
     }
 
     private void InitializeParams()

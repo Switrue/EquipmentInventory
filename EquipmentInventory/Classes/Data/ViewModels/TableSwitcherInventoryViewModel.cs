@@ -170,7 +170,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
     }
 
     private void ResetTechniqueUpdate()
-        => TechniqueUpdate = null;
+        => TechniqueUpdate = new TechniqueUpdateDto();
 
     private async Task DeleteItem(TechniqueDto item)
     {
@@ -247,7 +247,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
     protected override async Task LoadData()
     {
-        var pagination = new PaginationModel { Page = CurrentPage, PageSize = PageSize };
+        var pagination = new PaginationModel { Page = CurrentPage, PageSize = Settings.Default.PageSize };
         var result = new PaginatedResult<TechniqueDto>();
 
         object filter = SelectedQuery != null

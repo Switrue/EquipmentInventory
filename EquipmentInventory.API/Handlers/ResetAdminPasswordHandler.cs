@@ -25,9 +25,7 @@ public class ResetAdminPasswordHandler : ICodeHandler
     }
 
     public bool CanHandle(string code)
-    {
-        return code == _configuration["Codes:ResetAdminPassword:Code"]; ;
-    }
+        => code == _configuration["Codes:ResetAdminPassword:Code"];
 
     public async Task<ActionResult> Handle(BaseModel model)
     {

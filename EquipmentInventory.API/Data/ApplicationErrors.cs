@@ -7,6 +7,7 @@ public static class ApplicationErrors
     /// </summary>
     public const string InvalidCode = "Код недействителен";
     public const string AdminPasswordReset = "Пароль администратора сброшен";
+    public const string ArchiveReset = "Архив сброшен";
 
     /// <summary>
     /// Авторизация и регистрация

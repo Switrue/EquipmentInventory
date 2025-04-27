@@ -1,6 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Services;
+using EquipmentInventory.Properties;
 using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
@@ -23,7 +24,7 @@ public class TablesSwitcherArchiveViewModel : TableSwitcherBaseViewModel<Archive
 
     protected override async Task LoadData()
     {
-        var pagination = new PaginationModel { Page = CurrentPage, PageSize = PageSize };
+        var pagination = new PaginationModel { Page = CurrentPage, PageSize = Settings.Default.PageSize };
         var filter = SearchText;
 
         var result = await ArchiveRequest.GetArchive(pagination, filter);

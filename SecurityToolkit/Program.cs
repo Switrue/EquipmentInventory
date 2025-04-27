@@ -71,10 +71,10 @@ class Program
         {
             Console.Write("Количество генерируемых кодов: ");
 
-            if (!int.TryParse(Console.ReadLine(), out int value) || value <= 0)
+            if (!int.TryParse(Console.ReadLine(), out int value) || value <= 0 || value > 100)
             {
                 Console.Clear();
-                Console.WriteLine("Введите положительное число больше 0.\r\n");
+                Console.WriteLine("Введите целое число от 1 до 100.\r\n");
             }
             else
             {

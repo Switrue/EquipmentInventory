@@ -11,6 +11,7 @@ public static class DependenciesConfiguration
     {
         // Handlers
         services.AddScoped<ICodeHandler, ResetAdminPasswordHandler>();
+        services.AddScoped<ICodeHandler, ResetArchive>();
 
         // Helpers
         services.AddScoped<EntityValidator>();

@@ -22,7 +22,6 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
     private int _totalItems;
     private bool _isLoading;
     private int _currentPage = 1;
-    protected const int PageSize = 5;
 
     public ICommand CleanCommand { get; }
     public ICommand ForwardCommand { get; }
@@ -81,7 +80,7 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
         }
     }
 
-    protected int TotalPages => TotalItems > 0 ? (int)Math.Ceiling((double)TotalItems / PageSize) : 0;
+    protected int TotalPages => TotalItems > 0 ? (int)Math.Ceiling((double)TotalItems / Settings.Default.PageSize) : 0;
 
     protected TableSwitcherBaseViewModel(NotificationService notificationService)
     {
@@ -170,7 +169,7 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
     }
 
     protected void TriggerANotification(string message)
-        => _notificationService.Show(message);
+        =>  _notificationService.Show(message);
 
     // Общие методы для INotifyPropertyChanged
     protected bool SetField<TField>(ref TField field, TField value, [CallerMemberName] string propertyName = null)

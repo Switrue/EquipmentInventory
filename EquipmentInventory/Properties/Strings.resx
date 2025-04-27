@@ -568,4 +568,8 @@
     <value>Add</value>
     <comment>Tables</comment>
   </data>
+  <data name="PageSize" xml:space="preserve">
+    <value>Page size</value>
+    <comment>Settings</comment>
+  </data>
 </root>

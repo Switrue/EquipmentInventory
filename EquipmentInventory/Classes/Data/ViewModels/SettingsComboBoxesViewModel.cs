@@ -14,11 +14,14 @@ public class SettingsComboBoxesViewModel : INotifyPropertyChanged
 {
     private LanguageItem _selectedLanguage;
     private int _selectedLongInteger;
+    private int _selectedShortInteger;
     private SettingsBuffer _buffer;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public IList<int> LongIntegerList { get; }
+    public IList<int> ShortIntegerList { get; }
     public List<LanguageItem> Languages { get; }
+
     public LanguageItem SelectedLanguage
     {
         get => _selectedLanguage;
@@ -32,6 +35,7 @@ public class SettingsComboBoxesViewModel : INotifyPropertyChanged
             }
         }
     }
+
     public int SelectedLongInteger
     {
         get => _selectedLongInteger;
@@ -47,11 +51,27 @@ public class SettingsComboBoxesViewModel : INotifyPropertyChanged
         }
     }
 
+    public int SelectedShortInteger
+    {
+        get => _selectedShortInteger;
+        set
+        {
+            if (_selectedShortInteger != value)
+            {
+                _selectedShortInteger = value;
+                _buffer.NumberOfRecords = value;
+                _buffer.ApplyNumberOfRecords();
+                OnPropertyChanged(nameof(SelectedLongInteger));
+            }
+        }
+    }
+
     public SettingsComboBoxesViewModel()
     {
         _buffer = new SettingsBuffer();
 
         LongIntegerList = new List<int>(Enumerable.Range(1, 100));
+        ShortIntegerList = new List<int>(Enumerable.Range(1, 10));
 
         Languages = new List<LanguageItem>()
         {
@@ -69,6 +89,9 @@ public class SettingsComboBoxesViewModel : INotifyPropertyChanged
         SelectedLongInteger = LongIntegerList.Contains(_buffer.YearOfObsolescence)
             ? _buffer.YearOfObsolescence
             : LongIntegerList[4];
+        SelectedShortInteger = ShortIntegerList.Contains(_buffer.NumberOfRecords)
+            ? _buffer.NumberOfRecords 
+            : ShortIntegerList[4];
     }
 
     public ICommand ApplyLanguageCommand => new RelayCommand(() =>
