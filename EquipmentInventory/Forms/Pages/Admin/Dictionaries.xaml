@@ -5,11 +5,61 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.Admin"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:props="clr-namespace:EquipmentInventory.Properties"
              mc:Ignorable="d"
              Focusable="True"
              Background="Transparent"
+             MouseDown="UserControl_MouseDown"
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--#region Styles-->
+    <UserControl.Resources>
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource Background}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                    <Setter Property="BorderThickness" Value="2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <!--#endregion-->
+    
     <Grid>
-        
+        <UniformGrid Rows="2">
+            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ComboBox ItemsSource="{Binding ModelTypes}" 
+                          SelectedItem="{Binding SelectedModel}"
+                          Foreground="{StaticResource TextColor}"
+                          materialDesign:HintAssist.Hint="{x:Static props:Strings.Tables}"
+                          materialDesign:ThemeAssist.Theme="Dark"
+                          Width="200" 
+                          Margin="10" />
+                <Button Command="{Binding ClearItems}" 
+                        Content="{materialDesign:PackIcon Kind=Clear}" 
+                        ToolTip="{x:Static props:Strings.Clean}"
+                        Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
+            </WrapPanel>
+            <DataGrid CanUserAddRows="False"
+                      CanUserResizeRows="True"
+                      HeadersVisibility="All"
+                      materialDesign:ThemeAssist.Theme="Dark"
+                      Background="{StaticResource Background}"
+                      ItemsSource="{Binding Items}"
+                      materialDesign:DataGridAssist.SelectedCellBorderBrush="{StaticResource Foreground}"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow" />
+        </UniformGrid>
     </Grid>
 </UserControl>

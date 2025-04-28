@@ -1,31 +1,23 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
-using System;
+using EquipmentInventory.Properties;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
 
-public static class SuppliersRequest
+public static class PositionsRequest
 {
     public static async Task<List<BaseDto>> Get()
     {
         return await ApiClientHelper.GetAsync<List<BaseDto>>(
-            "/api/Suppliers/get",
-            Console.WriteLine);
+            "/api/Positions/get",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 
-    public static async Task<ObservableCollection<BaseDto>> GetSuppliersItemsAsync()
-    {
-        var result = await Get();
-        return result is null
-            ? new ObservableCollection<BaseDto>()
-            : new ObservableCollection<BaseDto>(result);
-    }
-
-    public static async Task<List<object>> GetSuppliersDataAsync()
+    public static async Task<List<object>> GetPositionsDataAsync()
     {
         var items = await Get();
         return items.Select(m => new

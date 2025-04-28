@@ -572,4 +572,16 @@
     <value>Page size</value>
     <comment>Settings</comment>
   </data>
+  <data name="TypeTecnique" xml:space="preserve">
+    <value>Type tecnique</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Office</value>
+    <comment>Tables</comment>
+  </data>
 </root>

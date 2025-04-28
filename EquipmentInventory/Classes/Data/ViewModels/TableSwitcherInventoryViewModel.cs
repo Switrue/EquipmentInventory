@@ -145,11 +145,11 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
     public async Task InitializeAsync()
     {
-        TypeTechniqueItems = await TypeTechniqueReques.GetTypeTechniqueItems();
-        SuppliersItems = await SuppliersRequest.GetSuppliersItems();
-        MembersItems = await MembersRequest.GetMembersItems();
-        OfficesItems = await OfficesRequest.GetOfficesItems();
-        ComputersItems = await ComputersRequest.GetComputersItems();
+        TypeTechniqueItems = await TypeTechniqueRequest.GetTypeTechniqueItemsAsync();
+        SuppliersItems = await SuppliersRequest.GetSuppliersItemsAsync();
+        MembersItems = await MembersRequest.GetMembersItemsAsync();
+        OfficesItems = await OfficesRequest.GetOfficesItemsAsync();
+        ComputersItems = await ComputersRequest.GetComputersItemsAsync();
     }
 
     private async Task SaveData()

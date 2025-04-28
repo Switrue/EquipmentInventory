@@ -77,7 +77,7 @@ public class UsersController : ControllerBase
                 c.Username,
                 c.Surname,
                 c.Login,
-                c.IdRoleNavigation.Name
+                Role = c.IdRoleNavigation.Name
             })
             .ToListAsync();
 

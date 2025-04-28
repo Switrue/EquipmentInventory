@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using EquipmentInventory.Classes.Data.ViewModels;
+using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Admin;
 
@@ -10,10 +11,9 @@ public partial class Dictionaries : UserControl
     public Dictionaries()
     {
         InitializeComponent();
+        DataContext = new DictionariesViewModel();
     }
 
-    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-
-    }
+    private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        => Focus();
 }

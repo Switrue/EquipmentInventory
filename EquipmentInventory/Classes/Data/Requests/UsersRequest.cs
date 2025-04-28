@@ -2,12 +2,22 @@
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Properties;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
 
 public static class UsersRequest
 {
+    public static async Task<List<UserDto>> Get()
+    {
+        return await ApiClientHelper.GetAsync<List<UserDto>>(
+            "api/Users/get",
+            Console.WriteLine);
+    }
+
     public static async Task<BaseResponse> UserRegister(RegisterRequest user)
     {
         return await ApiClientHelper.PostAsync<RegisterRequest, BaseResponse>(
@@ -32,5 +42,18 @@ public static class UsersRequest
             "/api/Users/image-me",
             error => CustomMessageBoxHelper.Show(Strings.Error, error)
         );
+    }
+
+    public static async Task<List<object>> GetUsersDataAsync()
+    {
+        var items = await Get();
+        return items.Select(m => new
+        {
+            m.Id,
+            Имя = m.Username,
+            Фамилия = m.Surname,
+            Логин = m.Login,
+            Роль = m.Role
+        }).ToList<object>();
     }
 }

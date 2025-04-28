@@ -3,6 +3,7 @@ using EquipmentInventory.Classes.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.Requests;
@@ -16,11 +17,23 @@ public static class OfficesRequest
             Console.WriteLine);
     }
 
-    public static async Task<ObservableCollection<OfficeDto>> GetOfficesItems()
+    public static async Task<ObservableCollection<OfficeDto>> GetOfficesItemsAsync()
     {
         var result = await Get();
         return result is null
             ? new ObservableCollection<OfficeDto>()
             : new ObservableCollection<OfficeDto>(result);
+    }
+
+    public static async Task<List<object>> GetOfficesDataAsync()
+    {
+        var items = await Get();
+        return items.Select(m => new
+        {
+            m.Id,
+            Номер = m.Number,
+            Этаж = m.Floor,
+            Наименование = m.Name
+        }).ToList<object>();
     }
 }

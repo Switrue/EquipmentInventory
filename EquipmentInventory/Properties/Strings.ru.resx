@@ -459,4 +459,13 @@
   <data name="PageSize" xml:space="preserve">
     <value>Размер страницы</value>
   </data>
+  <data name="TypeTecnique" xml:space="preserve">
+    <value>Тип техники</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Должность</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Кабинет</value>
+  </data>
 </root>
