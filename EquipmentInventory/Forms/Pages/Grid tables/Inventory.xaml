@@ -192,6 +192,8 @@
                                                             <i:InvokeCommandAction Command="{Binding DataContext.EditItemCommand, 
                                                                                                      RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                                    CommandParameter="{Binding}" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Click">
                                                             <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
@@ -274,6 +276,8 @@
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding DataContext.AddItemCommand, 
                                                                          RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
