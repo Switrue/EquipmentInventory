@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.Admin"
+             xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:props="clr-namespace:EquipmentInventory.Properties"
              mc:Ignorable="d"
              Focusable="True"
@@ -13,53 +14,122 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <!--#region Styles-->
     <UserControl.Resources>
-        <Style TargetType="DataGridRow">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
-                    <Setter Property="Foreground" Value="{StaticResource Background}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <local:SelectedQueryToIsDisabledConverter x:Key="SelectedQueryToIsDisabledConverter" />
 
-        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
-                    <Setter Property="BorderThickness" Value="2" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+            <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                        <Setter Property="Foreground" Value="{StaticResource Background}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+            </Style>
+
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="Focusable" Value="False" />
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
     <!--#endregion-->
     
     <Grid>
-        <UniformGrid Rows="2">
-            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ComboBox ItemsSource="{Binding ModelTypes}" 
-                          SelectedItem="{Binding SelectedModel}"
-                          Foreground="{StaticResource TextColor}"
-                          materialDesign:HintAssist.Hint="{x:Static props:Strings.Tables}"
+        <materialDesign:DialogHost DialogBackground="Transparent">
+            <materialDesign:DialogHost.DialogContent>
+                <materialDesign:Card Background="{StaticResource Background}" 
+                                     Width="350"
+                                     BorderBrush="{StaticResource SecondaryColor}"
+                                     BorderThickness="2 0 2 0"
+                                     UniformCornerRadius="20">
+                    <StackPanel Margin="10">
+                        <UniformGrid Columns="2">
+                            <TextBlock Text="{Binding SelectedModel}" 
+                                       Style="{StaticResource MaterialDesignTitleLargeTextBlock}" 
+                                       Foreground="{StaticResource TextColor}" 
+                                       Margin="6" />
+                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
+                                    Content="{materialDesign:PackIcon Kind=Close}" 
+                                    ToolTip="{x:Static props:Strings.Close}"
+                                    HorizontalAlignment="Right"
+                                    Padding="5"
+                                    Foreground="{StaticResource AccentColor}" />
+                        </UniformGrid>
+                        <ContentControl Content="{Binding Card}" Focusable="False" />
+                    </StackPanel>
+                </materialDesign:Card>
+            </materialDesign:DialogHost.DialogContent>
+            
+            <UniformGrid Rows="2">
+                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ComboBox ItemsSource="{Binding ModelTypes}" 
+                              SelectedItem="{Binding SelectedModel}"
+                              Foreground="{StaticResource TextColor}"
+                              materialDesign:HintAssist.Hint="{x:Static props:Strings.Tables}"
+                              materialDesign:ThemeAssist.Theme="Dark"
+                              Width="200" 
+                              Margin="10" />
+                    <Button Command="{Binding ClearItemsCommand}" 
+                            Content="{materialDesign:PackIcon Kind=Clear}" 
+                            ToolTip="{x:Static props:Strings.Clean}"
+                            Foreground="{StaticResource SecondaryColor}"
+                            Style="{StaticResource MaterialDesignFlatButton}" />
+                    <Button Content="{materialDesign:PackIcon Kind=Add}" 
+                            ToolTip="{x:Static props:Strings.Add}"
+                            IsEnabled="{Binding SelectedModel, 
+                                                Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
+                            Foreground="{StaticResource HintColor}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding AddItemCommand}" />
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Command="{x:Null}" 
+                            Content="{materialDesign:PackIcon Kind=Edit}" 
+                            ToolTip="{x:Static props:Strings.Edit}"
+                            IsEnabled="{Binding SelectedItem, 
+                                                Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
+                            Foreground="{StaticResource HintColor}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding EditItemCommand}" />
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Command="{Binding DeleteItemCommand}" 
+                            Content="{materialDesign:PackIcon Kind=Delete}" 
+                            ToolTip="{x:Static props:Strings.Delete}"
+                            IsEnabled="{Binding SelectedItem, 
+                                                Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
+                            Foreground="{StaticResource AccentColor}" />
+                </WrapPanel>
+                <DataGrid CanUserAddRows="False"
                           materialDesign:ThemeAssist.Theme="Dark"
-                          Width="200" 
-                          Margin="10" />
-                <Button Command="{Binding ClearItems}" 
-                        Content="{materialDesign:PackIcon Kind=Clear}" 
-                        ToolTip="{x:Static props:Strings.Clean}"
-                        Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
-            </WrapPanel>
-            <DataGrid CanUserAddRows="False"
-                      CanUserResizeRows="True"
-                      HeadersVisibility="All"
-                      materialDesign:ThemeAssist.Theme="Dark"
-                      Background="{StaticResource Background}"
-                      ItemsSource="{Binding Items}"
-                      materialDesign:DataGridAssist.SelectedCellBorderBrush="{StaticResource Foreground}"
-                      SelectionMode="Single"
-                      SelectionUnit="FullRow" />
-        </UniformGrid>
+                          Background="{StaticResource Background}"
+                          ItemsSource="{Binding Items}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                          materialDesign:DataGridAssist.ColumnHeaderPadding="15"
+                          materialDesign:DataGridAssist.SelectedCellBorderBrush="{StaticResource Foreground}"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow" />
+            </UniformGrid>
+        </materialDesign:DialogHost>
+        
+        <materialDesign:Snackbar x:Name="notificationSnackbar" />
     </Grid>
 </UserControl>

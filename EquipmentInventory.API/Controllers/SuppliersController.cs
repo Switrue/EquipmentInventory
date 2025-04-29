@@ -97,6 +97,9 @@ public class SuppliersController : ControllerBase
         if (supplier == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
+        if (await _suppliersService.HasDependenciesAsync(id))
+            return ApiResponseHelper.BadRequest(ApplicationErrors.ViolatesTheRulesOfAddiction);
+
         _dbContext.Suppliers.Remove(supplier);
 
         try

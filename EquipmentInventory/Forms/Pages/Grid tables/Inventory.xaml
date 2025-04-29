@@ -48,9 +48,8 @@
                                         Content="{materialDesign:PackIcon Kind=Close}"
                                         Foreground="{StaticResource AccentColor}"
                                         Focusable="False"
-                                        materialDesign:RippleAssist.IsDisabled="True"
                                         ToolTip="{x:Static props:Strings.Close}"
-                                        Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
+                                        Style="{StaticResource MaterialDesignFlatButton}" />
                             </UniformGrid>
 
                             <StackPanel Margin="0 0 0 15">

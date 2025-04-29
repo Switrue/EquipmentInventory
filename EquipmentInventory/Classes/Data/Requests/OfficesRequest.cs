@@ -1,5 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
+using EquipmentInventory.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,5 +37,12 @@ public static class OfficesRequest
             Этаж = m.Floor,
             Наименование = m.Name
         }).ToList<object>();
+    }
+
+    public static async Task<BaseResponse> Delete(long id)
+    {
+        return await ApiClientHelper.DeleteAsync<BaseResponse>(
+            $"/api/Offices/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 }

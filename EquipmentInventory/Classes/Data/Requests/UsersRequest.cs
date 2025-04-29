@@ -56,4 +56,11 @@ public static class UsersRequest
             Роль = m.Role
         }).ToList<object>();
     }
+
+    public static async Task<BaseResponse> Delete(long id)
+    {
+        return await ApiClientHelper.DeleteAsync<BaseResponse>(
+            $"/api/Users/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
 }

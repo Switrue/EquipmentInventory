@@ -103,5 +103,8 @@ public class OfficesService
 
         return null;
     }
+
+    public async Task<bool> HasDependenciesAsync(long IdOffice)
+        => await _context.Techniques.AnyAsync(t => t.IdOffice == IdOffice);
     #endregion
 }

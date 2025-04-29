@@ -61,6 +61,7 @@ public static class ApplicationErrors
     public const string InvalidModelType = "Неверный тип модели";
     public const string UniqueName = "Название должно быть уникальным";
     public const string IncorrectFormat = "Неверный формат";
+    public const string ViolatesTheRulesOfAddiction = "Нарушает правила зависимости";
 
     /// <summary>
     /// Серверная часть приложения

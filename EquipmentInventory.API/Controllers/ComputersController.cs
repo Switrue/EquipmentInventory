@@ -97,6 +97,9 @@ public class ComputersController : ControllerBase
         if (computer == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
+        if (await _computersService.HasDependenciesAsync(id))
+            return ApiResponseHelper.BadRequest(ApplicationErrors.ViolatesTheRulesOfAddiction);
+
         _dbContext.Computers.Remove(computer);
         
         try

@@ -97,6 +97,9 @@ public class PositionsController : ControllerBase
         if (position == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
+        if (await _positionsServise.HasDependenciesAsync(id))
+            return ApiResponseHelper.BadRequest(ApplicationErrors.ViolatesTheRulesOfAddiction);
+
         _dbContext.Positions.Remove(position);
 
         try

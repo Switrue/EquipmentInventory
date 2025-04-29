@@ -90,5 +90,8 @@ public class SuppliersService
 
         return null;
     }
+
+    public async Task<bool> HasDependenciesAsync(long IdSupplier)
+        => await _context.Techniques.AnyAsync(t => t.IdSupplier == IdSupplier);
     #endregion
 }

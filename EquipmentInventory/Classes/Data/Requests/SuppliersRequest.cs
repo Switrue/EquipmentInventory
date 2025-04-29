@@ -1,5 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
+using EquipmentInventory.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,5 +35,12 @@ public static class SuppliersRequest
             m.Id,
             Наименование = m.Name
         }).ToList<object>();
+    }
+
+    public static async Task<BaseResponse> Delete(long id)
+    {
+        return await ApiClientHelper.DeleteAsync<BaseResponse>(
+            $"/api/Suppliers/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 }

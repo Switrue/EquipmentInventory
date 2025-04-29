@@ -109,5 +109,8 @@ public class ComputersService
 
         return null;
     }
+
+    public async Task<bool> HasDependenciesAsync(long IdComputer)
+        => await _context.Techniques.AnyAsync(t => t.IdComputer == IdComputer);
     #endregion
 }

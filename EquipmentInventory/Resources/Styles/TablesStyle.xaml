@@ -30,7 +30,7 @@
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 
-    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatSecondaryButton}">
+    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
         <Setter Property="Padding" Value="5" />
         <Setter Property="Margin" Value="5 0 0 0" />
     </Style>

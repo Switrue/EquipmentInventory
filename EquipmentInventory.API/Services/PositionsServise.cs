@@ -90,5 +90,8 @@ public class PositionsServise
 
         return null;
     }
+
+    public async Task<bool> HasDependenciesAsync(long IdPosition)
+        => await _context.Members.AnyAsync(t => t.IdPosition == IdPosition);
     #endregion
 }

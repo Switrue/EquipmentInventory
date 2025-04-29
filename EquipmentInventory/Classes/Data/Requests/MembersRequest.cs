@@ -1,5 +1,7 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Helpers;
+using EquipmentInventory.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +15,7 @@ public static class MembersRequest
     public static async Task<List<MemberDto>> Get()
     {
         return await ApiClientHelper.GetAsync<List<MemberDto>>(
-            "api/Members/get",
+            "/api/Members/get",
             Console.WriteLine);
     }
 
@@ -35,5 +37,12 @@ public static class MembersRequest
             Фамилия = m.Surname,
             Должность = m.Position
         }).ToList<object>();
+    }
+
+    public static async Task<BaseResponse> Delete(long id)
+    {
+        return await ApiClientHelper.DeleteAsync<BaseResponse>(
+            $"/api/Members/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 }

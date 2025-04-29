@@ -89,5 +89,8 @@ public class TypeTechniqueService
 
         return null;
     }
+
+    public async Task<bool> HasDependenciesAsync(long IdTypeTechnique)
+        => await _context.Techniques.AnyAsync(t => t.IdTypeTechnique == IdTypeTechnique);
     #endregion
 }

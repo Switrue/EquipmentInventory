@@ -26,4 +26,11 @@ public static class PositionsRequest
             Наименование = m.Name
         }).ToList<object>();
     }
+
+    public static async Task<BaseResponse> Delete(long id)
+    {
+        return await ApiClientHelper.DeleteAsync<BaseResponse>(
+            $"/api/Positions/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
 }

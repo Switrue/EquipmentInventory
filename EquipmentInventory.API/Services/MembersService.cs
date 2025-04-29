@@ -105,5 +105,8 @@ public class MembersService
         var error = validations.FirstOrDefault(v => !v.Result).Error;
         return error != null ? ApiResponseHelper.BadRequest(error) : null;
     }
+
+    public async Task<bool> HasDependenciesAsync(long IdMember)
+        => await _context.Techniques.AnyAsync(t => t.IdMember == IdMember);
     #endregion
 }

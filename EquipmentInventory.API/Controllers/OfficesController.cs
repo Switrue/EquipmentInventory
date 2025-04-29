@@ -95,6 +95,9 @@ public class OfficesController : ControllerBase
         if (office == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
+        if (await _officesService.HasDependenciesAsync(id))
+            return ApiResponseHelper.BadRequest(ApplicationErrors.ViolatesTheRulesOfAddiction);
+
         _dbContext.Offices.Remove(office);
 
         try

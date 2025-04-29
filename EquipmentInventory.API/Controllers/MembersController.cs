@@ -96,6 +96,9 @@ public class MembersController : ControllerBase
         if (member == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
+        if (await _membersService.HasDependenciesAsync(id))
+            return ApiResponseHelper.BadRequest(ApplicationErrors.ViolatesTheRulesOfAddiction);
+
         _dbContext.Members.Remove(member);
 
         try

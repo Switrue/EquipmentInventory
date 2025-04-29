@@ -97,6 +97,9 @@ public class TypeTechniqueController : ControllerBase
         if (typeTechnique == null)
             return ApiResponseHelper.NotFound(ApplicationErrors.NotFound);
 
+        if (await _typeTechniqueService.HasDependenciesAsync(id)) 
+            return ApiResponseHelper.BadRequest(ApplicationErrors.ViolatesTheRulesOfAddiction);
+
         _dbContext.TypeTechniques.Remove(typeTechnique);
 
         try
