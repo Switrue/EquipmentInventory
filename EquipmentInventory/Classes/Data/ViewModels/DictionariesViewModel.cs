@@ -81,19 +81,19 @@ public class DictionariesViewModel : IDictionariesViewModel
 
             { Strings.Supplier, (
                 async () => await SuppliersRequest.GetSuppliersDataAsync(),
-                param => new SupplierCard(),
+                param => new SupplierCard(this, param),
                 SuppliersRequest.Delete
             )},
 
             { Strings.Employee, (
                 async () => await MembersRequest.GetMembersDataAsync(),
-                param => new MemberCard(),
+                param => new MemberCard(this, param),
                 MembersRequest.Delete
             )},
 
             { Strings.Position, (
                 async () => await PositionsRequest.GetPositionsDataAsync(),
-                param => new PositionCard(),
+                param => new PositionCard(this, param),
                 PositionsRequest.Delete
             )},
 
@@ -165,7 +165,8 @@ public class DictionariesViewModel : IDictionariesViewModel
 
         try
         {
-            var id = GetId() ?? throw new InvalidOperationException("Id cannot be null");
+            var id = DataService.GetProperty(SelectedItem, "Id") 
+                ?? throw new InvalidOperationException("Id cannot be null");
 
             if (SelectedModel is string modelTypes
                 && ModelActions.TryGetValue(modelTypes, out var actions))
@@ -184,18 +185,6 @@ public class DictionariesViewModel : IDictionariesViewModel
         {
             Console.WriteLine(ex.ToString());
         }
-    }
-
-    private object GetId()
-    {
-        // Поиск с помощью рефлексии
-        var idProperty = SelectedItem.GetType().GetProperty("Id");
-        if (idProperty != null)
-        {
-            return idProperty.GetValue(SelectedItem);
-        }
-
-        return null;
     }
 
     public async Task UpdateItemsAsync()

@@ -3,11 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.Cards"
+             xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:props="clr-namespace:EquipmentInventory.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock x:Name="test" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Поставщик" Foreground="{StaticResource TextColor}" />
-    </Grid>
+    <!--#region Styles-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:ValueToVisibilityConverter x:Key="ValueToVisibilityConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/TablesStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--#endregion-->
+
+    <StackPanel>
+        <StackPanel VerticalAlignment="Top" Margin="0 0 0 15">
+            <TextBlock Text="{Binding Id, UpdateSourceTrigger=PropertyChanged, StringFormat='Id: {0}'}"
+                       Foreground="{StaticResource HintColor}"
+                       Visibility="{Binding Id, Converter={StaticResource ValueToVisibilityConverter}}"
+                       Style="{StaticResource FieldTextBlock}" />
+            <TextBox Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource FieldTextBox}"
+                     MaxLength="100"
+                     materialDesign:HintAssist.Hint="{x:Static props:Strings.Name}" />
+        </StackPanel>
+
+        <Button Style="{StaticResource DefaultButton}"
+                VerticalAlignment="Bottom"
+                Command="{Binding SaveItemCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                Content="{x:Static props:Strings.Save}" />
+    </StackPanel>
 </UserControl>

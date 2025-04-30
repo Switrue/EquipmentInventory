@@ -43,9 +43,10 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <!--#endregion-->
-    
+
     <Grid>
         <materialDesign:DialogHost DialogBackground="Transparent">
+            <!--#region Card-->
             <materialDesign:DialogHost.DialogContent>
                 <materialDesign:Card Background="{StaticResource Background}" 
                                      Width="350"
@@ -54,10 +55,14 @@
                                      UniformCornerRadius="20">
                     <StackPanel Margin="10">
                         <UniformGrid Columns="2">
-                            <TextBlock Text="{Binding SelectedModel}" 
-                                       Style="{StaticResource MaterialDesignTitleLargeTextBlock}" 
-                                       Foreground="{StaticResource TextColor}" 
-                                       Margin="6" />
+                            <WrapPanel>
+                                <TextBlock Text="{Binding SelectedModel}" 
+                                           Style="{StaticResource MaterialDesignTitleLargeTextBlock}" 
+                                           Foreground="{StaticResource TextColor}" 
+                                           Margin="6" />
+                                <materialDesign:PackIcon Style="{StaticResource BaseInformation}" 
+                                                         ToolTip="{x:Static props:Strings.OptionalField}" />
+                            </WrapPanel>
                             <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
                                     Content="{materialDesign:PackIcon Kind=Close}" 
                                     ToolTip="{x:Static props:Strings.Close}"
@@ -65,11 +70,13 @@
                                     Padding="5"
                                     Foreground="{StaticResource AccentColor}" />
                         </UniformGrid>
-                        <ContentControl Content="{Binding Card}" MinHeight="50" Focusable="False" />
+                        <ContentControl Content="{Binding Card}" Focusable="False" />
                     </StackPanel>
                 </materialDesign:Card>
             </materialDesign:DialogHost.DialogContent>
+            <!--#endregion-->
             
+            <!--#region Tables-->
             <UniformGrid Rows="2">
                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <ComboBox ItemsSource="{Binding ModelTypes}" 
@@ -127,7 +134,7 @@
                           SelectionUnit="FullRow" />
             </UniformGrid>
         </materialDesign:DialogHost>
-        
+        <!--#endregion-->
         <materialDesign:Snackbar x:Name="notificationSnackbar" />
     </Grid>
 </UserControl>

@@ -3,19 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.Cards"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
              xmlns:props="clr-namespace:EquipmentInventory.Properties"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--#region Styles-->
     <UserControl.Resources>
-        <ResourceDictionary Source="/Resources/Styles/TablesStyle.xaml" />
+        <ResourceDictionary>
+            <local:ValueToVisibilityConverter x:Key="ValueToVisibilityConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/TablesStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
-    
+    <!--#endregion-->
+
     <StackPanel>
         <StackPanel VerticalAlignment="Top" Margin="0 0 0 15">
-            <TextBlock Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+            <TextBlock Text="{Binding Id, UpdateSourceTrigger=PropertyChanged, StringFormat='Id: {0}'}"
                        Foreground="{StaticResource HintColor}"
+                       Visibility="{Binding Id, Converter={StaticResource ValueToVisibilityConverter}}"
                        Style="{StaticResource FieldTextBlock}" />
             <TextBox Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource FieldTextBox}"

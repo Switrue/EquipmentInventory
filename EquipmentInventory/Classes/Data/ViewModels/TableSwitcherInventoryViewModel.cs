@@ -154,16 +154,19 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
     private async Task SaveData()
     {
+        var isAdd = id is null;
+
         if (!TechniqueUpdate.IsValid()) return;
 
         var response = new BaseResponse();
 
-        response = id is null
+        response = isAdd
                 ? await TechniqueRequest.Add(TechniqueUpdate)
                 : await TechniqueRequest.Update(TechniqueUpdate, id.Value);
 
         if (response != null)
         {
+            if (isAdd) ResetTechniqueUpdate();
             TriggerANotification(response.Message);
             await LoadData();
         }

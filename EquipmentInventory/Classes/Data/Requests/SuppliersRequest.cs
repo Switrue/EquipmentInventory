@@ -43,4 +43,20 @@ public static class SuppliersRequest
             $"/api/Suppliers/delete/{id}",
             error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
+
+    public static async Task<BaseResponse> Add(BaseUpdateDto model)
+    {
+        return await ApiClientHelper.PostAsync<BaseUpdateDto, BaseResponse>(
+            "/api/Suppliers/add",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<BaseResponse> Update(long id, BaseUpdateDto model)
+    {
+        return await ApiClientHelper.PatchAsync<BaseUpdateDto, BaseResponse>(
+            $"/api/Suppliers/update/{id}?Name={model.Name}",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
 }

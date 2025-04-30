@@ -221,6 +221,7 @@
     <Compile Include="Classes\Data\Models\JwtResponse.cs" />
     <Compile Include="Classes\Data\Models\LanguageItem.cs" />
     <Compile Include="Classes\Data\Models\MemberDto.cs" />
+    <Compile Include="Classes\Data\Models\MemberUpdateDto.cs" />
     <Compile Include="Classes\Data\Models\OfficeDto.cs" />
     <Compile Include="Classes\Data\Models\PaginatedResult.cs" />
     <Compile Include="Classes\Data\Models\PaginationModel.cs" />
@@ -245,11 +246,15 @@
     <Compile Include="Classes\Data\Requests\UsersRequest.cs" />
     <Compile Include="Classes\Data\ViewModels\BaseCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\DictionariesViewModel.cs" />
+    <Compile Include="Classes\Data\ViewModels\MemberCardViewModel.cs" />
+    <Compile Include="Classes\Data\ViewModels\PositionCardViewModel.cs" />
+    <Compile Include="Classes\Data\ViewModels\SupplierCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TablesSwitcherArchiveViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherBaseViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherInventoryViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TypeTechniqueCardViewModel.cs" />
     <Compile Include="Classes\Helpers\QueryParamsHelper.cs" />
+    <Compile Include="Classes\Services\DataService.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />
     <Compile Include="Classes\Data\Models\Users.cs" />
     <Compile Include="Classes\Helpers\ValidationHelper.cs" />

@@ -104,10 +104,13 @@ public abstract class BaseCardViewModel<T> : INotifyPropertyChanged where T : ne
     {
         if (response != null)
         {
+            if (!Id.HasValue) ClearItem(); 
             _viewModel.TriggerANotification(response.Message);
             await _viewModel.UpdateItemsAsync();
         }
     }
+
+    private void ClearItem() => Item = new T();
 
     private async Task SaveItemExecute() => await SaveData();
 

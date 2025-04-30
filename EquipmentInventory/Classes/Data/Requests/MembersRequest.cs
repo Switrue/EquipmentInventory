@@ -45,4 +45,25 @@ public static class MembersRequest
             $"/api/Members/delete/{id}",
             error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
+
+    public static async Task<BaseResponse> Add(MemberUpdateDto model)
+    {
+        return await ApiClientHelper.PostAsync<MemberUpdateDto, BaseResponse>(
+            "/api/Members/add",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<BaseResponse> Update(long id, MemberUpdateDto model)
+    {
+        var filterParams = QueryParamsHelper.ToQueryParams(model);
+
+        var filterQueryString = string.Join("&", filterParams
+            .Select(kvp => $"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}"));
+
+        return await ApiClientHelper.PatchAsync<MemberUpdateDto, BaseResponse>(
+            $"/api/Members/update/{id}?{filterQueryString}",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
 }

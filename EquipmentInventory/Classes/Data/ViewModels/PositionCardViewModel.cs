@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
 
-public class TypeTechniqueCardViewModel : BaseCardViewModel<BaseUpdateDto>
+public class PositionCardViewModel : BaseCardViewModel<BaseUpdateDto>
 {
-    public TypeTechniqueCardViewModel(IDictionariesViewModel viewModel, object selectedItem)
-        : base(viewModel, selectedItem)
+    public PositionCardViewModel(IDictionariesViewModel dictionariesView, object selectedItem)
+        : base(dictionariesView, selectedItem)
     {
     }
 
@@ -16,9 +16,9 @@ public class TypeTechniqueCardViewModel : BaseCardViewModel<BaseUpdateDto>
     {
         if (!Item.IsValid()) return;
 
-        var response = Id.HasValue 
-            ? await TypeTechniqueRequest.Update(Id.Value, Item) 
-            : await TypeTechniqueRequest.Add(Item);
+        var response = Id.HasValue
+            ? await PositionsRequest.Update(Id.Value, Item)
+            : await PositionsRequest.Add(Item);
 
         await ProcessResult(response);
     }

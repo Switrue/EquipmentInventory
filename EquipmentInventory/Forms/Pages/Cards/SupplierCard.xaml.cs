@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.ViewModels;
+using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Cards;
 
@@ -7,8 +9,9 @@ namespace EquipmentInventory.Forms.Pages.Cards;
 /// </summary>
 public partial class SupplierCard : UserControl
 {
-    public SupplierCard()
+    public SupplierCard(IDictionariesViewModel dictionariesView, object selectedItem)
     {
         InitializeComponent();
+        DataContext = new SupplierCardViewModel(dictionariesView, selectedItem);
     }
 }
