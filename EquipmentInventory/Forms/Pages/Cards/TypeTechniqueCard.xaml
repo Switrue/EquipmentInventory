@@ -5,9 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentInventory.Forms.Pages.Cards"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:props="clr-namespace:EquipmentInventory.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock x:Name="test" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Тип техники" Foreground="{StaticResource TextColor}" />
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resources/Styles/TablesStyle.xaml" />
+    </UserControl.Resources>
+    
+    <StackPanel>
+        <StackPanel VerticalAlignment="Top" Margin="0 0 0 15">
+            <TextBlock Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                       Foreground="{StaticResource HintColor}"
+                       Style="{StaticResource FieldTextBlock}" />
+            <TextBox Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource FieldTextBox}"
+                     MaxLength="100"
+                     materialDesign:HintAssist.Hint="{x:Static props:Strings.Name}" />
+        </StackPanel>
+
+        <Button Style="{StaticResource DefaultButton}"
+                VerticalAlignment="Bottom"
+                Command="{Binding SaveItemCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                Content="{x:Static props:Strings.Save}" />
+    </StackPanel>
 </UserControl>

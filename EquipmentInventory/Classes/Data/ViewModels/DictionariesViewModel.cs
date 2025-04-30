@@ -1,4 +1,5 @@
-﻿using EquipmentInventory.Classes.Data.Models;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.Models;
 using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Helper;
 using EquipmentInventory.Classes.Services;
@@ -17,57 +18,13 @@ using System.Windows.Input;
 
 namespace EquipmentInventory.Classes.Data.ViewModels;
 
-public class DictionariesViewModel : INotifyPropertyChanged
+public class DictionariesViewModel : IDictionariesViewModel
 {
     private readonly NotificationService _notificationService;
-    private static readonly Dictionary<string, (Func<Task<IEnumerable<object>>> get,
-                                               Func<object, UserControl> card,
-                                               Func<long, Task<BaseResponse>> delete)>
-    ModelActions = new()
-    {
-        { Strings.TypeTecnique, (
-            async () => await TypeTechniqueRequest.GetTypeTechniqueDataAsync(),
-            param => new TypeTechniqueCard(param),
-            TypeTechniqueRequest.Delete
-        )},
-
-        { Strings.Supplier, (
-            async () => await SuppliersRequest.GetSuppliersDataAsync(),
-            param => new SupplierCard(param),
-            SuppliersRequest.Delete
-        )},
-
-        { Strings.Employee, (
-            async () => await MembersRequest.GetMembersDataAsync(),
-            param => new MemberCard(param),
-            MembersRequest.Delete
-        )},
-
-        { Strings.Position, (
-            async () => await PositionsRequest.GetPositionsDataAsync(),
-            param => new PositionCard(param),
-            PositionsRequest.Delete
-        )},
-
-        { Strings.Computer, (
-            async () => await ComputersRequest.GetComputersDataAsync(),
-            param => new ComputerCard(param),
-            ComputersRequest.Delete
-        )},
-
-        { Strings.Office, (
-            async () => await OfficesRequest.GetOfficesDataAsync(),
-            param => new OfficeCard(param),
-            OfficesRequest.Delete
-        )},
-
-        { Strings.User, (
-            async () => await UsersRequest.GetUsersDataAsync(),
-            param => new UserCard(param),
-            UsersRequest.Delete
-        )}
-    };
-
+    private static Dictionary<string, (Func<Task<IEnumerable<object>>> get,
+                                       Func<object, UserControl> card,
+                                       Func<long, Task<BaseResponse>> delete)> ModelActions;
+    
     private UserControl _card;
     private ObservableCollection<object> _items;
     private object _selectedItem;
@@ -113,6 +70,51 @@ public class DictionariesViewModel : INotifyPropertyChanged
     public DictionariesViewModel(NotificationService notificationService)
     {
         _notificationService = notificationService;
+
+        ModelActions = new()
+        {
+            { Strings.TypeTecnique, (
+                async () => await TypeTechniqueRequest.GetTypeTechniqueDataAsync(),
+                param => new TypeTechniqueCard(this, param),
+                TypeTechniqueRequest.Delete
+            )},
+
+            { Strings.Supplier, (
+                async () => await SuppliersRequest.GetSuppliersDataAsync(),
+                param => new SupplierCard(),
+                SuppliersRequest.Delete
+            )},
+
+            { Strings.Employee, (
+                async () => await MembersRequest.GetMembersDataAsync(),
+                param => new MemberCard(),
+                MembersRequest.Delete
+            )},
+
+            { Strings.Position, (
+                async () => await PositionsRequest.GetPositionsDataAsync(),
+                param => new PositionCard(),
+                PositionsRequest.Delete
+            )},
+
+            { Strings.Computer, (
+                async () => await ComputersRequest.GetComputersDataAsync(),
+                param => new ComputerCard(),
+                ComputersRequest.Delete
+            )},
+
+            { Strings.Office, (
+                async () => await OfficesRequest.GetOfficesDataAsync(),
+                param => new OfficeCard(),
+                OfficesRequest.Delete
+            )},
+
+            { Strings.User, (
+                async () => await UsersRequest.GetUsersDataAsync(),
+                param => new UserCard(),
+                UsersRequest.Delete
+            )}
+        };
 
         Card = new UserControl();
         Items = new ObservableCollection<object>();
@@ -218,7 +220,7 @@ public class DictionariesViewModel : INotifyPropertyChanged
         }
     }
 
-    protected void TriggerANotification(string message)
+    public void TriggerANotification(string message)
         => _notificationService.Show(message);
 
     protected bool SetField<TField>(ref TField field, TField value, [CallerMemberName] string propertyName = null)

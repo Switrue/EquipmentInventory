@@ -203,6 +203,7 @@
     <Compile Include="Classes\Data\Converters\SelectedQueryToIsDisabledConverter.cs" />
     <Compile Include="Classes\Data\Converters\SelectedQueryToIsEnabledConverter.cs" />
     <Compile Include="Classes\Data\Converters\ValueToVisibilityConverter.cs" />
+    <Compile Include="Classes\Data\Interfaces\IDictionariesViewModel.cs" />
     <Compile Include="Classes\Data\Interfaces\IMainPanel.cs" />
     <Compile Include="Classes\Data\Interfaces\IMainWindow.cs" />
     <Compile Include="Classes\Data\Interfaces\INavigationService.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Classes\Data\Models\BaseDto.cs" />
     <Compile Include="Classes\Data\Models\BaseRequest.cs" />
     <Compile Include="Classes\Data\Models\BaseResponse.cs" />
+    <Compile Include="Classes\Data\Models\BaseUpdateDto.cs" />
     <Compile Include="Classes\Data\Models\ComputerDto.cs" />
     <Compile Include="Classes\Data\Models\IconData.cs" />
     <Compile Include="Classes\Data\Models\JwtResponse.cs" />
@@ -241,10 +243,12 @@
     <Compile Include="Classes\Data\Requests\TechniqueRequest.cs" />
     <Compile Include="Classes\Data\Requests\TypeTechniqueRequest.cs" />
     <Compile Include="Classes\Data\Requests\UsersRequest.cs" />
+    <Compile Include="Classes\Data\ViewModels\BaseCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\DictionariesViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TablesSwitcherArchiveViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherBaseViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherInventoryViewModel.cs" />
+    <Compile Include="Classes\Data\ViewModels\TypeTechniqueCardViewModel.cs" />
     <Compile Include="Classes\Helpers\QueryParamsHelper.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />
     <Compile Include="Classes\Data\Models\Users.cs" />

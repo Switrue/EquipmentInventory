@@ -39,9 +39,7 @@
                 <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
             </Style>
 
-            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                <Setter Property="Focusable" Value="False" />
-            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}" />
         </ResourceDictionary>
     </UserControl.Resources>
     <!--#endregion-->
@@ -67,7 +65,7 @@
                                     Padding="5"
                                     Foreground="{StaticResource AccentColor}" />
                         </UniformGrid>
-                        <ContentControl Content="{Binding Card}" Focusable="False" />
+                        <ContentControl Content="{Binding Card}" MinHeight="50" Focusable="False" />
                     </StackPanel>
                 </materialDesign:Card>
             </materialDesign:DialogHost.DialogContent>

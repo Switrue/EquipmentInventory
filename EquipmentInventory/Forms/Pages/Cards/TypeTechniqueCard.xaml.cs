@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using EquipmentInventory.Classes.Data.Interfaces;
+using EquipmentInventory.Classes.Data.ViewModels;
 using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Cards;
@@ -8,12 +9,9 @@ namespace EquipmentInventory.Forms.Pages.Cards;
 /// </summary>
 public partial class TypeTechniqueCard : UserControl
 {
-    private object _items;
-
-    public TypeTechniqueCard(object items)
+    public TypeTechniqueCard(IDictionariesViewModel dictionaries, object selectedItem)
     {
         InitializeComponent();
-        _items = items;
-        if (_items != null) MessageBox.Show(_items.ToString());
+        DataContext = new TypeTechniqueCardViewModel(dictionaries, selectedItem);
     }
 }

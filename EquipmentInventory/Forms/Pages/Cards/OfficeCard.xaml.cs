@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace EquipmentInventory.Forms.Pages.Cards;
 
@@ -8,12 +7,8 @@ namespace EquipmentInventory.Forms.Pages.Cards;
 /// </summary>
 public partial class OfficeCard : UserControl
 {
-    private object _item;
-
-    public OfficeCard(object item)
+    public OfficeCard()
     {
         InitializeComponent();
-        _item = item;
-        if (item != null ) MessageBox.Show(_item.ToString());
     }
 }
