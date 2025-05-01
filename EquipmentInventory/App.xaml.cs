@@ -3,8 +3,10 @@ using EquipmentInventory.Classes.Data.Requests;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Forms.Windows;
 using EquipmentInventory.Properties;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -17,6 +19,7 @@ namespace EquipmentInventory
     /// </summary>
     public partial class App : Application
     {
+        private static IConfiguration configuration;
         private static CultureInfo cultureInfo;
 
         public static HttpClient ApiClient { get; private set; }
@@ -26,12 +29,20 @@ namespace EquipmentInventory
         {
             base.OnStartup(e);
 
+            InitializeServices();
             InitializeApiClient();
             InitializeCulture();
             InitializeMainWindow();
         }
 
         #region Load
+        private void InitializeServices()
+        {
+            configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+        }
 
         private async void InitializeMainWindow()
         {
@@ -66,26 +77,34 @@ namespace EquipmentInventory
 
         private void InitializeApiClient()
         {
-            ApiClient = new HttpClient
+            try
             {
-                BaseAddress = new Uri("https://localhost:7278")
-            };
+                var apiSettings = configuration.GetSection("ApiSettings").Get<ApiSettings>();
 
-            ApiClient.DefaultRequestHeaders.Accept.Clear();
-            ApiClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+                ApiClient = new HttpClient
+                {
+                    BaseAddress = new Uri(apiSettings.BaseUrl)
+                };
 
-            if (!string.IsNullOrEmpty(Settings.Default.UserToken))
+                ApiClient.DefaultRequestHeaders.Accept.Clear();
+                ApiClient.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                if (!string.IsNullOrEmpty(Settings.Default.UserToken))
+                {
+                    ApiClient.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", Settings.Default.UserToken);
+                }
+            }
+            catch (Exception ex)
             {
-                ApiClient.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", Settings.Default.UserToken);
+                MessageBox.Show($"{Strings.Error}: {ex.Message}", Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(1);
             }
         }
-
         #endregion
 
         #region Methods
-
         public static void SetAuthorizationToken(string token)
         {
             if (ApiClient != null)
@@ -96,9 +115,7 @@ namespace EquipmentInventory
         }
 
         public static void SetUser(Users newUser)
-        {
-            user = newUser;
-        }
+            => user = newUser;
 
         public static void SetUserImage(byte[] bytes)
         {
@@ -111,7 +128,6 @@ namespace EquipmentInventory
                 throw new Exception("user image error");
             }
         }
-
         #endregion
     }
 }
