@@ -26,7 +26,7 @@ public static class UserAccountService
     {
         OpenFileDialog openFileDialog = new OpenFileDialog
         {
-            Filter = "Image Files (*.jpg; *.jpeg)|*.jpg;*.jpeg"
+            Filter = "Image Files (*.jpg; *.jpeg; *.png)|*.jpg;*.jpeg;*.png"
         };
 
         if (openFileDialog.ShowDialog() == true)
