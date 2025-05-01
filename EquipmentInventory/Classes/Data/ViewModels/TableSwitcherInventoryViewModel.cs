@@ -127,7 +127,7 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
             Strings.OutdatedTechnology
         };
 
-        DeleteItemCommand = new RelayCommand<TechniqueDto>(async (TechniqueDto) => await DeleteItem(TechniqueDto));
+        DeleteItemCommand = new RelayCommand<TechniqueDto>(async (item) => await DeleteItem(item));
         EditItemCommand = new RelayCommand<TechniqueDto>(EditItem);
         AddItemCommand = new RelayCommand(AddItem);
         SaveDataCommand = new RelayCommand<object>(async (sender) => await UserAccountService.ExecuteTask((Button)sender, SaveData));

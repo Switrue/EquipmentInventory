@@ -273,8 +273,7 @@
                             Margin="0 0 30 10">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding DataContext.AddItemCommand, 
-                                                                         RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                <i:InvokeCommandAction Command="{Binding AddItemCommand}" />
                             </i:EventTrigger>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />

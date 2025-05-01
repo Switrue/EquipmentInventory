@@ -131,7 +131,11 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
 
     protected abstract Task LoadData();
 
-    protected void ClearItems() => Items.Clear();
+    protected void ClearItems() 
+    {
+        Items.Clear();
+        SelectedItem = default;
+    }
 
     protected void UpdateCommandStates()
     {
@@ -145,8 +149,7 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
     {
         if (result?.Items.Any() == true)
         {
-            ClearItems();
-            foreach (var item in result.Items) Items.Add(item);
+            Items = [.. result.Items];
             TotalItems = result.TotalCount;
         }
         else
