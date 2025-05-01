@@ -493,6 +493,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Floor.
+        /// </summary>
+        public static string Floor {
+            get {
+                return ResourceManager.GetString("Floor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Generate a password.
         /// </summary>
         public static string GeneratePassword {
@@ -507,6 +516,15 @@ namespace EquipmentInventory.Properties {
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Hello World!.
+        /// </summary>
+        public static string HiddenText {
+            get {
+                return ResourceManager.GetString("HiddenText", resourceCulture);
             }
         }
         
@@ -637,11 +655,29 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Memory.
+        /// </summary>
+        public static string Memory {
+            get {
+                return ResourceManager.GetString("Memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Minimum system requirements.
         /// </summary>
         public static string MinimumSystemSequirements {
             get {
                 return ResourceManager.GetString("MinimumSystemSequirements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Motherboard.
+        /// </summary>
+        public static string Motherboard {
+            get {
+                return ResourceManager.GetString("Motherboard", resourceCulture);
             }
         }
         
@@ -718,6 +754,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Operating system.
+        /// </summary>
+        public static string OperatingSystem {
+            get {
+                return ResourceManager.GetString("OperatingSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Fields with an asterisk are optional.
         /// </summary>
         public static string OptionalField {
@@ -763,11 +808,29 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Power supply.
+        /// </summary>
+        public static string PowerSupply {
+            get {
+                return ResourceManager.GetString("PowerSupply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Price.
         /// </summary>
         public static string Price {
             get {
                 return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Processor.
+        /// </summary>
+        public static string Processor {
+            get {
+                return ResourceManager.GetString("Processor", resourceCulture);
             }
         }
         
@@ -1059,6 +1122,15 @@ namespace EquipmentInventory.Properties {
         public static string UserRegistration {
             get {
                 return ResourceManager.GetString("UserRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Video card.
+        /// </summary>
+        public static string VideoCard {
+            get {
+                return ResourceManager.GetString("VideoCard", resourceCulture);
             }
         }
         

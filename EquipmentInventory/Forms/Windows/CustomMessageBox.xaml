@@ -13,6 +13,7 @@
         ResizeMode="NoResize" 
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Pictures/MessageIcon.ico"
         MouseDown="Window_MouseDown"
         MinWidth="400" MinHeight="200">
     <!--#region Styles-->

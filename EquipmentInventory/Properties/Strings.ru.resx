@@ -468,4 +468,28 @@
   <data name="Office" xml:space="preserve">
     <value>Кабинет</value>
   </data>
+  <data name="PowerSupply" xml:space="preserve">
+    <value>Блок питания</value>
+  </data>
+  <data name="Motherboard" xml:space="preserve">
+    <value>Материнская плата</value>
+  </data>
+  <data name="Memory" xml:space="preserve">
+    <value>Память</value>
+  </data>
+  <data name="OperatingSystem" xml:space="preserve">
+    <value>Операционная система</value>
+  </data>
+  <data name="VideoCard" xml:space="preserve">
+    <value>Видеокарта</value>
+  </data>
+  <data name="Processor" xml:space="preserve">
+    <value>Процессор</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Этаж</value>
+  </data>
+  <data name="HiddenText" xml:space="preserve">
+    <value>Привет, мир!</value>
+  </data>
 </root>

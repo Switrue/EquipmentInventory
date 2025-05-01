@@ -99,19 +99,19 @@ public class DictionariesViewModel : IDictionariesViewModel
 
             { Strings.Computer, (
                 async () => await ComputersRequest.GetComputersDataAsync(),
-                param => new ComputerCard(),
+                param => new ComputerCard(this, param),
                 ComputersRequest.Delete
             )},
 
             { Strings.Office, (
                 async () => await OfficesRequest.GetOfficesDataAsync(),
-                param => new OfficeCard(),
+                param => new OfficeCard(this, param),
                 OfficesRequest.Delete
             )},
 
             { Strings.User, (
                 async () => await UsersRequest.GetUsersDataAsync(),
-                param => new UserCard(),
+                param => new UserControl(),
                 UsersRequest.Delete
             )}
         };

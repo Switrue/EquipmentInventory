@@ -9,31 +9,18 @@ public class ValueToVisibilityConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value == null)
+        bool isVisible = value switch
         {
-            return Visibility.Collapsed;
-        }
+            null => false,
+            string str => !string.IsNullOrEmpty(str),
+            int num => num != 0,
+            bool flag => flag,
+            _ => true
+        };
 
-        if (value is string strValue && string.IsNullOrEmpty(strValue))
-        {
-            return Visibility.Collapsed;
-        }
-
-        if (value is int intValue && intValue == 0)
-        {
-            return Visibility.Collapsed;
-        }
-
-        if (value is bool boolValue && boolValue == false)
-        {
-            return Visibility.Collapsed;
-        }
-
-        return Visibility.Visible;
+        return isVisible ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
+        => throw new NotImplementedException();
 }

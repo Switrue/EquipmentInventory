@@ -25,11 +25,11 @@
                        Foreground="{StaticResource HintColor}"
                        Visibility="{Binding Id, Converter={StaticResource ValueToVisibilityConverter}}"
                        Style="{StaticResource FieldTextBlock}" />
-            <TextBox Text="{Binding Item.Surname, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Text="{Binding Item.Username, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource FieldTextBox}"
                      MaxLength="60"
                      materialDesign:HintAssist.Hint="{x:Static props:Strings.FirstName}" />
-            <TextBox Text="{Binding Item.Username, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Text="{Binding Item.Surname, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource FieldTextBox}"
                      MaxLength="60"
                      materialDesign:HintAssist.Hint="{x:Static props:Strings.SecondName}" />

@@ -584,4 +584,36 @@
     <value>Office</value>
     <comment>Tables</comment>
   </data>
+  <data name="PowerSupply" xml:space="preserve">
+    <value>Power supply</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Motherboard" xml:space="preserve">
+    <value>Motherboard</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Memory" xml:space="preserve">
+    <value>Memory</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="OperatingSystem" xml:space="preserve">
+    <value>Operating system</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="VideoCard" xml:space="preserve">
+    <value>Video card</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Processor" xml:space="preserve">
+    <value>Processor</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="HiddenText" xml:space="preserve">
+    <value>Hello World!</value>
+    <comment>Base</comment>
+  </data>
 </root>

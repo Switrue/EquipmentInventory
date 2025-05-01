@@ -16,6 +16,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <local:SelectedQueryToIsDisabledConverter x:Key="SelectedQueryToIsDisabledConverter" />
+            <local:ReverseValueToVisibilityConverter x:Key="ReverseValueToVisibilityConverter" />
 
             <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                 <Style.Triggers>
@@ -49,7 +50,7 @@
             <!--#region Card-->
             <materialDesign:DialogHost.DialogContent>
                 <materialDesign:Card Background="{StaticResource Background}" 
-                                     Width="350"
+                                     Width="380"
                                      BorderBrush="{StaticResource SecondaryColor}"
                                      BorderThickness="2 0 2 0"
                                      UniformCornerRadius="20">
@@ -77,53 +78,68 @@
             <!--#endregion-->
             
             <!--#region Tables-->
-            <UniformGrid Rows="2">
-                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <ComboBox ItemsSource="{Binding ModelTypes}" 
-                              SelectedItem="{Binding SelectedModel}"
-                              Foreground="{StaticResource TextColor}"
-                              materialDesign:HintAssist.Hint="{x:Static props:Strings.Tables}"
-                              materialDesign:ThemeAssist.Theme="Dark"
-                              Width="200" 
-                              Margin="10" />
-                    <Button Command="{Binding ClearItemsCommand}" 
-                            Content="{materialDesign:PackIcon Kind=Clear}" 
-                            ToolTip="{x:Static props:Strings.Clean}"
-                            Foreground="{StaticResource SecondaryColor}"
-                            Style="{StaticResource MaterialDesignFlatButton}" />
-                    <Button Content="{materialDesign:PackIcon Kind=Add}" 
-                            ToolTip="{x:Static props:Strings.Add}"
-                            IsEnabled="{Binding SelectedModel, 
-                                                Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
-                            Foreground="{StaticResource HintColor}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding AddItemCommand}" />
-                                <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button Command="{x:Null}" 
-                            Content="{materialDesign:PackIcon Kind=Edit}" 
-                            ToolTip="{x:Static props:Strings.Edit}"
-                            IsEnabled="{Binding SelectedItem, 
-                                                Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
-                            Foreground="{StaticResource HintColor}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding EditItemCommand}" />
-                                <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button Command="{Binding DeleteItemCommand}" 
-                            Content="{materialDesign:PackIcon Kind=Delete}" 
-                            ToolTip="{x:Static props:Strings.Delete}"
-                            IsEnabled="{Binding SelectedItem, 
-                                                Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
-                            Foreground="{StaticResource AccentColor}" />
-                </WrapPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <UniformGrid Columns="2" Grid.Row="0" VerticalAlignment="Center" Margin="5">
+                    <WrapPanel HorizontalAlignment="Left" Margin="5">
+                        <ComboBox ItemsSource="{Binding ModelTypes}" 
+                                  SelectedItem="{Binding SelectedModel}"
+                                  Foreground="{StaticResource TextColor}"
+                                  materialDesign:HintAssist.Hint="{x:Static props:Strings.Tables}"
+                                  materialDesign:ThemeAssist.Theme="Dark"
+                                  Width="250" 
+                                  Margin="10" />
+                        <Button Command="{Binding ClearItemsCommand}" 
+                                Content="{materialDesign:PackIcon Kind=Clear}" 
+                                ToolTip="{x:Static props:Strings.Clean}"
+                                Foreground="{StaticResource SecondaryColor}"
+                                Style="{StaticResource MaterialDesignFlatButton}" />
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+                        <Button Content="{materialDesign:PackIcon Kind=Add}" 
+                                ToolTip="{x:Static props:Strings.Add}"
+                                Visibility="{Binding SelectedModel, 
+                                                     Converter={StaticResource ReverseValueToVisibilityConverter},
+                                                     ConverterParameter={x:Static props:Strings.User}}"
+                                IsEnabled="{Binding SelectedModel, 
+                                                    Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
+                                Foreground="{StaticResource HintColor}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding AddItemCommand}" />
+                                    <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button Content="{materialDesign:PackIcon Kind=Edit}" 
+                                ToolTip="{x:Static props:Strings.Edit}"
+                                Visibility="{Binding SelectedModel, 
+                                                     Converter={StaticResource ReverseValueToVisibilityConverter},
+                                                     ConverterParameter={x:Static props:Strings.User}}"
+                                IsEnabled="{Binding SelectedItem, 
+                                                    Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
+                                Foreground="{StaticResource HintColor}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding EditItemCommand}" />
+                                    <i:InvokeCommandAction Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button Command="{Binding DeleteItemCommand}" 
+                                Content="{materialDesign:PackIcon Kind=Delete}" 
+                                ToolTip="{x:Static props:Strings.Delete}"
+                                IsEnabled="{Binding SelectedItem, 
+                                                    Converter={StaticResource SelectedQueryToIsDisabledConverter}}"
+                                Foreground="{StaticResource AccentColor}" />
+                    </WrapPanel>
+                </UniformGrid>
                 <DataGrid CanUserAddRows="False"
+                          Grid.Row="1"
                           materialDesign:ThemeAssist.Theme="Dark"
                           Background="{StaticResource Background}"
                           ItemsSource="{Binding Items}"
@@ -132,7 +148,7 @@
                           materialDesign:DataGridAssist.SelectedCellBorderBrush="{StaticResource Foreground}"
                           SelectionMode="Single"
                           SelectionUnit="FullRow" />
-            </UniformGrid>
+            </Grid>
         </materialDesign:DialogHost>
         <!--#endregion-->
         <materialDesign:Snackbar x:Name="notificationSnackbar" />

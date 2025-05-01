@@ -186,6 +186,10 @@ public partial class MainWindow : Window, IMainWindow
 
     private void ToggleActionsPopup()
         => actionsPopup.IsOpen = !actionsPopup.IsOpen;
+
+    private void ShowHidenText_Click(object sender, RoutedEventArgs e)
+        => MessageBox.Show(Strings.HiddenText);
+
     #endregion
 
     #region Change frame

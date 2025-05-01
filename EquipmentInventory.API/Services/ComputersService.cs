@@ -86,7 +86,7 @@ public class ComputersService
         existing.Ram = model.Ram ?? existing.Ram;
         existing.Cpu = model.Cpu ?? existing.Cpu;
         existing.Os = model.Os ?? existing.Os;
-        existing.VideoCard = model.VideoCard ?? existing.VideoCard;
+        existing.VideoCard = model.VideoCard ?? null;
 
         await _context.SaveChangesAsync();
     }

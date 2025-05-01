@@ -37,10 +37,10 @@ public static class ComputersRequest
             Номер = m.Number,
             Материнскаяㅤплата = m.Motherboard,
             Процессор = m.Cpu,
-            Оперативнаяㅤпамять = m.Ram,
+            Память = m.Ram,
             Операционнаяㅤсистема = m.Os,
             Блокㅤпитания = m.PowerSupply,
-            Видеокарта = m.VideoCard ?? "-",
+            Видеокарта = m.VideoCard,
         }).ToList<object>();
     }
 
@@ -48,6 +48,27 @@ public static class ComputersRequest
     {
         return await ApiClientHelper.DeleteAsync<BaseResponse>(
             $"/api/Computers/delete/{id}",
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<BaseResponse> Add(ComputerUpdateDto model)
+    {
+        return await ApiClientHelper.PostAsync<ComputerUpdateDto, BaseResponse>(
+            "/api/Computers/add",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<BaseResponse> Update(long id, ComputerUpdateDto model)
+    {
+        var filterParams = QueryParamsHelper.ToQueryParams(model);
+
+        var filterQueryString = string.Join("&", filterParams
+            .Select(kvp => $"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}"));
+
+        return await ApiClientHelper.PatchAsync<ComputerUpdateDto, BaseResponse>(
+            $"/api/Computers/update/{id}?{filterQueryString}",
+            model,
             error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 }

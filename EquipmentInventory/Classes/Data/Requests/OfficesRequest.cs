@@ -45,4 +45,25 @@ public static class OfficesRequest
             $"/api/Offices/delete/{id}",
             error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
+
+    public static async Task<BaseResponse> Add(OfficeUpdateDto model)
+    {
+        return await ApiClientHelper.PostAsync<OfficeUpdateDto, BaseResponse>(
+            "/api/Offices/add",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
+
+    public static async Task<BaseResponse> Update(long id, OfficeUpdateDto model)
+    {
+        var filterParams = QueryParamsHelper.ToQueryParams(model);
+
+        var filterQueryString = string.Join("&", filterParams
+            .Select(kvp => $"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}"));
+
+        return await ApiClientHelper.PatchAsync<OfficeUpdateDto, BaseResponse>(
+            $"/api/Offices/update/{id}?{filterQueryString}",
+            model,
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
+    }
 }

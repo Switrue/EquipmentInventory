@@ -1,6 +1,5 @@
 ﻿using EquipmentInventory.Classes.Data.ViewModels;
 using EquipmentInventory.Classes.Helpers;
-using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -26,5 +25,5 @@ public partial class Inventory : UserControl
     }
 
     private void DatePicker_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        => e.Handled = !Regex.IsMatch(e.Text, @"[\d.]");
+        => e.Handled = !ValidationHelper.IsValidDate(e.Text);
 }

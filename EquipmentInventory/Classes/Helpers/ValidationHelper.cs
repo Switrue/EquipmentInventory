@@ -81,4 +81,10 @@ public static class ValidationHelper
 
         return regex.IsMatch(newText) && !hasDecimalSeparator;
     }
+
+    public static bool IsValidNumber(string inputText)
+        => Regex.IsMatch(inputText, @"\d");
+
+    public static bool IsValidDate(string inputText)
+        => Regex.IsMatch(inputText, @"[\d.]");
 }

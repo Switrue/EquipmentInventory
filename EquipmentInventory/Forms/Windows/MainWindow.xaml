@@ -11,6 +11,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Pictures/Icon.ico"
         SizeChanged="Window_SizeChanged"
         Height="650" Width="1000"
         MinHeight="500" MinWidth="800">
@@ -28,7 +29,18 @@
                     <Grid>
                         <WrapPanel HorizontalAlignment="Left">
                             <!-- #region Menu -->
-                            <StackPanel VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Click="ShowHidenText_Click"
+                                        Foreground="Transparent"
+                                        Padding="0"
+                                        Margin="7 0 0 0"
+                                        Focusable="True"
+                                        Cursor="Arrow"
+                                        materialDesign:RippleAssist.IsDisabled="True"
+                                        Style="{StaticResource MaterialDesignFlatSecondaryButton}">
+                                    <Image Source="/Resources/Pictures/Icon.ico" 
+                                           Width="20" />
+                                </Button>
                                 <Menu IsMainMenu="True" 
                                       FontSize="{DynamicResource DefaultFontSize}" 
                                       Background="{StaticResource Foreground}"

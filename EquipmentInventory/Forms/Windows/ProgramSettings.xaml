@@ -12,6 +12,7 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Pictures/SettingsIcon.ico"
         MouseDown="Window_MouseDown"
         Height="550" Width="500">
     <Border Style="{StaticResource WindowBorder}">
