@@ -1,0 +1,76 @@
+﻿<Window x:Class="EquipmentInventory.Forms.Windows.Captcha"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EquipmentInventory.Forms.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:props="clr-namespace:EquipmentInventory.Properties"
+        mc:Ignorable="d"
+        Style="{StaticResource MaterialDesignWindow}"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize" 
+        Icon="/Resources/Pictures/BarcodeIcon.ico"
+        MouseDown="Window_MouseDown"
+        Title="CAPTCHA" Height="280" Width="400">
+    <Grid>
+        <materialDesign:Card Background="Transparent" UniformCornerRadius="15">
+            <GroupBox Header="CAPTCHA"
+                      materialDesign:ColorZoneAssist.Mode="Custom"
+                      materialDesign:GroupBoxAssist.HeaderPadding="5"
+                      materialDesign:ColorZoneAssist.Foreground="{StaticResource HintColor}"
+                      materialDesign:ColorZoneAssist.Background="{StaticResource Foreground}"
+                      Background="{StaticResource Background}"
+                      Style="{StaticResource MaterialDesignCardGroupBox}">
+                <GroupBox.HeaderTemplate>
+                    <DataTemplate>
+                        <UniformGrid Columns="2">
+                            <WrapPanel VerticalAlignment="Center" Margin="7 0 0 0">
+                                <materialDesign:PackIcon Width="26"
+                                                         Height="26"
+                                                         VerticalAlignment="Center"
+                                                         Kind="BarcodeScan" />
+                                <TextBlock Margin="8 0 0 0"
+                                           FontSize="{DynamicResource TitleFontSize}"
+                                           VerticalAlignment="Center"
+                                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                           Text="{Binding}" />
+                            </WrapPanel>
+                            <Button x:Name="closeBtn"
+                                    ToolTip="{x:Static props:Strings.Close}"
+                                    HorizontalAlignment="Right" 
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource CloseButton}" 
+                                    Click="CloseWindow_Click" />
+                        </UniformGrid>
+                    </DataTemplate>
+                </GroupBox.HeaderTemplate>
+                <StackPanel>
+                    <Border BorderBrush="LightGray" BorderThickness="1" Padding="10" Margin="0 0 0 10">
+                        <Canvas x:Name="captchaCanvas" Height="100" Background="WhiteSmoke" />
+                    </Border>
+
+                    <TextBox x:Name="inputTextBox" 
+                             materialDesign:HintAssist.Hint="{x:Static props:Strings.Code}"
+                             Margin="0 0 0 10" 
+                             Padding="5" 
+                             Foreground="{StaticResource TextColor}" 
+                             materialDesign:ThemeAssist.Theme="Dark" />
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="{x:Static props:Strings.Check}"
+                                Click="OnCheckClick" 
+                                Width="120"
+                                Style="{StaticResource DefaultButton}" />
+                        <Button Content="{x:Static props:Strings.Refresh}"
+                                Click="OnRefreshClick" 
+                                Width="120"
+                                Style="{StaticResource DefaultButton}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </materialDesign:Card>
+    </Grid>
+</Window>

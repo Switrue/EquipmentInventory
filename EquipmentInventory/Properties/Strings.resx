@@ -616,4 +616,12 @@
     <value>Hello World!</value>
     <comment>Base</comment>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check it out</value>
+    <comment>Captcha</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>Captcha</comment>
+  </data>
 </root>

@@ -304,6 +304,7 @@
     <Compile Include="Classes\Data\ViewModels\TableSwitcherBaseViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TableSwitcherInventoryViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\TypeTechniqueCardViewModel.cs" />
+    <Compile Include="Classes\Helpers\CaptchaGenerator.cs" />
     <Compile Include="Classes\Helpers\QueryParamsHelper.cs" />
     <Compile Include="Classes\Services\DataService.cs" />
     <Compile Include="Classes\Services\UserAccountService.cs" />
@@ -381,6 +382,9 @@
     <Compile Include="Forms\Pages\UserProfile.xaml.cs">
       <DependentUpon>UserProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Windows\Captcha.xaml.cs">
+      <DependentUpon>Captcha.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Windows\ProgramSettings.xaml.cs">
       <DependentUpon>ProgramSettings.xaml</DependentUpon>
     </Compile>
@@ -413,6 +417,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\Pictures\BarcodeIcon.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -508,6 +513,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Windows\AuthoUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Windows\Captcha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

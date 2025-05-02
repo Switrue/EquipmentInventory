@@ -492,4 +492,10 @@
   <data name="HiddenText" xml:space="preserve">
     <value>Привет, мир!</value>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>Проверить</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
 </root>
