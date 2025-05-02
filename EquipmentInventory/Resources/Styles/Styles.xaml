@@ -137,8 +137,6 @@
 
     <Style x:Key="PageTextBlock" TargetType="TextBlock">
         <Setter Property="Margin" Value="6" />
-        <Setter Property="MaxHeight" Value="55" />
-        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />

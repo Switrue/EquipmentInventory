@@ -334,6 +334,7 @@
                             Command="{Binding BackCommand}"
                             Content="{materialDesign:PackIcon Kind=ChevronUp, Size=20}" />
                     <TextBlock Text="{Binding CurrentPage}"
+                               ToolTip="{Binding CurrentPage}"
                                Style="{StaticResource PageTextBlock}" />
                     <Button Style="{StaticResource PageButton}"
                             Command="{Binding ForwardCommand}"
@@ -344,6 +345,7 @@
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">
                     <TextBlock Text="{Binding TotalItems}"
+                               ToolTip="{Binding TotalItems}"
                                Style="{StaticResource PageTextBlock}"
                                Visibility="{Binding TotalItems, 
                                                     Converter={StaticResource ValueToVisibilityConverter}}"/>
