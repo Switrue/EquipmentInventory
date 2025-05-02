@@ -19,6 +19,8 @@ namespace EquipmentInventory
     /// </summary>
     public partial class App : Application
     {
+        private static Mutex _mutex;
+        private const string MutexName = "EquipmentInventory.Mutex";
         private static IConfiguration configuration;
         private static CultureInfo cultureInfo;
 
@@ -29,6 +31,12 @@ namespace EquipmentInventory
         {
             base.OnStartup(e);
 
+            if (!IsSingleInstance())
+            {
+                Shutdown();
+                return;
+            }
+
             InitializeServices();
             InitializeApiClient();
             InitializeCulture();
@@ -36,6 +44,12 @@ namespace EquipmentInventory
         }
 
         #region Load
+        private bool IsSingleInstance()
+        {
+            _mutex = new Mutex(true, MutexName, out bool isNewInstance);
+            return isNewInstance;
+        }
+
         private void InitializeServices()
         {
             configuration = new ConfigurationBuilder()
