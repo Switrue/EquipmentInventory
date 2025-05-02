@@ -498,4 +498,19 @@
   <data name="Refresh" xml:space="preserve">
     <value>Обновить</value>
   </data>
+  <data name="Export" xml:space="preserve">
+    <value>Экспортировать</value>
+  </data>
+  <data name="TitleSaveReport" xml:space="preserve">
+    <value>Сохранить отчет в</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Данные</value>
+  </data>
+  <data name="DescriptionReport" xml:space="preserve">
+    <value>Отчет сгенерирован</value>
+  </data>
 </root>

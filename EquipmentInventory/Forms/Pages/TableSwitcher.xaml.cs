@@ -61,6 +61,7 @@ public partial class TableSwitcher : UserControl
         repairTxtB.Text = Strings.InRepair + ":";
         findBtn.Content = Strings.Find;
         cleanBtn.ToolTip = Strings.Clean;
+        exportPopupBox.ToolTip = Strings.Export;
 
         TextFieldAssist.SetLeadingIcon(
             costFromTxtB, isCurrencyUsd 

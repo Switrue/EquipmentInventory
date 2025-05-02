@@ -322,6 +322,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Data.
+        /// </summary>
+        public static string Data {
+            get {
+                return ResourceManager.GetString("Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на There is no connection to the database..
         /// </summary>
         public static string DatabaseError {
@@ -412,6 +421,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Report generated on.
+        /// </summary>
+        public static string DescriptionReport {
+            get {
+                return ResourceManager.GetString("DescriptionReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Developer.
         /// </summary>
         public static string Developer {
@@ -471,6 +489,15 @@ namespace EquipmentInventory.Properties {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
             }
         }
         
@@ -880,6 +907,15 @@ namespace EquipmentInventory.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Report.
+        /// </summary>
+        public static string Report {
+            get {
+                return ResourceManager.GetString("Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Responsible.
         /// </summary>
         public static string Responsible {
@@ -1068,6 +1104,15 @@ namespace EquipmentInventory.Properties {
         public static string TheIntervalOfObsoleteTechnology {
             get {
                 return ResourceManager.GetString("TheIntervalOfObsoleteTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save report to.
+        /// </summary>
+        public static string TitleSaveReport {
+            get {
+                return ResourceManager.GetString("TitleSaveReport", resourceCulture);
             }
         }
         

@@ -624,4 +624,24 @@
     <value>Refresh</value>
     <comment>Captcha</comment>
   </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+    <comment>Tables</comment>
+  </data>
+  <data name="TitleSaveReport" xml:space="preserve">
+    <value>Save report to</value>
+    <comment>Export</comment>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+    <comment>Export</comment>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+    <comment>Export</comment>
+  </data>
+  <data name="DescriptionReport" xml:space="preserve">
+    <value>Report generated on</value>
+    <comment>Export</comment>
+  </data>
 </root>

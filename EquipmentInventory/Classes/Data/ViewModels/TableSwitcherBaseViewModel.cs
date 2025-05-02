@@ -1,4 +1,5 @@
 ﻿using EquipmentInventory.Classes.Data.Models;
+using EquipmentInventory.Classes.Helpers;
 using EquipmentInventory.Classes.Services;
 using EquipmentInventory.Properties;
 using GalaSoft.MvvmLight.Command;
@@ -29,6 +30,8 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
     public ICommand BackCommand { get; }
     public ICommand FirstPageCommand { get; }
     public ICommand SearchCommand { get; }
+    public ICommand ExportToWordCommand { get; }
+    public ICommand ExportToExcelCommand { get; }
 
     public ObservableCollection<T> Items
     {
@@ -93,6 +96,18 @@ public abstract class TableSwitcherBaseViewModel<T> : INotifyPropertyChanged
         LastPageCommand = new RelayCommand(async () => await ChangePage(TotalPages - CurrentPage), CanForwardCommand);
         BackCommand = new RelayCommand(async () => await ChangePage(-1), CanBackCommand);
         FirstPageCommand = new RelayCommand(async () => await ChangePage(-(CurrentPage - 1)), CanBackCommand);
+        ExportToWordCommand = new RelayCommand(ExportToWord);
+        ExportToExcelCommand = new RelayCommand(ExportToExcel);
+    }
+
+    protected void ExportToWord()
+    {
+        if (Items.Count > 0) ExportHelper.Word(Items.ToList());
+    }
+
+    protected void ExportToExcel()
+    {
+        if (Items.Count > 0) ExportHelper.Excel(Items.ToList());
     }
 
     protected virtual async Task ExecuteSearch()
