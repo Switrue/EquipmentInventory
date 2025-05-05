@@ -33,7 +33,7 @@ public partial class TableSwitcher : UserControl
     #region Load
     private void InitializeUI()
     {
-        bool isCurrencyUsd = Settings.Default.CultureInfo == "en_US";
+        bool isCurrencyUsd = Settings.Default.CultureInfo == "en-US";
 
         HintAssist.SetHint(searchDatePc, Strings.Search);
         viewFiltersBtn.Content = Strings.View;
