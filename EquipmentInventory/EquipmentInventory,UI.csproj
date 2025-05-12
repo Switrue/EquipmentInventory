@@ -327,6 +327,7 @@
     <Compile Include="Classes\Data\ViewModels\BaseCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\ComputerCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\DictionariesViewModel.cs" />
+    <Compile Include="Classes\Data\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\MemberCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\OfficeCardViewModel.cs" />
     <Compile Include="Classes\Data\ViewModels\PositionCardViewModel.cs" />

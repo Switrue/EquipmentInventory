@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EquipmentInventory"
+        xmlns:local="clr-namespace:EquipmentInventory.Classes.Data.Converters"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
         Style="{StaticResource MaterialDesignWindow}"
@@ -15,7 +15,14 @@
         SizeChanged="Window_SizeChanged"
         Height="650" Width="1000"
         MinHeight="500" MinWidth="800">
-    <Border Style="{StaticResource WindowBorder}" CornerRadius="{Binding WindowState.WindowCornerRadius}">
+    <Window.Resources>
+        <local:ValueToVisibilityConverter x:Key="ValueToVisibilityConverter" />
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+
+    <Border Style="{StaticResource WindowBorder}"
+            CornerRadius="{Binding WindowState.WindowCornerRadius}"
+            DataContext="{Binding WindowManagement}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -29,7 +36,11 @@
                     <Grid>
                         <WrapPanel HorizontalAlignment="Left">
                             <!-- #region Menu -->
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" 
+                                        VerticalAlignment="Center"
+                                        IsEnabled="{Binding DataContext.IsLoad, 
+                                                            Converter={StaticResource InverseBoolConverter},
+                                                            RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                                 <Button Click="ShowHidenText_Click"
                                         Foreground="Transparent"
                                         Padding="0"
@@ -75,7 +86,11 @@
 
                         <WrapPanel HorizontalAlignment="Right">
                             <!-- #region Manager Account -->
-                            <StackPanel VerticalAlignment="Center" MinWidth="60">
+                            <StackPanel VerticalAlignment="Center"
+                                        MinWidth="60"
+                                        IsEnabled="{Binding DataContext.IsLoad, 
+                                                            Converter={StaticResource InverseBoolConverter},
+                                                            RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                                 <Button x:Name="manageAccountBtn" 
                                         Cursor="Hand"
                                         Padding="10 4 10 4" 
@@ -126,9 +141,22 @@
 
                     <Grid>
                         <!-- #region Control panel -->
-                        <StackPanel HorizontalAlignment="Stretch" Margin="4 0 10 0">
+                        <StackPanel HorizontalAlignment="Stretch"
+                                    Margin="4 0 10 0"
+                                    IsEnabled="{Binding DataContext.IsLoad, 
+                                                        Converter={StaticResource InverseBoolConverter},
+                                                        RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                             <ContentControl x:Name="controlPanelFrame" IsTabStop="False" HorizontalAlignment="Left" />
                         </StackPanel>
+                        <ProgressBar IsIndeterminate="True"
+                                     Margin="0 0 10 0"
+                                     Visibility="{Binding DataContext.IsLoad, 
+                                                          Converter={StaticResource ValueToVisibilityConverter},
+                                                          RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                     Foreground="{StaticResource SecondaryColor}"
+                                     HorizontalAlignment="Right"
+                                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                     Value="0" />
                         <!-- #endregion -->
                     </Grid>
                 </StackPanel>
@@ -136,7 +164,10 @@
             <!-- #endregion -->
 
             <!--#region Body-->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1"
+                  IsEnabled="{Binding DataContext.IsLoad, 
+                                      Converter={StaticResource InverseBoolConverter},
+                                      RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                 <ContentControl x:Name="mainFrame" IsTabStop="False" />
             </Grid>
             <!-- #endregion -->
@@ -162,6 +193,9 @@
                                HorizontalAlignment="Right" 
                                Fill="{StaticResource HintColor}"
                                Visibility="{Binding WindowState.ResizeMarkerVisibility}"
+                               IsEnabled="{Binding DataContext.IsLoad, 
+                                                   Converter={StaticResource InverseBoolConverter},
+                                                   RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                MouseMove="ResizeHandle_MouseMove" 
                                MouseLeftButtonDown="ResizeHandle_MouseLeftButtonDown" 
                                MouseLeftButtonUp="ResizeHandle_MouseLeftButtonUp">
@@ -172,6 +206,12 @@
                 </Grid>
             </Border>
             <!-- #endregion -->
+
+            <Border Background="#80000000"
+                    Grid.Row="1"
+                    Visibility="{Binding DataContext.IsLoad, 
+                                         Converter={StaticResource ValueToVisibilityConverter},
+                                         RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </Grid>
     </Border> 
 </Window>

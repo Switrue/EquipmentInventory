@@ -145,11 +145,31 @@ public class TableSwitcherInventoryViewModel : TableSwitcherBaseViewModel<Techni
 
     public async Task InitializeAsync()
     {
-        TypeTechniqueItems = await TypeTechniqueRequest.GetTypeTechniqueItemsAsync();
-        SuppliersItems = await SuppliersRequest.GetSuppliersItemsAsync();
-        MembersItems = await MembersRequest.GetMembersItemsAsync();
-        OfficesItems = await OfficesRequest.GetOfficesItemsAsync();
-        ComputersItems = await ComputersRequest.GetComputersItemsAsync();
+        App.Loading = true;
+        try
+        {
+            var loadTask = Task.Run(async () =>
+            {
+                TypeTechniqueItems = await TypeTechniqueRequest.GetTypeTechniqueItemsAsync();
+                SuppliersItems = await SuppliersRequest.GetSuppliersItemsAsync();
+                MembersItems = await MembersRequest.GetMembersItemsAsync();
+                OfficesItems = await OfficesRequest.GetOfficesItemsAsync();
+                ComputersItems = await ComputersRequest.GetComputersItemsAsync();
+            });
+
+            var minDelayTask = Task.Delay(TimeSpan.FromSeconds(1));
+
+            await Task.WhenAll(loadTask, minDelayTask);
+        }
+        catch
+        {
+            CustomMessageBoxHelper.Show(Strings.Network, Strings.NetworkError);
+            WindowService.RestoreApp();
+        }
+        finally
+        {
+            App.Loading = false;
+        }
     }
 
     private async Task SaveData()

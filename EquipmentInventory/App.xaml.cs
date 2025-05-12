@@ -24,8 +24,24 @@ namespace EquipmentInventory
         private static IConfiguration configuration;
         private static CultureInfo cultureInfo;
 
+        private static bool _loading;
+        public static bool Loading
+        {
+            get => _loading;
+            set
+            {
+                if (_loading != value)
+                {
+                    _loading = value;
+                    OnLoadingChanged?.Invoke(null, EventArgs.Empty);
+                }
+            }
+        }
+
         public static HttpClient ApiClient { get; private set; }
         public static Users user { get; private set; }
+
+        public static event EventHandler OnLoadingChanged;
 
         protected override void OnStartup(StartupEventArgs e)
         {

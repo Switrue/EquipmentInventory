@@ -81,7 +81,7 @@ public partial class MainWindow : Window, IMainWindow
     {
         _windowState = new WindowStateHandler();
         _windowService = new WindowService(this, _windowState);
-        DataContext = new WindowManagementViewModel(_windowService, _windowState);
+        DataContext = new MainWindowViewModel(_windowService, _windowState);
     }
     public void SetUsernameOnTheMainWindow()
     {
@@ -189,7 +189,6 @@ public partial class MainWindow : Window, IMainWindow
 
     private void ShowHidenText_Click(object sender, RoutedEventArgs e)
         => MessageBox.Show(Strings.HiddenText);
-
     #endregion
 
     #region Change frame
