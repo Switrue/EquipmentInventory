@@ -159,12 +159,14 @@
                                                                              ConverterParameter=TechCost}" />
                                             <UniformGrid x:Name="costFields" Columns="2">
                                                 <TextBox x:Name="costFromTxtB" 
+                                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                                          IsEnabled="{Binding SelectedOption, 
                                                                              Converter={StaticResource RadioConverter}, 
                                                                              ConverterParameter=TechCost}"
                                                          Text="{Binding FromCost, UpdateSourceTrigger=PropertyChanged}"
                                                          PreviewTextInput="ValidationPrice_PreviewTextInput" />
                                                 <TextBox x:Name="costToTxtB" 
+                                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                                          IsEnabled="{Binding SelectedOption, 
                                                                             Converter={StaticResource RadioConverter}, 
                                                                             ConverterParameter=TechCost}"
@@ -371,6 +373,7 @@
                             Command="{Binding BackCommand}"
                             Content="{materialDesign:PackIcon Kind=ChevronUp, Size=20}" />
                     <TextBlock Text="{Binding CurrentPage}"
+                               ToolTipService.Placement="Right"
                                ToolTip="{Binding CurrentPage}"
                                Style="{StaticResource PageTextBlock}" />
                     <Button Style="{StaticResource PageButton}"
@@ -383,6 +386,7 @@
                 <StackPanel VerticalAlignment="Bottom">
                     <TextBlock Text="{Binding TotalItems}"
                                ToolTip="{Binding TotalItems}"
+                               ToolTipService.Placement="Right"
                                Style="{StaticResource PageTextBlock}"
                                Visibility="{Binding TotalItems, 
                                                     Converter={StaticResource ValueToVisibilityConverter}}"/>

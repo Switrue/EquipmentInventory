@@ -63,7 +63,8 @@
                     <WrapPanel Orientation="Vertical" Margin="0,20" VerticalAlignment="Center">
                         <TextBlock x:Name="userTitleTxtBl"
                                    Foreground="{StaticResource TextColor}"
-                                   Style="{StaticResource MaterialDesignDisplaySmallTextBlock}" />
+                                   Style="{StaticResource MaterialDesignDisplaySmallTextBlock}"
+                                   TextTrimming="CharacterEllipsis" />
                         <TextBlock x:Name="userRoleTxtBl"
                                    Foreground="{StaticResource HintColor}"
                                    Style="{StaticResource MaterialDesignLabelLargeTextBlock}" />

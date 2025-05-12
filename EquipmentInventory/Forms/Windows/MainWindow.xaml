@@ -111,6 +111,9 @@
                                                    FontSize="{DynamicResource DefaultFontSize}"
                                                    TextTrimming="CharacterEllipsis" 
                                                    Foreground="{StaticResource SecondaryColor}" />
+                                        <materialDesign:PackIcon Kind="ChevronDown" 
+                                                                 Margin="2 0 0 0"
+                                                                 VerticalAlignment="Center" />
                                     </WrapPanel>
                                 </Button>
 

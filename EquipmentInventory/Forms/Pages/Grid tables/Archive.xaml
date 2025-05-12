@@ -101,7 +101,8 @@
                                     </StackPanel>
                                 </UniformGrid>
 
-                                <TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0}'}"
+                                <TextBlock Text="{Binding Cost, StringFormat='Цена: {0:# ##0.##}'}"
+                                           Language="ru-RU"
                                            Style="{StaticResource BaseDataTextBlock}" />
                             </StackPanel>
                         </materialDesign:Card>
