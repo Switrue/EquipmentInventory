@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventory,UI", "EquipmentInventory\EquipmentInventory,UI.csproj", "{CDB1ED48-C826-4BFE-972C-D2C99C5D6288}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventory.UI", "EquipmentInventory\EquipmentInventory.UI.csproj", "{CDB1ED48-C826-4BFE-972C-D2C99C5D6288}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventory.API", "EquipmentInventory.API\EquipmentInventory.API.csproj", "{F786A81B-7A13-4A8B-9F37-DB59B48B7125}"
 EndProject
