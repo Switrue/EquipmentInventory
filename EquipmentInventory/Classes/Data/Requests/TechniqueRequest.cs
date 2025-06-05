@@ -41,7 +41,7 @@ public static class TechniqueRequest
     {
         return await ApiClientHelper.DeleteAsync<BaseResponse>(
             $"api/Technique/delete/{id}",
-            error => CustomMessageBoxHelper.Show(Strings.Error, error)); ;
+            error => CustomMessageBoxHelper.Show(Strings.Error, error));
     }
 
     public static async Task<BaseResponse> Add(TechniqueUpdateDto model)

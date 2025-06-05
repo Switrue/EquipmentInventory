@@ -15,6 +15,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup.API", "Setup.API\Setup.API.vdproj", "{BFB2F3C2-FD46-3B22-7607-3231B07AEBDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventory.UI.Tests", "EquipmentInventory.UI.Tests\EquipmentInventory.UI.Tests.csproj", "{A1E3EC60-FA66-4458-AAFA-826CE2C11466}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{DBE9999D-346E-CA63-6964-F3B7FC1D42B4}.Release|Any CPU.ActiveCfg = Release
 		{BFB2F3C2-FD46-3B22-7607-3231B07AEBDB}.Debug|Any CPU.ActiveCfg = Debug
 		{BFB2F3C2-FD46-3B22-7607-3231B07AEBDB}.Release|Any CPU.ActiveCfg = Release
+		{A1E3EC60-FA66-4458-AAFA-826CE2C11466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E3EC60-FA66-4458-AAFA-826CE2C11466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E3EC60-FA66-4458-AAFA-826CE2C11466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E3EC60-FA66-4458-AAFA-826CE2C11466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

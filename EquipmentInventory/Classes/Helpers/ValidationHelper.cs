@@ -83,8 +83,8 @@ public static class ValidationHelper
     }
 
     public static bool IsValidNumber(string inputText)
-        => Regex.IsMatch(inputText, @"\d");
+        => Regex.IsMatch(inputText, @"^\d+$");
 
     public static bool IsValidDate(string inputText)
-        => Regex.IsMatch(inputText, @"[\d.]");
+        => Regex.IsMatch(inputText, @"^[\d.]+$");
 }
