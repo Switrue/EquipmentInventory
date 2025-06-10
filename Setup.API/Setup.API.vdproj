@@ -53800,7 +53800,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Инвентаризация техники API"
         "ProductCode" = "8:{2493007D-DEFE-4E1F-A37F-D12CCA7BCA25}"
-        "PackageCode" = "8:{5ED11037-D333-4E17-9A5F-DE5A302B0774}"
+        "PackageCode" = "8:{D01D0EDB-14C1-408A-8C81-6881F7408744}"
         "UpgradeCode" = "8:{A5B62428-FE7D-4138-87E9-41BE3C870682}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
