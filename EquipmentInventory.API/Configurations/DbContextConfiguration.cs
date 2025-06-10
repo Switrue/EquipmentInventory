@@ -11,7 +11,7 @@ public static class DbContextConfiguration
         {
             options
                 .UseNpgsql(configuration.GetConnectionString(nameof(EquipmentInventoryDbContext)))
-                .EnableSensitiveDataLogging()
+                .EnableSensitiveDataLogging(false)
                 .LogTo(Console.WriteLine, LogLevel.Information);
         });
     }

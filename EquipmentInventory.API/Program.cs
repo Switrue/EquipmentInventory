@@ -1,35 +1,44 @@
 using EquipmentInventory.API.Configurations;
 
-var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
-var services = builder.Services;
-
-services.AddControllers();
-services.AddDependencies();
-services.AddEndpointsApiExplorer();
-services.AddSwaggerServices();
-
-services.AddDbContextConfiguration(configuration);
-
-services.AddAuthenticationConfiguration(configuration);
-services.AddAuthorization();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var builder = WebApplication.CreateBuilder(args);
+    var configuration = builder.Configuration;
+    var services = builder.Services;
+
+    services.AddControllers();
+    services.AddDependencies();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerServices();
+
+    services.AddDbContextConfiguration(configuration);
+
+    services.AddAuthenticationConfiguration(configuration);
+    services.AddAuthorization();
+
+    var app = builder.Build();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseCustomStatusCodeHandling();
+    app.UseExceptionHandlerService();
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+}
+catch (Exception ex)
+{
+    File.WriteAllText("error.log", ex.ToString());
+    throw;
 }
 
-app.UseCustomStatusCodeHandling();
-app.UseExceptionHandlerService();
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

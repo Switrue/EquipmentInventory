@@ -76,18 +76,23 @@ namespace EquipmentInventory
 
         private async void InitializeMainWindow()
         {
-            var jwt = Settings.Default.UserToken;
-
-            if (!string.IsNullOrWhiteSpace(jwt))
+            try
             {
-                if (await AuthoRequest.CheckAuthorization())
+                var jwt = Settings.Default.UserToken;
+
+                if (!string.IsNullOrWhiteSpace(jwt))
                 {
-                    await AuthorizationService.Authorize(jwt);
-                    return;
+                    if (await AuthoRequest.CheckAuthorization())
+                    {
+                        await AuthorizationService.Authorize(jwt);
+                        return;
+                    }
                 }
             }
-
-            new AuthoUser().Show();
+            catch
+            {
+                new AuthoUser().Show();
+            }
         }
 
         private void InitializeCulture()
