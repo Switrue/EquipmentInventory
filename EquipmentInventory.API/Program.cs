@@ -1,4 +1,6 @@
-using EquipmentInventory.API.Configurations;
+﻿using EquipmentInventory.API.Configurations;
+using EquipmentInventory.API.Data.Enums;
+using EquipmentInventory.API.Services;
 
 try
 {
@@ -6,15 +8,26 @@ try
     var configuration = builder.Configuration;
     var services = builder.Services;
 
-    services.AddControllers();
-    services.AddDependencies();
-    services.AddEndpointsApiExplorer();
-    services.AddSwaggerServices();
+    try
+    {
+        services.ConfigureWebHostUrls(builder.WebHost, configuration);
 
-    services.AddDbContextConfiguration(configuration);
+        services.AddControllers();
+        services.AddDependencies();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerServices();
 
-    services.AddAuthenticationConfiguration(configuration);
-    services.AddAuthorization();
+        services.AddDbContextConfiguration(configuration);
+
+        services.AddAuthenticationConfiguration(configuration);
+        services.AddAuthorization();
+    }
+    catch (Exception configError)
+    {
+        ErrorDisplayService.ShowError(configError, ErrorType.Configuration);
+        ErrorDisplayService.LogErrorToFile(configError);
+        return;
+    }
 
     var app = builder.Build();
 
@@ -38,7 +51,8 @@ try
 }
 catch (Exception ex)
 {
-    File.WriteAllText("error.log", ex.ToString());
-    throw;
+    ErrorDisplayService.ShowError(ex, ErrorType.Startup);
+    ErrorDisplayService.LogErrorToFile(ex);
+    return;
 }
 
