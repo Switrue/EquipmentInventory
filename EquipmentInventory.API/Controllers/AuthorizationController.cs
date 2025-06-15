@@ -109,4 +109,7 @@ public class AuthorizationController : ControllerBase
     [Authorize]
     [HttpHead]
     public ActionResult Authorize() => Ok();
+
+    [HttpGet("ping")]
+    public ActionResult Ping() => Ok();
 }

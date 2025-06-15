@@ -10,6 +10,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace EquipmentInventory
@@ -88,10 +89,14 @@ namespace EquipmentInventory
                         return;
                     }
                 }
+                else
+                {
+                    OpenAuthoWindow();
+                }
             }
             catch
             {
-                new AuthoUser().Show();
+                OpenAuthoWindow();
             }
         }
 
@@ -110,15 +115,21 @@ namespace EquipmentInventory
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }
 
-        private void InitializeApiClient()
+        private async void InitializeApiClient()
         {
             try
             {
                 var apiSettings = configuration.GetSection("ApiSettings").Get<ApiSettings>();
 
+                if (!Uri.IsWellFormedUriString(apiSettings.BaseUrl, UriKind.Absolute))
+                {
+                    throw new ArgumentException("Некорректный URL сервера.");
+                }
+
                 ApiClient = new HttpClient
                 {
-                    BaseAddress = new Uri(apiSettings.BaseUrl)
+                    BaseAddress = new Uri(apiSettings.BaseUrl),
+                    Timeout = TimeSpan.FromSeconds(15)
                 };
 
                 ApiClient.DefaultRequestHeaders.Accept.Clear();
@@ -130,10 +141,18 @@ namespace EquipmentInventory
                     ApiClient.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", Settings.Default.UserToken);
                 }
+
+                var response = await ApiClient.GetAsync("/api/Authorization/ping");
+                response.EnsureSuccessStatusCode();
             }
-            catch (Exception ex)
+            catch (HttpRequestException httpEx)
             {
-                MessageBox.Show($"{Strings.Error}: {ex.Message}", Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{Strings.Error}: Не удалось подключиться к серверу. {httpEx.Message}", Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(1);
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show($"{Strings.Error}: Запрос превысил время ожидания.", Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(1);
             }
         }
@@ -163,6 +182,8 @@ namespace EquipmentInventory
                 throw new Exception("user image error");
             }
         }
+
+        private void OpenAuthoWindow() => new AuthoUser().Show();
         #endregion
     }
 }

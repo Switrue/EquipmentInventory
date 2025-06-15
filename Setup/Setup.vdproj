@@ -2809,6 +2809,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -2825,6 +2841,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -8243,7 +8267,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Инвентаризация техники 2.0"
         "ProductCode" = "8:{37D8F970-9113-4A81-84AA-B2B7336A8FE2}"
-        "PackageCode" = "8:{8F9D4FDD-E366-4254-8779-3EA35131175D}"
+        "PackageCode" = "8:{D50B1E93-7982-4489-906C-724A2D1C5272}"
         "UpgradeCode" = "8:{2ED644E9-4B7A-48DF-B317-5DFBAD74178D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -8254,7 +8278,7 @@
         "Manufacturer" = "8:ByTrollka"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Equipment Inventory "
+        "Title" = "8:Equipment Inventory"
         "Subject" = "8:"
         "ARPCONTACT" = "8:ByTrollka"
         "Keywords" = "8:"
