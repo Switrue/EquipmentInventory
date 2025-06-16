@@ -81,18 +81,13 @@ namespace EquipmentInventory
             {
                 var jwt = Settings.Default.UserToken;
 
-                if (!string.IsNullOrWhiteSpace(jwt))
-                {
-                    if (await AuthoRequest.CheckAuthorization())
-                    {
-                        await AuthorizationService.Authorize(jwt);
-                        return;
-                    }
-                }
-                else
+                if (string.IsNullOrWhiteSpace(jwt) || !await AuthoRequest.CheckAuthorization())
                 {
                     OpenAuthoWindow();
+                    return;
                 }
+
+                await AuthorizationService.Authorize(jwt);
             }
             catch
             {
