@@ -1,4 +1,4 @@
-#EquipmentInventory
+# EquipmentInventory
 
 > Automation system for inventory and accounting of computer equipment in an organization.
 
