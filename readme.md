@@ -79,7 +79,7 @@ ___
 - **NuGet**:
   - `BCrypt.Net-Next` - 4.0.3
   - `Microsoft.AspNetCore.Authentication.JwtBearer` - 7.0.2
-  - `Swashbuckle.AspNetCore - 6.6.2`
+  - `Swashbuckle.AspNetCore` - 6.6.2
   - `System.IdentityModel.Tokens.Jwt` - 7.1.2
 
 #### EquipmentInventory.UI
